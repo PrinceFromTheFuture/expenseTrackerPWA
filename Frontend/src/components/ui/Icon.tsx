@@ -10,8 +10,12 @@ const Icon = ({ varient, src }: { varient: "full" | "mid" | "small"; src: string
           <img src={src} alt="" className=" w-4" />
         </Tuchable>
       );
-    case "full":
-      return <img src={src} alt="" className=" w-90" />;
+    case "small":
+      return (
+        <div className="p-2 bg-main rounded-full">
+          <img src={src} alt="" className=" w-4" />
+        </div>
+      );
   }
 };
 

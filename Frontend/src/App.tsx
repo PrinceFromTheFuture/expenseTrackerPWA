@@ -1,11 +1,7 @@
-import React, { useRef, useState } from "react";
-import facebookTest from "@/assets/facebookTest.svg";
+import { useRef, useState } from "react";
 import ExpensesWidget from "./ExpensesWidget";
-import ExpensesWidgetIdea from "./ExpensesWidgetIdea";
-import edit_main from "@/assets/edit_main.svg";
 
 import { AnimatePresence, motion } from "framer-motion";
-import Icon from "./components/ui/Icon";
 import AnimationTest from "./SuccessBanner";
 
 const App = () => {

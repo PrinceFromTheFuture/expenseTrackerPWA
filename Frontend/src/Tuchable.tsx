@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 const Tuchable = ({ children, className }: { children: React.ReactNode; className: string }) => {

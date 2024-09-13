@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import  { useRef, useState } from "react";
 import facebookTest from "@/assets/facebookTest.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { easeInOut } from "framer-motion/dom";

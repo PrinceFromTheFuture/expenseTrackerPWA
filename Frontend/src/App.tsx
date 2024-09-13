@@ -1,8 +1,5 @@
-import { useRef, useState } from "react";
 import ExpensesWidget from "./ExpensesWidget";
 
-import { AnimatePresence, motion } from "framer-motion";
-import AnimationTest from "./SuccessBanner";
 import Tuchable from "./Tuchable";
 import Icon from "./components/ui/Icon";
 import edit_main from "@/assets/edit_main.svg";

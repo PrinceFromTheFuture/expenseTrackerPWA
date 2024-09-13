@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import transactionsReducer from "./transactionsSlice";
-import { useDispatch, useSelector, useStore } from "react-redux";
 
 const store = configureStore({ reducer: { transactionsSlice: transactionsReducer } });
 

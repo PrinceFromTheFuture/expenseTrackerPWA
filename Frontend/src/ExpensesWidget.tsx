@@ -5,7 +5,6 @@ import trash_warning from "@/assets/trash_warning.svg";
 
 import Icon from "./components/ui/Icon";
 import Tuchable from "./Tuchable";
-import SuccessBanner from "./SuccessBanner.tsx";
 import { RootState } from "./redux/store.ts";
 import { singleTransactionSelector } from "./redux/transactionsSlice.ts";
 import { formatAmountInAgorot } from "./lib/formatAmountInAgorot.ts";

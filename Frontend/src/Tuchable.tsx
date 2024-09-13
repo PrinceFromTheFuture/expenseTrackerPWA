@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const Tuchable = ({ children, className }: { children: React.ReactNode; className: string }) => {
+const Tuchable = ({ children, className }: { children: React.ReactNode; className?: string }) => {
   return (
     <motion.div
       className={className}

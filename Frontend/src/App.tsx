@@ -3,65 +3,27 @@ import ExpensesWidget from "./ExpensesWidget";
 
 import { AnimatePresence, motion } from "framer-motion";
 import AnimationTest from "./SuccessBanner";
+import Tuchable from "./Tuchable";
+import Icon from "./components/ui/Icon";
+import edit_main from "@/assets/edit_main.svg";
 
 const App = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const itemRef = useRef<HTMLDivElement>(null);
   return (
-    <div className=" w-full fixed inset-0 bg-surface select-none font-montserrat ">
-      <motion.div
-        whileHover={{ scale: 1.02, backgroundColor: "rgb(198, 208, 220)" }}
-        whileTap={{ scale: 0.98, backgroundColor: "#f1f5f9  " }}
-        ref={itemRef}
-        onClick={() => setIsOpen(!isOpen)}
-        className="  bg-slate-100 border-lime-100 text-white p-5 rounded-lg select-none cursor-pointer"
-      >
-        Expense tracher
-      </motion.div>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed  rounded-lg select-none cursor-pointer shadow-lg p-4"
-            style={{ backgroundColor: "#f1f5f9  " }}
-            transition={{
-              type: "tween",
-              ease: "easeOut",
-              duration: 0.2,
-            }}
-            onClick={() => setIsOpen(!isOpen)}
-            layout
-            initial={{
-              top: itemRef.current!.getBoundingClientRect().top,
-              left: itemRef.current!.getBoundingClientRect().left,
-              width: itemRef.current!.getBoundingClientRect().width,
-              height: itemRef.current!.getBoundingClientRect().height,
-            }}
-            animate={{
-              top: 20,
-              left: 20,
-              right: 20,
-              bottom: 20,
-              width: "100%",
-              height: "100%",
-            }}
-            exit={{
-              top: itemRef.current!.getBoundingClientRect().top,
-              left: itemRef.current!.getBoundingClientRect().left,
-              width: itemRef.current!.getBoundingClientRect().width,
-              height: itemRef.current!.getBoundingClientRect().height,
-            }}
-          >
-            fjkl
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div>
-        <input type="date" />
-        date
+    <div className=" w-full fixed inset-0 bg-surface select-none font-montserrat py-4 ">
+      <div className=" flex justify-between items-start mx-4">
+        <Tuchable>
+          <Icon varient="mid" src={edit_main} />
+        </Tuchable>
+        <div className=" font-bold text-dark text-lg">Home</div>
+        <Tuchable>
+          <Icon varient="mid" src={edit_main} />
+        </Tuchable>
       </div>
-
-      <ExpensesWidget />
-      <AnimationTest />
+      <div className=" w-full py-20 flex flex-col justify-center items-center">
+        <div className=" text-3xl text-dark font-extrabold">₪ 12,234.21</div>
+        <div className=" text-secondary font-semibold">current blanace</div>
+      </div>
+      <ExpensesWidget transactionId="#$327892h" />\
     </div>
   );
 };

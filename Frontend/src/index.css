@@ -6,3 +6,6 @@
 html {
   font-family: Montserrat;
 }
+body {
+  overscroll-behavior-y: contain;
+}

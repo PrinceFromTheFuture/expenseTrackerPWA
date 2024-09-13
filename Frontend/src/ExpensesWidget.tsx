@@ -1,12 +1,8 @@
-import React, { useRef, useState } from "react";
 import facebookTest from "@/assets/facebookTest.svg";
-import { AnimatePresence, motion } from "framer-motion";
-import { easeInOut } from "framer-motion/dom";
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import edit_main from "@/assets/edit_main.svg";
 import trash_warning from "@/assets/trash_warning.svg";
 
-import completed from "@/assets/completed.svg";
 import Icon from "./components/ui/Icon";
 import Tuchable from "./Tuchable";
 import SuccessBanner from "./SuccessBanner.tsx";

@@ -1,6 +1,5 @@
 import ExpensesWidget from "./ExpensesWidget";
 
-import Tuchable from "./Tuchable";
 import Icon from "./components/ui/Icon";
 import edit_main from "@/assets/edit_main.svg";
 import bell_surface from "@/assets/bell_surface.svg";
@@ -12,13 +11,9 @@ const App = () => {
   return (
     <div className=" w-full fixed inset-0 bg-surface select-none font-montserrat py-4 ">
       <div className=" flex justify-between items-start mx-4">
-        <Tuchable>
-          <Icon varient="mid" src={edit_main} />
-        </Tuchable>
+        <Icon varient="mid" src={edit_main} />
         <div className=" font-bold text-dark text-lg">Home</div>
-        <Tuchable>
-          <Icon varient="mid" src={edit_main} />
-        </Tuchable>
+        <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
         <div className=" text-4xl text-dark font-extrabold">₪ 12,234.21</div>
@@ -37,11 +32,10 @@ const App = () => {
             </div>
             <Icon src={bell_surface} varient="small" />
           </div>
-        <SpendingsTimeFrame/>
+          <SpendingsTimeFrame />
         </div>
-       
       </div>
-      <ExpensesWidget transactionId="#$327892h" />\
+      <ExpensesWidget transactionId="#$327892h" />
     </div>
   );
 };

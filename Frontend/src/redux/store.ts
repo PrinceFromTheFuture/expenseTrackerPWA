@@ -1,7 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import transactionsReducer from "./transactionsSlice";
+import userReducer from "./userSlice";
+import userPreferencesReducer from "./userPreferencesSlice";
 
-const store = configureStore({ reducer: { transactionsSlice: transactionsReducer } });
+const store = configureStore({
+  reducer: {
+    transactionsSlice: transactionsReducer,
+    userSlice: userReducer,
+    userPreferencesSlice: userPreferencesReducer,
+  },
+});
 
 export default store;
 

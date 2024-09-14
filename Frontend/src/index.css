@@ -9,3 +9,6 @@ html {
 body {
   overscroll-behavior-y: contain;
 }
+.mainContainer::-webkit-scrollbar {
+  display: none;
+}

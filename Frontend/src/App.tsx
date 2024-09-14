@@ -14,7 +14,7 @@ const App = () => {
   const allTransactions = useAppSelector(allTransactionsSelctor);
 
   return (
-    <div className=" w-full fixed inset-0 bg-surface select-none font-montserrat py-4 ">
+    <div className=" mainContainer w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
       <div className=" flex justify-between items-start mx-4">
         <Icon varient="mid" src={edit_main} />
         <div className=" font-bold text-dark text-lg">Home</div>

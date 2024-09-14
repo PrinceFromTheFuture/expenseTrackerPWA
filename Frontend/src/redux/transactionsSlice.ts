@@ -60,4 +60,5 @@ export default transactionsReducer;
 export const singleTransactionSelector = (state: RootState, id: string) =>
   state.transactionsSlice.find((transaction) => transaction.id === id) || null;
 
-export const allTransactionsSelctor = (state: RootState) => state.transactionsSlice;
+export const allTransactionsSelctor = (state: RootState) =>
+  state.transactionsSlice;

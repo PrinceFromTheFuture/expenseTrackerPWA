@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, MotionStyle, VariantLabels } from "framer-motion";
+import { motion } from "framer-motion";
 import generalTransition from "./generalTransition";
 
 const Tuchable = ({

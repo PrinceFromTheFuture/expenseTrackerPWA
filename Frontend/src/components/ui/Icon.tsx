@@ -1,5 +1,4 @@
 import Tuchable from "@/Tuchable";
-import { ClassNameValue } from "tailwind-merge";
 
 const Icon = ({ varient, src }: { varient: "full" | "mid" | "small"; src: string }) => {
   switch (varient) {

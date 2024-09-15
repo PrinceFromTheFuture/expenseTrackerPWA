@@ -16,7 +16,7 @@ const Tuchable = ({
       onClick={onClick}
       className={className}
       whileTap={{ backgroundColor: "#D6DBDE" }}
-      transition={generalTransition}
+      transition={{ ...generalTransition, duration: 0.08 }}
     >
       {children}
     </motion.div>

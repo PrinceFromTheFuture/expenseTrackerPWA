@@ -2,7 +2,7 @@ import Icon from "@/components/ui/Icon";
 import generalTransition from "@/generalTransition";
 import Tuchable from "@/Tuchable";
 import { AnimatePresence, motion } from "framer-motion";
-import {  useState } from "react";
+import { useState } from "react";
 import arrow_main from "@/assets/arrow-main.svg";
 import edit_main from "@/assets/edit_main.svg";
 import { Link } from "react-router-dom";
@@ -127,7 +127,7 @@ const NewExpenss = () => {
         {currentStage > 0 && (
           <Tuchable
             onClick={previousStage}
-            className="  bg-container  p-4 px-8 rounded-2xl flex justify-center items-center font-bold text-md mt-5  text-surface"
+            className="  bg-container  p-4 px-8 rounded-2xl flex justify-center items-center font-bold text-md text-surface"
           >
             <div className="w-6">
               <Icon varient="full" src={arrow_main}></Icon>
@@ -136,7 +136,7 @@ const NewExpenss = () => {
         )}
         <Tuchable
           onClick={handleNextStage}
-          className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md mt-5  text-surface"
+          className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  text-surface"
         >
           Next
         </Tuchable>

@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import transactionsReducer from "./transactionsSlice";
 import userReducer from "./userSlice";
 import userPreferencesReducer from "./userPreferencesSlice";
+import formSliceReducer from "./formSlice";
 
 const store = configureStore({
   reducer: {
     transactionsSlice: transactionsReducer,
     userSlice: userReducer,
     userPreferencesSlice: userPreferencesReducer,
+    formSlice:formSliceReducer
   },
 });
 

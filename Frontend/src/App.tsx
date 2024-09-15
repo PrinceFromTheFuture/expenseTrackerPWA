@@ -12,7 +12,10 @@ import { allTransactionsSelctor } from "@/redux/transactionsSlice";
 import SpendingsTimeFrameValues from "@/SpendingsTimeFrameValues.tsx";
 import ExpensesWidgetSkeleton from "./ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
+import { userBalanceSelector } from "./redux/userSlice";
+import { formatAmountInAgorot } from "./lib/formatAmountInAgorot";
 const App = () => {
+  const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
 
   return (
@@ -23,7 +26,7 @@ const App = () => {
         <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">₪ 12,234.21</div>
+        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance)}</div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-12">

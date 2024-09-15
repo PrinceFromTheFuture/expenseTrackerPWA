@@ -26,10 +26,7 @@ const userSlice = createSlice({
 const userReducer = userSlice.reducer;
 export default userReducer;
 
-export const SpendingsTimeFrameSelector = (
-  state: RootState,
-  timeFrame: "1d" | "7d" | "30d"
-) => {
+export const SpendingsTimeFrameSelector = (state: RootState, timeFrame: "1d" | "7d" | "30d") => {
   switch (timeFrame) {
     case "1d":
       return state.userSlice.oneDaySpendings;
@@ -39,3 +36,5 @@ export const SpendingsTimeFrameSelector = (
       return state.userSlice.thirtyDaySpendings;
   }
 };
+
+export const userBalanceSelector = (state: RootState) => state.userSlice.balance;

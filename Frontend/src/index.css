@@ -5,9 +5,11 @@
 
 html {
   font-family: Montserrat;
+  user-select: none;
 }
 body {
   overscroll-behavior-y: contain;
+  user-select: none;
 }
 .mainContainer::-webkit-scrollbar {
   display: none;

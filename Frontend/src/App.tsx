@@ -27,41 +27,30 @@ const App = () => {
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-12">
-        <div className=" text-xl font-semibold mb-2 text-dark ">
-          useful insights
-        </div>
+        <div className=" text-xl font-semibold mb-2 text-dark ">useful insights</div>
         <div className="   flex gap-4 justify-between items-center">
           <div className=" bg-container  rounded-l-2xl rounded-r-md w-full flex justify-between  h-24 items-start p-4">
             <div>
-              <div className=" text-secondary mb-1 font-semibold text-base">
-                my behavior
-              </div>
+              <div className=" text-secondary mb-1 font-semibold text-base">my behavior</div>
               <SpendingsTimeFrameValues />
             </div>
             <Icon src={bell_surface} varient="small" />
           </div>
           <SpendingsTimeFrame />
         </div>
-        <Link to={"new"}>
-          <Tuchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-xs mt-5  text-surface">
+        <Link className=" select-none" to={"new"}>
+          <Tuchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md mt-5  text-surface">
             new expenss
           </Tuchable>
         </Link>
       </div>
-      <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">
-        recent transactions
-      </div>
+      <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">recent transactions</div>
       {allTransactions.length === 0
         ? Array.from([1, 2, 3, 4, 5], (item) => {
             return <ExpensesWidgetSkeleton key={item} />;
           })
         : allTransactions.map((transaction) => {
-            return (
-              <ExpensesWidget
-                key={transaction.id}
-                transactionId={transaction.id}
-              />
-            );
+            return <ExpensesWidget key={transaction.id} transactionId={transaction.id} />;
           })}
     </div>
   );

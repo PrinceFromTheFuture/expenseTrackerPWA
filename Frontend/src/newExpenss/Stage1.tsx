@@ -31,7 +31,7 @@ const NumberInputBox = ({
         navigator.vibrate(25);
       }}
       className={cn(
-        "   aspect-square rounded-2xl flex justify-center items-center w-full   font-semiboldbold   text-dark text-lg",
+        "   aspect-square rounded-2xl flex justify-center items-center w-full   font-bold   text-dark text-lg",
         backgroundColor || "bg-surface"
       )}
     >

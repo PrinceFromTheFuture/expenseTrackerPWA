@@ -26,7 +26,10 @@ const NumberInputBox = ({
 }) => {
   return (
     <Tuchable
-      onClick={onClick}
+      onClick={() => {
+        onClick();
+        navigator.vibrate(25);
+      }}
       className={cn(
         "   aspect-square rounded-2xl flex justify-center items-center w-full   font-semiboldbold   text-dark text-lg",
         backgroundColor || "bg-surface"

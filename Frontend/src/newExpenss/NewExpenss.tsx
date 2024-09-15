@@ -6,6 +6,7 @@ import { useState } from "react";
 import arrow_main from "@/assets/arrow-main.svg";
 import edit_main from "@/assets/edit_main.svg";
 import { Link } from "react-router-dom";
+import exit_main from "@/assets/exit_main.svg";
 import Stage1 from "./Stage1";
 import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
@@ -97,7 +98,7 @@ const NewExpenss = () => {
         <div className=" w-full  justify-between items-center flex ">
           <Link to={"/"}>
             {" "}
-            <Icon varient="mid" src={edit_main} />
+            <Icon varient="mid" src={exit_main} />
           </Link>
           <div className="font-bold text-dark text-lg">New Transaction</div>
 

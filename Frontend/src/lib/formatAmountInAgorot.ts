@@ -1,4 +1,7 @@
-export function formatAmountInAgorot(agorot: number, showSymbol?: boolean): string {
+export function formatAmountInAgorot(
+  agorot: number,
+  showSymbol?: boolean
+): string {
   // Convert agorot to dollars
   const shekels = (agorot / 100).toFixed(2); // Ensure two decimal places
 

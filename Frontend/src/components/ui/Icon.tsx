@@ -1,9 +1,20 @@
+import { cn } from "@/lib/utils";
 import Tuchable from "@/Tuchable";
 
-const Icon = ({ varient, src }: { varient: "full" | "mid" | "small"; src: string }) => {
+const Icon = ({
+  varient,
+  src,
+  backgroundColor,
+}: {
+  varient: "full" | "mid" | "small";
+  src: string;
+  backgroundColor?: string;
+}) => {
   switch (varient) {
     case "full":
-      return <img src={src} alt="" className=" w-10" />;
+      return (
+        <img src={src} alt="" className=" w-10" />
+      );
     case "mid":
       return (
         <Tuchable className=" w-10 h-10 bg-container rounded-2xl flex justify-center items-center">
@@ -12,7 +23,16 @@ const Icon = ({ varient, src }: { varient: "full" | "mid" | "small"; src: string
       );
     case "small":
       return (
-        <div className="p-2 bg-main rounded-full">
+        <div
+          style={{
+            backgroundColor:
+              backgroundColor && backgroundColor,
+          }}
+          className={cn(
+            "p-2 rounded-full",
+            !backgroundColor && "bg-main"
+          )}
+        >
           <img src={src} alt="" className=" w-4" />
         </div>
       );

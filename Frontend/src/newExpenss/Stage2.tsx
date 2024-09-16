@@ -1,5 +1,6 @@
 import caret_secondary from "@/assets/caret_secondary.svg";
-import { useRef, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { cn } from "@/lib/utils";
@@ -12,14 +13,19 @@ import {
   formBudgetIdSelector,
   selectBudgetInForm,
 } from "@/redux/formSlice";
+import Icon from "@/components/ui/Icon";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const aspectRatio =
+    window.innerWidth / window.innerHeight;
+  useEffect(() => {
+    console.log(aspectRatio);
+  }, []);
   const selctedBudgetId = useAppSelector(
     formBudgetIdSelector
   );
   const dispatch = useAppDispatch();
-
   const allBudgets = useAppSelector(allBugdetsSelctor);
   const budgetsWidgetsContainerRef =
     useRef<HTMLDivElement>(null);
@@ -32,7 +38,13 @@ const Stage2 = () => {
         ref={budgetsWidgetsContainerRef}
         transition={generalTransition}
         animate={{
-          maxHeight: isMenuOpen ? "22rem" : "20rem",
+          maxHeight: isMenuOpen
+            ? aspectRatio < 0.47
+              ? "33rem"
+              : "21rem"
+            : aspectRatio < 0.47
+            ? "30rem"
+            : "20rem",
           overflow: isMenuOpen ? "auto" : "hidden",
         }}
         className={cn(
@@ -56,7 +68,7 @@ const Stage2 = () => {
                     : "0px",
               }}
               transition={generalTransition}
-              className=" h-24 full outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
+              className=" h-36 full flex-col outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
             >
               <motion.div
                 transition={generalTransition}
@@ -86,6 +98,14 @@ const Stage2 = () => {
                   className="  bg-container rounded-full"
                 ></motion.div>
               </motion.div>
+              <Icon
+                backgroundColor={budget.color}
+                src={budget.iconURL}
+                varient="small"
+              />
+              <div className=" text-dark font-bold">
+                {budget.name}
+              </div>
             </motion.div>
           );
         })}

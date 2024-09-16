@@ -3,12 +3,22 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { cn } from "@/lib/utils";
-import { useAppSelector } from "@/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "@/hooks";
 import { allBugdetsSelctor } from "@/redux/budgetsSlice";
+import {
+  formBudgetIdSelector,
+  selectBudgetInForm,
+} from "@/redux/formSlice";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const [isSelcted, setIsSelcted] = useState(false);
+  const selctedBudgetId = useAppSelector(
+    formBudgetIdSelector
+  );
+  const dispatch = useAppDispatch();
 
   const allBudgets = useAppSelector(allBugdetsSelctor);
   const budgetsWidgetsContainerRef =
@@ -29,32 +39,54 @@ const Stage2 = () => {
           " h-full gap-4 grid grid-cols-2 justify-end   overflow-scroll w-full"
         )}
       >
-        {allBudgets.map(() => {
+        {allBudgets.map((budget) => {
           return (
-            <div
-              onClick={() => setIsSelcted(!isSelcted)}
-              className=" h-24 full min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
+            <motion.div
+              onClick={() =>
+                dispatch(selectBudgetInForm(budget.id))
+              }
+              animate={{
+                outlineOffset:
+                  selctedBudgetId === budget.id
+                    ? "-2px"
+                    : "0px",
+                outlineWidth:
+                  selctedBudgetId === budget.id
+                    ? "2px"
+                    : "0px",
+              }}
+              transition={generalTransition}
+              className=" h-24 full outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
             >
               <motion.div
+                transition={generalTransition}
                 initial={{
                   backgroundColor: "#9daab0",
                 }}
                 animate={{
-                  backgroundColor: isSelcted
-                    ? "#0d6680"
-                    : "#9daab0",
+                  backgroundColor:
+                    selctedBudgetId === budget.id
+                      ? "#0d6680"
+                      : "#9daab0",
                 }}
                 className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "
               >
                 <motion.div
+                  transition={generalTransition}
                   animate={{
-                    width: isSelcted ? "50%" : "80%",
-                    height: isSelcted ? "50%" : "80%",
+                    width:
+                      selctedBudgetId === budget.id
+                        ? "50%"
+                        : "80%",
+                    height:
+                      selctedBudgetId === budget.id
+                        ? "50%"
+                        : "80%",
                   }}
                   className="  bg-container rounded-full"
                 ></motion.div>
               </motion.div>
-            </div>
+            </motion.div>
           );
         })}
       </motion.div>

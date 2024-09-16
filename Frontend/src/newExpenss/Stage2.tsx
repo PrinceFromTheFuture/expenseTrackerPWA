@@ -14,6 +14,7 @@ import {
   selectBudgetInForm,
 } from "@/redux/formSlice";
 import Icon from "@/components/ui/Icon";
+import Tuchable from "@/Tuchable";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -38,13 +39,7 @@ const Stage2 = () => {
         ref={budgetsWidgetsContainerRef}
         transition={generalTransition}
         animate={{
-          maxHeight: isMenuOpen
-            ? aspectRatio < 0.47
-              ? "33rem"
-              : "21rem"
-            : aspectRatio < 0.47
-            ? "30rem"
-            : "20rem",
+          maxHeight: isMenuOpen ? "22rem" : "20rem",
           overflow: isMenuOpen ? "auto" : "hidden",
         }}
         className={cn(
@@ -53,7 +48,7 @@ const Stage2 = () => {
       >
         {allBudgets.map((budget) => {
           return (
-            <motion.div
+            <Tuchable
               onClick={() =>
                 dispatch(selectBudgetInForm(budget.id))
               }
@@ -67,7 +62,6 @@ const Stage2 = () => {
                     ? "2px"
                     : "0px",
               }}
-              transition={generalTransition}
               className=" h-36 full flex-col outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
             >
               <motion.div
@@ -106,7 +100,7 @@ const Stage2 = () => {
               <div className=" text-dark font-bold">
                 {budget.name}
               </div>
-            </motion.div>
+            </Tuchable>
           );
         })}
       </motion.div>

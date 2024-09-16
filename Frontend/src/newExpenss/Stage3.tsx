@@ -53,7 +53,7 @@ const Stage3 = () => {
           className="mt-4"
           mode="single"
           selected={date}
-          onSelect={(a, dateChoosen) => {
+          onSelect={(_, dateChoosen) => {
             setDate(dateChoosen);
           }}
           onDayFocus={() => console.log("fds")}

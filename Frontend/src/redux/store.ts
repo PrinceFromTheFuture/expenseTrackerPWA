@@ -3,13 +3,15 @@ import transactionsReducer from "./transactionsSlice";
 import userReducer from "./userSlice";
 import userPreferencesReducer from "./userPreferencesSlice";
 import formSliceReducer from "./formSlice";
+import budgetsSliceReducer from "./budgetsSlice";
 
 const store = configureStore({
   reducer: {
     transactionsSlice: transactionsReducer,
     userSlice: userReducer,
     userPreferencesSlice: userPreferencesReducer,
-    formSlice:formSliceReducer
+    formSlice: formSliceReducer,
+    budgetsSlice: budgetsSliceReducer,
   },
 });
 

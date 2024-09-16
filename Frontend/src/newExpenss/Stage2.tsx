@@ -1,43 +1,85 @@
 import caret_secondary from "@/assets/caret_secondary.svg";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { cn } from "@/lib/utils";
+import { useAppSelector } from "@/hooks";
+import { allBugdetsSelctor } from "@/redux/budgetsSlice";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const budgets = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+  const [isSelcted, setIsSelcted] = useState(false);
+
+  const allBudgets = useAppSelector(allBugdetsSelctor);
+  const budgetsWidgetsContainerRef =
+    useRef<HTMLDivElement>(null);
   return (
     <div className=" w-full h-full flex-col flex justify-between items-center gap-4 my-8 ">
       <div className="text-secondary mb-1 font-semibold text-base">
         choose budget category
       </div>
       <motion.div
+        ref={budgetsWidgetsContainerRef}
         transition={generalTransition}
-        animate={{ maxHeight: isMenuOpen ? "22rem" : "20rem" }}
+        animate={{
+          maxHeight: isMenuOpen ? "22rem" : "20rem",
+          overflow: isMenuOpen ? "auto" : "hidden",
+        }}
         className={cn(
           " h-full gap-4 grid grid-cols-2 justify-end   overflow-scroll w-full"
         )}
       >
-        {budgets.map(() => {
-          return <div className=" h-24 full min-h-24  bg-black"></div>;
+        {allBudgets.map(() => {
+          return (
+            <div
+              onClick={() => setIsSelcted(!isSelcted)}
+              className=" h-24 full min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
+            >
+              <motion.div
+                initial={{
+                  backgroundColor: "#9daab0",
+                }}
+                animate={{
+                  backgroundColor: isSelcted
+                    ? "#0d6680"
+                    : "#9daab0",
+                }}
+                className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "
+              >
+                <motion.div
+                  animate={{
+                    width: isSelcted ? "50%" : "80%",
+                    height: isSelcted ? "50%" : "80%",
+                  }}
+                  className="  bg-container rounded-full"
+                ></motion.div>
+              </motion.div>
+            </div>
+          );
         })}
       </motion.div>
       <div
         className=" flex justify-center items-center gap-2"
         onClick={() => {
+          budgetsWidgetsContainerRef.current?.scrollTo(
+            {
+              top: 0,
+            }
+          );
           setIsMenuOpen(!isMenuOpen);
         }}
       >
         <div className="text-secondary mb-1 font-semibold text-base">
-          see More
+          see more
         </div>
         <motion.img
           src={caret_secondary}
           alt=""
           className=" w-4"
           transition={generalTransition}
-          animate={{ rotate: isMenuOpen ? 180 : 0 }}
+          animate={{
+            rotate: isMenuOpen ? 180 : 0,
+          }}
         />
       </div>
     </div>

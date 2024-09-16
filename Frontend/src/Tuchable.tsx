@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AnimationControls,
-  AnimationProps,
   motion,
   TargetAndTransition,
   VariantLabels,

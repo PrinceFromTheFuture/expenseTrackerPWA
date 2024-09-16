@@ -3,7 +3,6 @@ import { DayPicker } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
 import caret_secondary from "@/assets/caret_secondary.svg";
-import { buttonVariants } from "./button";
 export type CalendarProps = React.ComponentProps<
   typeof DayPicker
 >;
@@ -62,13 +61,13 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => (
+        IconLeft: () => (
           <img
             src={caret_secondary}
             className="h-3 w-3 rotate-90"
           />
         ),
-        IconRight: ({ ...props }) => (
+        IconRight: () => (
           <img
             src={caret_secondary}
             className="h-3 w-3 -rotate-90"

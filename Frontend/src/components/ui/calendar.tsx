@@ -16,26 +16,23 @@ function Calendar({
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn(
-        "   align-middle text-center  ",
-        className
-      )}
+      className={cn("    ", className)}
       classNames={{
         months:
           "flex font-semibold flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: " space-y-4 ",
         caption:
-          "flex  font-semibold justify-center w-full   relative items-center text-secondary",
+          "flex  font-semibold justify-center w-full text-sm   relative items-center text-secondary",
         caption_label: "font-semibold text-md ",
         nav: "font-bold space-x-1 flex items-center",
 
         nav_button_previous: "absolute left-1",
         nav_button_next: "absolute right-1",
-        table: "w-full border-collapse space-y-1",
+        table: "w-full border-collapse ",
         head_row: "flex",
         head_cell:
           "text-dark rounded-md w-full font-bold text-sm dark:text-neutral-400",
-        row: "flex justify-between w-full mt-2",
+        row: "flex justify-between w-full ",
         cell: cn(
           "relative m-1 hover:text-surface  w-full rounded-lg flex justify-center  items-center aspect-square w-full text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-neutral-100 [&:has([aria-selected].day-outside)]:bg-neutral-100/50 [&:has([aria-selected].day-range-end)]:rounded-r-md dark:[&:has([aria-selected])]:bg-neutral-800 dark:[&:has([aria-selected].day-outside)]:bg-neutral-800/50",
           props.mode === "range"
@@ -43,14 +40,14 @@ function Calendar({
             : "[&:has([aria-selected])]:rounded-md"
         ),
         day: cn(
-          "h-full font-semibold rounded-lg w-full justify-center flex flex-col items-center  hover:bg-main aria-selected:opacity-"
+          "h-full transition-all tr font-semibold rounded-lg w-full justify-center flex flex-col items-center  hover:bg-main aria-selected:opacity-"
         ),
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected:
           "bg-primary  text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
         day_today:
-          "bg-neutral-100   text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50",
+          "bg-container hover:text-surface   text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50",
         day_outside:
           "day-outside  hover:text-surface text-neutral-500 opacity-50  aria-selected:bg-neutral-100/50 aria-selected:text-neutral-500 aria-selected:opacity-30 dark:text-neutral-400 dark:aria-selected:bg-neutral-800/50 dark:aria-selected:text-neutral-400",
         day_disabled:

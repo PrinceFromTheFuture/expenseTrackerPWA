@@ -4,37 +4,25 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { cn } from "@/lib/utils";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { allBugdetsSelctor } from "@/redux/budgetsSlice";
-import {
-  formBudgetIdSelector,
-  selectBudgetInForm,
-} from "@/redux/formSlice";
+import { formBudgetIdSelector, selectBudgetInForm } from "@/redux/formSlice";
 import Icon from "@/components/ui/Icon";
 import Tuchable from "@/Tuchable";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const aspectRatio =
-    window.innerWidth / window.innerHeight;
+  const aspectRatio = window.innerWidth / window.innerHeight;
   useEffect(() => {
     console.log(aspectRatio);
   }, []);
-  const selctedBudgetId = useAppSelector(
-    formBudgetIdSelector
-  );
+  const selctedBudgetId = useAppSelector(formBudgetIdSelector);
   const dispatch = useAppDispatch();
   const allBudgets = useAppSelector(allBugdetsSelctor);
-  const budgetsWidgetsContainerRef =
-    useRef<HTMLDivElement>(null);
+  const budgetsWidgetsContainerRef = useRef<HTMLDivElement>(null);
   return (
     <div className=" w-full h-full flex-col flex justify-between items-center gap-4 my-8 ">
-      <div className="text-secondary mb-1 font-semibold text-base">
-        choose budget category
-      </div>
+      <div className="text-secondary mb-1 font-semibold text-base">choose budget category</div>
       <motion.div
         ref={budgetsWidgetsContainerRef}
         transition={generalTransition}
@@ -42,25 +30,16 @@ const Stage2 = () => {
           maxHeight: isMenuOpen ? "22rem" : "20rem",
           overflow: isMenuOpen ? "auto" : "hidden",
         }}
-        className={cn(
-          " h-full gap-4 grid grid-cols-2 justify-end   overflow-scroll w-full"
-        )}
+        className={cn(" h-full gap-4 grid grid-cols-2 justify-end   overflow-scroll w-full")}
       >
         {allBudgets.map((budget) => {
           return (
             <Tuchable
-              onClick={() =>
-                dispatch(selectBudgetInForm(budget.id))
-              }
+              key={budget.id}
+              onClick={() => dispatch(selectBudgetInForm(budget.id))}
               animate={{
-                outlineOffset:
-                  selctedBudgetId === budget.id
-                    ? "-2px"
-                    : "0px",
-                outlineWidth:
-                  selctedBudgetId === budget.id
-                    ? "2px"
-                    : "0px",
+                outlineOffset: selctedBudgetId === budget.id ? "-2px" : "0px",
+                outlineWidth: selctedBudgetId === budget.id ? "2px" : "0px",
               }}
               className=" h-36 full flex-col outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
             >
@@ -70,36 +49,21 @@ const Stage2 = () => {
                   backgroundColor: "#9daab0",
                 }}
                 animate={{
-                  backgroundColor:
-                    selctedBudgetId === budget.id
-                      ? "#0d6680"
-                      : "#9daab0",
+                  backgroundColor: selctedBudgetId === budget.id ? "#0d6680" : "#9daab0",
                 }}
                 className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "
               >
                 <motion.div
                   transition={generalTransition}
                   animate={{
-                    width:
-                      selctedBudgetId === budget.id
-                        ? "50%"
-                        : "80%",
-                    height:
-                      selctedBudgetId === budget.id
-                        ? "50%"
-                        : "80%",
+                    width: selctedBudgetId === budget.id ? "50%" : "80%",
+                    height: selctedBudgetId === budget.id ? "50%" : "80%",
                   }}
                   className="  bg-container rounded-full"
                 ></motion.div>
               </motion.div>
-              <Icon
-                backgroundColor={budget.color}
-                src={budget.iconURL}
-                varient="small"
-              />
-              <div className=" text-dark font-bold">
-                {budget.name}
-              </div>
+              <Icon backgroundColor={budget.color} src={budget.iconURL} varient="small" />
+              <div className=" text-dark font-bold">{budget.name}</div>
             </Tuchable>
           );
         })}
@@ -107,17 +71,13 @@ const Stage2 = () => {
       <div
         className=" flex justify-center items-center gap-2"
         onClick={() => {
-          budgetsWidgetsContainerRef.current?.scrollTo(
-            {
-              top: 0,
-            }
-          );
+          budgetsWidgetsContainerRef.current?.scrollTo({
+            top: 0,
+          });
           setIsMenuOpen(!isMenuOpen);
         }}
       >
-        <div className="text-secondary mb-1 font-semibold text-base">
-          see more
-        </div>
+        <div className="text-secondary mb-1 font-semibold text-base">see more</div>
         <motion.img
           src={caret_secondary}
           alt=""

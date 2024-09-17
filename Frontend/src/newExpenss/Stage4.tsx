@@ -1,8 +1,5 @@
-
-const Stage4 = () => {
-  return (
-    <div>Stage4</div>
-  )
+function Stage4() {
+  return <div className=" w-full h-full"></div>;
 }
 
-export default Stage4
+export default Stage4;

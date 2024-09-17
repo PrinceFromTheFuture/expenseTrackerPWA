@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 interface Form {
   amount: number;
   budgetId: string | null;
-  dateTime: null | Date;
+  dateTime: null | string;
 }
 const initialState: Form = {
   amount: 0,
@@ -40,25 +40,26 @@ const formSlice = createSlice({
     selectBudgetInForm(state, action: PayloadAction<string>) {
       state.budgetId = action.payload;
     },
-    modifyDateInForm(state, action: PayloadAction<Date | "initialize">) {
-      if (action.payload || !state.dateTime) {
-        state.dateTime = new Date();
+    modifyDateInForm(state, action: PayloadAction<string | "initialize">) {
+      if (action.payload === "initialize" || !state.dateTime) {
+        state.dateTime = dayjs().toString();
         return;
       }
+
       const curentDateTime = dayjs(state.dateTime);
       const selctedDate = dayjs(action.payload);
       const newDateTime = selctedDate
         .set("hours", curentDateTime.get("hours"))
         .set("minutes", curentDateTime.get("minutes"))
-        .toDate();
+        .toString();
       state.dateTime = newDateTime;
     },
     modifyHoursInForm(state, action: PayloadAction<{ value: number; type: "hours" | "minutes" }>) {
       const curentDateTime = dayjs(state.dateTime);
       if (action.payload.type === "hours") {
-        state.dateTime = curentDateTime.set("hours", action.payload.value).toDate();
+        state.dateTime = curentDateTime.set("hours", action.payload.value).toString();
       } else {
-        state.dateTime = curentDateTime.set("minutes", action.payload.value).toDate();
+        state.dateTime = curentDateTime.set("minutes", action.payload.value).toString();
       }
     },
   },
@@ -70,6 +71,7 @@ export default formSliceReducer;
 export const formAmountSelctor = (state: RootState) => state.formSlice.amount;
 
 export const formBudgetIdSelector = (state: RootState) => state.formSlice.budgetId;
+export const formDateTimeSelector = (state: RootState) => state.formSlice.dateTime;
 
 export const {
   addNumberToFormAmount,
@@ -78,4 +80,6 @@ export const {
   clearNumberFromFormAmount,
   decreaseOneFromFormAmount,
   selectBudgetInForm,
+  modifyHoursInForm,
+  modifyDateInForm,
 } = formSlice.actions;

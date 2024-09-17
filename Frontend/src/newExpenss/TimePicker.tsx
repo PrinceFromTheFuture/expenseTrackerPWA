@@ -19,10 +19,9 @@ const TimePicker = () => {
       return;
     }
     minutesCarouselApi.on("select", () => {
-      dispatch(
-        modifyHoursInForm({ type: "minutes", value: minutesCarouselApi.selectedScrollSnap() + 1 })
-      );
-      setSelectedMinute(minutesCarouselApi.selectedScrollSnap() + 1);
+      const minutes = minutesCarouselApi.selectedScrollSnap() + 1;
+      dispatch(modifyHoursInForm({ type: "minutes", value: minutes }));
+      setSelectedMinute(minutes !== 60 ? minutes : 0);
     });
   }, [minutesCarouselApi]);
 
@@ -31,10 +30,9 @@ const TimePicker = () => {
       return;
     }
     hoursCarouselApi.on("select", () => {
-      setSelectedHour(hoursCarouselApi.selectedScrollSnap() + 1);
-      dispatch(
-        modifyHoursInForm({ type: "hours", value: hoursCarouselApi.selectedScrollSnap() + 1 })
-      );
+      const hours = hoursCarouselApi.selectedScrollSnap() + 1;
+      dispatch(modifyHoursInForm({ type: "hours", value: hours }));
+      setSelectedHour(hours !== 24 ? hours : 0);
     });
   }, [hoursCarouselApi]);
   return (
@@ -61,7 +59,7 @@ const TimePicker = () => {
                 animate={{ color: index === selectedHour ? "#171c1f" : "#9daab0" }}
                 transition={generalTransition}
               >
-                {index === 0 ? 24 : index}
+                {index === 0 ? "00" : index}
               </motion.div>
             </CarouselItem>
           ))}
@@ -90,7 +88,7 @@ const TimePicker = () => {
                 animate={{ color: index === selectedMinute ? "#171c1f" : "#9daab0" }}
                 transition={generalTransition}
               >
-                {index === 0 ? 60 : index}
+                {index === 0 ? "00" : index}
               </motion.div>
             </CarouselItem>
           ))}

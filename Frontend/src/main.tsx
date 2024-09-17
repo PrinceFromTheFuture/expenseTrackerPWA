@@ -13,7 +13,7 @@ const AppWraper = () => {
   const location = useLocation();
 
   return (
-    <div>
+    <div className="">
       <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
           <Route path="/" element={<App />} />

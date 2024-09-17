@@ -43,9 +43,9 @@ const NewExpenss = () => {
       initial={{ opacity: 0, top: 40 }}
       animate={{ opacity: 1, top: 0 }}
       exit={{ opacity: 0, top: 40 }}
-      className="bg-surface inset-0 fixed  p-4 flex justify-between items-center flex-col  overflow-hidden w-full h-full"
+      className="bg-surface inset-0 fixed     p-4 flex justify-between items-center flex-col  overflow-hidden w-full h-full"
     >
-      <div className=" w-full">
+      <div className=" w-full ">
         {" "}
         <div className=" w-full gap-3 h-5 mb-4  flex ">
           <div className=" h-2 w-full rounded-full bg-container ">

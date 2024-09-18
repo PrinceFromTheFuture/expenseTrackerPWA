@@ -6,16 +6,26 @@ import { Drawer, DrawerContent, DrawerTrigger, DrawerClose } from "@/components/
 import thought_bubble_main from "@/assets/thought_bubble_main.svg";
 import tag_main from "@/assets/tag_main.svg";
 
+import {
+  modifyTitleInForm,
+  modifyDescriptionInForm,
+  formTitileSelector,
+  formDescriptionSelector,
+} from "@/redux/formSlice";
+
 import { useRef, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 function Stage4() {
+  const dispatch = useAppDispatch();
+
   const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
   const [isTitleOpen, setIsTitleOpen] = useState<boolean>(false);
 
   const titleTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const descriptionTextAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const [title, setTitle] = useState("");
-  const [desciption, setDesciption] = useState("");
+  const title = useAppSelector(formTitileSelector);
+  const desciption = useAppSelector(formDescriptionSelector);
 
   const maxFiledLength = 120;
 
@@ -50,12 +60,12 @@ function Stage4() {
       >
         <DrawerTrigger className=" mt-2 w-full">
           <Touchable className=" p-4 bg-surface  gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
-            <img className=" w-7 h-7" src={tag_main} />
+            <img className=" w-6 h-6" src={tag_main} />
             <div className=" w-full">
               {" "}
               <div className="text-sm text-main font-bold text-left"> Expense Title</div>
               <TextareaAutosize
-                value={title}
+                value={title || ""}
                 placeholder="Enter a brief title (e.g., Groceries, Coffee, Gas)"
                 className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
               />
@@ -66,15 +76,15 @@ function Stage4() {
           <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
           <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
-              <img className=" w-7 h-7" src={tag_main} />
+              <img className=" w-6 h-6" src={tag_main} />
               <div className=" w-full">
                 {" "}
                 <div className="text-sm text-main font-bold"> Expense Title</div>
                 <TextareaAutosize
-                  value={title}
+                  value={title || ""}
                   onChange={(e) => {
                     if (e.target.value.length <= maxFiledLength) {
-                      setTitle(e.target.value);
+                      dispatch(modifyTitleInForm(e.target.value));
                     }
                   }}
                   ref={titleTextAreaRef}
@@ -86,7 +96,11 @@ function Stage4() {
                 />
               </div>
             </div>
-            <img onClick={() => setTitle("")} className=" w-4 h-4" src={exit_main} />
+            <img
+              onClick={() => dispatch(modifyTitleInForm(null))}
+              className=" w-4 h-4"
+              src={exit_main}
+            />
           </div>
           <DrawerClose className=" w-full">
             <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
@@ -104,12 +118,12 @@ function Stage4() {
       >
         <DrawerTrigger className=" mt-2 w-full">
           <Touchable className=" p-4 bg-surface   gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
-            <img className=" w-7 h-7" src={thought_bubble_main} />
+            <img className=" w-6 h-6" src={thought_bubble_main} />
             <div className=" w-full">
               {" "}
               <div className="text-sm text-main font-bold text-left"> Expense Description</div>
               <TextareaAutosize
-                value={desciption}
+                value={desciption || ""}
                 placeholder="Add any relevant details (e.g., purchased from, purpose, etc."
                 className="placeholder:text-secondary  text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
               />
@@ -120,7 +134,7 @@ function Stage4() {
           <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
           <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
-              <img className=" w-7 h-7" src={thought_bubble_main} />
+              <img className=" w-6 h-6" src={thought_bubble_main} />
               <div className=" w-full">
                 {" "}
                 <div className="text-sm text-main font-bold"> Expense Description</div>
@@ -129,10 +143,10 @@ function Stage4() {
                   onBlur={(e) => {
                     e.target.focus();
                   }}
-                  value={desciption}
+                  value={desciption || ""}
                   onChange={(e) => {
                     if (e.target.value.length <= maxFiledLength) {
-                      setDesciption(e.target.value);
+                      dispatch(modifyDescriptionInForm(e.target.value));
                     }
                   }}
                   placeholder="Add any relevant details (e.g., purchased from, purpose, etc."
@@ -140,7 +154,11 @@ function Stage4() {
                 />
               </div>
             </div>
-            <img className=" w-4 h-4" onClick={() => setDesciption("")} src={exit_main} />
+            <img
+              className=" w-4 h-4"
+              onClick={() => dispatch(modifyDescriptionInForm(null))}
+              src={exit_main}
+            />
           </div>
           <DrawerClose className=" w-full">
             <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">

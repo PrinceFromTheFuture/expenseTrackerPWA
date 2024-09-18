@@ -6,11 +6,15 @@ interface Form {
   amount: number;
   budgetId: string | null;
   dateTime: null | string;
+  title: string | null;
+  description: string | null;
 }
 const initialState: Form = {
   amount: 0,
   budgetId: null,
   dateTime: null,
+  title: null,
+  description: null,
 };
 const formSlice = createSlice({
   initialState,
@@ -62,6 +66,22 @@ const formSlice = createSlice({
         state.dateTime = curentDateTime.set("minutes", action.payload.value).toString();
       }
     },
+    modifyTitleInForm(state, action: PayloadAction<string | null>) {
+      state.title = action.payload;
+    },
+    modifyDescriptionInForm(state, action: PayloadAction<string | null>) {
+      state.description = action.payload;
+    },
+    clearAllInForm() {
+      const clearedForm: Form = {
+        amount: 0,
+        budgetId: null,
+        dateTime: null,
+        title: null,
+        description: null,
+      };
+      return clearedForm;
+    },
   },
 });
 
@@ -72,6 +92,8 @@ export const formAmountSelctor = (state: RootState) => state.formSlice.amount;
 
 export const formBudgetIdSelector = (state: RootState) => state.formSlice.budgetId;
 export const formDateTimeSelector = (state: RootState) => state.formSlice.dateTime;
+export const formTitileSelector = (state: RootState) => state.formSlice.title;
+export const formDescriptionSelector = (state: RootState) => state.formSlice.description;
 
 export const {
   addNumberToFormAmount,
@@ -82,4 +104,7 @@ export const {
   selectBudgetInForm,
   modifyHoursInForm,
   modifyDateInForm,
+  modifyTitleInForm,
+  modifyDescriptionInForm,
+  clearAllInForm,
 } = formSlice.actions;

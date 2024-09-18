@@ -13,8 +13,11 @@ import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 import Stage5 from "./Stage5";
 import Stage6 from "./Stage6";
+import { clearAllInForm } from "@/redux/formSlice";
+import { useAppDispatch } from "@/hooks";
 
 const NewExpenss = () => {
+  const dispatch = useAppDispatch();
   const [currentStage, setCurrentStage] = useState(0);
   const lastStage = 5;
 
@@ -96,7 +99,7 @@ const NewExpenss = () => {
           </div>
         </div>
         <div className=" w-full  justify-between items-center flex ">
-          <Link to={"/"}>
+          <Link to={"/"} onClick={() => dispatch(clearAllInForm())}>
             {" "}
             <Icon varient="mid" src={exit_main} />
           </Link>

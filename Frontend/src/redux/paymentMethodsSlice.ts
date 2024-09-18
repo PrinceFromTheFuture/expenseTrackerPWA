@@ -8,22 +8,22 @@ interface PaymentMethod {
 }
 const initialState: PaymentMethod[] = [
   {
-    iconURL: "/src/assets/facebookTest.svg",
+    iconURL: "/facebookTest.svg",
     id: "3dFD$3",
     name: "creaditCard 1",
   },
   {
-    iconURL: "/src/assets/facebookTest.svg",
+    iconURL: "/facebookTest.svg",
     id: "3ddFD$3",
     name: "creaditCard 2",
   },
   {
-    iconURL: "/src/assets/facebookTest.svg",
+    iconURL: "/facebookTest.svg",
     id: "3FdddD$3",
     name: "creaditCard 3",
   },
   {
-    iconURL: "/src/assets/facebookTest.svg",
+    iconURL: "/facebookTest.svg",
     id: "3FD$3ddd",
     name: "creaditCard 4",
   },

@@ -19,7 +19,7 @@ const Stage5 = () => {
         <div className="text-dark   font-semibold text-lg">Payment Method</div>
         <Icon src={edit_main} varient="mid" />
       </div>
-      <div className=" w-full flex flex-col justify-between items-start gap-4">
+      <div className=" w-full flex flex-col justify-between items-start gap-2">
         {allPaymentMethods.map((paymentMethod) => {
           return (
             <Touchable
@@ -55,7 +55,7 @@ const Stage5 = () => {
                 </motion.div>
               </div>
               <div className=" w-full flex justify-between items-center">
-                <div className=" text-md text-dark font-bold">{paymentMethod.name}</div>
+                <div className=" text-md text-secondary font-bold">{paymentMethod.name}</div>
                 <Icon src={paymentMethod.iconURL} varient="full" />
               </div>
             </Touchable>

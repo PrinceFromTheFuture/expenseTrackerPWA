@@ -14,12 +14,35 @@ import Stage4 from "./Stage4";
 import Stage5 from "./Stage5";
 import Stage6 from "./Stage6";
 import { clearAllInForm } from "@/redux/formSlice";
+import paper_plane_surface from "@/assets/paper_plane_surface.svg";
 import { useAppDispatch } from "@/hooks";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
+import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
+
+const StageProgressBar = ({
+  currentStage,
+  thisBarStage,
+}: {
+  currentStage: number;
+  thisBarStage: number;
+}) => {
+  return (
+    <div className=" h-2 w-full rounded-full bg-container ">
+      <motion.div
+        initial={{ width: 0 }}
+        className=" bg-main rounded-full  h-full   "
+        animate={{ width: currentStage >= thisBarStage ? "100%" : "0px" }}
+        transition={generalTransition}
+      ></motion.div>
+    </div>
+  );
+};
 
 const NewExpenss = () => {
+  const [isReviewBeforeSubmitOpen, setIsReviewBeforeSubmitOpen] = useState(false);
   const dispatch = useAppDispatch();
   const [currentStage, setCurrentStage] = useState(0);
-  const lastStage = 5;
+  const lastStage = 4;
 
   const handleNextStage = () => {
     if (currentStage <= lastStage - 1) {
@@ -38,7 +61,6 @@ const NewExpenss = () => {
     { stageComponnet: <Stage3 />, stageIndex: 2 },
     { stageComponnet: <Stage4 />, stageIndex: 3 },
     { stageComponnet: <Stage5 />, stageIndex: 4 },
-    { stageComponnet: <Stage6 />, stageIndex: 5 },
   ];
   return (
     <motion.div
@@ -57,46 +79,9 @@ const NewExpenss = () => {
               transition={generalTransition}
             ></motion.div>
           </div>
-          <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div
-              initial={{ width: 0 }}
-              className=" bg-main rounded-full  h-full   "
-              animate={{ width: currentStage >= 1 ? "100%" : "0px" }}
-              transition={generalTransition}
-            ></motion.div>
-          </div>
-          <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div
-              initial={{ width: 0 }}
-              className=" bg-main rounded-full  h-full   "
-              animate={{ width: currentStage >= 2 ? "100%" : "0px" }}
-              transition={generalTransition}
-            ></motion.div>
-          </div>
-          <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div
-              initial={{ width: 0 }}
-              className=" bg-main rounded-full  h-full   "
-              animate={{ width: currentStage >= 3 ? "100%" : "0px" }}
-              transition={generalTransition}
-            ></motion.div>
-          </div>
-          <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div
-              className=" bg-main rounded-full  h-full   "
-              initial={{ width: 0 }}
-              animate={{ width: currentStage >= 4 ? "100%" : "0px" }}
-              transition={generalTransition}
-            ></motion.div>
-          </div>
-          <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div
-              className=" bg-main rounded-full w  h-full   "
-              initial={{ width: 0 }}
-              animate={{ width: currentStage >= 5 ? "100%" : "0px" }}
-              transition={generalTransition}
-            ></motion.div>
-          </div>
+          {Array.from([1, 2, 3, 4], (item) => {
+            return <StageProgressBar key={item} currentStage={currentStage} thisBarStage={item} />;
+          })}
         </div>
         <div className=" w-full  justify-between items-center flex ">
           <Link to={"/"} onClick={() => dispatch(clearAllInForm())}>
@@ -120,7 +105,7 @@ const NewExpenss = () => {
                 transform: `translate(-${currentStage * 100}%)`,
                 opacity: stage.stageIndex === currentStage ? 1 : 0,
               }}
-              className="min-w-full flex flex-col  justify-between items-center    w-full h-full" // Use flex-grow instead of flex-1
+              className="min-w-full flex flex-col  justify-between items-center    w-full h-full"
             >
               {stage.stageComponnet}
             </motion.div>
@@ -138,12 +123,41 @@ const NewExpenss = () => {
             </div>
           </Touchable>
         )}
-        <Touchable
-          onClick={handleNextStage}
-          className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  text-surface"
+
+        <AlertDialog
+          open={isReviewBeforeSubmitOpen}
+          onOpenChange={(isOpen) => {
+            if (currentStage === 4) {
+              setIsReviewBeforeSubmitOpen(isOpen);
+            }
+          }}
         >
-          Next
-        </Touchable>
+          <AlertDialogTrigger className=" w-full">
+            {" "}
+            <Touchable
+              onClick={handleNextStage}
+              className=" w-full bg-main  gap-2  p-4 rounded-2xl flex justify-center items-center font-bold text-md  text-surface"
+            >
+              <div>{currentStage !== 4 ? "Next" : "Submit"}</div>
+              <AnimatePresence>
+                {currentStage === 4 && (
+                  <motion.img
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    transition={generalTransition}
+                    src={paper_plane_surface}
+                    className=" w-4"
+                  />
+                )}
+              </AnimatePresence>
+            </Touchable>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            fdfd
+            <AlertDialogCancel>fdf</AlertDialogCancel>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </motion.div>
   );

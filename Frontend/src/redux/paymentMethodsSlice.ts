@@ -6,7 +6,7 @@ interface PaymentMethod {
   iconURL: string;
   id: string;
 }
-const initialState: PaymentMethod[] = [
+const initialState: PaymentMethod[] = [  
   {
     iconURL: "/facebookTest.svg",
     id: "3dFD$3",

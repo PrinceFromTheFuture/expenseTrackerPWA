@@ -1,9 +1,11 @@
 import Touchable from "@/Touchable";
-import calender_main from "@/assets/calender_main.svg";
 import exit_main from "@/assets/exit_main.svg";
 import TextareaAutosize from "react-textarea-autosize";
 
 import { Drawer, DrawerContent, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
+import thought_bubble_main from "@/assets/thought_bubble_main.svg";
+import tag_main from "@/assets/tag_main.svg";
+
 import { useRef, useState } from "react";
 function Stage4() {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
@@ -48,7 +50,7 @@ function Stage4() {
       >
         <DrawerTrigger className=" mt-2 w-full">
           <Touchable className=" p-4 bg-surface  gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
-            <img className=" w-7 h-7" src={calender_main} />
+            <img className=" w-7 h-7" src={tag_main} />
             <div className=" w-full">
               {" "}
               <div className="text-sm text-main font-bold text-left"> Expense Title</div>
@@ -64,7 +66,7 @@ function Stage4() {
           <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
           <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
-              <img className=" w-7 h-7" src={calender_main} />
+              <img className=" w-7 h-7" src={tag_main} />
               <div className=" w-full">
                 {" "}
                 <div className="text-sm text-main font-bold"> Expense Title</div>
@@ -102,7 +104,7 @@ function Stage4() {
       >
         <DrawerTrigger className=" mt-2 w-full">
           <Touchable className=" p-4 bg-surface   gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
-            <img className=" w-7 h-7" src={calender_main} />
+            <img className=" w-7 h-7" src={thought_bubble_main} />
             <div className=" w-full">
               {" "}
               <div className="text-sm text-main font-bold text-left"> Expense Description</div>
@@ -118,7 +120,7 @@ function Stage4() {
           <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
           <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
-              <img className=" w-7 h-7" src={calender_main} />
+              <img className=" w-7 h-7" src={thought_bubble_main} />
               <div className=" w-full">
                 {" "}
                 <div className="text-sm text-main font-bold"> Expense Description</div>

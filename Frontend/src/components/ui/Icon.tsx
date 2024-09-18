@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Tuchable from "@/Tuchable";
+import Touchable from "@/Touchable";
 
 const Icon = ({
   varient,
@@ -12,26 +12,20 @@ const Icon = ({
 }) => {
   switch (varient) {
     case "full":
-      return (
-        <img src={src} alt="" className=" w-10" />
-      );
+      return <img src={src} alt="" className=" w-10" />;
     case "mid":
       return (
-        <Tuchable className=" w-10 h-10 bg-container rounded-2xl flex justify-center items-center">
+        <Touchable className=" w-10 h-10 bg-container rounded-2xl flex justify-center items-center">
           <img src={src} alt="" className=" w-4" />
-        </Tuchable>
+        </Touchable>
       );
     case "small":
       return (
         <div
           style={{
-            backgroundColor:
-              backgroundColor && backgroundColor,
+            backgroundColor: backgroundColor && backgroundColor,
           }}
-          className={cn(
-            "p-2 rounded-full",
-            !backgroundColor && "bg-main"
-          )}
+          className={cn("p-2 rounded-full", !backgroundColor && "bg-main")}
         >
           <img src={src} alt="" className=" w-4" />
         </div>

@@ -1,18 +1,9 @@
 import React from "react";
-import {
-  AnimationControls,
-  motion,
-  TargetAndTransition,
-  VariantLabels,
-} from "framer-motion";
+import { AnimationControls, motion, TargetAndTransition, VariantLabels } from "framer-motion";
 import generalTransition from "./generalTransition";
 
-type FrmaerAnimationProps =
-  | AnimationControls
-  | TargetAndTransition
-  | VariantLabels
-  | boolean;
-const Tuchable = ({
+type FrmaerAnimationProps = AnimationControls | TargetAndTransition | VariantLabels | boolean;
+const Touchable = ({
   children,
   className,
   onClick,
@@ -39,4 +30,4 @@ const Tuchable = ({
   );
 };
 
-export default Tuchable;
+export default Touchable;

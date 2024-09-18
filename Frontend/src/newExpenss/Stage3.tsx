@@ -1,5 +1,5 @@
 import { Calendar } from "@/components/ui/calendar";
-import Tuchable from "@/Tuchable";
+import Touchable from "@/Touchable";
 import { AnimatePresence, motion } from "framer-motion";
 import calender_main from "@/assets/calender_main.svg";
 import clock_main from "@/assets/clock_main.svg";
@@ -26,7 +26,7 @@ const Stage3 = () => {
   return (
     <div className=" w-full my-4 h-full flex justify-start flex-col items-center">
       <div className="text-secondary mb-4 font-semibold text-base">choose budget category</div>
-      <Tuchable
+      <Touchable
         onClick={() => setIsOpenMenu("date")}
         animate={{
           outlineOffset: openMenu === "date" ? "-2px" : "0px",
@@ -39,7 +39,7 @@ const Stage3 = () => {
           <div className=" text-sm text-dark font-bold">{String(formDateTime).slice(0, 10)}</div>{" "}
           <div className=" text-xs text-secondary font-semibold">date</div>{" "}
         </div>
-      </Tuchable>
+      </Touchable>
       <AnimatePresence>
         {openMenu === "date" && (
           <motion.div
@@ -61,7 +61,7 @@ const Stage3 = () => {
         )}
       </AnimatePresence>
 
-      <Tuchable
+      <Touchable
         onClick={() => setIsOpenMenu("time")}
         animate={{
           outlineOffset: openMenu === "time" ? "-2px" : "0px",
@@ -76,7 +76,7 @@ const Stage3 = () => {
           </div>{" "}
           <div className=" text-xs text-secondary font-semibold">time</div>{" "}
         </div>
-      </Tuchable>
+      </Touchable>
       <AnimatePresence>
         {openMenu === "time" && (
           <motion.div

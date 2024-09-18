@@ -4,7 +4,7 @@ import edit_main from "@/assets/edit_main.svg";
 import trash_warning from "@/assets/trash_warning.svg";
 
 import Icon from "./components/ui/Icon";
-import Tuchable from "./Tuchable";
+import Touchable from "./Touchable";
 import { RootState } from "./redux/store.ts";
 import { singleTransactionSelector } from "./redux/transactionsSlice.ts";
 import { formatAmountInAgorot } from "./lib/formatAmountInAgorot.ts";
@@ -23,7 +23,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
     <>
       <Drawer>
         <DrawerTrigger className=" w-full">
-          <Tuchable className=" box-content p-4 w-full bg-surface rounded-2xl flex justify-between items-center">
+          <Touchable className=" box-content p-4 w-full bg-surface rounded-2xl flex justify-between items-center">
             <div className=" flex justify-start items-center gap-2 ">
               <Icon varient="full" src={facebookTest} />
               <div>
@@ -36,7 +36,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
             <div className="font-extrabold  text-base mr-8">
               - {formatAmountInAgorot(transaction.amountInAgorot)}
             </div>
-          </Tuchable>
+          </Touchable>
         </DrawerTrigger>
         <DrawerContent>
           <div className=" w-full flex justify-between items-end mb-5">
@@ -48,7 +48,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
             </div>
           </div>
           <div className=" w-full p-4 border-container border-2 rounded-2xl">
-            <Tuchable className=" mb-5 w-full bg-container rounded-lg p-4 flex justify-between items-center">
+            <Touchable className=" mb-5 w-full bg-container rounded-lg p-4 flex justify-between items-center">
               <div className=" flex justify-start items-center gap-2 ">
                 <Icon varient="full" src={facebookTest} />
                 <div>
@@ -58,7 +58,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
                   </div>
                 </div>
               </div>
-            </Tuchable>
+            </Touchable>
             <div className=" flex mb-5 justify-between items-center w-full">
               <div className="text-sm text-secondary text-left font-semibold">date and time</div>
               <div className="text-sm text-dark text-left font-bold">
@@ -107,9 +107,9 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
           </div>
 
           <DrawerClose className=" w-full">
-            <Tuchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
+            <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
               Close
-            </Tuchable>
+            </Touchable>
           </DrawerClose>
         </DrawerContent>
       </Drawer>

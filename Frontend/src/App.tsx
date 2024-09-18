@@ -5,7 +5,7 @@ import edit_main from "@/assets/edit_main.svg";
 import bell_surface from "@/assets/bell_surface.svg";
 
 import SpendingsTimeFrame from "./SpendingsTimeFrame";
-import Tuchable from "./Tuchable";
+import Touchable from "./Touchable";
 import { useAppSelector } from "./hooks";
 import { allTransactionsSelctor } from "@/redux/transactionsSlice";
 
@@ -42,9 +42,9 @@ const App = () => {
           <SpendingsTimeFrame />
         </div>
         <Link className=" select-none" to={"new"}>
-          <Tuchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md mt-5  text-surface">
+          <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md mt-5  text-surface">
             new expenss
-          </Tuchable>
+          </Touchable>
         </Link>
       </div>
       <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">recent transactions</div>

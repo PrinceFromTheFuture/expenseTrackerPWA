@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { allBugdetsSelctor } from "@/redux/budgetsSlice";
 import { formBudgetIdSelector, selectBudgetInForm } from "@/redux/formSlice";
 import Icon from "@/components/ui/Icon";
-import Tuchable from "@/Tuchable";
+import Touchable from "@/Touchable";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -34,7 +34,7 @@ const Stage2 = () => {
       >
         {allBudgets.map((budget) => {
           return (
-            <Tuchable
+            <Touchable
               key={budget.id}
               onClick={() => dispatch(selectBudgetInForm(budget.id))}
               animate={{
@@ -64,7 +64,7 @@ const Stage2 = () => {
               </motion.div>
               <Icon backgroundColor={budget.color} src={budget.iconURL} varient="small" />
               <div className=" text-dark font-bold">{budget.name}</div>
-            </Tuchable>
+            </Touchable>
           );
         })}
       </motion.div>

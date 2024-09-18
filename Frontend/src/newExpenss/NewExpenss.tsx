@@ -1,6 +1,6 @@
 import Icon from "@/components/ui/Icon";
 import generalTransition from "@/generalTransition";
-import Tuchable from "@/Tuchable";
+import Touchable from "@/Touchable";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import arrow_main from "@/assets/arrow-main.svg";
@@ -126,21 +126,21 @@ const NewExpenss = () => {
       </div>
       <div className=" w-full flex justify-between gap-2">
         {currentStage > 0 && (
-          <Tuchable
+          <Touchable
             onClick={previousStage}
             className="  bg-container  p-4 px-8 rounded-2xl flex justify-center items-center font-bold text-md text-surface"
           >
             <div className="w-6">
               <Icon varient="full" src={arrow_main}></Icon>
             </div>
-          </Tuchable>
+          </Touchable>
         )}
-        <Tuchable
+        <Touchable
           onClick={handleNextStage}
           className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  text-surface"
         >
           Next
-        </Tuchable>
+        </Touchable>
       </div>
     </motion.div>
   );

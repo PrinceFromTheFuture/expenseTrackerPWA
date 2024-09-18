@@ -51,7 +51,7 @@ function Stage4() {
             <img className=" w-7 h-7" src={calender_main} />
             <div className=" w-full">
               {" "}
-              <div className="text-xs text-main font-semibold text-left"> Expense Title</div>
+              <div className="text-sm text-main font-bold text-left"> Expense Title</div>
               <TextareaAutosize
                 value={title}
                 placeholder="Enter a brief title (e.g., Groceries, Coffee, Gas)"
@@ -61,16 +61,13 @@ function Stage4() {
           </Touchable>
         </DrawerTrigger>
         <DrawerContent className="">
-          <div className=" font-semibold text-xl text-dark my-4">transaction details</div>
-          <div className=" px-4 py-2 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
+          <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
+          <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
               <img className=" w-7 h-7" src={calender_main} />
               <div className=" w-full">
                 {" "}
-                <div className="text-xs text-main font-semibold">
-                  {" "}
-                  this is a title for the trnasaction
-                </div>
+                <div className="text-sm text-main font-bold"> Expense Title</div>
                 <TextareaAutosize
                   value={title}
                   onChange={(e) => {
@@ -108,7 +105,7 @@ function Stage4() {
             <img className=" w-7 h-7" src={calender_main} />
             <div className=" w-full">
               {" "}
-              <div className="text-xs text-main font-semibold text-left"> Expense Description</div>
+              <div className="text-sm text-main font-bold text-left"> Expense Description</div>
               <TextareaAutosize
                 value={desciption}
                 placeholder="Add any relevant details (e.g., purchased from, purpose, etc."
@@ -118,16 +115,13 @@ function Stage4() {
           </Touchable>
         </DrawerTrigger>
         <DrawerContent className="">
-          <div className=" font-semibold text-xl text-dark my-4">transaction details</div>
-          <div className=" px-4 py-2 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
+          <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
+          <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
               <img className=" w-7 h-7" src={calender_main} />
               <div className=" w-full">
                 {" "}
-                <div className="text-xs text-main font-semibold">
-                  {" "}
-                  this is a title for the trnasaction
-                </div>
+                <div className="text-sm text-main font-bold"> Expense Description</div>
                 <TextareaAutosize
                   ref={descriptionTextAreaRef}
                   onBlur={(e) => {

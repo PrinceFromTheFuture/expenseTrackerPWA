@@ -3,12 +3,12 @@ import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/
 import edit_main from "@/assets/edit_main.svg";
 import trash_warning from "@/assets/trash_warning.svg";
 
-import Icon from "./components/ui/Icon";
+import Icon from "@/components/ui/Icon.tsx";
 import Touchable from "../../Touchable.tsx";
-import { RootState } from "./redux/store.ts";
-import { singleTransactionSelector } from "./redux/transactionsSlice.ts";
-import { formatAmountInAgorot } from "./lib/formatAmountInAgorot.ts";
-import { useAppSelector } from "./hooks.ts";
+import { RootState } from "@/redux/store.ts";
+import { singleTransactionSelector } from "@/redux/transactionsSlice.ts";
+import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot.ts";
+import { useAppSelector } from "@/hooks.ts";
 import dayjs from "dayjs";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {

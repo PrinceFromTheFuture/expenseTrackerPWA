@@ -2,30 +2,43 @@ import Touchable from "@/Touchable";
 import exit_main from "@/assets/exit_main.svg";
 import TextareaAutosize from "react-textarea-autosize";
 
-import { Drawer, DrawerContent, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+  DrawerClose,
+} from "@/components/ui/drawer";
 import thought_bubble_main from "@/assets/thought_bubble_main.svg";
 import tag_main from "@/assets/tag_main.svg";
 
 import {
   modifyTitleInForm,
   modifyDescriptionInForm,
-  formTitileSelector,
-  formDescriptionSelector,
+  formDataSelector,
 } from "@/redux/formSlice";
 
 import { useRef, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "@/hooks";
 function Stage4() {
   const dispatch = useAppDispatch();
 
-  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
-  const [isTitleOpen, setIsTitleOpen] = useState<boolean>(false);
+  const [isDescriptionOpen, setIsDescriptionOpen] =
+    useState<boolean>(false);
+  const [isTitleOpen, setIsTitleOpen] =
+    useState<boolean>(false);
 
-  const titleTextAreaRef = useRef<HTMLTextAreaElement>(null);
-  const descriptionTextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const titleTextAreaRef =
+    useRef<HTMLTextAreaElement>(null);
+  const descriptionTextAreaRef =
+    useRef<HTMLTextAreaElement>(null);
 
-  const title = useAppSelector(formTitileSelector);
-  const desciption = useAppSelector(formDescriptionSelector);
+  const title = useAppSelector(formDataSelector).title;
+  const desciption = useAppSelector(
+    formDataSelector
+  ).description;
 
   const maxFiledLength = 120;
 
@@ -49,7 +62,9 @@ function Stage4() {
 
   return (
     <div className=" w-full h-full my-4 flex flex-col items-center ">
-      <div className="text-secondary mb-4 font-semibold text-base">Add Details</div>
+      <div className="text-secondary mb-4 font-semibold text-base">
+        Add Details
+      </div>
 
       <Drawer
         open={isTitleOpen}
@@ -63,7 +78,10 @@ function Stage4() {
             <img className=" w-6 h-6" src={tag_main} />
             <div className=" w-full">
               {" "}
-              <div className="text-sm text-main font-bold text-left"> Expense Title</div>
+              <div className="text-sm text-main font-bold text-left">
+                {" "}
+                Expense Title
+              </div>
               <TextareaAutosize
                 value={title || ""}
                 placeholder="Enter a brief title (e.g., Groceries, Coffee, Gas)"
@@ -73,18 +91,33 @@ function Stage4() {
           </Touchable>
         </DrawerTrigger>
         <DrawerContent className="">
-          <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
+          <div className=" font-semibold text-xl text-dark my-4">
+            Add Details
+          </div>
           <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
-              <img className=" w-6 h-6" src={tag_main} />
+              <img
+                className=" w-6 h-6"
+                src={tag_main}
+              />
               <div className=" w-full">
                 {" "}
-                <div className="text-sm text-main font-bold"> Expense Title</div>
+                <div className="text-sm text-main font-bold">
+                  {" "}
+                  Expense Title
+                </div>
                 <TextareaAutosize
                   value={title || ""}
                   onChange={(e) => {
-                    if (e.target.value.length <= maxFiledLength) {
-                      dispatch(modifyTitleInForm(e.target.value));
+                    if (
+                      e.target.value.length <=
+                      maxFiledLength
+                    ) {
+                      dispatch(
+                        modifyTitleInForm(
+                          e.target.value
+                        )
+                      );
                     }
                   }}
                   ref={titleTextAreaRef}
@@ -97,7 +130,9 @@ function Stage4() {
               </div>
             </div>
             <img
-              onClick={() => dispatch(modifyTitleInForm(null))}
+              onClick={() =>
+                dispatch(modifyTitleInForm(null))
+              }
               className=" w-4 h-4"
               src={exit_main}
             />
@@ -118,10 +153,16 @@ function Stage4() {
       >
         <DrawerTrigger className=" mt-2 w-full">
           <Touchable className=" p-4 bg-container   gap-3   rounded-2xl flex justify-between items-center">
-            <img className=" w-6 h-6" src={thought_bubble_main} />
+            <img
+              className=" w-6 h-6"
+              src={thought_bubble_main}
+            />
             <div className=" w-full">
               {" "}
-              <div className="text-sm text-main font-bold text-left"> Expense Description</div>
+              <div className="text-sm text-main font-bold text-left">
+                {" "}
+                Expense Description
+              </div>
               <TextareaAutosize
                 value={desciption || ""}
                 placeholder="Add any relevant details (e.g., purchased from, purpose, etc."
@@ -131,13 +172,21 @@ function Stage4() {
           </Touchable>
         </DrawerTrigger>
         <DrawerContent className="">
-          <div className=" font-semibold text-xl text-dark my-4">Add Details</div>
+          <div className=" font-semibold text-xl text-dark my-4">
+            Add Details
+          </div>
           <div className=" p-4 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <div className=" w-full mr-2 flex gap-3 justify-start items-center">
-              <img className=" w-6 h-6" src={thought_bubble_main} />
+              <img
+                className=" w-6 h-6"
+                src={thought_bubble_main}
+              />
               <div className=" w-full">
                 {" "}
-                <div className="text-sm text-main font-bold"> Expense Description</div>
+                <div className="text-sm text-main font-bold">
+                  {" "}
+                  Expense Description
+                </div>
                 <TextareaAutosize
                   ref={descriptionTextAreaRef}
                   onBlur={(e) => {
@@ -145,8 +194,15 @@ function Stage4() {
                   }}
                   value={desciption || ""}
                   onChange={(e) => {
-                    if (e.target.value.length <= maxFiledLength) {
-                      dispatch(modifyDescriptionInForm(e.target.value));
+                    if (
+                      e.target.value.length <=
+                      maxFiledLength
+                    ) {
+                      dispatch(
+                        modifyDescriptionInForm(
+                          e.target.value
+                        )
+                      );
                     }
                   }}
                   placeholder="Add any relevant details (e.g., purchased from, purpose, etc."
@@ -156,7 +212,9 @@ function Stage4() {
             </div>
             <img
               className=" w-4 h-4"
-              onClick={() => dispatch(modifyDescriptionInForm(null))}
+              onClick={() =>
+                dispatch(modifyDescriptionInForm(null))
+              }
               src={exit_main}
             />
           </div>

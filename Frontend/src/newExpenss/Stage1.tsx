@@ -6,10 +6,10 @@ import { cn } from "@/lib/utils";
 import {
   addNumberToFormAmount,
   decreaseNumberFromFormAmount,
-  formAmountSelctor,
   addOneToFormAmount,
   clearNumberFromFormAmount,
   decreaseOneFromFormAmount,
+  formDataSelector,
 } from "@/redux/formSlice";
 import { userBalanceSelector } from "@/redux/userSlice";
 import Touchable from "@/Touchable";
@@ -43,7 +43,7 @@ const NumberInputBox = ({
 const Stage1 = () => {
   const balance = useAppSelector(userBalanceSelector);
 
-  const formAmount = useAppSelector(formAmountSelctor);
+  const formAmount = useAppSelector(formDataSelector).amount;
 
   const dispatch = useAppDispatch();
 

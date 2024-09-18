@@ -6,7 +6,7 @@ interface PaymentMethod {
   iconURL: string;
   id: string;
 }
-const initialState: PaymentMethod[] = [  
+const initialState: PaymentMethod[] = [
   {
     iconURL: "/facebookTest.svg",
     id: "3dFD$3",
@@ -28,9 +28,31 @@ const initialState: PaymentMethod[] = [
     name: "creaditCard 4",
   },
 ];
-const paymentMethodsSlice = createSlice({ initialState, name: "paymentMethod", reducers: {} });
+const paymentMethodsSlice = createSlice({
+  initialState,
+  name: "paymentMethod",
+  reducers: {},
+});
 
-const paymentMethodsSliceReducer = paymentMethodsSlice.reducer;
+const paymentMethodsSliceReducer =
+  paymentMethodsSlice.reducer;
 export default paymentMethodsSliceReducer;
 
-export const allPaymentMethodsSelector = (state: RootState) => state.paymentMethodsSlice;
+export const allPaymentMethodsSelector = (
+  state: RootState
+) => state.paymentMethodsSlice;
+
+export const getPaymentMethodNameByIdSelector = (
+  state: RootState,
+  paymentMethodId: string
+) => {
+  const PaymentMethodFound =
+    state.paymentMethodsSlice.find(
+      (paymentMethod) =>
+        paymentMethod.id === paymentMethodId
+    );
+  if (!PaymentMethodFound) {
+    return null;
+  }
+  return PaymentMethodFound.name;
+};

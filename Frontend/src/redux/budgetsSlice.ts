@@ -93,3 +93,16 @@ export default budgetsSliceReducer;
 
 export const allBugdetsSelctor = (state: RootState) =>
   state.budgetsSlice;
+
+export const getBudgetNameByIdSelector = (
+  state: RootState,
+  budgetId: string
+) => {
+  const budgetFound = state.budgetsSlice.find(
+    (budget) => budget.id === budgetId
+  );
+  if (!budgetFound) {
+    return null;
+  }
+  return budgetFound.name;
+};

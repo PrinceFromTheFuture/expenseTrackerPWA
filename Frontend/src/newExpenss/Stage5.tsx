@@ -1,22 +1,43 @@
 import Icon from "@/components/ui/Icon";
 import Touchable from "@/Touchable";
 import edit_main from "@/assets/edit_main.svg";
-import { useAppSelector } from "@/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "@/hooks";
 import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
-import { useState } from "react";
+import {
+  formDataSelector,
+  modifyPaymentMethodInForm,
+} from "@/redux/formSlice";
+import { useEffect } from "react";
 
 const Stage5 = () => {
-  const allPaymentMethods = useAppSelector(allPaymentMethodsSelector);
-  const [selctedPaymentMethodId, setSelctedPaymentMethodId] = useState(allPaymentMethods[0].id);
+  const allPaymentMethods = useAppSelector(
+    allPaymentMethodsSelector
+  );
+
+  const selctedPaymentMethodId = useAppSelector(
+    formDataSelector
+  ).paymentMethodId;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    console.log(selctedPaymentMethodId);
+  }, [selctedPaymentMethodId]);
   return (
     <div className=" w-full h-full my-4 flex flex-col justify-start items-center">
       {" "}
-      <div className="text-secondary mb-4  font-semibold text-base">Payment Method</div>
+      <div className="text-secondary mb-4  font-semibold text-base">
+        Payment Method
+      </div>
       <div className=" w-full mb-4 flex justify-between items-end">
         {" "}
-        <div className="text-dark   font-semibold text-lg">Payment Method</div>
+        <div className="text-dark   font-semibold text-lg">
+          Payment Method
+        </div>
         <Icon src={edit_main} varient="mid" />
       </div>
       <div className=" w-full flex flex-col justify-between items-start gap-2">
@@ -24,10 +45,24 @@ const Stage5 = () => {
           return (
             <Touchable
               animate={{
-                outlineOffset: selctedPaymentMethodId === paymentMethod.id ? "-2px" : "0px",
-                outlineWidth: selctedPaymentMethodId === paymentMethod.id ? "2px" : "0px",
+                outlineOffset:
+                  selctedPaymentMethodId ===
+                  paymentMethod.id
+                    ? "-2px"
+                    : "0px",
+                outlineWidth:
+                  selctedPaymentMethodId ===
+                  paymentMethod.id
+                    ? "2px"
+                    : "0px",
               }}
-              onClick={() => setSelctedPaymentMethodId(paymentMethod.id)}
+              onClick={() =>
+                dispatch(
+                  modifyPaymentMethodInForm(
+                    paymentMethod.id
+                  )
+                )
+              }
               key={paymentMethod.id}
               className=" rounded-2xl w-full p-4 flex  outline-main outline justify-between items-center bg-container"
             >
@@ -40,23 +75,39 @@ const Stage5 = () => {
                   }}
                   animate={{
                     backgroundColor:
-                      selctedPaymentMethodId === paymentMethod.id ? "#0d6680" : "#9daab0",
+                      selctedPaymentMethodId ===
+                      paymentMethod.id
+                        ? "#0d6680"
+                        : "#9daab0",
                   }}
                   className=" flex justify-center  items-center  w-4 h-4 rounded-full "
                 >
                   <motion.div
                     transition={generalTransition}
                     animate={{
-                      width: selctedPaymentMethodId === paymentMethod.id ? "50%" : "80%",
-                      height: selctedPaymentMethodId === paymentMethod.id ? "50%" : "80%",
+                      width:
+                        selctedPaymentMethodId ===
+                        paymentMethod.id
+                          ? "50%"
+                          : "80%",
+                      height:
+                        selctedPaymentMethodId ===
+                        paymentMethod.id
+                          ? "50%"
+                          : "80%",
                     }}
                     className="  bg-container rounded-full"
                   ></motion.div>
                 </motion.div>
               </div>
               <div className=" w-full flex justify-between items-center">
-                <div className=" text-md text-secondary font-bold">{paymentMethod.name}</div>
-                <Icon src={paymentMethod.iconURL} varient="full" />
+                <div className=" text-md text-secondary font-bold">
+                  {paymentMethod.name}
+                </div>
+                <Icon
+                  src={paymentMethod.iconURL}
+                  varient="full"
+                />
               </div>
             </Touchable>
           );

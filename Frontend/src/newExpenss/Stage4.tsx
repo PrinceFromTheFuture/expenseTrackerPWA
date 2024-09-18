@@ -59,7 +59,7 @@ function Stage4() {
         }}
       >
         <DrawerTrigger className=" mt-2 w-full">
-          <Touchable className=" p-4 bg-surface  gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
+          <Touchable className=" bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center">
             <img className=" w-6 h-6" src={tag_main} />
             <div className=" w-full">
               {" "}
@@ -117,7 +117,7 @@ function Stage4() {
         }}
       >
         <DrawerTrigger className=" mt-2 w-full">
-          <Touchable className=" p-4 bg-surface   gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
+          <Touchable className=" p-4 bg-container   gap-3   rounded-2xl flex justify-between items-center">
             <img className=" w-6 h-6" src={thought_bubble_main} />
             <div className=" w-full">
               {" "}

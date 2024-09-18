@@ -22,7 +22,6 @@ const Touchable = ({
       whileTap={{ backgroundColor: "#D6DBDE" }}
       transition={{
         ...generalTransition,
-        duration: 0.08,
       }}
     >
       {children}

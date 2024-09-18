@@ -4,6 +4,7 @@ import userReducer from "./userSlice";
 import userPreferencesReducer from "./userPreferencesSlice";
 import formSliceReducer from "./formSlice";
 import budgetsSliceReducer from "./budgetsSlice";
+import paymentMethodsSliceReducer from "./paymentMethodsSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     userPreferencesSlice: userPreferencesReducer,
     formSlice: formSliceReducer,
     budgetsSlice: budgetsSliceReducer,
+    paymentMethodsSlice: paymentMethodsSliceReducer,
   },
 });
 

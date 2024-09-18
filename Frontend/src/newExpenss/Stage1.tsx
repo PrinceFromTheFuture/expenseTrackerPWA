@@ -68,7 +68,7 @@ const Stage1 = () => {
 
   return (
     <div className=" w-full h-full m-4 flex flex-col justify-between items-center">
-      <div className="text-secondary mb-1 font-semibold text-base">expensess amount</div>
+      <div className="text-secondary mb-1 font-semibold text-base">Enter Amount</div>
       <div
         className=" w-full p-4 
       py-6 border-container border-2 rounded-2xl flex justify-center items-start flex-col"

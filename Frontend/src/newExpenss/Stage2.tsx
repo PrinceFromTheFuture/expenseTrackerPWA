@@ -22,7 +22,7 @@ const Stage2 = () => {
   const budgetsWidgetsContainerRef = useRef<HTMLDivElement>(null);
   return (
     <div className=" w-full h-full flex-col flex justify-between items-center gap-4 my-8 ">
-      <div className="text-secondary mb-1 font-semibold text-base">choose budget category</div>
+      <div className="text-secondary mb-1 font-semibold text-base">Select Budget Category </div>
       <motion.div
         ref={budgetsWidgetsContainerRef}
         transition={generalTransition}

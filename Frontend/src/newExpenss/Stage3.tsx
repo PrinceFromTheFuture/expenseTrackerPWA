@@ -25,7 +25,7 @@ const Stage3 = () => {
 
   return (
     <div className=" w-full my-4 h-full flex justify-start flex-col items-center">
-      <div className="text-secondary mb-4 font-semibold text-base">choose budget category</div>
+      <div className="text-secondary mb-4 font-semibold text-base">Set Time & Date</div>
       <Touchable
         onClick={() => setIsOpenMenu("date")}
         animate={{

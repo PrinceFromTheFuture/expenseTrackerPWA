@@ -6,16 +6,27 @@ import TextareaAutosize from "react-textarea-autosize";
 import { Drawer, DrawerContent, DrawerTrigger, DrawerClose } from "@/components/ui/drawer";
 import { useRef, useState } from "react";
 function Stage4() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isDescriptionOpen, setIsDescriptionOpen] = useState<boolean>(false);
+  const [isTitleOpen, setIsTitleOpen] = useState<boolean>(false);
+
   const titleTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const descriptionTextAreaRef = useRef<HTMLTextAreaElement>(null);
 
-  const [title, setTitle] = useState("fsdfds");
-  const [desciption, setDesciption] = useState("fsdfds");
+  const [title, setTitle] = useState("");
+  const [desciption, setDesciption] = useState("");
 
   const maxFiledLength = 120;
 
-  const handleOnOpenChange = () => {
+  const handleOnDescriptionOpenChange = () => {
+    setTimeout(() => {
+      if (!descriptionTextAreaRef.current) {
+        return;
+      }
+      descriptionTextAreaRef.current.focus();
+    }, 300);
+  };
+
+  const handleOnTitleOpenChange = () => {
     setTimeout(() => {
       if (!titleTextAreaRef.current) {
         return;
@@ -26,22 +37,25 @@ function Stage4() {
 
   return (
     <div className=" w-full h-full my-4 flex flex-col items-center ">
-      <div className="text-secondary mb-4 font-semibold text-base">choose budget category</div>
+      <div className="text-secondary mb-4 font-semibold text-base">Add Details</div>
 
-      <Drawer>
+      <Drawer
+        open={isTitleOpen}
+        onOpenChange={(isOpen) => {
+          handleOnTitleOpenChange();
+          setIsTitleOpen(isOpen);
+        }}
+      >
         <DrawerTrigger className=" mt-2 w-full">
-          <Touchable className=" p-4 bg-surface  gap-2 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
+          <Touchable className=" p-4 bg-surface  gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <img className=" w-7 h-7" src={calender_main} />
             <div className=" w-full">
               {" "}
-              <div className="text-xs text-main font-semibold text-left">
-                {" "}
-                this is a title for the trnasaction
-              </div>
+              <div className="text-xs text-main font-semibold text-left"> Expense Title</div>
               <TextareaAutosize
                 value={title}
-                placeholder="fdf"
-                className="text-sm select-none w-full focus:outline-none text-dark font-bold bg-transparent "
+                placeholder="Enter a brief title (e.g., Groceries, Coffee, Gas)"
+                className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
               />
             </div>
           </Touchable>
@@ -49,7 +63,7 @@ function Stage4() {
         <DrawerContent className="">
           <div className=" font-semibold text-xl text-dark my-4">transaction details</div>
           <div className=" px-4 py-2 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
-            <div className=" w-full mr-2 flex gap-2 justify-start items-center">
+            <div className=" w-full mr-2 flex gap-3 justify-start items-center">
               <img className=" w-7 h-7" src={calender_main} />
               <div className=" w-full">
                 {" "}
@@ -60,7 +74,6 @@ function Stage4() {
                 <TextareaAutosize
                   value={title}
                   onChange={(e) => {
-                    console.log(e.target.value.length);
                     if (e.target.value.length <= maxFiledLength) {
                       setTitle(e.target.value);
                     }
@@ -69,12 +82,12 @@ function Stage4() {
                   onBlur={(e) => {
                     e.target.focus();
                   }}
-                  placeholder="fdsf"
-                  className="text-sm w-full focus:outline-none text-dark font-bold bg-transparent "
+                  placeholder="Enter a brief title (e.g., Groceries, Coffee, Gas)"
+                  className=" placeholder:text-secondary text-sm w-full focus:outline-none text-dark font-semibold bg-transparent "
                 />
               </div>
             </div>
-            <img onClick={() => setTitle("111")} className=" w-4 h-4" src={exit_main} />
+            <img onClick={() => setTitle("")} className=" w-4 h-4" src={exit_main} />
           </div>
           <DrawerClose className=" w-full">
             <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
@@ -84,25 +97,22 @@ function Stage4() {
         </DrawerContent>
       </Drawer>
       <Drawer
-        open={isOpen}
+        open={isDescriptionOpen}
         onOpenChange={(isOpen) => {
-          handleOnOpenChange();
-          setIsOpen(isOpen);
+          handleOnDescriptionOpenChange();
+          setIsDescriptionOpen(isOpen);
         }}
       >
         <DrawerTrigger className=" mt-2 w-full">
-          <Touchable className=" p-4 bg-surface   gap-2 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
+          <Touchable className=" p-4 bg-surface   gap-3 outline-secondary -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
             <img className=" w-7 h-7" src={calender_main} />
             <div className=" w-full">
               {" "}
-              <div className="text-xs text-main font-semibold text-left">
-                {" "}
-                this is a title for the trnasaction
-              </div>
+              <div className="text-xs text-main font-semibold text-left"> Expense Description</div>
               <TextareaAutosize
                 value={desciption}
-                placeholder="fdf"
-                className="text-sm select-none w-full focus:outline-none text-dark font-bold bg-transparent "
+                placeholder="Add any relevant details (e.g., purchased from, purpose, etc."
+                className="placeholder:text-secondary  text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
               />
             </div>
           </Touchable>
@@ -110,7 +120,7 @@ function Stage4() {
         <DrawerContent className="">
           <div className=" font-semibold text-xl text-dark my-4">transaction details</div>
           <div className=" px-4 py-2 outline-main -outline-offset-2 outline  outline-2  rounded-2xl flex justify-between items-center">
-            <div className=" w-full mr-2 flex gap-2 justify-start items-center">
+            <div className=" w-full mr-2 flex gap-3 justify-start items-center">
               <img className=" w-7 h-7" src={calender_main} />
               <div className=" w-full">
                 {" "}
@@ -125,17 +135,16 @@ function Stage4() {
                   }}
                   value={desciption}
                   onChange={(e) => {
-                    console.log(e.target.value.length);
                     if (e.target.value.length <= maxFiledLength) {
                       setDesciption(e.target.value);
                     }
                   }}
-                  placeholder="fdf"
-                  className="text-sm w-full focus:outline-none text-dark font-bold bg-transparent "
+                  placeholder="Add any relevant details (e.g., purchased from, purpose, etc."
+                  className=" placeholder:text-secondary text-sm w-full focus:outline-none text-dark font-semibold bg-transparent "
                 />
               </div>
             </div>
-            <img className=" w-4 h-4" onClick={() => setDesciption("111")} src={exit_main} />
+            <img className=" w-4 h-4" onClick={() => setDesciption("")} src={exit_main} />
           </div>
           <DrawerClose className=" w-full">
             <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">

@@ -16,9 +16,7 @@ const SpendingsTimeFrameValues = () => {
   const thirtyDaysSpendings = useAppSelector((state: RootState) =>
     SpendingsTimeFrameSelector(state, "30d")
   );
-  const spendingsTimeFramePreferance = useAppSelector(
-    spendingsTimeFramePreferenceSelector
-  );
+  const spendingsTimeFramePreferance = useAppSelector(spendingsTimeFramePreferenceSelector);
   return (
     <div className=" relative">
       <AnimatePresence>
@@ -30,7 +28,7 @@ const SpendingsTimeFrameValues = () => {
             transition={generalTransition}
             className=" text-dark font-extrabold text-2xl absolute"
           >
-            {formatAmountInAgorot(oneDaysSpendings)}
+            {formatAmountInAgorot(oneDaysSpendings,true)}
           </motion.div>
         )}
       </AnimatePresence>
@@ -44,7 +42,7 @@ const SpendingsTimeFrameValues = () => {
             transition={generalTransition}
             className=" text-dark font-extrabold text-2xl absolute"
           >
-            {formatAmountInAgorot(sevenDaysSpendings)}
+            {formatAmountInAgorot(sevenDaysSpendings,true)}
           </motion.div>
         )}
       </AnimatePresence>
@@ -58,7 +56,7 @@ const SpendingsTimeFrameValues = () => {
             transition={generalTransition}
             className=" text-dark font-extrabold text-2xl absolute"
           >
-            {formatAmountInAgorot(thirtyDaysSpendings)}
+            {formatAmountInAgorot(thirtyDaysSpendings, true)}
           </motion.div>
         )}
       </AnimatePresence>

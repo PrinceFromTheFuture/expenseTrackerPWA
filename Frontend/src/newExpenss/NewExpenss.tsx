@@ -1,10 +1,7 @@
 import Icon from "@/components/ui/Icon";
 import generalTransition from "@/generalTransition";
 import Touchable from "@/Touchable";
-import {
-  AnimatePresence,
-  motion,
-} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import arrow_main from "@/assets/arrow-main.svg";
 import edit_main from "@/assets/edit_main.svg";
@@ -17,21 +14,11 @@ import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 import Stage5 from "./Stage5";
-import {
-  clearAllInForm,
-  formDataSelector,
-} from "@/redux/formSlice";
+import { clearAllInForm, formDataSelector } from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "@/hooks";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-} from "@/components/ui/alert-dialog";
-import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
+import { AlertDialogAction, AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import dayjs from "dayjs";
 import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice";
@@ -50,10 +37,7 @@ const StageProgressBar = ({
         initial={{ width: 0 }}
         className=" bg-main rounded-full  h-full   "
         animate={{
-          width:
-            currentStage >= thisBarStage
-              ? "100%"
-              : "0px",
+          width: currentStage >= thisBarStage ? "100%" : "0px",
         }}
         transition={generalTransition}
       ></motion.div>
@@ -65,23 +49,13 @@ const NewExpenss = () => {
   const formData = useAppSelector(formDataSelector);
 
   const formDataBudgetName = useAppSelector((state) =>
-    getBudgetNameByIdSelector(
-      state,
-      formData.budgetId!
-    )
+    getBudgetNameByIdSelector(state, formData.budgetId!)
   );
-  const formDatePaymentMethodName = useAppSelector(
-    (state) =>
-      getPaymentMethodNameByIdSelector(
-        state,
-        formData.paymentMethodId!
-      )
+  const formDatePaymentMethodName = useAppSelector((state) =>
+    getPaymentMethodNameByIdSelector(state, formData.paymentMethodId!)
   );
 
-  const [
-    isReviewBeforeSubmitOpen,
-    setIsReviewBeforeSubmitOpen,
-  ] = useState(false);
+  const [isReviewBeforeSubmitOpen, setIsReviewBeforeSubmitOpen] = useState(false);
   const dispatch = useAppDispatch();
   const [currentStage, setCurrentStage] = useState(0);
   const lastStage = 4;
@@ -122,26 +96,15 @@ const NewExpenss = () => {
             ></motion.div>
           </div>
           {Array.from([1, 2, 3, 4], (item) => {
-            return (
-              <StageProgressBar
-                key={item}
-                currentStage={currentStage}
-                thisBarStage={item}
-              />
-            );
+            return <StageProgressBar key={item} currentStage={currentStage} thisBarStage={item} />;
           })}
         </div>
         <div className=" w-full  justify-between items-center flex ">
-          <Link
-            to={"/"}
-            onClick={() => dispatch(clearAllInForm())}
-          >
+          <Link to={"/"} onClick={() => dispatch(clearAllInForm())}>
             {" "}
             <Icon varient="mid" src={exit_main} />
           </Link>
-          <div className="font-bold text-dark text-lg">
-            New Transaction
-          </div>
+          <div className="font-bold text-dark text-lg">New Transaction</div>
 
           <div className=" invisible">
             <Icon varient="mid" src={edit_main} />
@@ -155,13 +118,8 @@ const NewExpenss = () => {
               key={stage.stageIndex} // Add key for each item
               initial={{ opacity: 0 }}
               animate={{
-                transform: `translate(-${
-                  currentStage * 100
-                }%)`,
-                opacity:
-                  stage.stageIndex === currentStage
-                    ? 1
-                    : 0,
+                transform: `translate(-${currentStage * 100}%)`,
+                opacity: stage.stageIndex === currentStage ? 1 : 0,
               }}
               className="min-w-full flex flex-col  justify-between items-center    w-full h-full"
             >
@@ -177,10 +135,7 @@ const NewExpenss = () => {
             className="  bg-container  p-4 px-8 rounded-2xl flex justify-center items-center font-bold text-md text-surface"
           >
             <div className="w-6">
-              <Icon
-                varient="full"
-                src={arrow_main}
-              ></Icon>
+              <Icon varient="full" src={arrow_main}></Icon>
             </div>
           </Touchable>
         )}
@@ -204,11 +159,7 @@ const NewExpenss = () => {
               onClick={handleNextStage}
               className=" w-full bg-main  gap-2  p-4 rounded-2xl flex justify-center items-center font-bold text-md  text-surface"
             >
-              <div>
-                {currentStage !== 4
-                  ? "Next"
-                  : "Submit"}
-              </div>
+              <div>{currentStage !== 4 ? "Next" : "Submit"}</div>
               <AnimatePresence>
                 {currentStage === 4 && (
                   <motion.img
@@ -227,29 +178,20 @@ const NewExpenss = () => {
             <div className=" w-full gap-8 justify-between items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface">
               <div className=" w-full">
                 <AlertDialogCancel>
-                  <Icon
-                    src={exit_main}
-                    varient="mid"
-                  />
+                  <Icon src={exit_main} varient="mid" />
                 </AlertDialogCancel>
               </div>
               <div className=" w-full  flex flex-col justify-center items-center ">
-                <div className=" text-xl mb-2 text-dark font-bold">
-                  Confirm Details!
-                </div>
+                <div className=" text-xl mb-2 text-dark font-bold">Confirm Details!</div>
               </div>
               <div className=" w-full ">
                 {" "}
                 <Touchable className=" mb-5 w-full bg-container rounded-lg p-4 flex justify-between items-center">
                   <div className=" flex justify-start items-center gap-2 ">
-                    <Icon
-                      varient="full"
-                      src={facebookTest}
-                    />
+                    <Icon varient="full" src={facebookTest} />
                     <div>
                       <div className=" text-sm font-bold">
-                        {formData.title ||
-                          "Untitled Transaction"}
+                        {formData.title || "Untitled Transaction"}
                       </div>
                       <div className=" text-xs text-secondary text-left font-semibold">
                         {formDataBudgetName}
@@ -263,9 +205,7 @@ const NewExpenss = () => {
                       date and time
                     </div>
                     <div className="text-sm text-dark text-left font-bold">
-                      {dayjs(formData.dateTime).format(
-                        "DD.MM.YYYY HH:mm"
-                      )}
+                      {dayjs(formData.dateTime).format("DD.MM.YYYY HH:mm")}
                     </div>
                   </div>
                   <div className=" flex mb-5 justify-between items-center w-full">
@@ -273,8 +213,7 @@ const NewExpenss = () => {
                       expenses title
                     </div>
                     <div className="text-sm text-dark text-left font-bold">
-                      {formData.title ||
-                        "Untitled Transaction"}
+                      {formData.title || "Untitled Transaction"}
                     </div>
                   </div>
                   <div className=" flex mb-5 justify-between items-center w-full">
@@ -316,10 +255,7 @@ const NewExpenss = () => {
                       total amount
                     </div>
                     <div className="text-sm text-dark text-left font-bold">
-                      {formatAmountInAgorot(
-                        formData.amount,
-                        true
-                      )}
+                      {formatAmountInAgorot(formData.amount, true)}
                     </div>
                   </div>
                 </div>
@@ -330,25 +266,27 @@ const NewExpenss = () => {
                     Cancel
                   </Touchable>
                 </AlertDialogCancel>
-                <AlertDialogCancel className=" w-full ">
-                  <Touchable className=" flex justify-center items-center gap-2 w-full bg-main rounded-2xl font-semibold text-surface p-4">
-                    <div>Submit</div>
-                    <motion.img
-                      initial={{
-                        opacity: 0,
-                        scale: 0,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        scale: 1,
-                      }}
-                      exit={{ opacity: 0, scale: 0 }}
-                      transition={generalTransition}
-                      src={paper_plane_surface}
-                      className=" w-4"
-                    />
-                  </Touchable>
-                </AlertDialogCancel>
+                <Link to={"/"} className=" w-full">
+                  <AlertDialogAction className=" w-full ">
+                    <Touchable className=" flex justify-center items-center gap-2 w-full bg-main rounded-2xl font-semibold text-surface p-4">
+                      <div>Submit</div>
+                      <motion.img
+                        initial={{
+                          opacity: 0,
+                          scale: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                        }}
+                        exit={{ opacity: 0, scale: 0 }}
+                        transition={generalTransition}
+                        src={paper_plane_surface}
+                        className=" w-4"
+                      />
+                    </Touchable>
+                  </AlertDialogAction>
+                </Link>
               </div>
             </div>
           </AlertDialogContent>

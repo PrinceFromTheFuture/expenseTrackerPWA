@@ -26,7 +26,7 @@ const App = () => {
         <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance)}</div>
+        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance,true)}</div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-12">

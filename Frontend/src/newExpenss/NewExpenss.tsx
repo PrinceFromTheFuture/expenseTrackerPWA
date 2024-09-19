@@ -237,11 +237,6 @@ const NewExpenss = () => {
                 <div className=" text-xl mb-2 text-dark font-bold">
                   Confirm Details!
                 </div>
-                <div className=" w-full text-center text-lg text-secondary font-semibold">
-                  Please verify all expense details
-                  before submitting. This action cannot
-                  be undone.
-                </div>
               </div>
               <div className=" w-full ">
                 {" "}

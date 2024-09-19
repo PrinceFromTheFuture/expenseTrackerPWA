@@ -1,6 +1,6 @@
 import React from "react";
 import { AnimationControls, motion, TargetAndTransition, VariantLabels } from "framer-motion";
-import generalTransition from "./generalTransition";
+import generalTransition from "../../../generalTransition";
 
 type FrmaerAnimationProps = AnimationControls | TargetAndTransition | VariantLabels | boolean;
 const Touchable = ({

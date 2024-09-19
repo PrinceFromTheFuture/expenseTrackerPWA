@@ -1,16 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 import { RootState } from "./store";
+import { Transaction } from "@/types";
+import { HTTPGetAllTransactions } from "@/http.requests";
 
-export interface Transaction {
-  amountInAgorot: number;
-  budgetId: string | null;
-  date: null | string;
-  paymentMethodId: null | string;
-  title: string | null;
-  description: string | null;
-  id: string;
-}
+export const getAllTransactionsAsyncThunk = createAsyncThunk("transactions/getAll", async () => {
+  return await HTTPGetAllTransactions();
+});
 
 const fakeTransactions: Transaction[] = [
   {
@@ -57,19 +53,17 @@ const transactionsSlice = createSlice({
   initialState,
   name: "transactions",
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getAllTransactionsAsyncThunk.fulfilled, (_, action) => {
+      return action.payload;
+    });
+  },
 });
 
 const transactionsReducer = transactionsSlice.reducer;
 export default transactionsReducer;
 
-export const singleTransactionSelector = (
-  state: RootState,
-  id: string
-) =>
-  state.transactionsSlice.find(
-    (transaction) => transaction.id === id
-  ) || null;
+export const singleTransactionSelector = (state: RootState, id: string) =>
+  state.transactionsSlice.find((transaction) => transaction.id === id) || null;
 
-export const allTransactionsSelctor = (
-  state: RootState
-) => state.transactionsSlice;
+export const allTransactionsSelctor = (state: RootState) => state.transactionsSlice;

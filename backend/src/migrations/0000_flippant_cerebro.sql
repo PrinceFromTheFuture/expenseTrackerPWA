@@ -1,11 +1,13 @@
 CREATE TABLE IF NOT EXISTS "budgets" (
-	"name" varchar(100) NOT NULL,
+	"name" varchar(50) NOT NULL,
 	"color" varchar(7) NOT NULL,
+	"iconURL" varchar(100) NOT NULL,
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "paymentMethods" (
-	"name" varchar(100) NOT NULL,
+	"name" varchar(50) NOT NULL,
+	"iconURL" varchar(100) NOT NULL,
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL
 );
 --> statement-breakpoint

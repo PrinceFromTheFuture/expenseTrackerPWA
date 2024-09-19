@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Touchable from "@/Touchable";
+import Touchable from "@/components/ui/generalComponents/Touchable";
 
 const Icon = ({
   varient,

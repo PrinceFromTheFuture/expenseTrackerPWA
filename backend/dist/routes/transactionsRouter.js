@@ -1,13 +1,9 @@
 import * as express from "express";
 import { db } from "../server.js";
 import { transactionsTable } from "../schema.js";
-import { v4 as uuidv4 } from "uuid";
 const transactionsRouter = express.Router();
-transactionsRouter.get("/", (req, res) => {
-    const getAllTransactions = async () => {
-        return await db.select().from(transactionsTable);
-    };
-    const allTransactions = getAllTransactions();
+transactionsRouter.get("/", async (req, res) => {
+    const allTransactions = await db.select().from(transactionsTable);
     res.json(allTransactions);
 });
 transactionsRouter.get("/new", (req, res) => {
@@ -17,8 +13,8 @@ transactionsRouter.get("/new", (req, res) => {
             date: new Date(Date.now()),
             description: "3242fg",
             title: "fsdf",
-            budgetId: uuidv4(),
-            paymentMethodId: uuidv4(),
+            budgetId: "eb4e8781-fa1e-463d-944c-8e7198cbfeff",
+            paymentMethodId: "e102eafb-29b7-40fc-8b53-44408ab2cf66",
         });
     };
     getAllTransactions();

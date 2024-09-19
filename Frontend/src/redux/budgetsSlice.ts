@@ -1,12 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { Bugdet } from "@/types";
+import { HTTPGetAllBudgets } from "@/http.requests";
 
-interface Bugdet {
-  name: string;
-  color: string;
-  iconURL: string;
-  id: string;
-}
+export const getAllBudgetsAsyncThunk = createAsyncThunk("budgets/getAll", async () => {
+  return await HTTPGetAllBudgets();
+});
 
 const fakeBudgets: Bugdet[] = [
   {
@@ -86,21 +85,20 @@ const budgetsSlice = createSlice({
   initialState: fakeBudgets,
   name: "budgets",
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getAllBudgetsAsyncThunk.fulfilled, (_, action) => {
+      return action.payload;
+    });
+  },
 });
 
 const budgetsSliceReducer = budgetsSlice.reducer;
 export default budgetsSliceReducer;
 
-export const allBugdetsSelctor = (state: RootState) =>
-  state.budgetsSlice;
+export const allBugdetsSelctor = (state: RootState) => state.budgetsSlice;
 
-export const getBudgetNameByIdSelector = (
-  state: RootState,
-  budgetId: string
-) => {
-  const budgetFound = state.budgetsSlice.find(
-    (budget) => budget.id === budgetId
-  );
+export const getBudgetNameByIdSelector = (state: RootState, budgetId: string) => {
+  const budgetFound = state.budgetsSlice.find((budget) => budget.id === budgetId);
   if (!budgetFound) {
     return null;
   }

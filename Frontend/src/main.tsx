@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -8,10 +8,22 @@ import { Provider } from "react-redux";
 import store from "@/redux/store.ts";
 import NewExpenss from "@/newExpenss/NewExpenss.tsx";
 import { AnimatePresence } from "framer-motion";
+import { useAppDispatch } from "./hooks.ts";
+import { getAllBudgetsAsyncThunk } from "./redux/budgetsSlice.ts";
+import { getAllPaymentMethodsAsyncThunk } from "./redux/paymentMethodsSlice.ts";
+import { getAllTransactionsAsyncThunk } from "./redux/transactionsSlice.ts";
 
 const AppWraper = () => {
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(getAllBudgetsAsyncThunk());
+      dispatch(getAllPaymentMethodsAsyncThunk());
+      dispatch(getAllTransactionsAsyncThunk());
+    }, 1000);
+  }, []);
   return (
     <div className="">
       <AnimatePresence mode="wait">

@@ -1,5 +1,5 @@
 {
-  "id": "ad4f85d8-b867-4e70-9c02-57f3228e4c55",
+  "id": "3c8c78d8-c25f-4ae8-9bfa-57f7bc3d9a78",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,13 +10,19 @@
       "columns": {
         "name": {
           "name": "name",
-          "type": "varchar(100)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
         "color": {
           "name": "color",
           "type": "varchar(7)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "iconURL": {
+          "name": "iconURL",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
@@ -39,6 +45,12 @@
       "columns": {
         "name": {
           "name": "name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "iconURL": {
+          "name": "iconURL",
           "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true

@@ -12,7 +12,7 @@ import {
   formDataSelector,
 } from "@/redux/formSlice";
 import { userBalanceSelector } from "@/redux/userSlice";
-import Touchable from "@/Touchable";
+import Touchable from "@/components/ui/generalComponents/Touchable";
 import React from "react";
 
 const NumberInputBox = ({

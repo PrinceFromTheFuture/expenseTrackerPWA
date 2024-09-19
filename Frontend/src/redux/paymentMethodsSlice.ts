@@ -1,11 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import { PaymentMethod } from "@/types";
+import { HTTPGetAllPaymentMethods } from "@/http.requests";
 
-interface PaymentMethod {
-  name: string;
-  iconURL: string;
-  id: string;
-}
+export const getAllPaymentMethodsAsyncThunk = createAsyncThunk(
+  "paymentMethods/getAll",
+  async () => {
+    return await HTTPGetAllPaymentMethods();
+  }
+);
+
 const initialState: PaymentMethod[] = [
   {
     iconURL: "/facebookTest.svg",
@@ -32,25 +36,22 @@ const paymentMethodsSlice = createSlice({
   initialState,
   name: "paymentMethod",
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getAllPaymentMethodsAsyncThunk.fulfilled, (_, action) => {
+      return action.payload;
+    });
+  },
 });
 
-const paymentMethodsSliceReducer =
-  paymentMethodsSlice.reducer;
+const paymentMethodsSliceReducer = paymentMethodsSlice.reducer;
 export default paymentMethodsSliceReducer;
 
-export const allPaymentMethodsSelector = (
-  state: RootState
-) => state.paymentMethodsSlice;
+export const allPaymentMethodsSelector = (state: RootState) => state.paymentMethodsSlice;
 
-export const getPaymentMethodNameByIdSelector = (
-  state: RootState,
-  paymentMethodId: string
-) => {
-  const PaymentMethodFound =
-    state.paymentMethodsSlice.find(
-      (paymentMethod) =>
-        paymentMethod.id === paymentMethodId
-    );
+export const getPaymentMethodNameByIdSelector = (state: RootState, paymentMethodId: string) => {
+  const PaymentMethodFound = state.paymentMethodsSlice.find(
+    (paymentMethod) => paymentMethod.id === paymentMethodId
+  );
   if (!PaymentMethodFound) {
     return null;
   }

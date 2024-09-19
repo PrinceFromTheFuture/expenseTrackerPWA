@@ -1,26 +1,20 @@
 import { motion } from "framer-motion";
-import generalTransition from "./generalTransition";
-import { useAppDispatch, useAppSelector } from "./hooks";
+import generalTransition from "../../../generalTransition";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
   changeSpendingsTimeFrame,
   spendingsTimeFramePreferenceSelector,
-} from "./redux/userPreferencesSlice";
+} from "../../../redux/userPreferencesSlice";
 
 const SpendingsTimeFrame = () => {
-  const spendingsTimeFrame = useAppSelector(
-    spendingsTimeFramePreferenceSelector
-  );
+  const spendingsTimeFrame = useAppSelector(spendingsTimeFramePreferenceSelector);
   const dispatch = useAppDispatch();
   return (
     <div
       className="  h-24 flex flex-col items-center relative   w-16 "
       style={{
         justifyContent:
-          spendingsTimeFrame === "1d"
-            ? "start"
-            : spendingsTimeFrame === "7d"
-            ? "center"
-            : "end",
+          spendingsTimeFrame === "1d" ? "start" : spendingsTimeFrame === "7d" ? "center" : "end",
       }}
     >
       <motion.div

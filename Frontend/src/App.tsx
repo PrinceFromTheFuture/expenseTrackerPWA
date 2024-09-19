@@ -1,19 +1,20 @@
-import ExpensesWidget from "./ExpensesWidget";
+import ExpensesWidget from "./components/ui/generalComponents/ExpensesWidget";
 
 import Icon from "./components/ui/Icon";
 import edit_main from "@/assets/edit_main.svg";
 import bell_surface from "@/assets/bell_surface.svg";
 
-import SpendingsTimeFrame from "./SpendingsTimeFrame";
-import Touchable from "./Touchable";
-import { useAppSelector } from "./hooks";
+import SpendingsTimeFrame from "./components/ui/generalComponents/SpendingsTimeFrame";
+import Touchable from "./components/ui/generalComponents/Touchable";
+import {  useAppSelector } from "./hooks";
 import { allTransactionsSelctor } from "@/redux/transactionsSlice";
 
-import SpendingsTimeFrameValues from "@/SpendingsTimeFrameValues.tsx";
-import ExpensesWidgetSkeleton from "./ExpensesWidgetSkeleton";
+import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
+import ExpensesWidgetSkeleton from "./components/ui/generalComponents/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
 import { userBalanceSelector } from "./redux/userSlice";
 import { formatAmountInAgorot } from "./lib/formatAmountInAgorot";
+import { AnimatePresence, motion } from "framer-motion";
 const App = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
@@ -26,7 +27,9 @@ const App = () => {
         <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance,true)}</div>
+        <div className=" text-4xl text-dark font-extrabold">
+          {formatAmountInAgorot(balance, true)}
+        </div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-12">
@@ -50,13 +53,29 @@ const App = () => {
       <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">recent transactions</div>
       {allTransactions.length === 0
         ? Array.from([1, 2, 3, 4, 5], (item) => {
-            return <ExpensesWidgetSkeleton key={item} />;
+            return (
+              <AnimatePresence key={item}>
+                <motion.div>
+                  <ExpensesWidgetSkeleton key={item} />
+                </motion.div>
+              </AnimatePresence>
+            );
           })
         : allTransactions.map((transaction) => {
-            return <ExpensesWidget key={transaction.id} transactionId={transaction.id} />;
+            return (
+              <AnimatePresence key={transaction.id}>
+                <motion.div
+                  layout
+                  animate={{ opacity: 1, height: "auto" }}
+                  initial={{ opacity: 0, height: 0 }}
+                  exit={{ opacity: 0, height: 0 }}
+                >
+                  <ExpensesWidget transactionId={transaction.id} />
+                </motion.div>
+              </AnimatePresence>
+            );
           })}
     </div>
   );
 };
-
 export default App;

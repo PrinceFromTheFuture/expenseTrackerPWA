@@ -2,45 +2,50 @@ import { createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 import { RootState } from "./store";
 
-interface Transaction {
+export interface Transaction {
   amountInAgorot: number;
-  budget: string;
-  title: string;
-  paymentMethod: string;
+  budgetId: string | null;
+  date: null | string;
+  paymentMethodId: null | string;
+  title: string | null;
+  description: string | null;
   id: string;
-  date: string;
 }
 
 const fakeTransactions: Transaction[] = [
   {
     amountInAgorot: 1332443,
-    budget: "transportation",
+    budgetId: "transportation",
     title: "chocolate",
-    paymentMethod: "credit card",
+    paymentMethodId: "credit card",
+    description: "fdsfe",
     id: "#$327892h",
     date: dayjs().toString(),
   },
   {
     amountInAgorot: 89152,
-    budget: "transportation",
+    budgetId: "transportation",
     title: "chocolate",
-    paymentMethod: "credit card",
+    description: "fdsfe",
+    paymentMethodId: "credit card",
     id: "#$F3273892h",
     date: dayjs().toString(),
   },
   {
     amountInAgorot: 51985,
-    budget: "transportation",
+    budgetId: "transportation",
     title: "chocolate",
-    paymentMethod: "credit card",
+    description: "fdsfe",
+    paymentMethodId: "credit card",
     id: "#$F3292h",
     date: dayjs().toString(),
   },
   {
     amountInAgorot: 92124,
-    budget: "transportation",
+    budgetId: "transportation",
     title: "chocolate",
-    paymentMethod: "credit card",
+    description: "fdsfe",
+    paymentMethodId: "credit card",
     id: "#$F3hs27892h",
     date: dayjs().toString(),
   },
@@ -57,8 +62,14 @@ const transactionsSlice = createSlice({
 const transactionsReducer = transactionsSlice.reducer;
 export default transactionsReducer;
 
-export const singleTransactionSelector = (state: RootState, id: string) =>
-  state.transactionsSlice.find((transaction) => transaction.id === id) || null;
+export const singleTransactionSelector = (
+  state: RootState,
+  id: string
+) =>
+  state.transactionsSlice.find(
+    (transaction) => transaction.id === id
+  ) || null;
 
-export const allTransactionsSelctor = (state: RootState) =>
-  state.transactionsSlice;
+export const allTransactionsSelctor = (
+  state: RootState
+) => state.transactionsSlice;

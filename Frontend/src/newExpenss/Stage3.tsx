@@ -28,7 +28,7 @@ const Stage3 = () => {
 
   const formDateTime = useAppSelector(
     formDataSelector
-  ).dateTime;
+  ).date;
 
   const dispatch = useAppDispatch();
 

@@ -48,7 +48,7 @@ const ExpensesWidget = ({
                   {transaction.title}
                 </div>
                 <div className=" text-xs text-secondary text-left font-semibold">
-                  {transaction.budget}
+                  {transaction.budgetId}
                 </div>
               </div>
             </div>

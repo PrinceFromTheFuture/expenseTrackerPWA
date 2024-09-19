@@ -104,6 +104,11 @@ const NewExpenss = () => {
     { stageComponnet: <Stage4 />, stageIndex: 3 },
     { stageComponnet: <Stage5 />, stageIndex: 4 },
   ];
+  const displayFormDataTitle =
+    (formData.title &&
+      formData.title.length > 10 &&
+      `${formData.title.substring(0, 22)}...`) ||
+    "Untitled Transaction";
   return (
     <motion.div
       transition={generalTransition}
@@ -192,7 +197,7 @@ const NewExpenss = () => {
               currentStage === 4 &&
               formData.budgetId &&
               formData.paymentMethodId &&
-              formData.amount !== 0
+              formData.amountInAgorot !== 0
             ) {
               setIsReviewBeforeSubmitOpen(isOpen);
             }
@@ -248,8 +253,7 @@ const NewExpenss = () => {
                     />
                     <div>
                       <div className=" text-sm font-bold">
-                        {formData.title ||
-                          "Untitled Transaction"}
+                        {displayFormDataTitle}
                       </div>
                       <div className=" text-xs text-secondary text-left font-semibold">
                         {formDataBudgetName}
@@ -263,7 +267,7 @@ const NewExpenss = () => {
                       date and time
                     </div>
                     <div className="text-sm text-dark text-left font-bold">
-                      {dayjs(formData.dateTime).format(
+                      {dayjs(formData.date).format(
                         "DD.MM.YYYY HH:mm"
                       )}
                     </div>
@@ -273,8 +277,7 @@ const NewExpenss = () => {
                       expenses title
                     </div>
                     <div className="text-sm text-dark text-left font-bold">
-                      {formData.title ||
-                        "Untitled Transaction"}
+                      {displayFormDataTitle}
                     </div>
                   </div>
                   <div className=" flex mb-5 justify-between items-center w-full">
@@ -317,7 +320,7 @@ const NewExpenss = () => {
                     </div>
                     <div className="text-sm text-dark text-left font-bold">
                       {formatAmountInAgorot(
-                        formData.amount,
+                        formData.amountInAgorot,
                         true
                       )}
                     </div>

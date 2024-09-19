@@ -4,19 +4,13 @@ import {
 } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import dayjs from "dayjs";
+import { Transaction } from "./transactionsSlice";
 
-interface Form {
-  amount: number;
-  budgetId: string | null;
-  dateTime: null | string;
-  paymentMethodId: null | string;
-  title: string | null;
-  description: string | null;
-}
-const initialState: Form = {
-  amount: 0,
+const initialState: Transaction = {
+  amountInAgorot: 0,
   budgetId: null,
-  dateTime: null,
+  id: "fds3fdfsDS",
+  date: dayjs().toString(),
   paymentMethodId: null,
   title: null,
   description: null,
@@ -30,30 +24,30 @@ const formSlice = createSlice({
       action: PayloadAction<number>
     ) {
       const newAmount = Number(
-        String(state.amount).concat(
+        String(state.amountInAgorot).concat(
           String(action.payload)
         )
       );
       if (newAmount < 100000000) {
-        state.amount = newAmount;
+        state.amountInAgorot = newAmount;
       } else {
         return;
       }
     },
     decreaseNumberFromFormAmount(state) {
       const newAmount = Number(
-        String(state.amount).slice(0, -1)
+        String(state.amountInAgorot).slice(0, -1)
       );
-      state.amount = newAmount;
+      state.amountInAgorot = newAmount;
     },
     clearNumberFromFormAmount(state) {
-      state.amount = 0;
+      state.amountInAgorot = 0;
     },
     addOneToFormAmount(state) {
-      state.amount += 100;
+      state.amountInAgorot += 100;
     },
     decreaseOneFromFormAmount(state) {
-      state.amount -= 100;
+      state.amountInAgorot -= 100;
     },
     selectBudgetInForm(
       state,
@@ -67,19 +61,19 @@ const formSlice = createSlice({
     ) {
       if (
         action.payload === "initialize" ||
-        !state.dateTime
+        !state.date
       ) {
-        state.dateTime = dayjs().toString();
+        state.date = dayjs().toString();
         return;
       }
 
-      const curentDateTime = dayjs(state.dateTime);
+      const curentDateTime = dayjs(state.date);
       const selctedDate = dayjs(action.payload);
       const newDateTime = selctedDate
         .set("hours", curentDateTime.get("hours"))
         .set("minutes", curentDateTime.get("minutes"))
         .toString();
-      state.dateTime = newDateTime;
+      state.date = newDateTime;
     },
     modifyHoursInForm(
       state,
@@ -88,13 +82,13 @@ const formSlice = createSlice({
         type: "hours" | "minutes";
       }>
     ) {
-      const curentDateTime = dayjs(state.dateTime);
+      const curentDateTime = dayjs(state.date);
       if (action.payload.type === "hours") {
-        state.dateTime = curentDateTime
+        state.date = curentDateTime
           .set("hours", action.payload.value)
           .toString();
       } else {
-        state.dateTime = curentDateTime
+        state.date = curentDateTime
           .set("minutes", action.payload.value)
           .toString();
       }
@@ -112,13 +106,14 @@ const formSlice = createSlice({
       state.description = action.payload;
     },
     clearAllInForm() {
-      const clearedForm: Form = {
-        amount: 0,
+      const clearedForm: Transaction = {
+        amountInAgorot: 0,
         budgetId: null,
-        dateTime: null,
+        date: null,
         title: null,
         paymentMethodId: null,
         description: null,
+        id: "",
       };
       return clearedForm;
     },
@@ -135,13 +130,13 @@ const formSliceReducer = formSlice.reducer;
 export default formSliceReducer;
 
 export const formAmountSelctor = (state: RootState) =>
-  state.formSlice.amount;
+  state.formSlice.date;
 export const formBudgetIdSelector = (
   state: RootState
 ) => state.formSlice.budgetId;
 export const formDateTimeSelector = (
   state: RootState
-) => state.formSlice.dateTime;
+) => state.formSlice.date;
 export const formTitileSelector = (state: RootState) =>
   state.formSlice.title;
 export const formDescriptionSelector = (

@@ -43,7 +43,7 @@ const NumberInputBox = ({
 const Stage1 = () => {
   const balance = useAppSelector(userBalanceSelector);
 
-  const formAmount = useAppSelector(formDataSelector).amount;
+  const formAmount = useAppSelector(formDataSelector).amountInAgorot;
 
   const dispatch = useAppDispatch();
 

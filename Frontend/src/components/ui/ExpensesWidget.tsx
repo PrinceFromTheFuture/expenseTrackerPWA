@@ -29,7 +29,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
               <div>
                 <div className=" text-left text-sm font-bold">{transaction.title}</div>
                 <div className=" text-xs text-secondary text-left font-semibold">
-                  {transaction.budget}
+                  {transaction.budgetId}
                 </div>
               </div>
             </div>
@@ -54,7 +54,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
                 <div>
                   <div className=" text-sm font-bold">{transaction.title}</div>
                   <div className=" text-xs text-secondary text-left font-semibold">
-                    {transaction.budget}
+                    {transaction.budgetId}
                   </div>
                 </div>
               </div>
@@ -71,12 +71,12 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
             </div>
             <div className=" flex mb-5 justify-between items-center w-full">
               <div className="text-sm text-secondary text-left font-semibold">budget category</div>
-              <div className="text-sm text-dark text-left font-bold">{transaction.budget}</div>
+              <div className="text-sm text-dark text-left font-bold">{transaction.budgetId}</div>
             </div>
             <div className=" flex mb-3 justify-between items-center w-full">
               <div className="text-sm text-secondary text-left font-semibold">payment method</div>
               <div className="text-sm text-dark text-left font-bold">
-                {transaction.paymentMethod}
+                {transaction.paymentMethodId}
               </div>
             </div>
             <svg

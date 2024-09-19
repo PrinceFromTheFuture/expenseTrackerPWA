@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Bugdet, PaymentMethod, Transaction } from "./types";
-const apiURL = import.meta.env.VITE_API_BASE_URI;
+const apiURL = process.env.VITE_API_BASE_URI;
 
 export const HTTPGetAllTransactions = async () => {
   const res = await axios.get<Transaction[]>(`${apiURL}/transactions`);

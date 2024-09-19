@@ -1,6 +1,6 @@
 import caret_secondary from "@/assets/caret_secondary.svg";
 
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { cn } from "@/lib/utils";

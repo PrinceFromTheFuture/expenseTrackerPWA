@@ -6,14 +6,12 @@ import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { formDataSelector, modifyPaymentMethodInForm } from "@/redux/formSlice";
-import { useEffect } from "react";
 
 const Stage5 = () => {
   const allPaymentMethods = useAppSelector(allPaymentMethodsSelector);
 
   const selctedPaymentMethodId = useAppSelector(formDataSelector).paymentMethodId;
   const dispatch = useAppDispatch();
-
 
   return (
     <div className=" w-full h-full my-4 flex flex-col justify-start items-center">

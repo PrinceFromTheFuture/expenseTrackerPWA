@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import dayjs from "dayjs";
-import { Transaction, TransactionForm } from "@/types";
+import {  TransactionForm } from "@/types";
 
 const initialState: TransactionForm = {
   amountInAgorot: 0,

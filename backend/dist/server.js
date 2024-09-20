@@ -6,11 +6,11 @@ import { configDotenv } from "dotenv";
 import cors from "cors";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import bodyParser from "body-parser";
 configDotenv();
 const server = express();
 server.use(cors());
 server.use(express.json());
+server.use(express.urlencoded({ extended: true })); // Specify the extended op
 const port = process.env.PORT || 3000;
 if (!process.env.DB_CONNECTION_STRING) {
     console.log("the data base connection string is not readable or not configured properly");
@@ -18,7 +18,6 @@ if (!process.env.DB_CONNECTION_STRING) {
 }
 const sql = neon(process.env.DB_CONNECTION_STRING);
 export const db = drizzle(sql);
-server.use(bodyParser);
 server.use("/budgets", budgetsRouter);
 server.use("/paymentMethods", paymentsMethodRouter);
 server.use("/transactions", transactionsRouter);

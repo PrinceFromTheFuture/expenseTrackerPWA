@@ -8,7 +8,6 @@ import cors from "cors";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import bodyParser from "body-parser";
-import bodyParser from "body-parser";
 
 configDotenv();
 

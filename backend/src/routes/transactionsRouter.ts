@@ -3,8 +3,6 @@ import { db } from "../server.js";
 import { transactionsTable } from "../schema.js";
 import { TransactionForm } from "../types.js";
 import dayjs from "dayjs";
-import { TransactionForm } from "../types.js";
-import dayjs from "dayjs";
 
 export interface Transaction {
   amountInAgorot: number;

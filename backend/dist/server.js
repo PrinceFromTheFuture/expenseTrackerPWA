@@ -6,6 +6,10 @@ import { configDotenv } from "dotenv";
 import cors from "cors";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
+import { transactionsTable } from "./schema.js";
+import { between } from "drizzle-orm";
+import dayjs from "dayjs";
+import usersRouter from "./routes/usersRouter.js";
 configDotenv();
 const server = express();
 server.use(cors());
@@ -21,6 +25,7 @@ export const db = drizzle(sql);
 server.use("/budgets", budgetsRouter);
 server.use("/paymentMethods", paymentsMethodRouter);
 server.use("/transactions", transactionsRouter);
+server.use("/users", usersRouter);
 function initilizeServer() {
     try {
         server.listen(port, () => {
@@ -32,7 +37,12 @@ function initilizeServer() {
     }
 }
 initilizeServer();
-server.get("/", (req, res) => {
-    console.log("hellow world");
-    res.send("fd");
+server.get("/", async (req, res) => {
+    res.send("welcome to Expense Tracker PWA API");
+    const data = await db
+        .select()
+        .from(transactionsTable)
+        .where(between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate()));
+    console.log(data);
+    console.log(dayjs().toISOString());
 });

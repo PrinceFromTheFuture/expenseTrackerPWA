@@ -54,7 +54,7 @@ const Stage3 = () => {
               mode="single"
               selected={dayjs(formDateTime).toDate() || new Date()}
               onSelect={(dateChoosen) => {
-                dispatch(modifyDateInForm(dayjs(dateChoosen).toString()));
+                dispatch(modifyDateInForm(dayjs(dateChoosen).toISOString()));
               }}
             />
           </motion.div>

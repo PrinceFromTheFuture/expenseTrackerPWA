@@ -1,8 +1,7 @@
-import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import dayjs from "dayjs";
 import { TransactionForm } from "@/types";
-
 
 const initialState: TransactionForm = {
   amountInAgorot: 0,
@@ -43,7 +42,7 @@ const formSlice = createSlice({
     },
     modifyDateInForm(state, action: PayloadAction<string | "initialize">) {
       if (action.payload === "initialize" || !state.date) {
-        state.date = dayjs().toString();
+        state.date = dayjs().toISOString();
         return;
       }
 
@@ -52,7 +51,7 @@ const formSlice = createSlice({
       const newDateTime = selctedDate
         .set("hours", curentDateTime.get("hours"))
         .set("minutes", curentDateTime.get("minutes"))
-        .toString();
+        .toISOString();
       state.date = newDateTime;
     },
     modifyHoursInForm(
@@ -64,9 +63,9 @@ const formSlice = createSlice({
     ) {
       const curentDateTime = dayjs(state.date);
       if (action.payload.type === "hours") {
-        state.date = curentDateTime.set("hours", action.payload.value).toString();
+        state.date = curentDateTime.set("hours", action.payload.value).toISOString();
       } else {
-        state.date = curentDateTime.set("minutes", action.payload.value).toString();
+        state.date = curentDateTime.set("minutes", action.payload.value).toISOString();
       }
     },
     modifyTitleInForm(state, action: PayloadAction<string | null>) {
@@ -90,7 +89,6 @@ const formSlice = createSlice({
       state.paymentMethodId = action.payload;
     },
   },
-  
 });
 
 const formSliceReducer = formSlice.reducer;

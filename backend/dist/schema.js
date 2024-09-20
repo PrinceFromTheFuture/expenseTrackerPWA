@@ -5,7 +5,7 @@ export const transactionsTable = pgTable("transactions", {
     description: varchar("description", {
         length: 50,
     }),
-    date: timestamp("date").notNull(),
+    date: timestamp("date", { withTimezone: true }).notNull(),
     id: uuid("id").primaryKey().defaultRandom(),
     budgetId: uuid("budgetId").references(() => budgetsTable.id),
     paymentMethodId: uuid("paymentMethodId").references(() => paymentMethodsTable.id),
@@ -22,4 +22,10 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
         length: 100,
     }).notNull(),
     id: uuid("id").primaryKey().defaultRandom(),
+});
+export const userTable = pgTable("users", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    name: varchar("name", { length: 25 }).notNull(),
+    email: varchar("email", { length: 50 }).notNull(),
+    balanceInAgorot: integer("balanceInAgorot").notNull(),
 });

@@ -4,7 +4,9 @@ import { transactionsTable } from "../schema.js";
 import dayjs from "dayjs";
 const transactionsRouter = express.Router();
 transactionsRouter.get("/", async (req, res) => {
-    const allTransactions = await db.select().from(transactionsTable);
+    const allTransactions = await db
+        .select()
+        .from(transactionsTable);
     res.json(allTransactions);
 });
 transactionsRouter.post("/", async (req, res) => {

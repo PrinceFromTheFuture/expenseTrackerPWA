@@ -6,6 +6,7 @@ import { configDotenv } from "dotenv";
 import cors from "cors";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
+import bodyParser from "body-parser";
 configDotenv();
 const server = express();
 server.use(cors());
@@ -16,6 +17,7 @@ if (!process.env.DB_CONNECTION_STRING) {
 }
 const sql = neon(process.env.DB_CONNECTION_STRING);
 export const db = drizzle(sql);
+server.use(bodyParser);
 server.use("/budgets", budgetsRouter);
 server.use("/paymentMethods", paymentsMethodRouter);
 server.use("/transactions", transactionsRouter);

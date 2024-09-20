@@ -9,3 +9,4 @@ budgetsRouter.get("/", async (req, res) => {
   res.json(AllBudgets);
 });
 export default budgetsRouter;
+

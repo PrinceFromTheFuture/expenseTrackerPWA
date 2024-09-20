@@ -16,9 +16,7 @@ server.use(cors());
 server.use(express.json());
 const port = process.env.PORT || 3000;
 if (!process.env.DB_CONNECTION_STRING) {
-  console.log(
-    "the data base connection string is not readable or not configured properly"
-  );
+  console.log("the data base connection string is not readable or not configured properly");
   process.abort();
 }
 
@@ -32,7 +30,7 @@ server.use("/transactions", transactionsRouter);
 
 function initilizeServer() {
   try {
-    server.listen(port, "0.0.0.0", () => {
+    server.listen(port, () => {
       console.log(`server is up and running on port: ${port}`);
     });
   } catch (e) {

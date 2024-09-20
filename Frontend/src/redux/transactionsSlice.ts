@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import dayjs from "dayjs";
 import { RootState } from "./store";
 import { Transaction } from "@/types";
 import { HTTPGetAllTransactions, HTTPPostNewTransaction } from "@/http.requests";
@@ -71,5 +70,5 @@ export const singleTransactionSelector = (state: RootState, id: string) =>
   state.transactionsSlice.data.find((transaction) => transaction.id === id) || null;
 
 export const allTransactionsSelctor = (state: RootState) => state.transactionsSlice.data;
-export const getTransactionsDataStatusSelector = (state: RootState) => state.transactionsSlice.status;
-
+export const getTransactionsDataStatusSelector = (state: RootState) =>
+  state.transactionsSlice.status;

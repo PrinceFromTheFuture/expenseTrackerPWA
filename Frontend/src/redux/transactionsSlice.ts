@@ -34,59 +34,32 @@ export const postNewTransactionAsyncThunk = createAsyncThunk(
   }
 );
 
-const fakeTransactions: Transaction[] = [
-  {
-    amountInAgorot: 1332443,
-    budgetId: "transportation",
-    title: "chocolate",
-    paymentMethodId: "credit card",
-    description: "fdsfe",
-    id: "#$327892h",
-    date: dayjs().toString(),
-  },
-  {
-    amountInAgorot: 89152,
-    budgetId: "transportation",
-    title: "chocolate",
-    description: "fdsfe",
-    paymentMethodId: "credit card",
-    id: "#$F3273892h",
-    date: dayjs().toString(),
-  },
-  {
-    amountInAgorot: 51985,
-    budgetId: "transportation",
-    title: "chocolate",
-    description: "fdsfe",
-    paymentMethodId: "credit card",
-    id: "#$F3292h",
-    date: dayjs().toString(),
-  },
-  {
-    amountInAgorot: 92124,
-    budgetId: "transportation",
-    title: "chocolate",
-    description: "fdsfe",
-    paymentMethodId: "credit card",
-    id: "#$F3hs27892h",
-    date: dayjs().toString(),
-  },
-];
-
-const initialState = fakeTransactions;
+const initialState: { data: Transaction[]; status: "success" | "pending" } = {
+  data: [],
+  status: "pending",
+};
 
 const transactionsSlice = createSlice({
   initialState,
   name: "transactions",
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllTransactionsAsyncThunk.fulfilled, (_, action) => {
-      return action.payload;
+    builder.addCase(getAllTransactionsAsyncThunk.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = "success";
+    });
+
+    builder.addCase(getAllTransactionsAsyncThunk.pending, (state) => {
+      state.status = "pending";
     });
     builder.addCase(postNewTransactionAsyncThunk.fulfilled, (state, action) => {
       if (action.payload) {
-        state.push(action.payload);
+        state.data.push(action.payload);
       }
+      state.status = "success";
+    });
+    builder.addCase(postNewTransactionAsyncThunk.pending, (state) => {
+      state.status = "pending";
     });
   },
 });
@@ -95,6 +68,8 @@ const transactionsReducer = transactionsSlice.reducer;
 export default transactionsReducer;
 
 export const singleTransactionSelector = (state: RootState, id: string) =>
-  state.transactionsSlice.find((transaction) => transaction.id === id) || null;
+  state.transactionsSlice.data.find((transaction) => transaction.id === id) || null;
 
-export const allTransactionsSelctor = (state: RootState) => state.transactionsSlice;
+export const allTransactionsSelctor = (state: RootState) => state.transactionsSlice.data;
+export const getTransactionsDataStatusSelector = (state: RootState) => state.transactionsSlice.status;
+

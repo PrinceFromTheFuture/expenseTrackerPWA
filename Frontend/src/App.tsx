@@ -6,8 +6,11 @@ import bell_surface from "@/assets/bell_surface.svg";
 
 import SpendingsTimeFrame from "./components/ui/generalComponents/SpendingsTimeFrame";
 import Touchable from "./components/ui/generalComponents/Touchable";
-import {  useAppSelector } from "./hooks";
-import { allTransactionsSelctor } from "@/redux/transactionsSlice";
+import { useAppSelector } from "./hooks";
+import {
+  allTransactionsSelctor,
+  getTransactionsDataStatusSelector,
+} from "@/redux/transactionsSlice";
 
 import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
 import ExpensesWidgetSkeleton from "./components/ui/generalComponents/ExpensesWidgetSkeleton";
@@ -18,6 +21,8 @@ import { AnimatePresence, motion } from "framer-motion";
 const App = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
+
+  const transactionsDataStatus = useAppSelector(getTransactionsDataStatusSelector);
 
   return (
     <div className=" mainContainer w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
@@ -51,7 +56,7 @@ const App = () => {
         </Link>
       </div>
       <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">recent transactions</div>
-      {allTransactions.length === 0
+      {transactionsDataStatus === "pending"
         ? Array.from([1, 2, 3, 4, 5], (item) => {
             return (
               <AnimatePresence key={item}>

@@ -2,11 +2,37 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 import { RootState } from "./store";
 import { Transaction } from "@/types";
-import { HTTPGetAllTransactions } from "@/http.requests";
+import { HTTPGetAllTransactions, HTTPPostNewTransaction } from "@/http.requests";
 
 export const getAllTransactionsAsyncThunk = createAsyncThunk("transactions/getAll", async () => {
   return await HTTPGetAllTransactions();
 });
+
+export const postNewTransactionAsyncThunk = createAsyncThunk(
+  "form/postNewTransaction",
+  async (_, thunkApi) => {
+    let { amountInAgorot, budgetId, date, description, paymentMethodId, title } = (
+      thunkApi.getState() as RootState
+    ).formSlice;
+    console.log((thunkApi.getState() as RootState).formSlice);
+    if (!budgetId || !paymentMethodId || !date) {
+      return null;
+    }
+    if (!title) {
+      title = "Untitled Transaction";
+    }
+    const savedTransaction = await HTTPPostNewTransaction({
+      budgetId,
+      amountInAgorot,
+      date,
+      description,
+      paymentMethodId,
+      title,
+    });
+
+    return savedTransaction;
+  }
+);
 
 const fakeTransactions: Transaction[] = [
   {
@@ -56,6 +82,11 @@ const transactionsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllTransactionsAsyncThunk.fulfilled, (_, action) => {
       return action.payload;
+    });
+    builder.addCase(postNewTransactionAsyncThunk.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.push(action.payload);
+      }
     });
   },
 });

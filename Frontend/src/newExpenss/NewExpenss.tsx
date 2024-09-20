@@ -7,7 +7,7 @@ import arrow_main from "@/assets/arrow-main.svg";
 import edit_main from "@/assets/edit_main.svg";
 import facebookTest from "@/assets/facebookTest.svg";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import exit_main from "@/assets/exit_main.svg";
 import Stage1 from "./Stage1";
 import Stage2 from "./Stage2";
@@ -18,11 +18,12 @@ import { clearAllInForm, formDataSelector } from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
-import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
+import { AlertDialogAction, AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import dayjs from "dayjs";
 import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice";
+import { postNewTransactionAsyncThunk } from "@/redux/transactionsSlice";
 
 const StageProgressBar = ({
   currentStage,
@@ -47,6 +48,7 @@ const StageProgressBar = ({
 
 const NewExpenss = () => {
   const formData = useAppSelector(formDataSelector);
+  const navigate = useNavigate();
 
   const formDataBudgetName = useAppSelector((state) =>
     getBudgetNameByIdSelector(state, formData.budgetId!)
@@ -54,6 +56,10 @@ const NewExpenss = () => {
   const formDatePaymentMethodName = useAppSelector((state) =>
     getPaymentMethodNameByIdSelector(state, formData.paymentMethodId!)
   );
+  const handleSubmit = () => {
+    dispatch(postNewTransactionAsyncThunk());
+    navigate("/");
+  };
 
   const [isReviewBeforeSubmitOpen, setIsReviewBeforeSubmitOpen] = useState(false);
   const dispatch = useAppDispatch();
@@ -78,9 +84,11 @@ const NewExpenss = () => {
     { stageComponnet: <Stage4 />, stageIndex: 3 },
     { stageComponnet: <Stage5 />, stageIndex: 4 },
   ];
-  const displayFormDataTitle =
-    (formData.title && formData.title.length > 10 && `${formData.title.substring(0, 22)}...`) ||
-    "Untitled Transaction";
+  const displayFormDataTitle = formData.title
+    ? formData.title.length > 22
+      ? `${formData.title.substring(0, 22)}...`
+      : formData.title
+    : "Untitled Transaction";
   return (
     <motion.div
       transition={generalTransition}
@@ -267,7 +275,7 @@ const NewExpenss = () => {
                     Cancel
                   </Touchable>
                 </AlertDialogCancel>
-                <AlertDialogCancel className=" w-full ">
+                <AlertDialogAction onClick={handleSubmit} className=" w-full ">
                   <Touchable className=" flex justify-center items-center gap-2 w-full bg-main rounded-2xl font-semibold text-surface p-4">
                     <div>Submit</div>
                     <motion.img
@@ -285,7 +293,7 @@ const NewExpenss = () => {
                       className=" w-4"
                     />
                   </Touchable>
-                </AlertDialogCancel>
+                </AlertDialogAction>
               </div>
             </div>
           </AlertDialogContent>

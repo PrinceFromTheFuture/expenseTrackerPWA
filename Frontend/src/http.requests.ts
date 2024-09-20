@@ -16,3 +16,8 @@ export const HTTPGetAllPaymentMethods = async () => {
   const res = await axios.get<PaymentMethod[]>(`${apiURL}/paymentMethods`);
   return res.data;
 };
+
+export const HTTPPostNewTransaction = async (filledForm: Omit<Transaction, "id">) => {
+  const res = await axios.post<Transaction[]>(`${apiURL}/transactions`, filledForm);
+  return res.data[0];
+};

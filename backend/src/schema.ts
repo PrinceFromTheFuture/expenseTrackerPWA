@@ -5,7 +5,7 @@ export const transactionsTable = pgTable("transactions", {
   title: varchar("title", { length: 50 }).notNull(),
   description: varchar("description", {
     length: 50,
-  }).notNull(),
+  }),
   date: timestamp("date").notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
   budgetId: uuid("budgetId").references(() => budgetsTable.id),

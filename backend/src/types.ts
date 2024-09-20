@@ -6,11 +6,11 @@ export interface Bugdet {
 }
 export interface TransactionForm {
   amountInAgorot: number;
-  budgetId: string | null;
-  date: string | null;
-  paymentMethodId: null | string;
-  title: string | null;
-  description: string | null;
+  budgetId: string;
+  date: string;
+  paymentMethodId: string;
+  title: string;
+  description: string;
 }
 
 export interface Transaction {
@@ -19,10 +19,9 @@ export interface Transaction {
   date: string;
   paymentMethodId: string;
   title: string;
-  description: string | null;
+  description: string;
   id: string;
 }
-
 export interface PaymentMethod {
   name: string;
   iconURL: string;

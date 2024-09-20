@@ -1,16 +1,18 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import dayjs from "dayjs";
-import {  TransactionForm } from "@/types";
+import { TransactionForm } from "@/types";
+
 
 const initialState: TransactionForm = {
   amountInAgorot: 0,
   budgetId: null,
-  date: dayjs().toString(),
+  date: null,
   paymentMethodId: null,
   title: null,
   description: null,
 };
+
 const formSlice = createSlice({
   initialState,
   name: "form",
@@ -88,6 +90,7 @@ const formSlice = createSlice({
       state.paymentMethodId = action.payload;
     },
   },
+  
 });
 
 const formSliceReducer = formSlice.reducer;

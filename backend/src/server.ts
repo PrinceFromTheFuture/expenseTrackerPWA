@@ -7,11 +7,13 @@ import cors from "cors";
 
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
+import bodyParser from "body-parser";
 
 configDotenv();
 
 const server = express();
 server.use(cors());
+server.use(express.json());
 const port = process.env.PORT || 3000;
 if (!process.env.DB_CONNECTION_STRING) {
   console.log("the data base connection string is not readable or not configured properly");
@@ -25,11 +27,9 @@ server.use("/budgets", budgetsRouter);
 server.use("/paymentMethods", paymentsMethodRouter);
 server.use("/transactions", transactionsRouter);
 
-server.use(express.json());
-
 function initilizeServer() {
   try {
-    server.listen(port, () => {
+    server.listen(port, "0.0.0.0", () => {
       console.log(`server is up and running on port: ${port}`);
     });
   } catch (e) {
@@ -38,6 +38,7 @@ function initilizeServer() {
 }
 
 initilizeServer();
-server.get("/", () => {
+server.get("/", (req, res) => {
   console.log("hellow world");
+  res.send("fd");
 });

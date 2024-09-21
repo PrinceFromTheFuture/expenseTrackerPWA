@@ -13,7 +13,6 @@ export const postNewTransactionAsyncThunk = createAsyncThunk(
     let { amountInAgorot, budgetId, date, description, paymentMethodId, title } = (
       thunkApi.getState() as RootState
     ).formSlice;
-    console.log((thunkApi.getState() as RootState).formSlice);
     if (!budgetId || !paymentMethodId || !date) {
       return null;
     }
@@ -33,7 +32,10 @@ export const postNewTransactionAsyncThunk = createAsyncThunk(
   }
 );
 
-const initialState: { data: Transaction[]; status: "success" | "pending" } = {
+const initialState: {
+  data: Transaction[];
+  status: "success" | "pending";
+} = {
   data: [],
   status: "pending",
 };

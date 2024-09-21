@@ -26,6 +26,7 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
   }).notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
 });
+
 export const userTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 25 }).notNull(),

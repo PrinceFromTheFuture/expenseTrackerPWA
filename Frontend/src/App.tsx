@@ -22,7 +22,9 @@ const App = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
 
-  const transactionsDataStatus = useAppSelector(getTransactionsDataStatusSelector);
+  const transactionsDataStatus = useAppSelector(
+    getTransactionsDataStatusSelector
+  );
 
   return (
     <div className=" mainContainer w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
@@ -33,16 +35,22 @@ const App = () => {
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
         <div className=" text-4xl text-dark font-extrabold">
-          {formatAmountInAgorot(balance, true)}
+          {formatAmountInAgorot(balance || 0, true)}
         </div>
-        <div className=" text-secondary font-semibold">current blanace</div>
+        <div className=" text-secondary font-semibold">
+          current blanace
+        </div>
       </div>
       <div className="  mx-4 mb-12">
-        <div className=" text-xl font-semibold mb-2 text-dark ">useful insights</div>
+        <div className=" text-xl font-semibold mb-2 text-dark ">
+          useful insights
+        </div>
         <div className="   flex gap-4 justify-between items-center">
           <div className=" bg-container  rounded-l-2xl rounded-r-md w-full flex justify-between  h-24 items-start p-4">
             <div>
-              <div className=" text-secondary mb-1 font-semibold text-base">my behavior</div>
+              <div className=" text-secondary mb-1 font-semibold text-base">
+                my behavior
+              </div>
               <SpendingsTimeFrameValues />
             </div>
             <Icon src={bell_surface} varient="small" />
@@ -55,7 +63,9 @@ const App = () => {
           </Touchable>
         </Link>
       </div>
-      <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">recent transactions</div>
+      <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">
+        recent transactions
+      </div>
       {transactionsDataStatus === "pending"
         ? Array.from([1, 2, 3, 4, 5], (item) => {
             return (

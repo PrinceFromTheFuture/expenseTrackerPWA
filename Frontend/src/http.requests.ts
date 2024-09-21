@@ -18,6 +18,14 @@ export const HTTPGetAllPaymentMethods = async () => {
 };
 
 export const HTTPPostNewTransaction = async (filledForm: Omit<Transaction, "id">) => {
-  const res = await axios.post<Transaction[]>(`${apiURL}/transactions`, filledForm);
-  return res.data[0];
+  const res = await axios.post<Transaction>(`${apiURL}/transactions`, filledForm);
+  return res.data;
+};
+
+export const HTTPGetSpendingsInTimeFrame = async (timeFrame: { from: string; to: string }) => {
+  const res = await axios.post<{ amountInAgorot: number }>(
+    `${apiURL}/users/timeFrameSpendings`,
+    timeFrame
+  );
+  return res.data;
 };

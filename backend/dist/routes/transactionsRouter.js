@@ -11,13 +11,14 @@ transactionsRouter.get("/", async (req, res) => {
 });
 transactionsRouter.post("/", async (req, res) => {
     const transactionForm = req.body;
-    const savedTransaction = await db
+    const result = await db
         .insert(transactionsTable)
         .values({
         ...transactionForm,
         date: dayjs(transactionForm.date).toDate(),
     })
         .returning();
+    const savedTransaction = result[0];
     res.json(savedTransaction);
 });
 export default transactionsRouter;

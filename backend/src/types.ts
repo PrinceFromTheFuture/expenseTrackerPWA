@@ -7,7 +7,7 @@ export interface Bugdet {
 export interface TransactionForm {
   amountInAgorot: number;
   budgetId: string;
-  date: string;
+  date: string | null;
   paymentMethodId: string;
   title: string;
   description: string;

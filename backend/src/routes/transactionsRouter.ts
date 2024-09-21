@@ -4,14 +4,7 @@ import { transactionsTable } from "../schema.js";
 import { TransactionForm } from "../types.js";
 import dayjs from "dayjs";
 
-export interface Transaction {
-  amountInAgorot: number;
-  budgetId: string;
-  date: string;
-  paymentMethodId: string;
-  title: string;
-  description: string;
-}
+
 
 const transactionsRouter = express.Router();
 
@@ -25,13 +18,14 @@ transactionsRouter.get("/", async (req, res) => {
 transactionsRouter.post("/", async (req, res) => {
   const transactionForm: TransactionForm = req.body;
 
-  const savedTransaction = await db
+  const result = await db
     .insert(transactionsTable)
     .values({
       ...transactionForm,
       date: dayjs(transactionForm.date).toDate(),
     })
     .returning();
+    const savedTransaction = result[0]
   res.json(savedTransaction);
 });
 

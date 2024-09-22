@@ -32,7 +32,7 @@ const Stage5 = () => {
               }}
               onClick={() => dispatch(modifyPaymentMethodInForm(paymentMethod.id))}
               key={paymentMethod.id}
-              className=" rounded-2xl w-full p-4 flex  outline-main outline justify-between items-center bg-container"
+              className=" rounded-2xl w-full h-16 p-4 flex  outline-main outline justify-between items-center bg-container"
             >
               <div className=" mr-4">
                 {" "}

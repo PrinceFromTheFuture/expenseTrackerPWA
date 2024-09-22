@@ -28,7 +28,7 @@ const SpendingsTimeFrameValues = () => {
             transition={generalTransition}
             className=" text-dark font-extrabold text-2xl absolute"
           >
-            {formatAmountInAgorot(oneDaysSpendings, true)}
+            {formatAmountInAgorot(oneDaysSpendings || 0, true)}
           </motion.div>
         )}
       </AnimatePresence>
@@ -42,7 +42,7 @@ const SpendingsTimeFrameValues = () => {
             transition={generalTransition}
             className=" text-dark font-extrabold text-2xl absolute"
           >
-            {formatAmountInAgorot(sevenDaysSpendings, true)}
+            {formatAmountInAgorot(sevenDaysSpendings || 0, true)}
           </motion.div>
         )}
       </AnimatePresence>
@@ -56,7 +56,7 @@ const SpendingsTimeFrameValues = () => {
             transition={generalTransition}
             className=" text-dark font-extrabold text-2xl absolute"
           >
-            {formatAmountInAgorot(thirtyDaysSpendings, true)}
+            {formatAmountInAgorot(thirtyDaysSpendings || 0, true)}
           </motion.div>
         )}
       </AnimatePresence>

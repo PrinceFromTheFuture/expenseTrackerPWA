@@ -24,6 +24,7 @@ import dayjs from "dayjs";
 import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice";
 import { postNewTransactionAsyncThunk } from "@/redux/transactionsSlice";
+import { getSpendingsInTimeFrameAsyncThunk } from "@/redux/userSlice";
 
 const StageProgressBar = ({
   currentStage,
@@ -47,6 +48,7 @@ const StageProgressBar = ({
 };
 
 const NewExpenss = () => {
+  const dispatch = useAppDispatch();
   const formData = useAppSelector(formDataSelector);
   const navigate = useNavigate();
 
@@ -58,11 +60,27 @@ const NewExpenss = () => {
   );
   const handleSubmit = () => {
     dispatch(postNewTransactionAsyncThunk());
+    getSpendingsInTimeFrameAsyncThunk({
+      from: dayjs().subtract(1, "days").toISOString(),
+      to: dayjs().toISOString(),
+      defenition: "1d",
+    });
+    getSpendingsInTimeFrameAsyncThunk({
+      from: dayjs().subtract(7, "days").toISOString(),
+      to: dayjs().toISOString(),
+      defenition: "7d",
+    });
+    getSpendingsInTimeFrameAsyncThunk({
+      from: dayjs().subtract(30, "days").toISOString(),
+      to: dayjs().toISOString(),
+      defenition: "30d",
+    });
+    dispatch(clearAllInForm());
+
     navigate("/");
   };
 
   const [isReviewBeforeSubmitOpen, setIsReviewBeforeSubmitOpen] = useState(false);
-  const dispatch = useAppDispatch();
   const [currentStage, setCurrentStage] = useState(0);
   const lastStage = 4;
 

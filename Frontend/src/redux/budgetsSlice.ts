@@ -7,13 +7,22 @@ export const getAllBudgetsAsyncThunk = createAsyncThunk("budgets/getAll", async 
   return await HTTPGetAllBudgets();
 });
 
+const initialState: {
+  data: Bugdet[];
+  status: "success" | "pending";
+} = {
+  data: [],
+  status: "pending",
+};
+
 const budgetsSlice = createSlice({
-  initialState: [] as Bugdet[],
+  initialState,
   name: "budgets",
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllBudgetsAsyncThunk.fulfilled, (_, action) => {
-      return action.payload;
+    builder.addCase(getAllBudgetsAsyncThunk.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.status = "success";
     });
   },
 });
@@ -24,7 +33,7 @@ export default budgetsSliceReducer;
 export const allBugdetsSelctor = (state: RootState) => state.budgetsSlice;
 
 export const getBudgetNameByIdSelector = (state: RootState, budgetId: string) => {
-  const budgetFound = state.budgetsSlice.find((budget) => budget.id === budgetId);
+  const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);
   if (!budgetFound) {
     return null;
   }
@@ -33,7 +42,7 @@ export const getBudgetNameByIdSelector = (state: RootState, budgetId: string) =>
 };
 
 export const getBudgetByIdSelector = (state: RootState, budgetId: string) => {
-  const budgetFound = state.budgetsSlice.find((budget) => budget.id === budgetId);
+  const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);
   if (!budgetFound) {
     return null;
   }

@@ -9,7 +9,7 @@ import { singleTransactionSelector } from "@/redux/transactionsSlice.ts";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot.ts";
 import { useAppSelector } from "@/hooks.ts";
 import dayjs from "dayjs";
-import { getBudgetByIdSelector,  } from "@/redux/budgetsSlice.ts";
+import { getBudgetByIdSelector } from "@/redux/budgetsSlice.ts";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice.ts";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
@@ -30,9 +30,9 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
     )
   );
 
-  const iconPath = `/src/assets/${transactionBudegt!.iconName}/${transactionBudegt!.iconName}_${
-    transactionBudegt!.color
-  }.svg`;
+  const iconPath = `/src/assets/${transactionBudegt ? transactionBudegt.iconName : ""}/${
+    transactionBudegt ? transactionBudegt.iconName : ""
+  }_${transactionBudegt ? transactionBudegt.color : ""}.svg`;
   if (!transaction) {
     return <div>the data base doesnt contain a trnsaction with the id of {transactionId}</div>;
   }

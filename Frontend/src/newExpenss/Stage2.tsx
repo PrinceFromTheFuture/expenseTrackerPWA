@@ -61,7 +61,7 @@ const Stage2 = () => {
               </motion.div>
               <Icon
                 backgroundColor={budget.color}
-                src={`/public/${budget.iconName}/${budget.iconName}_surface.svg`}
+                src={`/${budget.iconName}/${budget.iconName}_surface.svg`}
                 varient="small"
               />
               <div className=" text-dark font-bold">{budget.name}</div>

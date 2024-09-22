@@ -30,7 +30,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
     )
   );
 
-  const iconPath = `/src/assets/${transactionBudegt ? transactionBudegt.iconName : ""}/${
+  const iconPath = `/public/${transactionBudegt ? transactionBudegt.iconName : ""}/${
     transactionBudegt ? transactionBudegt.iconName : ""
   }_${transactionBudegt ? transactionBudegt.color : ""}.svg`;
   if (!transaction) {

@@ -29,6 +29,20 @@
       "when": 1726864759800,
       "tag": "0003_marvelous_scorpion",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1727031607081,
+      "tag": "0004_nifty_betty_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1727031863979,
+      "tag": "0005_windy_zzzax",
+      "breakpoints": true
     }
   ]
 }

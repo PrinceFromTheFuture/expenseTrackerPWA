@@ -10,16 +10,18 @@ import { singleTransactionSelector } from "@/redux/transactionsSlice.ts";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot.ts";
 import { useAppSelector } from "@/hooks.ts";
 import dayjs from "dayjs";
-import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice.ts";
+import { getBudgetByIdSelector, getBudgetNameByIdSelector } from "@/redux/budgetsSlice.ts";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice.ts";
+import clock_main from "@/assets/clock_main.svg";
+import bus_purple from "@/assets/bus/bus-purple.svg";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
   const transaction = useAppSelector((state: RootState) =>
     singleTransactionSelector(state, transactionId)
   );
 
-  const budgetName = useAppSelector((state) =>
-    getBudgetNameByIdSelector(
+  const transactionBudegt = useAppSelector((state) =>
+    getBudgetByIdSelector(
       state,
       transaction ? transaction.budgetId : "erorr: no budget with this id"
     )
@@ -30,6 +32,10 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
       transaction ? transaction.paymentMethodId : "erorr: no budget with this id"
     )
   );
+
+  const iconPath = `/src/assets/${transactionBudegt!.iconName}/${transactionBudegt!.iconName}_${
+    transactionBudegt!.color
+  }.svg`;
   if (!transaction) {
     return <div>the data base doesnt contain a trnsaction with the id of {transactionId}</div>;
   }
@@ -40,10 +46,12 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
         <DrawerTrigger className=" w-full">
           <Touchable className=" box-content p-4 w-full bg-surface rounded-2xl flex justify-between items-center">
             <div className=" flex justify-start items-center gap-2 ">
-              <Icon varient="full" src={facebookTest} />
+              <Icon varient="mid" src={iconPath} />
               <div>
                 <div className=" text-left text-sm font-bold">{transaction.title}</div>
-                <div className=" text-xs text-secondary text-left font-semibold">{budgetName}</div>
+                <div className=" text-xs text-secondary text-left font-semibold">
+                  {transactionBudegt!.name}
+                </div>
               </div>
             </div>
             <div className="font-extrabold  text-base mr-8">
@@ -63,11 +71,15 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
           <div className=" w-full p-4 border-container border-2 rounded-2xl">
             <Touchable className=" mb-5 w-full bg-container rounded-lg p-4 flex justify-between items-center">
               <div className=" flex justify-start items-center gap-2 ">
-                <Icon varient="full" src={facebookTest} />
+                <div className=" w-8">
+                  {" "}
+                  <Icon varient="full" src={iconPath} />
+                </div>
+
                 <div>
                   <div className=" text-sm font-bold">{transaction.title}</div>
                   <div className=" text-xs text-secondary text-left font-semibold">
-                    {budgetName}
+                    {transactionBudegt!.name}
                   </div>
                 </div>
               </div>
@@ -84,7 +96,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
             </div>
             <div className=" flex mb-5 justify-between items-center w-full">
               <div className="text-sm text-secondary text-left font-semibold">budget category</div>
-              <div className="text-sm text-dark text-left font-bold">{budgetName}</div>
+              <div className="text-sm text-dark text-left font-bold">{transactionBudegt!.name}</div>
             </div>
             <div className=" flex mb-3 justify-between items-center w-full">
               <div className="text-sm text-secondary text-left font-semibold">payment method</div>

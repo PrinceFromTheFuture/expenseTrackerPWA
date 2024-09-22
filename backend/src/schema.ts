@@ -15,14 +15,14 @@ export const transactionsTable = pgTable("transactions", {
 export const budgetsTable = pgTable("budgets", {
   name: varchar("name", { length: 50 }).notNull(),
   color: varchar("color", { length: 7 }).notNull(),
-  iconURL: varchar("iconURL", { length: 100 }).notNull(),
+  iconName: varchar("iconName", { length: 100 }).notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
 });
 
 export const paymentMethodsTable = pgTable("paymentMethods", {
   name: varchar("name", { length: 50 }).notNull(),
-  iconURL: varchar("iconURL", {
-    length: 100,
+  iconName: varchar("iconName", {
+    length: 20,
   }).notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
 });

@@ -1,6 +1,6 @@
 import caret_secondary from "@/assets/caret_secondary.svg";
 
-import {  useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { cn } from "@/lib/utils";
@@ -9,10 +9,9 @@ import { allBugdetsSelctor } from "@/redux/budgetsSlice";
 import { formDataSelector, selectBudgetInForm } from "@/redux/formSlice";
 import Icon from "@/components/ui/Icon";
 import Touchable from "@/components/ui/generalComponents/Touchable";
+import bus_surface from "@/assets/bus/bus_surface.svg";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-
 
   const selctedBudgetId = useAppSelector(formDataSelector).budgetId;
 
@@ -61,7 +60,11 @@ const Stage2 = () => {
                   className="  bg-container rounded-full"
                 ></motion.div>
               </motion.div>
-              <Icon backgroundColor={budget.color} src={budget.iconURL} varient="small" />
+              <Icon
+                backgroundColor={budget.color}
+                src={`/src/assets/${budget.name}/${budget.iconName}_surface.svg`}
+                varient="small"
+              />
               <div className=" text-dark font-bold">{budget.name}</div>
             </Touchable>
           );

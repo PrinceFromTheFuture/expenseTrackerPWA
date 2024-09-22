@@ -9,7 +9,6 @@ import { allBugdetsSelctor } from "@/redux/budgetsSlice";
 import { formDataSelector, selectBudgetInForm } from "@/redux/formSlice";
 import Icon from "@/components/ui/Icon";
 import Touchable from "@/components/ui/generalComponents/Touchable";
-import bus_surface from "@/assets/bus/bus_surface.svg";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

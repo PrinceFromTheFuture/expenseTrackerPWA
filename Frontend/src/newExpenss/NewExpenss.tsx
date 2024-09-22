@@ -40,7 +40,7 @@ import dayjs from "dayjs";
 import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice";
 import { postNewTransactionAsyncThunk } from "@/redux/transactionsSlice";
-import { getSpendingsInTimeFrameAsyncThunk, getUserBalanceAsyncThunk } from "@/redux/userSlice";
+import { getSpendingsInTimeFrameAsyncThunk,  } from "@/redux/userSlice";
 
 const StageProgressBar = ({
   currentStage,

@@ -1,4 +1,3 @@
-import facebookTest from "@/assets/facebookTest.svg";
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import edit_main from "@/assets/edit_main.svg";
 import trash_warning from "@/assets/trash_warning.svg";
@@ -10,10 +9,8 @@ import { singleTransactionSelector } from "@/redux/transactionsSlice.ts";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot.ts";
 import { useAppSelector } from "@/hooks.ts";
 import dayjs from "dayjs";
-import { getBudgetByIdSelector, getBudgetNameByIdSelector } from "@/redux/budgetsSlice.ts";
+import { getBudgetByIdSelector,  } from "@/redux/budgetsSlice.ts";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice.ts";
-import clock_main from "@/assets/clock_main.svg";
-import bus_purple from "@/assets/bus/bus-purple.svg";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
   const transaction = useAppSelector((state: RootState) =>

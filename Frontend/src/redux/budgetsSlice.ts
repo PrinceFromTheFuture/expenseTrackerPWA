@@ -30,7 +30,7 @@ const budgetsSlice = createSlice({
 const budgetsSliceReducer = budgetsSlice.reducer;
 export default budgetsSliceReducer;
 
-export const allBugdetsSelctor = (state: RootState) => state.budgetsSlice;
+export const allBugdetsSelctor = (state: RootState) => state.budgetsSlice.data;
 
 export const getBudgetNameByIdSelector = (state: RootState, budgetId: string) => {
   const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);

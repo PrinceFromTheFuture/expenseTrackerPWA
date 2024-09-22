@@ -3,4 +3,4 @@ const devUserId =
 const amirUserId =
   "cfad1132-6e09-45b0-ac52-f72735057c3f";
 
-export default amirUserId;
+export default devUserId;

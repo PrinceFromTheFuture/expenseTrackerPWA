@@ -7,7 +7,7 @@ import {
 import { TransactionForm } from "../types.js";
 import dayjs from "dayjs";
 import { eq } from "drizzle-orm";
-import userId from "./devUser.js";
+import userId from "../devUser.js";
 
 const transactionsRouter = express.Router();
 

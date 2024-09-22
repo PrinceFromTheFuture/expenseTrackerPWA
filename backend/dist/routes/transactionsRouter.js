@@ -3,7 +3,7 @@ import { db } from "../server.js";
 import { transactionsTable, userTable, } from "../schema.js";
 import dayjs from "dayjs";
 import { eq } from "drizzle-orm";
-import userId from "./devUser.js";
+import userId from "../devUser.js";
 const transactionsRouter = express.Router();
 transactionsRouter.get("/", async (req, res) => {
     const allTransactions = await db

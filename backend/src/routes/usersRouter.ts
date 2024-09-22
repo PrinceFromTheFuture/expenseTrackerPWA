@@ -8,7 +8,7 @@ import {
 } from "../schema.js";
 import { between, eq } from "drizzle-orm";
 import dayjs from "dayjs";
-import userId from "./devUser.js";
+import userId from "../devUser.js";
 
 const usersRouter = express.Router();
 

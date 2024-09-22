@@ -87,7 +87,7 @@ const Stage1 = () => {
         </div>
         <div className="mt-2 flex justify-start gap-2 items-end">
           <div className=" font-semibold text-secondary text-sm ">current balance:</div>
-          <div className=" font-bold text-dark text-sm ">{formatAmountInAgorot(balance)}</div>
+          <div className=" font-bold text-dark text-sm ">{formatAmountInAgorot(balance || 0)}</div>
         </div>
       </div>
       <div className=" w-full flex    flex-col gap-4 justify-between items-center">

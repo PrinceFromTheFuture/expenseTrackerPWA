@@ -1,18 +1,10 @@
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@radix-ui/react-alert-dialog";
-import React, { ReactEventHandler } from "react";
+import React from "react";
 import Touchable from "./Touchable";
 import { AnimatePresence } from "framer-motion";
 import exit_main from "@/assets/exit_main.svg";
 import Icon from "../Icon";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
-import trash_warning from "@/assets/trash_warning.svg";
 import { DrawerPortal } from "../drawer";
 
 const DeleteTransaction = ({
@@ -22,8 +14,6 @@ const DeleteTransaction = ({
   isDialogOpen: boolean;
   setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const handleDelete = () => {};
-
   return (
     <DrawerPortal>
       {isDialogOpen && (

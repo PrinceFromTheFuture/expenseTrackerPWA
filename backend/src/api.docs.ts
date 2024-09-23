@@ -34,6 +34,11 @@ const serverDefnition = {
           request: Object.prototype as TransactionForm,
           response: Object.prototype as Transaction,
         },
+        {
+          path: "/:transactionId",
+          method: "DELETE",
+          response: Object.prototype as { success: boolean },
+        },
       ],
     },
     users: {

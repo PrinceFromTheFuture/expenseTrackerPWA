@@ -1,7 +1,7 @@
 export interface Bugdet {
   name: string;
   color: string;
-  iconNmae: string;
+  iconURL: string;
   id: string;
 }
 export interface TransactionForm {

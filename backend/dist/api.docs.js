@@ -32,6 +32,11 @@ const serverDefnition = {
                     request: Object.prototype,
                     response: Object.prototype,
                 },
+                {
+                    path: "/:transactionId",
+                    method: "DELETE",
+                    response: Object.prototype,
+                },
             ],
         },
         users: {

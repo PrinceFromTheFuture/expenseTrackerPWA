@@ -11,17 +11,15 @@ import { useAppSelector } from "@/hooks.ts";
 import dayjs from "dayjs";
 import { getBudgetByIdSelector } from "@/redux/budgetsSlice.ts";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice.ts";
+import DeleteTransaction from "./deleteTransaction.tsx";
+import { useState } from "react";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
-  const transaction = useAppSelector((state: RootState) =>
-    singleTransactionSelector(state, transactionId)
-  );
+  const transaction = useAppSelector((state: RootState) => singleTransactionSelector(state, transactionId));
 
+  const [isDeleteWarningDialogOpen, setIsDeleteWarningDialogOpen] = useState(false);
   const transactionBudegt = useAppSelector((state) =>
-    getBudgetByIdSelector(
-      state,
-      transaction ? transaction.budgetId : "erorr: no budget with this id"
-    )
+    getBudgetByIdSelector(state, transaction ? transaction.budgetId : "erorr: no budget with this id")
   );
   const paymentMethodName = useAppSelector((state) =>
     getPaymentMethodNameByIdSelector(
@@ -30,9 +28,6 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
     )
   );
 
-  const iconPath = `/${transactionBudegt ? transactionBudegt.iconName : ""}/${
-    transactionBudegt ? transactionBudegt.iconName : ""
-  }_${transactionBudegt ? transactionBudegt.color : ""}.svg`;
   if (!transaction) {
     return <div>the data base doesnt contain a trnsaction with the id of {transactionId}</div>;
   }
@@ -40,10 +35,14 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
   return (
     <>
       <Drawer>
+        <DeleteTransaction
+          isDialogOpen={isDeleteWarningDialogOpen}
+          setIsDialogOpen={setIsDeleteWarningDialogOpen}
+        />
         <DrawerTrigger className=" w-full">
           <Touchable className=" box-content p-4 w-full bg-surface rounded-2xl flex justify-between items-center">
             <div className=" flex justify-start items-center gap-2 ">
-              <Icon varient="mid" src={iconPath} />
+              <Icon varient="mid" src={transactionBudegt ? transactionBudegt.iconURL : ""} />
               <div>
                 <div className=" text-left text-sm font-bold">{transaction.title}</div>
                 <div className=" text-xs text-secondary text-left font-semibold">
@@ -61,7 +60,9 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
             <div className=" font-semibold text-xl text-dark">transaction details</div>
             <div className=" flex justify-between gap-3 w-auto">
               {" "}
-              <Icon src={trash_warning} varient="mid" />
+              <div onClick={() => setIsDeleteWarningDialogOpen(true)}>
+                <Icon src={trash_warning} varient="mid" />
+              </div>
               <Icon src={edit_main} varient="mid" />
             </div>
           </div>
@@ -70,7 +71,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
               <div className=" flex justify-start items-center gap-2 ">
                 <div className=" w-8">
                   {" "}
-                  <Icon varient="full" src={iconPath} />
+                  <Icon varient="full" src={transactionBudegt ? transactionBudegt.iconURL : ""} />
                 </div>
 
                 <div>

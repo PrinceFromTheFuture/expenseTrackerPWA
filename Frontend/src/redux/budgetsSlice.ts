@@ -1,11 +1,15 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { Bugdet } from "@/types";
 import { HTTPGetAllBudgets } from "@/http.requests";
 
-export const getAllBudgetsAsyncThunk = createAsyncThunk("budgets/getAll", async () => {
-  return await HTTPGetAllBudgets();
-});
+export const getAllBudgetsAsyncThunk =
+  createAsyncThunk("budgets/getAll", async () => {
+    return await HTTPGetAllBudgets();
+  });
 
 const initialState: {
   data: Bugdet[];
@@ -20,20 +24,29 @@ const budgetsSlice = createSlice({
   name: "budgets",
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllBudgetsAsyncThunk.fulfilled, (state, action) => {
-      state.data = action.payload;
-      state.status = "success";
-    });
+    builder.addCase(
+      getAllBudgetsAsyncThunk.fulfilled,
+      (state, action) => {
+        state.data = action.payload;
+        state.status = "success";
+      }
+    );
   },
 });
 
 const budgetsSliceReducer = budgetsSlice.reducer;
 export default budgetsSliceReducer;
 
-export const allBugdetsSelctor = (state: RootState) => state.budgetsSlice.data;
+export const allBugdetsSelctor = (state: RootState) =>
+  state.budgetsSlice.data;
 
-export const getBudgetNameByIdSelector = (state: RootState, budgetId: string) => {
-  const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);
+export const getBudgetNameByIdSelector = (
+  state: RootState,
+  budgetId: string
+) => {
+  const budgetFound = state.budgetsSlice.data.find(
+    (budget) => budget.id === budgetId
+  );
   if (!budgetFound) {
     return null;
   }
@@ -41,8 +54,13 @@ export const getBudgetNameByIdSelector = (state: RootState, budgetId: string) =>
   return budgetFound.name;
 };
 
-export const getBudgetByIdSelector = (state: RootState, budgetId: string) => {
-  const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);
+export const getBudgetByIdSelector = (
+  state: RootState,
+  budgetId: string
+) => {
+  const budgetFound = state.budgetsSlice.data.find(
+    (budget) => budget.id === budgetId
+  );
   if (!budgetFound) {
     return null;
   }

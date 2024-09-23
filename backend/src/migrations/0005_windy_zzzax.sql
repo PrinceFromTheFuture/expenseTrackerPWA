@@ -1,1 +1,0 @@
-ALTER TABLE "budgets" RENAME COLUMN "iconURL" TO "iconName";

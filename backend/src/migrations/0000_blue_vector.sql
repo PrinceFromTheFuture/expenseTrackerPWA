@@ -7,18 +7,25 @@ CREATE TABLE IF NOT EXISTS "budgets" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "paymentMethods" (
 	"name" varchar(50) NOT NULL,
-	"iconURL" varchar(100) NOT NULL,
+	"iconURL" varchar(20) NOT NULL,
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "transactions" (
 	"amountInAgorot" integer NOT NULL,
 	"title" varchar(50) NOT NULL,
-	"description" varchar(50) NOT NULL,
-	"date" timestamp NOT NULL,
+	"description" varchar(50),
+	"date" timestamp with time zone NOT NULL,
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"budgetId" uuid,
 	"paymentMethodId" uuid
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "users" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"name" varchar(25) NOT NULL,
+	"email" varchar(50) NOT NULL,
+	"balanceInAgorot" integer NOT NULL
 );
 --> statement-breakpoint
 DO $$ BEGIN

@@ -2,52 +2,56 @@
 import axios from "axios";
 import { Bugdet, PaymentMethod, Transaction } from "./types";
 const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
-
-if (!apiURL) {
-  console.log("api is not defined!!");
-}
+const ngrokHeaderByPass = { "ngrok-skip-browser-warning": "true" };
 
 export const HTTPGetAllTransactions = async () => {
-  console.log("cetch transactions");
-
-  const res = await axios.get<Transaction[]>(`${apiURL}/transactions`);
-  console.log("fetch succeful");
+  const res = await axios.get<Transaction[]>(`${apiURL}/transactions`, {
+    headers: ngrokHeaderByPass,
+  });
 
   return res.data;
-};  
+};
 
 export const HTTPGetAllBudgets = async () => {
-  const res = await axios.get<Bugdet[]>(`${apiURL}/budgets`);
+  const res = await axios.get<Bugdet[]>(`${apiURL}/budgets`, { headers: ngrokHeaderByPass });
   return res.data;
 };
 
 export const HTTPGetAllPaymentMethods = async () => {
-  const res = await axios.get<PaymentMethod[]>(`${apiURL}/paymentMethods`);
+  const res = await axios.get<PaymentMethod[]>(`${apiURL}/paymentMethods`, {
+    headers: ngrokHeaderByPass,
+  });
+
   return res.data;
 };
 
 export const HTTPPostNewTransaction = async (filledForm: Omit<Transaction, "id">) => {
-  const res = await axios.post<Transaction>(`${apiURL}/transactions`, filledForm);
+  const res = await axios.post<Transaction>(`${apiURL}/transactions`, filledForm, {
+    headers: ngrokHeaderByPass,
+  });
+
   return res.data;
 };
 
 export const HTTPGetSpendingsInTimeFrame = async (timeFrame: { from: string; to: string }) => {
   const res = await axios.post<{
     amountInAgorot: number;
-  }>(`${apiURL}/users/timeFrameSpendings`, timeFrame);
+  }>(`${apiURL}/users/timeFrameSpendings`, timeFrame, { headers: ngrokHeaderByPass });
+
   return res.data;
 };
 
 export const HTTPGetUserBalance = async () => {
   const res = await axios.get<{
     balanceInAgorot: number;
-  }>(`${apiURL}/users/balance`);
+  }>(`${apiURL}/users/balance`, { headers: ngrokHeaderByPass });
+
   return res.data;
 };
 
 export const HTTPDeleteTransaction = async (transactionId: string) => {
-  console.log("deleted happen");
-  const res = await axios.delete<{ success: boolean }>(`${apiURL}/transactions/${transactionId}`);
-  console.log("succefull delted");
+  const res = await axios.delete<{ success: boolean }>(`${apiURL}/transactions/${transactionId}`, {
+    headers: ngrokHeaderByPass,
+  });
   return res.data;
 };

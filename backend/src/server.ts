@@ -3,6 +3,8 @@ import budgetsRouter from "./routes/budgetsRouter.js";
 import paymentsMethodRouter from "./routes/paymentMethodRouter.js";
 import transactionsRouter from "./routes/transactionsRouter.js";
 import { configDotenv } from "dotenv";
+import { exec } from "child_process";
+
 import cors from "cors";
 
 import { neon } from "@neondatabase/serverless";
@@ -59,4 +61,9 @@ server.get("/", async (req, res) => {
     );
   console.log(data);
   console.log(dayjs().toISOString());
+});
+
+server.post("/gitWebHook", (req, res) => {
+  console.log('fd')
+  exec("cd ../ && git pull");
 });

@@ -3,6 +3,7 @@ import budgetsRouter from "./routes/budgetsRouter.js";
 import paymentsMethodRouter from "./routes/paymentMethodRouter.js";
 import transactionsRouter from "./routes/transactionsRouter.js";
 import { configDotenv } from "dotenv";
+import { exec } from "child_process";
 import cors from "cors";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
@@ -49,4 +50,8 @@ server.get("/", async (req, res) => {
         .where(between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate()));
     console.log(data);
     console.log(dayjs().toISOString());
+});
+server.post("/gitWebHook", (req, res) => {
+    console.log('fd');
+    exec("cd ../ && git pull");
 });

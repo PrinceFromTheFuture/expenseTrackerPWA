@@ -27,6 +27,7 @@ const AppWraper = () => {
 
   useEffect(() => {
     getAllDataFromAPI(dispatch);
+    console.log("HOLAAAAAA");
   }, []);
   return (
     <div className="">

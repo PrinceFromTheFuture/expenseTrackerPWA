@@ -6,14 +6,26 @@ import Icon from "../Icon";
 import { motion } from "framer-motion";
 import generalTransition from "@/generalTransition";
 import { DrawerPortal } from "../drawer";
+import { useAppDispatch } from "@/hooks";
+import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
+import { deleteTransactionAsyncThunk } from "@/redux/transactionsSlice";
 
 const DeleteTransaction = ({
   isDialogOpen,
   setIsDialogOpen,
+  transactionId,
 }: {
   isDialogOpen: boolean;
+  transactionId: string;
   setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const dispatch = useAppDispatch();
+  const onConfirmDelete = async () => {
+    await dispatch(deleteTransactionAsyncThunk(transactionId));
+    setIsDialogOpen(false);
+    await getAllDataFromAPI(dispatch);
+  };
+
   return (
     <DrawerPortal>
       {isDialogOpen && (
@@ -31,7 +43,7 @@ const DeleteTransaction = ({
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 transition={generalTransition}
-                className=" w-full gap-8 justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+                className=" w-full gap-8 shadow-xl justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
               >
                 <div className=" w-full">
                   <div>
@@ -50,7 +62,7 @@ const DeleteTransaction = ({
                 <div className=" w-full justify-between flex items-center gap-2">
                   <div className=" w-full ">
                     <Touchable
-                      onClick={() => setIsDialogOpen(false)}
+                      onClick={() => onConfirmDelete()}
                       className=" w-full text-center bg-warning rounded-2xl font-semibold text-surface p-4"
                     >
                       Delete
@@ -60,7 +72,6 @@ const DeleteTransaction = ({
                     <Touchable
                       onClick={() => {
                         setIsDialogOpen(false);
-                        console.log("err");
                       }}
                       className=" flex justify-center items-center gap-2 w-full bg-container rounded-2xl font-semibold text-secondary p-4"
                     >

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { Transaction } from "@/types";
-import { HTTPGetAllTransactions, HTTPPostNewTransaction } from "@/http.requests";
+import { HTTPDeleteTransaction, HTTPGetAllTransactions, HTTPPostNewTransaction } from "@/http.requests";
 
 export const getAllTransactionsAsyncThunk = createAsyncThunk("transactions/getAll", async () => {
   return await HTTPGetAllTransactions();
@@ -29,6 +29,14 @@ export const postNewTransactionAsyncThunk = createAsyncThunk(
     });
 
     return savedTransaction;
+  }
+);
+
+export const deleteTransactionAsyncThunk = createAsyncThunk(
+  "transactions/deleteTransaction",
+  async (transactionsId: string) => {
+    const data = await HTTPDeleteTransaction(transactionsId);
+    return data;
   }
 );
 
@@ -72,5 +80,4 @@ export const singleTransactionSelector = (state: RootState, id: string) =>
   state.transactionsSlice.data.find((transaction) => transaction.id === id) || null;
 
 export const allTransactionsSelctor = (state: RootState) => state.transactionsSlice.data;
-export const getTransactionsDataStatusSelector = (state: RootState) =>
-  state.transactionsSlice.status;
+export const getTransactionsDataStatusSelector = (state: RootState) => state.transactionsSlice.status;

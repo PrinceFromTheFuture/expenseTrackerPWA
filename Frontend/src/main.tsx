@@ -14,47 +14,24 @@ import { getAllPaymentMethodsAsyncThunk } from "./redux/paymentMethodsSlice.ts";
 import { getAllTransactionsAsyncThunk } from "./redux/transactionsSlice.ts";
 import { getSpendingsInTimeFrameAsyncThunk, getUserBalanceAsyncThunk } from "./redux/userSlice.ts";
 import dayjs from "dayjs";
+import getAllDataFromAPI from "./lib/getAllDataFromAPI.ts";
 
 const AppWraper = () => {
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const getAllDataFromAPI = () => {
-    dispatch(getAllBudgetsAsyncThunk());
-    dispatch(getAllPaymentMethodsAsyncThunk());
-    dispatch(getAllTransactionsAsyncThunk());
-    dispatch(
-      getSpendingsInTimeFrameAsyncThunk({
-        from: dayjs().subtract(1, "days").toISOString(),
-        to: dayjs().toISOString(),
-        defenition: "1d",
-      })
-    );
-    dispatch(
-      getSpendingsInTimeFrameAsyncThunk({
-        from: dayjs().subtract(7, "days").toISOString(),
-        to: dayjs().toISOString(),
-        defenition: "7d",
-      })
-    );
-    dispatch(
-      getSpendingsInTimeFrameAsyncThunk({
-        from: dayjs().subtract(30, "days").toISOString(),
-        to: dayjs().toISOString(),
-        defenition: "30d",
-      })
-    );
-    dispatch(getUserBalanceAsyncThunk());
-  };
 
+  const handleViablityChange = () => {
+    getAllDataFromAPI(dispatch);
+  };
   useEffect(() => {
-    document.addEventListener("visibilitychange", getAllDataFromAPI);
+    document.addEventListener("visibilitychange", handleViablityChange);
     return () => {
-      document.removeEventListener("visibilitychange", getAllDataFromAPI);
+      document.removeEventListener("visibilitychange", handleViablityChange);
     };
   }, []);
 
   useEffect(() => {
-    getAllDataFromAPI();
+    getAllDataFromAPI(dispatch);
   }, []);
   return (
     <div className="">

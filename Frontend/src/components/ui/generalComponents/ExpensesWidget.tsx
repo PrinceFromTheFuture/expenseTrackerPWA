@@ -34,8 +34,9 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
 
   return (
     <>
-      <Drawer>
+      <Drawer onOpenChange={() => setIsDeleteWarningDialogOpen(false)}>
         <DeleteTransaction
+          transactionId={transaction.id}
           isDialogOpen={isDeleteWarningDialogOpen}
           setIsDialogOpen={setIsDeleteWarningDialogOpen}
         />

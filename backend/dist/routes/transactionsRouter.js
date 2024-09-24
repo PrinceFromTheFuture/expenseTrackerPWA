@@ -30,7 +30,7 @@ transactionsRouter.delete("/:transactionId", async (req, res) => {
     const aboutToBeDeletedTransaction = (await db.select().from(transactionsTable).where(eq(transactionsTable.id, transactionId)))[0];
     const currentBalanceInAgorot = (await db.select().from(userTable).where(eq(userTable.id, userId)))[0]
         .balanceInAgorot;
-    const newBalanceInAgorot = currentBalanceInAgorot - aboutToBeDeletedTransaction.amountInAgorot;
+    const newBalanceInAgorot = currentBalanceInAgorot + aboutToBeDeletedTransaction.amountInAgorot;
     await db.update(userTable).set({ balanceInAgorot: newBalanceInAgorot }).where(eq(userTable.id, userId));
     const success = await db.delete(transactionsTable).where(eq(transactionsTable.id, transactionId)).execute();
     res.json({ success });

@@ -29,19 +29,14 @@ const AppWraper = () => {
     getAllDataFromAPI(dispatch);
   }, []);
   useEffect(() => {
-    // Disable context menu for all links and images
-    const disableContextMenu = (event: { preventDefault: () => void }) => event.preventDefault();
+    const disableContextMenu = (event: MouseEvent) => {
+      event.preventDefault();
+    };
 
-    const links = document.querySelectorAll("a");
-    const images = document.querySelectorAll("img");
+    document.addEventListener("contextmenu", disableContextMenu);
 
-    links.forEach((link) => link.addEventListener("contextmenu", disableContextMenu));
-    images.forEach((image) => image.addEventListener("contextmenu", disableContextMenu));
-
-    // Cleanup event listeners on component unmount
     return () => {
-      links.forEach((link) => link.removeEventListener("contextmenu", disableContextMenu));
-      images.forEach((image) => image.removeEventListener("contextmenu", disableContextMenu));
+      document.removeEventListener("contextmenu", disableContextMenu);
     };
   }, []);
   return (

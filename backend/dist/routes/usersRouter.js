@@ -1,10 +1,9 @@
 // src/routes/users.ts
 import * as express from "express";
-import { db } from "../server.js";
+import { db, devUserId } from "../server.js";
 import { transactionsTable, userTable, } from "../schema.js";
 import { between, eq } from "drizzle-orm";
 import dayjs from "dayjs";
-import userId from "../devUser.js";
 const usersRouter = express.Router();
 usersRouter.post("/timeFrameSpendings", async (req, res) => {
     const requestedTimeFrame = req.body;
@@ -22,7 +21,7 @@ usersRouter.get("/balance", async (req, res) => {
     const result = await db
         .select()
         .from(userTable)
-        .where(eq(userTable.id, userId));
+        .where(eq(userTable.id, devUserId));
     const user = result[0];
     res.json({ balanceInAgorot: user.balanceInAgorot });
 });

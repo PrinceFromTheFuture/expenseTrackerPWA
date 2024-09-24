@@ -7,7 +7,10 @@ import bell_surface from "@/assets/bell_surface.svg";
 import SpendingsTimeFrame from "./components/ui/generalComponents/SpendingsTimeFrame";
 import Touchable from "./components/ui/generalComponents/Touchable";
 import { useAppSelector } from "./hooks";
-import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/redux/transactionsSlice";
+import {
+  allTransactionsSelctor,
+  getTransactionsDataStatusSelector,
+} from "@/redux/transactionsSlice";
 
 import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
 import ExpensesWidgetSkeleton from "./components/ui/generalComponents/ExpensesWidgetSkeleton";
@@ -16,6 +19,7 @@ import { userBalanceSelector } from "./redux/userSlice";
 import { formatAmountInAgorot } from "./lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 const App = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
@@ -30,7 +34,9 @@ const App = () => {
         <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance || 0, true)}</div>
+        <div className=" text-4xl text-dark font-extrabold">
+          {formatAmountInAgorot(balance || 0, true)}
+        </div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-12">
@@ -45,7 +51,7 @@ const App = () => {
           </div>
           <SpendingsTimeFrame />
         </div>
-        <Link className=" select-none" to={"new"}>
+        <Link className=" select-none  " to={"new"}>
           <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md mt-5  text-surface">
             new expenss
           </Touchable>
@@ -64,7 +70,9 @@ const App = () => {
           })
         : allTransactions
             .slice()
-            .sort((transactionA, transactionB) => dayjs(transactionA.date).diff(dayjs(transactionB.date)))
+            .sort((transactionA, transactionB) =>
+              dayjs(transactionA.date).diff(dayjs(transactionB.date))
+            )
             .reverse()
             .map((transaction) => {
               return (

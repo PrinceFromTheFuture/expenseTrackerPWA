@@ -8,13 +8,10 @@ if (!apiURL) {
 }
 
 export const HTTPGetAllTransactions = async () => {
-  console.log("cetch transactions");
-
   const res = await axios.get<Transaction[]>(`${apiURL}/transactions`);
-  console.log("fetch succeful");
 
   return res.data;
-};  
+};
 
 export const HTTPGetAllBudgets = async () => {
   const res = await axios.get<Bugdet[]>(`${apiURL}/budgets`);
@@ -46,8 +43,6 @@ export const HTTPGetUserBalance = async () => {
 };
 
 export const HTTPDeleteTransaction = async (transactionId: string) => {
-  console.log("deleted happen");
   const res = await axios.delete<{ success: boolean }>(`${apiURL}/transactions/${transactionId}`);
-  console.log("succefull delted");
   return res.data;
 };

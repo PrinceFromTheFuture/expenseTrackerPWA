@@ -13,6 +13,7 @@ import { getBudgetByIdSelector } from "@/redux/budgetsSlice.ts";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice.ts";
 import DeleteTransaction from "./deleteTransaction.tsx";
 import { useState } from "react";
+import { formatDistanceToNow } from "date-fns";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
   const transaction = useAppSelector((state: RootState) => singleTransactionSelector(state, transactionId));
@@ -47,7 +48,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
               <div>
                 <div className=" text-left text-sm font-bold">{transaction.title}</div>
                 <div className=" text-xs text-secondary text-left font-semibold">
-                  {transactionBudegt?.name}
+                  {formatDistanceToNow(dayjs(transaction.date).toDate(), { addSuffix: true })}
                 </div>
               </div>
             </div>

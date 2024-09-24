@@ -78,7 +78,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
                 <div>
                   <div className=" text-sm font-bold">{transaction.title}</div>
                   <div className=" text-xs text-secondary text-left font-semibold">
-                    {transactionBudegt!.name}
+                    {transactionBudegt?.name}
                   </div>
                 </div>
               </div>

@@ -27,7 +27,6 @@ const AppWraper = () => {
 
   useEffect(() => {
     getAllDataFromAPI(dispatch);
-    console.log("holi");
   }, []);
   return (
     <div className="">

@@ -19,7 +19,6 @@ import { userBalanceSelector } from "./redux/userSlice";
 import { formatAmountInAgorot } from "./lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
-import { useEffect } from "react";
 const App = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);

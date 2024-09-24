@@ -16,10 +16,6 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op
-server.use((req, res, next) => {
-    req.headers["ngrok-skip-browser-warning"] = "true";
-    next();
-});
 const port = process.env.PORT || 3000;
 if (!process.env.DB_CONNECTION_STRING) {
     console.log("the data base connection string is not readable or not configured properly");

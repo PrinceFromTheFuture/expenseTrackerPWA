@@ -21,14 +21,12 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op
-server.use((req, res, next) => {
-  req.headers["ngrok-skip-browser-warning"] = "true";
-  next();
-});
 
 const port = process.env.PORT || 3000;
 if (!process.env.DB_CONNECTION_STRING) {
-  console.log("the data base connection string is not readable or not configured properly");
+  console.log(
+    "the data base connection string is not readable or not configured properly"
+  );
   process.abort();
 }
 
@@ -43,7 +41,9 @@ server.use("/users", usersRouter);
 function initilizeServer() {
   try {
     server.listen(port, () => {
-      console.log(`server is up and running on port: ${port}`);
+      console.log(
+        `server is up and running on port: ${port}`
+      );
     });
   } catch (e) {
     console.log(e);
@@ -57,7 +57,11 @@ server.get("/", async (req, res) => {
     .select()
     .from(transactionsTable)
     .where(
-      between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate())
+      between(
+        transactionsTable.date,
+        dayjs().subtract(2, "hours").toDate(),
+        dayjs().toDate()
+      )
     );
   console.log(data);
   console.log(dayjs().toISOString());

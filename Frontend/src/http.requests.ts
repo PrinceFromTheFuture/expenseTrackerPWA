@@ -2,7 +2,7 @@
 import axios from "axios";
 import { Bugdet, PaymentMethod, Transaction } from "./types";
 const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
-const ngrokHeaderByPass = { "ngrok-skip-browser-warning": "true" };
+const ngrokHeaderByPass = { "bypass-tunnel-reminder": "true" };
 
 export const HTTPGetAllTransactions = async () => {
   const res = await axios.get<Transaction[]>(`${apiURL}/transactions`, {

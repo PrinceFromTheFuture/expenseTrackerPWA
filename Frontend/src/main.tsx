@@ -9,11 +9,6 @@ import store from "@/redux/store.ts";
 import NewExpenss from "@/newExpenss/NewExpenss.tsx";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch } from "./hooks.ts";
-import { getAllBudgetsAsyncThunk } from "./redux/budgetsSlice.ts";
-import { getAllPaymentMethodsAsyncThunk } from "./redux/paymentMethodsSlice.ts";
-import { getAllTransactionsAsyncThunk } from "./redux/transactionsSlice.ts";
-import { getSpendingsInTimeFrameAsyncThunk, getUserBalanceAsyncThunk } from "./redux/userSlice.ts";
-import dayjs from "dayjs";
 import getAllDataFromAPI from "./lib/getAllDataFromAPI.ts";
 
 const AppWraper = () => {

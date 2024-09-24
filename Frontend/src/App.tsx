@@ -65,6 +65,7 @@ const App = () => {
         : allTransactions
             .slice()
             .sort((transactionA, transactionB) => dayjs(transactionA.date).diff(dayjs(transactionB.date)))
+            .reverse()
             .map((transaction) => {
               return (
                 <AnimatePresence key={transaction.id}>

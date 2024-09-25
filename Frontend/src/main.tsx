@@ -6,10 +6,10 @@ import "./index.css";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "@/redux/store.ts";
-import NewExpenss from "@/newExpenss/NewExpenss.tsx";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch } from "./hooks.ts";
 import getAllDataFromAPI from "./lib/getAllDataFromAPI.ts";
+import ExpenssForm from "./newExpenss/ExpenssForm.tsx";
 
 const AppWraper = () => {
   const location = useLocation();
@@ -44,7 +44,8 @@ const AppWraper = () => {
       <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
           <Route path="/" element={<App />} />
-          <Route path="/new" element={<NewExpenss />} />
+          <Route path="/new" element={<ExpenssForm />} />
+          <Route path="/editTransaction" element={<ExpenssForm />} />
         </Routes>
       </AnimatePresence>
     </div>

@@ -1,7 +1,7 @@
 import express from "express";
-import budgetsRouter from "./routes/budgetsRouter.js";
-import paymentsMethodRouter from "./routes/paymentMethodRouter.js";
-import transactionsRouter from "./routes/transactionsRouter.js";
+import budgetsRouter from "./routes/endpoints/budgetsRouter.js";
+import paymentsMethodRouter from "./routes/endpoints/paymentMethodRouter.js";
+import transactionsRouter from "./routes/endpoints/transactionsRouter.js";
 import { configDotenv } from "dotenv";
 import { exec } from "child_process";
 
@@ -12,7 +12,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { transactionsTable } from "./schema.js";
 import { between } from "drizzle-orm";
 import dayjs from "dayjs";
-import usersRouter from "./routes/usersRouter.js";
+import usersRouter from "./routes/endpoints/usersRouter.js";
 
 configDotenv();
 
@@ -67,9 +67,7 @@ server.get("/", async (req, res) => {
   const data = await db
     .select()
     .from(transactionsTable)
-    .where(
-      between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate())
-    );
+    .where(between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate()));
   console.log(data);
   console.log(dayjs().toISOString());
 });

@@ -39,6 +39,12 @@ const serverDefnition = {
           method: "DELETE",
           response: Object.prototype as { success: boolean },
         },
+        {
+          path: "/:transactionId",
+          method: "PUT",
+          request: Object.prototype as TransactionForm,
+          response: Object.prototype as { success: boolean },
+        },
       ],
     },
     users: {

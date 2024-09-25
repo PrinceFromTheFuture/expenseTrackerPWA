@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { Transaction } from "@/types";
-import { HTTPDeleteTransaction, HTTPGetAllTransactions, HTTPPostNewTransaction } from "@/http.requests";
+import {
+  HTTPDeleteTransaction,
+  HTTPGetAllTransactions,
+  HTTPPostNewTransaction,
+  HTTPPPutNewTransaction,
+} from "@/http.requests";
 
 export const getAllTransactionsAsyncThunk = createAsyncThunk("transactions/getAll", async () => {
   return await HTTPGetAllTransactions();
@@ -27,8 +32,32 @@ export const postNewTransactionAsyncThunk = createAsyncThunk(
       paymentMethodId,
       title,
     });
-
     return savedTransaction;
+  }
+);
+
+export const updateNewTransactionAsyncThunk = createAsyncThunk(
+  "form/updateNewTransaction",
+  async (_, thunkApi) => {
+    let { amountInAgorot, budgetId, date, description, paymentMethodId, title, id } = (
+      thunkApi.getState() as RootState
+    ).formSlice;
+    if (!budgetId || !paymentMethodId || !date || !id) {
+      return null;
+    }
+    if (!title) {
+      title = "Untitled Transaction";
+    }
+    const data = await HTTPPPutNewTransaction({
+      budgetId,
+      amountInAgorot,
+      date,
+      description,
+      paymentMethodId,
+      title,
+      id,
+    });
+    return data;
   }
 );
 
@@ -68,6 +97,9 @@ const transactionsSlice = createSlice({
       state.status = "success";
     });
     builder.addCase(postNewTransactionAsyncThunk.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(updateNewTransactionAsyncThunk.pending, (state) => {
       state.status = "pending";
     });
   },

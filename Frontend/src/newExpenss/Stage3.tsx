@@ -15,12 +15,14 @@ import TimePicker from "./TimePicker";
 const Stage3 = () => {
   const [openMenu, setIsOpenMenu] = useState<"date" | "time">("date");
 
-  const formDateTime = useAppSelector(formDataSelector).date;
+  const formData = useAppSelector(formDataSelector);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(modifyDateInForm("initialize"));
+    if (!formData.editMode) {
+      dispatch(modifyDateInForm("initialize"));
+    }
   }, []);
 
   return (
@@ -36,7 +38,7 @@ const Stage3 = () => {
       >
         <img className=" w-7 h-7" src={calender_main} />
         <div className="ml-2">
-          <div className=" text-sm text-dark font-bold">{String(formDateTime).slice(0, 10)}</div>{" "}
+          <div className=" text-sm text-dark font-bold">{String(formData.date).slice(0, 10)}</div>{" "}
           <div className=" text-xs text-secondary font-semibold">date</div>{" "}
         </div>
       </Touchable>
@@ -52,7 +54,7 @@ const Stage3 = () => {
             <Calendar
               className=""
               mode="single"
-              selected={dayjs(formDateTime).toDate() || new Date()}
+              selected={dayjs(formData.date).toDate() || new Date()}
               onSelect={(dateChoosen) => {
                 dispatch(modifyDateInForm(dayjs(dateChoosen).toISOString()));
               }}
@@ -71,9 +73,7 @@ const Stage3 = () => {
       >
         <img className=" w-7 h-7" src={clock_main} />
         <div className="ml-2">
-          <div className=" text-sm text-dark font-bold">
-            {String(dayjs(formDateTime).format("HH:mm"))}
-          </div>{" "}
+          <div className=" text-sm text-dark font-bold">{String(dayjs(formData.date).format("HH:mm"))}</div>{" "}
           <div className=" text-xs text-secondary font-semibold">time</div>{" "}
         </div>
       </Touchable>

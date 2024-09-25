@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import dayjs from "dayjs";
-import { TransactionForm } from "@/types";
+import { Transaction, TransactionForm } from "@/types";
 
 const initialState: TransactionForm = {
   amountInAgorot: 0,
@@ -10,6 +10,8 @@ const initialState: TransactionForm = {
   paymentMethodId: null,
   title: null,
   description: null,
+  editMode: false,
+  id: null,
 };
 
 const formSlice = createSlice({
@@ -82,11 +84,16 @@ const formSlice = createSlice({
         title: null,
         paymentMethodId: null,
         description: null,
+        editMode: false,
+        id: null,
       };
       return clearedForm;
     },
     modifyPaymentMethodInForm(state, action: PayloadAction<string>) {
       state.paymentMethodId = action.payload;
+    },
+    enterEditModeInForm(_, action: PayloadAction<Transaction>) {
+      return { ...action.payload, editMode: true };
     },
   },
 });
@@ -114,4 +121,5 @@ export const {
   modifyDescriptionInForm,
   clearAllInForm,
   modifyPaymentMethodInForm,
+  enterEditModeInForm
 } = formSlice.actions;

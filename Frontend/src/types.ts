@@ -11,6 +11,8 @@ export interface TransactionForm {
   paymentMethodId: null | string;
   title: string | null;
   description: string | null;
+  editMode: boolean;
+  id: string | null;
 }
 
 export interface Transaction {

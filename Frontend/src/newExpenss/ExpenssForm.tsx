@@ -18,47 +18,14 @@ import { clearAllInForm, formDataSelector } from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
-import { AlertDialogAction, AlertDialogCancel } from "@radix-ui/react-alert-dialog";
-import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
-import dayjs from "dayjs";
-import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice";
-import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice";
-import { postNewTransactionAsyncThunk } from "@/redux/transactionsSlice";
-import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import ReviewBeforeSubmit from "./ReviewBeforeSubmit";
+import StageProgressBar from "./StageProgressBar";
 
-const StageProgressBar = ({ currentStage, thisBarStage }: { currentStage: number; thisBarStage: number }) => {
-  return (
-    <div className=" h-2 w-full rounded-full bg-container ">
-      <motion.div
-        initial={{ width: 0 }}
-        className=" bg-main rounded-full  h-full   "
-        animate={{
-          width: currentStage >= thisBarStage ? "100%" : "0px",
-        }}
-        transition={generalTransition}
-      ></motion.div>
-    </div>
-  );
-};
-
-const NewExpenss = () => {
-  const dispatch = useAppDispatch();
+const ExpenssForm = () => {
   const formData = useAppSelector(formDataSelector);
-  const navigate = useNavigate();
-
-  const formDataBudgetName = useAppSelector((state) => getBudgetNameByIdSelector(state, formData.budgetId!));
-  const formDatePaymentMethodName = useAppSelector((state) =>
-    getPaymentMethodNameByIdSelector(state, formData.paymentMethodId!)
-  );
-  const handleSubmit = async () => {
-    navigate("/");
-    await dispatch(postNewTransactionAsyncThunk());
-    await getAllDataFromAPI(dispatch);
-    dispatch(clearAllInForm());
-  };
 
   const [isReviewBeforeSubmitOpen, setIsReviewBeforeSubmitOpen] = useState(false);
+  const dispatch = useAppDispatch();
   const [currentStage, setCurrentStage] = useState(0);
   const lastStage = 4;
 
@@ -80,11 +47,7 @@ const NewExpenss = () => {
     { stageComponnet: <Stage4 />, stageIndex: 3 },
     { stageComponnet: <Stage5 />, stageIndex: 4 },
   ];
-  const displayFormDataTitle = formData.title
-    ? formData.title.length > 22
-      ? `${formData.title.substring(0, 22)}...`
-      : formData.title
-    : "Untitled Transaction";
+
   return (
     <motion.div
       transition={generalTransition}
@@ -111,7 +74,7 @@ const NewExpenss = () => {
             {" "}
             <Icon varient="mid" src={exit_main} />
           </Link>
-          <div className="font-bold text-dark text-lg">New Transaction</div>
+          <div className="font-bold text-dark text-lg">{formData.editMode ? "Edit" : "New"} Transaction</div>
 
           <div className=" invisible">
             <Icon varient="mid" src={edit_main} />
@@ -147,10 +110,47 @@ const NewExpenss = () => {
           </Touchable>
         )}
 
-        <ReviewBeforeSubmit />
+        <AlertDialog
+          open={isReviewBeforeSubmitOpen}
+          onOpenChange={(isOpen) => {
+            if (
+              currentStage === 4 &&
+              formData.budgetId &&
+              formData.paymentMethodId &&
+              formData.amountInAgorot !== 0
+            ) {
+              setIsReviewBeforeSubmitOpen(isOpen);
+            }
+          }}
+        >
+          <AlertDialogTrigger className=" w-full">
+            {" "}
+            <Touchable
+              onClick={handleNextStage}
+              className=" w-full bg-main  gap-2  p-4 rounded-2xl flex justify-center items-center font-bold text-md  text-surface"
+            >
+              <div>{currentStage !== 4 ? "Next" : "Submit"}</div>
+              <AnimatePresence>
+                {currentStage === 4 && (
+                  <motion.img
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    transition={generalTransition}
+                    src={paper_plane_surface}
+                    className=" w-4"
+                  />
+                )}
+              </AnimatePresence>
+            </Touchable>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <ReviewBeforeSubmit />
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </motion.div>
   );
 };
 
-export default NewExpenss;
+export default ExpenssForm;

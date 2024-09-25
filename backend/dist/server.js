@@ -3,6 +3,7 @@ import budgetsRouter from "./routes/budgetsRouter.js";
 import paymentsMethodRouter from "./routes/paymentMethodRouter.js";
 import transactionsRouter from "./routes/transactionsRouter.js";
 import { configDotenv } from "dotenv";
+import { exec } from "child_process";
 import cors from "cors";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
@@ -16,11 +17,23 @@ server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op
 const port = process.env.PORT || 3000;
-if (!process.env.DB_CONNECTION_STRING) {
+const envoirmennt = process.env.environment;
+if (!envoirmennt) {
+    console.log("the envoirment mode is not readable or not configured properly");
+    process.abort();
+}
+console.log(envoirmennt);
+const DBConnectionString = envoirmennt === "PRODUCTION"
+    ? process.env.PRODUCTION_DB_CONNECTION_STRING
+    : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
+if (!DBConnectionString) {
     console.log("the data base connection string is not readable or not configured properly");
     process.abort();
 }
-const sql = neon(process.env.DB_CONNECTION_STRING);
+export const devUserId = envoirmennt === "PRODUCTION"
+    ? "cfad1132-6e09-45b0-ac52-f72735057c3f"
+    : "8be0bc5a-c5a2-4cb0-b4b4-e10f37a41846";
+const sql = neon(DBConnectionString);
 export const db = drizzle(sql);
 server.use("/budgets", budgetsRouter);
 server.use("/paymentMethods", paymentsMethodRouter);
@@ -45,4 +58,8 @@ server.get("/", async (req, res) => {
         .where(between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate()));
     console.log(data);
     console.log(dayjs().toISOString());
+});
+server.post("/gitWebHook", (req, res) => {
+    console.log("test!)!");
+    exec("cd ../ && git pull");
 });

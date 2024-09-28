@@ -26,7 +26,7 @@ const LandingPage = () => {
         <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  mb-4  text-surface">
           Sign Up
         </Touchable>
-        <div className=" w-full bg-transparent out outline-2 -outline-offset-2 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
+        <div className=" w-full bg-transparent out outline-2 -outline-offset-8 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
           Log In
         </div>
       </div>

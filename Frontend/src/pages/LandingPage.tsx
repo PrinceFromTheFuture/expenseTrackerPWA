@@ -16,7 +16,9 @@ const LandingPage = () => {
       className=" p-4 bg-surface  fixed flex flex-col justify-center items-center"
     >
       <div className=" flex flex-col justify-center items-center mb-8">
-        <img src={app_icon} className=" w-28" alt="" />
+        <div className="p-2  mb-8 flex justify-center items-center bg-dark rounded-3xl h-32 w-32">
+          <img src={app_icon} className="  w-4/6 mt-4 " alt="" />
+        </div>
         <div className=" text-3xl text-dark font-extrabold mb-2">How are you?!</div>
         <div className=" text-secondary font-semibold text-sm text-center">
           lets start to plan your life together because knwolage is the kay to undesrtanding!
@@ -26,7 +28,7 @@ const LandingPage = () => {
         <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  mb-4  text-surface">
           Sign Up
         </Touchable>
-        <div className=" w-full bg-transparent out outline-2 -outline-offset-8 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
+        <div className=" w-full bg-transparent out outline-2 -outline-offset-2 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
           Log In
         </div>
       </div>

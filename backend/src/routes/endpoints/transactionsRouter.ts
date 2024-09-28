@@ -5,15 +5,16 @@ import { TransactionForm } from "../../types.js";
 import dayjs from "dayjs";
 import { eq } from "drizzle-orm";
 import controller from "../controllers/transactionsRouterComtroller/index.js";
+import authMiddleware from "../../middleware/authMiddlware.js";
 
 const transactionsRouter = express.Router();
 
-transactionsRouter.get("/", controller.getAllTransactions);
+transactionsRouter.get("/", authMiddleware, controller.getAllTransactions);
 
-transactionsRouter.post("/", controller.postNewTransaction);
+transactionsRouter.post("/", authMiddleware, controller.postNewTransaction);
 
-transactionsRouter.delete("/:transactionId", controller.deleteTransactionById);
+transactionsRouter.delete("/:transactionId", authMiddleware, controller.deleteTransactionById);
 
-transactionsRouter.put("/:transactionId", controller.updateTransactionById);
+transactionsRouter.put("/:transactionId", authMiddleware, controller.updateTransactionById);
 
 export default transactionsRouter;

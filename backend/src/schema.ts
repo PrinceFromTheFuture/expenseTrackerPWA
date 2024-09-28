@@ -10,8 +10,13 @@ export const transactionsTable = pgTable("transactions", {
     withTimezone: true,
   }).notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
-  budgetId: uuid("budgetId").references(() => budgetsTable.id),
-  paymentMethodId: uuid("paymentMethodId").references(() => paymentMethodsTable.id),
+  budgetId: uuid("budgetId")
+    .references(() => budgetsTable.id)
+    .notNull(),
+  paymentMethodId: uuid("paymentMethodId")
+    .references(() => paymentMethodsTable.id)
+    .notNull(),
+  userId: uuid("userId").references(() => userTable.id),
 });
 
 export const budgetsTable = pgTable("budgets", {
@@ -35,7 +40,7 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
 export const userTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 25 }).notNull(),
-  email: varchar("email", { length: 50 }).notNull(),
+  email: varchar("email", { length: 50 }).notNull().unique(),
   balanceInAgorot: integer("balanceInAgorot").notNull(),
   hashedPassword: text("hashedPassword").notNull(),
 });

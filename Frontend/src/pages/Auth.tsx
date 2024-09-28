@@ -10,13 +10,16 @@ import lock_main from "@/assets/lock_main.svg";
 import user_main from "@/assets/user_main.svg";
 import PinaColada_text from "@/assets/PinaColada_text.svg";
 import app_icon from "@/assets/app_icon.svg";
+import { useAppDispatch } from "@/lib/hooks/hooks";
+import { signInAsyncTunk, signUpAsyncTunk } from "@/redux/userSlice";
 
 const Auth = ({ state }: { state: "signin" | "signup" }) => {
   const [email, setEmail] = useState<null | string>(null);
   const [password, setPassword] = useState<null | string>(null);
   const [isEmailValid, setIsEmailValid] = useState<null | boolean>(null);
   const [isPasswordValid, setIsPasswordValid] = useState<null | boolean>(null);
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length > 38) {
       return;
@@ -60,6 +63,14 @@ const Auth = ({ state }: { state: "signin" | "signup" }) => {
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isEmailValid || !isPasswordValid || !email || !password) {
+      return;
+    }
+    if (state === "signin") {
+      dispatch(signInAsyncTunk({ email, password }));
+    } else {
+      dispatch(signUpAsyncTunk({ email, password, name }));
+    }
   };
   return (
     <motion.div
@@ -80,30 +91,30 @@ const Auth = ({ state }: { state: "signin" | "signup" }) => {
       </div>
 
       <form className=" w-full" onSubmit={handleSubmit}>
-        <div className="text-secondary ml-4 mb-4 font-semibold text-base ">Sign in to your account</div>
-        <Touchable
-          animate={{
-            outlineOffset: isEmailValid === false ? "-2px" : "0px",
-            outlineWidth: isEmailValid === false ? "2px" : "0px",
-          }}
-          className={cn(
-            " bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center",
-            " outline-warning outline"
-          )}
-        >
-          <img className=" w-6 h-6" src={user_main} />
-          <div className=" w-full">
-            {" "}
-            <div className="text-sm  text-main font-bold text-left"> Name</div>
-            <input
-              type="name"
-              value={name}
-              onChange={handleNameChange}
-              placeholder="Jhone Doe"
-              className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
-            />
-          </div>
-        </Touchable>
+        <div className="text-secondary ml-4 mb-4 font-semibold text-base ">
+          {state === "signin" ? "Sign in to your account" : "Create New Account"}
+        </div>
+        {state === "signup" && (
+          <Touchable
+            className={cn(
+              " bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center",
+              " "
+            )}
+          >
+            <img className=" w-6 h-6" src={user_main} />
+            <div className=" w-full">
+              {" "}
+              <div className="text-sm  text-main font-bold text-left"> Name</div>
+              <input
+                type="name"
+                value={name ? name : ""}
+                onChange={handleNameChange}
+                placeholder="Jhone Doe"
+                className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
+              />
+            </div>
+          </Touchable>
+        )}
         {isEmailValid === false && (
           <motion.div
             transition={generalTransition}
@@ -173,7 +184,7 @@ const Auth = ({ state }: { state: "signin" | "signup" }) => {
         </Touchable>
         <button type="submit" className="mt-4 w-full">
           <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  mb-4  text-surface">
-            Sign Up
+            {state === "signin" ? "Sign in" : "Sign Up"}
           </Touchable>
         </button>
       </form>

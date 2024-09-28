@@ -3,6 +3,8 @@ import { RootState } from "./store";
 import {
   HTTPGetSpendingsInTimeFrame,
   HTTPGetUserBalance,
+  HTTPSignInUser,
+  HTTPSignUpUser,
   HTTPVerifyToken,
 } from "@/lib/http.requests";
 
@@ -45,10 +47,22 @@ export const getUserBalanceAsyncThunk = createAsyncThunk("/users/getBalance", as
   return data;
 });
 
-export const verifyUserTokenAsyncTunk = createAsyncThunk(
-  "users/acessTokenVerification",
-  async () => {
-    const data = await HTTPVerifyToken();
+export const verifyUserTokenAsyncTunk = createAsyncThunk("users/acessTokenVerification", async () => {
+  const data = await HTTPVerifyToken();
+  return data;
+});
+
+export const signInAsyncTunk = createAsyncThunk(
+  "users/signIn",
+  async (args: { email: string; password: string }) => {
+    const data = await HTTPSignInUser(args);
+    return data;
+  }
+);
+export const signUpAsyncTunk = createAsyncThunk(
+  "users/signUp",
+  async (args: { email: string; password: string; name: string | null }) => {
+    const data = await HTTPSignUpUser({ ...args, name: "User" });
     return data;
   }
 );
@@ -76,6 +90,26 @@ const userSlice = createSlice({
       state.user.balance = action.payload.balanceInAgorot;
     });
     builder.addCase(verifyUserTokenAsyncTunk.fulfilled, (state, action) => {
+      state.status = "success";
+      if (action.payload.success === false || !action.payload.userId) {
+        return;
+      }
+      state.user.userId = action.payload.userId;
+    });
+    builder.addCase(signInAsyncTunk.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(signInAsyncTunk.fulfilled, (state,action) => {
+      state.status = "success";
+      if (action.payload.success === false || !action.payload.userId) {
+        return;
+      }
+      state.user.userId = action.payload.userId;
+    });
+    builder.addCase(signUpAsyncTunk.pending, (state) => {
+      state.status = "pending";
+    });
+    builder.addCase(signUpAsyncTunk.fulfilled, (state, action) => {
       state.status = "success";
       if (action.payload.success === false || !action.payload.userId) {
         return;

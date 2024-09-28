@@ -70,6 +70,13 @@ const serverDefnition = {
                     responseCookie: Object.prototype,
                 },
                 {
+                    path: "/signIn",
+                    method: "POST",
+                    request: Object.prototype,
+                    response: Object.prototype,
+                    responseCookie: Object.prototype,
+                },
+                {
                     path: "/verifyToken",
                     method: "GET",
                     requestCookie: String() || null,

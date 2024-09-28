@@ -2,11 +2,12 @@
 
 import * as express from "express";
 import controller from "../controllers/usersRouterController/index.js";
+import authMiddleware from "../../middleware/authMiddlware.js";
 
 const usersRouter = express.Router();
 
-usersRouter.post("/timeFrameSpendings", controller.getUserSpendingsByTimeFrame);
+usersRouter.post("/timeFrameSpendings", authMiddleware, controller.getUserSpendingsByTimeFrame);
 
-usersRouter.get("/balance", controller.getUserBalance);
+usersRouter.get("/balance", authMiddleware, controller.getUserBalance);
 
 export default usersRouter;

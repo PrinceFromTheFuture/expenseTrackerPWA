@@ -57,6 +57,13 @@
       "when": 1727451048319,
       "tag": "0007_overrated_champions",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1727545587685,
+      "tag": "0008_material_bruce_banner",
+      "breakpoints": true
     }
   ]
 }

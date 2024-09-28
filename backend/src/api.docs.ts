@@ -68,8 +68,20 @@ const serverDefnition = {
         {
           path: "/signUp",
           method: "POST",
+          request: Object.prototype as { email: string; password: string; name: string | null },
+          response: Object.prototype as { success: boolean; userId?: string; message?: string },
+          responseCookie: Object.prototype as {
+            name: "token";
+            httpOnly: true;
+            secure: true;
+            maxAge: number;
+          },
+        },
+        {
+          path: "/signIn",
+          method: "POST",
           request: Object.prototype as { email: string; password: string },
-          response: Object.prototype as { success: boolean; message?: string },
+          response: Object.prototype as { success: boolean; userId?: string; message?: string },
           responseCookie: Object.prototype as {
             name: "token";
             httpOnly: true;

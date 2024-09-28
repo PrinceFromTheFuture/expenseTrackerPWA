@@ -12,6 +12,6 @@ const verifyToken = async (req, res) => {
         return;
     }
     const decodedToken = jwt.verify(token, jwtSecret);
-    res.json({ sucess: true, ...decodedToken });
+    res.json({ success: true, ...decodedToken });
 };
 export default verifyToken;

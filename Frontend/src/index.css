@@ -14,3 +14,28 @@ body {
 .mainContainer::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes caruselAnimation {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes loadingAnimation {
+  0% {
+    stroke-dasharray: 0 900;
+  }
+  33% {
+    stroke-dasharray: 28 900;
+  }
+  100% {
+    stroke-dasharray: 0 900;
+  }
+}
+
+.circlet {
+  animation: 1s loadingAnimation infinite ease-in-out;
+}

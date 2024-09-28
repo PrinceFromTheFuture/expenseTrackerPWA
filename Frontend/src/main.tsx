@@ -16,6 +16,7 @@ import {
   getUserIdSelector,
   verifyUserTokenAsyncTunk,
 } from "./redux/userSlice.ts";
+import LoadingPage from "./pages/LoadingPage.tsx";
 
 const AppWraper = () => {
   const dispatch = useAppDispatch();
@@ -26,13 +27,11 @@ const AppWraper = () => {
   let userSliceState = useAppSelector(getUserDataStatusSelector);
   let userId = useAppSelector(getUserIdSelector);
 
-  if (userSliceState === "pending") {
-    return <div>laoding...</div>;
-  }
-
   return (
-    <div className="">
-      <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait">
+      {userSliceState === "pending" ? (
+        <LoadingPage value="Test" />
+      ) : (
         <Routes key={location.pathname} location={location}>
           {userId ? (
             <Route path="/" element={<PrimaryLayout />}>
@@ -43,13 +42,15 @@ const AppWraper = () => {
             </Route>
           ) : (
             <>
-              <Route path="/login" element={<div>log in</div>} />
+              <Route path="/login" element={<div>fd </div>} />
+              <Route path="/signup" element={<div>fd </div>} />
+
               <Route path="*" element={<Navigate to={"/login"} />} />
             </>
           )}
         </Routes>
-      </AnimatePresence>
-    </div>
+      )}
+    </AnimatePresence>
   );
 };
 

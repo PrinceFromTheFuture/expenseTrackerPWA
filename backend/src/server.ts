@@ -20,8 +20,8 @@ configDotenv();
 
 const server = express();
 
-server.use(cors({ origin: "https://amirwais.site" }));
-//server.use(cors({ origin: process.env.FRONTENDURL }));
+//server.use(cors({ origin: "http://localhost:5173" }));
+server.use(cors({ origin: process.env.FRONTENDURL }));
 
 server.use(cookieParser());
 server.use(express.json());

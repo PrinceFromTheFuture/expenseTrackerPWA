@@ -26,13 +26,13 @@ const LandingPage = () => {
         <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  mb-4  text-surface">
           Sign Up
         </Touchable>
-        <div className=" w-full bg-transparent outline-2 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
+        <div className=" w-full bg-transparent out outline-2 -outline-offset-2 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
           Log In
         </div>
       </div>
       <div className=" w-11/12 flex gap-4 justify-between items-center mb-8">
         <div className=" h-[2px] bg-secondary w-full" />
-        <div className=" font-semibold text-md text-dark">Or</div>
+        <div className=" font-semibold  text-dark">Or</div>
         <div className=" h-[2px] bg-secondary w-full" />
       </div>
       <Touchable className="  w-full bg-container  p-4 rounded-2xl flex justify-between items-center font-bold text-md text-main">

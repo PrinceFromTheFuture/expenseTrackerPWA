@@ -1,23 +1,26 @@
-import ExpensesWidget from "./components/ui/generalComponents/ExpensesWidget";
+import ExpensesWidget from "../components/ui/generalComponents/ExpensesWidget";
 
-import Icon from "./components/ui/Icon";
+import Icon from "../components/ui/Icon";
 import edit_main from "@/assets/edit_main.svg";
 import bell_surface from "@/assets/bell_surface.svg";
 
-import SpendingsTimeFrame from "./components/ui/generalComponents/SpendingsTimeFrame";
-import Touchable from "./components/ui/generalComponents/Touchable";
-import { useAppSelector } from "./hooks";
-import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/redux/transactionsSlice";
+import SpendingsTimeFrame from "../components/ui/generalComponents/SpendingsTimeFrame";
+import Touchable from "../components/ui/generalComponents/Touchable";
+import { useAppSelector } from "../lib/hooks/hooks";
+import {
+  allTransactionsSelctor,
+  getTransactionsDataStatusSelector,
+} from "@/redux/transactionsSlice";
 
 import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
-import ExpensesWidgetSkeleton from "./components/ui/generalComponents/ExpensesWidgetSkeleton";
+import ExpensesWidgetSkeleton from "../components/ui/generalComponents/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
-import { userBalanceSelector } from "./redux/userSlice";
-import { formatAmountInAgorot } from "./lib/formatAmountInAgorot";
+import { userBalanceSelector } from "../redux/userSlice";
+import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
-import CustomGoogleLogin from "./components/CustomGoogleLogin";
-const App = () => {
+import CustomGoogleLogin from "../components/CustomGoogleLogin";
+const Home = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
 
@@ -31,7 +34,9 @@ const App = () => {
         <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance || 0, true)}</div>
+        <div className=" text-4xl text-dark font-extrabold">
+          {formatAmountInAgorot(balance || 0, true)}
+        </div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-12">
@@ -65,7 +70,9 @@ const App = () => {
           })
         : allTransactions
             .slice()
-            .sort((transactionA, transactionB) => dayjs(transactionA.date).diff(dayjs(transactionB.date)))
+            .sort((transactionA, transactionB) =>
+              dayjs(transactionA.date).diff(dayjs(transactionB.date))
+            )
             .reverse()
             .map((transaction) => {
               return (
@@ -81,8 +88,7 @@ const App = () => {
                 </AnimatePresence>
               );
             })}
-      <CustomGoogleLogin />
     </div>
   );
 };
-export default App;
+export default Home;

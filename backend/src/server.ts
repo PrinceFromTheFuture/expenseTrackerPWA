@@ -13,12 +13,15 @@ import { transactionsTable } from "./schema.js";
 import { between } from "drizzle-orm";
 import dayjs from "dayjs";
 import usersRouter from "./routes/endpoints/usersRouter.js";
+import authRouter from "./routes/endpoints/authRouter.js";
+import cookieParser from "cookie-parser";
 
 configDotenv();
 
 const server = express();
 
-server.use(cors());
+server.use(cors({ origin: process.env.FRONTENDURL }));
+server.use(cookieParser());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op
 
@@ -46,10 +49,11 @@ export const devUserId =
 const sql = neon(DBConnectionString);
 export const db = drizzle(sql);
 
-server.use("/budgets", budgetsRouter);
-server.use("/paymentMethods", paymentsMethodRouter);
-server.use("/transactions", transactionsRouter);
-server.use("/users", usersRouter);
+server.use("/api/budgets", budgetsRouter);
+server.use("/api/paymentMethods", paymentsMethodRouter);
+server.use("/api/transactions", transactionsRouter);
+server.use("/api/users", usersRouter);
+server.use("/api/auth", authRouter);
 
 function initilizeServer() {
   try {
@@ -62,12 +66,14 @@ function initilizeServer() {
 }
 
 initilizeServer();
-server.get("/", async (req, res) => {
+server.get("/api", async (req, res) => {
   res.send("welcome to Expense Tracker PWA API");
   const data = await db
     .select()
     .from(transactionsTable)
-    .where(between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate()));
+    .where(
+      between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate())
+    );
   console.log(data);
   console.log(dayjs().toISOString());
 });

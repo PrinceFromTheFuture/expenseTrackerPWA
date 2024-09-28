@@ -1,4 +1,4 @@
-import { pgTable, integer, uuid, varchar, timestamp, } from "drizzle-orm/pg-core";
+import { pgTable, integer, uuid, varchar, timestamp, text } from "drizzle-orm/pg-core";
 export const transactionsTable = pgTable("transactions", {
     amountInAgorot: integer("amountInAgorot").notNull(),
     title: varchar("title", { length: 50 }).notNull(),
@@ -32,4 +32,5 @@ export const userTable = pgTable("users", {
     name: varchar("name", { length: 25 }).notNull(),
     email: varchar("email", { length: 50 }).notNull(),
     balanceInAgorot: integer("balanceInAgorot").notNull(),
+    hashedPassword: text("hashedPassword").notNull(),
 });

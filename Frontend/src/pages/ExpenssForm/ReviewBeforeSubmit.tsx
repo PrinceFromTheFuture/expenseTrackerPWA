@@ -1,23 +1,19 @@
 import Touchable from "@/components/ui/generalComponents/Touchable";
 import Icon from "@/components/ui/Icon";
-import generalTransition from "@/generalTransition";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import generalTransition from "@/lib/generalTransition";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice";
 import { clearAllInForm, formDataSelector } from "@/redux/formSlice";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice";
-import { postNewTransactionAsyncThunk, updateNewTransactionAsyncThunk } from "@/redux/transactionsSlice";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@radix-ui/react-alert-dialog";
+  postNewTransactionAsyncThunk,
+  updateNewTransactionAsyncThunk,
+} from "@/redux/transactionsSlice";
+import { AlertDialogAction, AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 import dayjs from "dayjs";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 import facebookTest from "@/assets/facebookTest.svg";
@@ -37,7 +33,9 @@ const ReviewBeforeSubmit = () => {
       : formData.title
     : "Untitled Transaction";
 
-  const formDataBudgetName = useAppSelector((state) => getBudgetNameByIdSelector(state, formData.budgetId!));
+  const formDataBudgetName = useAppSelector((state) =>
+    getBudgetNameByIdSelector(state, formData.budgetId!)
+  );
   const formDatePaymentMethodName = useAppSelector((state) =>
     getPaymentMethodNameByIdSelector(state, formData.paymentMethodId!)
   );
@@ -75,7 +73,9 @@ const ReviewBeforeSubmit = () => {
             <Icon varient="full" src={facebookTest} />
             <div>
               <div className=" text-sm font-bold">{displayFormDataTitle}</div>
-              <div className=" text-xs text-secondary text-left font-semibold">{formDataBudgetName}</div>
+              <div className=" text-xs text-secondary text-left font-semibold">
+                {formDataBudgetName}
+              </div>
             </div>
           </div>
         </Touchable>

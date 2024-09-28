@@ -1,11 +1,13 @@
 //@ts-ignore
 import axios from "axios";
-import { Bugdet, PaymentMethod, Transaction } from "./types";
+import { Bugdet, PaymentMethod, Transaction } from "@/types";
 const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
 
 if (!apiURL) {
   console.log("api is not defined!!");
 }
+
+axios.defaults.withCredentials = true;
 
 export const HTTPGetAllTransactions = async () => {
   const res = await axios.get<Transaction[]>(`${apiURL}/transactions`);
@@ -51,5 +53,20 @@ export const HTTPGetUserBalance = async () => {
 
 export const HTTPDeleteTransaction = async (transactionId: string) => {
   const res = await axios.delete<{ success: boolean }>(`${apiURL}/transactions/${transactionId}`);
+  return res.data;
+};
+
+export const HTTPPostNewUser = async (userData: { email: string; password: string }) => {
+  const res = await axios.post<{ success: boolean; message?: string }>(
+    `${apiURL}/auth/signUp`,
+    userData
+  );
+  return res.data;
+};
+
+export const HTTPVerifyToken = async () => {
+  const res = await axios.get<{ success: boolean; message?: string; userId?: string }>(
+    `${apiURL}/auth/verifyToken`
+  );
   return res.data;
 };

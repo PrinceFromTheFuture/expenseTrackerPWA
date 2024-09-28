@@ -8,6 +8,55 @@
       "when": 1727075149090,
       "tag": "0000_blue_vector",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1727449886562,
+      "tag": "0001_tired_star_brand",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1727449985728,
+      "tag": "0002_worthless_the_twelve",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1727450052446,
+      "tag": "0003_funny_swarm",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1727450453300,
+      "tag": "0004_safe_havok",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1727450693061,
+      "tag": "0005_wooden_sersi",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1727450840445,
+      "tag": "0006_cuddly_enchantress",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1727451048319,
+      "tag": "0007_overrated_champions",
+      "breakpoints": true
     }
   ]
 }

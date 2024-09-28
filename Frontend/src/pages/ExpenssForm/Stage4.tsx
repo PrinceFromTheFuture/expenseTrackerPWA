@@ -9,7 +9,7 @@ import tag_main from "@/assets/tag_main.svg";
 import { modifyTitleInForm, modifyDescriptionInForm, formDataSelector } from "@/redux/formSlice";
 
 import { useRef, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 function Stage4() {
   const dispatch = useAppDispatch();
 

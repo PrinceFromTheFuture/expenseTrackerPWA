@@ -5,11 +5,11 @@ import calender_main from "@/assets/calender_main.svg";
 import clock_main from "@/assets/clock_main.svg";
 
 import { useEffect, useState } from "react";
-import generalTransition from "@/generalTransition";
+import generalTransition from "@/lib/generalTransition";
 
 import dayjs from "dayjs";
 import { formDataSelector, modifyDateInForm } from "@/redux/formSlice";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import TimePicker from "./TimePicker";
 
 const Stage3 = () => {
@@ -73,7 +73,9 @@ const Stage3 = () => {
       >
         <img className=" w-7 h-7" src={clock_main} />
         <div className="ml-2">
-          <div className=" text-sm text-dark font-bold">{String(dayjs(formData.date).format("HH:mm"))}</div>{" "}
+          <div className=" text-sm text-dark font-bold">
+            {String(dayjs(formData.date).format("HH:mm"))}
+          </div>{" "}
           <div className=" text-xs text-secondary font-semibold">time</div>{" "}
         </div>
       </Touchable>

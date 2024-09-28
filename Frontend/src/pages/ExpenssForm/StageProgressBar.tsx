@@ -1,7 +1,13 @@
-import generalTransition from "@/generalTransition";
+import generalTransition from "@/lib/generalTransition";
 import { motion } from "framer-motion";
 
-const StageProgressBar = ({ currentStage, thisBarStage }: { currentStage: number; thisBarStage: number }) => {
+const StageProgressBar = ({
+  currentStage,
+  thisBarStage,
+}: {
+  currentStage: number;
+  thisBarStage: number;
+}) => {
   return (
     <div className=" h-2 w-full rounded-full bg-container ">
       <motion.div

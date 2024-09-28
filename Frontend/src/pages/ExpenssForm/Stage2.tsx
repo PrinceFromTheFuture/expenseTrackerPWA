@@ -2,9 +2,9 @@ import caret_secondary from "@/assets/caret_secondary.svg";
 //fd
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import generalTransition from "@/generalTransition";
+import generalTransition from "@/lib/generalTransition";
 import { cn } from "@/lib/utils";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { allBugdetsSelctor } from "@/redux/budgetsSlice";
 import { formDataSelector, selectBudgetInForm } from "@/redux/formSlice";
 import Icon from "@/components/ui/Icon";
@@ -61,7 +61,10 @@ const Stage2 = () => {
               </motion.div>
               <Icon
                 backgroundColor={budget.color}
-                src={`${budget.iconURL.substring(0, budget.iconURL.lastIndexOf("/") + 1)}default.svg`}
+                src={`${budget.iconURL.substring(
+                  0,
+                  budget.iconURL.lastIndexOf("/") + 1
+                )}default.svg`}
                 varient="small"
               />
               <div className=" text-dark font-bold">{budget.name}</div>

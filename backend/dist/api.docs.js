@@ -60,6 +60,23 @@ const serverDefnition = {
                 },
             ],
         },
+        auth: {
+            endpoints: [
+                {
+                    path: "/signUp",
+                    method: "POST",
+                    request: Object.prototype,
+                    response: Object.prototype,
+                    responseCookie: Object.prototype,
+                },
+                {
+                    path: "/verifyToken",
+                    method: "GET",
+                    requestCookie: String() || null,
+                    response: Object.prototype,
+                },
+            ],
+        },
     },
 };
 export {};

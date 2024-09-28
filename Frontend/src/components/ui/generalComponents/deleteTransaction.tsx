@@ -4,9 +4,9 @@ import { AnimatePresence } from "framer-motion";
 import exit_main from "@/assets/exit_main.svg";
 import Icon from "../Icon";
 import { motion } from "framer-motion";
-import generalTransition from "@/generalTransition";
+import generalTransition from "@/lib/generalTransition";
 import { DrawerPortal } from "../drawer";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch } from "@/lib/hooks/hooks";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import { deleteTransactionAsyncThunk } from "@/redux/transactionsSlice";
 

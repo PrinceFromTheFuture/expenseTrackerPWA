@@ -1,6 +1,6 @@
 import delete_surfce from "@/assets/delete_surface.svg";
 import Icon from "@/components/ui/Icon";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import { cn } from "@/lib/utils";
 import {
@@ -87,7 +87,9 @@ const Stage1 = () => {
         </div>
         <div className="mt-2 flex justify-start gap-2 items-end">
           <div className=" font-semibold text-secondary text-sm ">current balance:</div>
-          <div className=" font-bold text-dark text-sm ">{formatAmountInAgorot(balance || 0, true)}</div>
+          <div className=" font-bold text-dark text-sm ">
+            {formatAmountInAgorot(balance || 0, true)}
+          </div>
         </div>
       </div>
       <div className=" w-full flex    flex-col gap-4 justify-between items-center">

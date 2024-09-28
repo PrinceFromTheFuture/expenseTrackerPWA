@@ -1,51 +1,52 @@
 import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import Home from "./pages/Home.tsx";
 import "./index.css";
 
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "@/redux/store.ts";
 import { AnimatePresence } from "framer-motion";
-import { useAppDispatch } from "./hooks.ts";
+import { useAppDispatch, useAppSelector } from "./lib/hooks/hooks.ts";
 import getAllDataFromAPI from "./lib/getAllDataFromAPI.ts";
-import ExpenssForm from "./newExpenss/ExpenssForm.tsx";
+import ExpenssForm from "./pages/ExpenssForm/ExpenssForm.tsx";
+import PrimaryLayout from "./PrimaryLayout.tsx";
+import {
+  getUserDataStatusSelector,
+  getUserIdSelector,
+  verifyUserTokenAsyncTunk,
+} from "./redux/userSlice.ts";
 
 const AppWraper = () => {
-  const location = useLocation();
   const dispatch = useAppDispatch();
-
-  const handleViablityChange = () => {
-    getAllDataFromAPI(dispatch);
-  };
   useEffect(() => {
-    document.addEventListener("visibilitychange", handleViablityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleViablityChange);
-    };
+    dispatch(verifyUserTokenAsyncTunk());
   }, []);
+  const location = useLocation();
+  let userSliceState = useAppSelector(getUserDataStatusSelector);
+  let userId = useAppSelector(getUserIdSelector);
 
-  useEffect(() => {
-    getAllDataFromAPI(dispatch);
-  }, []);
-  useEffect(() => {
-    const disableContextMenu = (event: MouseEvent) => {
-      event.preventDefault();
-    };
+  if (userSliceState === "pending") {
+    return <div>laoding...</div>;
+  }
 
-    document.addEventListener("contextmenu", disableContextMenu);
-
-    return () => {
-      document.removeEventListener("contextmenu", disableContextMenu);
-    };
-  }, []);
   return (
     <div className="">
       <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<App />} />
-          <Route path="/new" element={<ExpenssForm />} />
-          <Route path="/editTransaction" element={<ExpenssForm />} />
+          {userId ? (
+            <Route path="/" element={<PrimaryLayout />}>
+              <Route index element={<Home />} />
+              <Route path="new" element={<ExpenssForm />} />
+              <Route path="editTransaction" element={<ExpenssForm />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Route>
+          ) : (
+            <>
+              <Route path="/login" element={<div>log in</div>} />
+              <Route path="*" element={<Navigate to={"/login"} />} />
+            </>
+          )}
         </Routes>
       </AnimatePresence>
     </div>

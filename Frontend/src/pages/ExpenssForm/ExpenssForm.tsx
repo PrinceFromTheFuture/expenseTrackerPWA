@@ -1,13 +1,12 @@
 import Icon from "@/components/ui/Icon";
-import generalTransition from "@/generalTransition";
+import generalTransition from "@/lib/generalTransition";
 import Touchable from "@/components/ui/generalComponents/Touchable";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import arrow_main from "@/assets/arrow-main.svg";
 import edit_main from "@/assets/edit_main.svg";
-import facebookTest from "@/assets/facebookTest.svg";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import exit_main from "@/assets/exit_main.svg";
 import Stage1 from "./Stage1";
 import Stage2 from "./Stage2";
@@ -16,7 +15,7 @@ import Stage4 from "./Stage4";
 import Stage5 from "./Stage5";
 import { clearAllInForm, formDataSelector } from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
-import { useAppDispatch, useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
 import ReviewBeforeSubmit from "./ReviewBeforeSubmit";
 import StageProgressBar from "./StageProgressBar";
@@ -74,7 +73,9 @@ const ExpenssForm = () => {
             {" "}
             <Icon varient="mid" src={exit_main} />
           </Link>
-          <div className="font-bold text-dark text-lg">{formData.editMode ? "Edit" : "New"} Transaction</div>
+          <div className="font-bold text-dark text-lg">
+            {formData.editMode ? "Edit" : "New"} Transaction
+          </div>
 
           <div className=" invisible">
             <Icon varient="mid" src={edit_main} />

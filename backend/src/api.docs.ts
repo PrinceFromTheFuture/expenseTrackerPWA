@@ -1,3 +1,4 @@
+import { response } from "express";
 import { Bugdet, PaymentMethod, Transaction, TransactionForm } from "./types.js";
 
 const serverDefnition = {
@@ -59,6 +60,28 @@ const serverDefnition = {
           path: "/balance",
           method: "GET",
           response: Object.prototype as { balanceInAgorot: number },
+        },
+      ],
+    },
+    auth: {
+      endpoints: [
+        {
+          path: "/signUp",
+          method: "POST",
+          request: Object.prototype as { email: string; password: string },
+          response: Object.prototype as { success: boolean; message?: string },
+          responseCookie: Object.prototype as {
+            name: "token";
+            httpOnly: true;
+            secure: true;
+            maxAge: number;
+          },
+        },
+        {
+          path: "/verifyToken",
+          method: "GET",
+          requestCookie: String() || null,
+          response: Object.prototype as { success: boolean; message?: string; userId?: string },
         },
       ],
     },

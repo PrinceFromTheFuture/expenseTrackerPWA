@@ -11,9 +11,12 @@ import { transactionsTable } from "./schema.js";
 import { between } from "drizzle-orm";
 import dayjs from "dayjs";
 import usersRouter from "./routes/endpoints/usersRouter.js";
+import authRouter from "./routes/endpoints/authRouter.js";
+import cookieParser from "cookie-parser";
 configDotenv();
 const server = express();
-server.use(cors());
+server.use(cors({ origin: process.env.FRONTENDURL }));
+server.use(cookieParser());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op
 const port = process.env.PORT || 3000;
@@ -35,10 +38,11 @@ export const devUserId = envoirmennt === "PRODUCTION"
     : "8be0bc5a-c5a2-4cb0-b4b4-e10f37a41846";
 const sql = neon(DBConnectionString);
 export const db = drizzle(sql);
-server.use("/budgets", budgetsRouter);
-server.use("/paymentMethods", paymentsMethodRouter);
-server.use("/transactions", transactionsRouter);
-server.use("/users", usersRouter);
+server.use("/api/budgets", budgetsRouter);
+server.use("/api/paymentMethods", paymentsMethodRouter);
+server.use("/api/transactions", transactionsRouter);
+server.use("/api/users", usersRouter);
+server.use("/api/auth", authRouter);
 function initilizeServer() {
     try {
         server.listen(port, () => {
@@ -50,7 +54,7 @@ function initilizeServer() {
     }
 }
 initilizeServer();
-server.get("/", async (req, res) => {
+server.get("/api", async (req, res) => {
     res.send("welcome to Expense Tracker PWA API");
     const data = await db
         .select()

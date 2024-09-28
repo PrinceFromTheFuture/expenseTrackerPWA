@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import generalTransition from "../../../generalTransition";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import generalTransition from "../../../lib/generalTransition";
+import { useAppDispatch, useAppSelector } from "../../../lib/hooks/hooks";
 import {
   changeSpendingsTimeFrame,
   spendingsTimeFramePreferenceSelector,

@@ -7,7 +7,7 @@ import Touchable from "./Touchable.tsx";
 import { RootState } from "@/redux/store.ts";
 import { singleTransactionSelector } from "@/redux/transactionsSlice.ts";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot.ts";
-import { useAppDispatch, useAppSelector } from "@/hooks.ts";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks.ts";
 import dayjs from "dayjs";
 import { getBudgetByIdSelector } from "@/redux/budgetsSlice.ts";
 import { getPaymentMethodNameByIdSelector } from "@/redux/paymentMethodsSlice.ts";
@@ -18,12 +18,17 @@ import { Link } from "react-router-dom";
 import { enterEditModeInForm } from "@/redux/formSlice.ts";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
-  const transaction = useAppSelector((state: RootState) => singleTransactionSelector(state, transactionId));
+  const transaction = useAppSelector((state: RootState) =>
+    singleTransactionSelector(state, transactionId)
+  );
 
   const dispatch = useAppDispatch();
   const [isDeleteWarningDialogOpen, setIsDeleteWarningDialogOpen] = useState(false);
   const transactionBudegt = useAppSelector((state) =>
-    getBudgetByIdSelector(state, transaction ? transaction.budgetId : "erorr: no budget with this id")
+    getBudgetByIdSelector(
+      state,
+      transaction ? transaction.budgetId : "erorr: no budget with this id"
+    )
   );
   const paymentMethodName = useAppSelector((state) =>
     getPaymentMethodNameByIdSelector(

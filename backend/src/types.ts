@@ -27,3 +27,11 @@ export interface PaymentMethod {
   iconURL: string;
   id: string;
 }
+
+export interface User {
+  name: string;
+  id: string;
+  email: string;
+  balanceInAgorot: number;
+  hashedPassword: string;
+}

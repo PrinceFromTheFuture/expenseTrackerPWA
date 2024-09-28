@@ -1,33 +1,18 @@
-import {
-  pgTable,
-  integer,
-  uuid,
-  varchar,
-  timestamp,
-} from "drizzle-orm/pg-core";
+import { pgTable, integer, uuid, varchar, timestamp, text } from "drizzle-orm/pg-core";
 
-export const transactionsTable = pgTable(
-  "transactions",
-  {
-    amountInAgorot: integer(
-      "amountInAgorot"
-    ).notNull(),
-    title: varchar("title", { length: 50 }).notNull(),
-    description: varchar("description", {
-      length: 50,
-    }),
-    date: timestamp("date", {
-      withTimezone: true,
-    }).notNull(),
-    id: uuid("id").primaryKey().defaultRandom(),
-    budgetId: uuid("budgetId").references(
-      () => budgetsTable.id
-    ),
-    paymentMethodId: uuid(
-      "paymentMethodId"
-    ).references(() => paymentMethodsTable.id),
-  }
-);
+export const transactionsTable = pgTable("transactions", {
+  amountInAgorot: integer("amountInAgorot").notNull(),
+  title: varchar("title", { length: 50 }).notNull(),
+  description: varchar("description", {
+    length: 50,
+  }),
+  date: timestamp("date", {
+    withTimezone: true,
+  }).notNull(),
+  id: uuid("id").primaryKey().defaultRandom(),
+  budgetId: uuid("budgetId").references(() => budgetsTable.id),
+  paymentMethodId: uuid("paymentMethodId").references(() => paymentMethodsTable.id),
+});
 
 export const budgetsTable = pgTable("budgets", {
   name: varchar("name", { length: 50 }).notNull(),
@@ -38,31 +23,23 @@ export const budgetsTable = pgTable("budgets", {
   id: uuid("id").primaryKey().defaultRandom(),
 });
 
-export const paymentMethodsTable = pgTable(
-  "paymentMethods",
-  {
-    name: varchar("name", { length: 50 }).notNull(),
-    iconURL: varchar("iconURL", {
-      length: 20,
-    }).notNull(),
+export const paymentMethodsTable = pgTable("paymentMethods", {
+  name: varchar("name", { length: 50 }).notNull(),
+  iconURL: varchar("iconURL", {
+    length: 20,
+  }).notNull(),
 
-    id: uuid("id").primaryKey().defaultRandom(),
-  }
-);
+  id: uuid("id").primaryKey().defaultRandom(),
+});
 
 export const userTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 25 }).notNull(),
   email: varchar("email", { length: 50 }).notNull(),
-  balanceInAgorot: integer(
-    "balanceInAgorot"
-  ).notNull(),
+  balanceInAgorot: integer("balanceInAgorot").notNull(),
+  hashedPassword: text("hashedPassword").notNull(),
 });
 
-export type InsertPaymentMethods =
-  typeof paymentMethodsTable.$inferInsert;
-export type InsertBudgets =
-  typeof budgetsTable.$inferInsert;
-
-export type InsertTransaction =
-  typeof transactionsTable.$inferInsert;
+export type InsertPaymentMethods = typeof paymentMethodsTable.$inferInsert;
+export type InsertBudgets = typeof budgetsTable.$inferInsert;
+export type InsertTransaction = typeof transactionsTable.$inferInsert;

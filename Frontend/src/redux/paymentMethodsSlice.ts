@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { PaymentMethod } from "@/types";
-import { HTTPGetAllPaymentMethods } from "@/http.requests";
+import { HTTPGetAllPaymentMethods } from "@/lib/http.requests";
 
 export const getAllPaymentMethodsAsyncThunk = createAsyncThunk(
   "paymentMethods/getAll",

@@ -2,8 +2,8 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/componen
 import dayjs from "dayjs";
 import * as React from "react";
 import { motion } from "framer-motion";
-import generalTransition from "@/generalTransition";
-import { useAppDispatch } from "@/hooks";
+import generalTransition from "@/lib/generalTransition";
+import { useAppDispatch } from "@/lib/hooks/hooks";
 import { modifyHoursInForm } from "@/redux/formSlice";
 
 const TimePicker = () => {

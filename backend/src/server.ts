@@ -20,7 +20,9 @@ configDotenv();
 
 const server = express();
 
-server.use(cors({ origin: process.env.FRONTENDURL }));
+server.use(cors({ origin: "https://amirwais.site" }));
+//server.use(cors({ origin: process.env.FRONTENDURL }));
+
 server.use(cookieParser());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op
@@ -71,9 +73,7 @@ server.get("/api", async (req, res) => {
   const data = await db
     .select()
     .from(transactionsTable)
-    .where(
-      between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate())
-    );
+    .where(between(transactionsTable.date, dayjs().subtract(2, "hours").toDate(), dayjs().toDate()));
   console.log(data);
   console.log(dayjs().toISOString());
 });

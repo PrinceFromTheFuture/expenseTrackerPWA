@@ -11,17 +11,16 @@ import { useAppDispatch, useAppSelector } from "./lib/hooks/hooks.ts";
 import getAllDataFromAPI from "./lib/getAllDataFromAPI.ts";
 import ExpenssForm from "./pages/ExpenssForm/ExpenssForm.tsx";
 import PrimaryLayout from "./PrimaryLayout.tsx";
-import {
-  getUserDataStatusSelector,
-  getUserIdSelector,
-  verifyUserTokenAsyncTunk,
-} from "./redux/userSlice.ts";
+import { getUserDataStatusSelector, getUserIdSelector, verifyUserTokenAsyncTunk } from "./redux/userSlice.ts";
 import LoadingPage from "./pages/LoadingPage.tsx";
+import LandingPage from "./pages/LandingPage.tsx";
 
 const AppWraper = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(verifyUserTokenAsyncTunk());
+    setTimeout(() => {
+      dispatch(verifyUserTokenAsyncTunk());
+    }, 1000);
   }, []);
   const location = useLocation();
   let userSliceState = useAppSelector(getUserDataStatusSelector);
@@ -42,10 +41,12 @@ const AppWraper = () => {
             </Route>
           ) : (
             <>
+              <Route path="/" element={<LandingPage />} />
+
               <Route path="/login" element={<div>fd </div>} />
               <Route path="/signup" element={<div>fd </div>} />
 
-              <Route path="*" element={<Navigate to={"/login"} />} />
+              <Route path="*" element={<Navigate to={"/"} />} />
             </>
           )}
         </Routes>

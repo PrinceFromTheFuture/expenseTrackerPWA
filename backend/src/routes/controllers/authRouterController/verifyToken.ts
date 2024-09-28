@@ -6,6 +6,8 @@ import signJWTToken from "../../../utils/signJWTToken.js";
 import jwt from "jsonwebtoken";
 
 const verifyToken = async (req: Request, res: Response) => {
+  // res.json({ success: true, userId: "fd" });
+  //return;
   const token: string | null = req.cookies.token;
   if (!token) {
     res.json({ success: false, message: "token was not provided" });

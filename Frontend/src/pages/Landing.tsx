@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import app_icon from "@/assets/app_icon.svg";
 import Touchable from "@/components/ui/generalComponents/Touchable";
 import google_icon from "@/assets/google__logo.svg";
+import { Link } from "react-router-dom";
 
-const LandingPage = () => {
+const Landing = () => {
   return (
     <motion.div
       transition={generalTransition}
@@ -25,12 +26,16 @@ const LandingPage = () => {
         </div>
       </div>
       <div className=" w-full mb-8">
-        <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  mb-4  text-surface">
-          Sign Up
-        </Touchable>
-        <div className=" w-full bg-transparent out outline-2 -outline-offset-2 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
-          Log In
-        </div>
+        <Link to="/signup">
+          <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md  mb-4  text-surface">
+            Sign Up
+          </Touchable>
+        </Link>
+        <Link to="/signin">
+          <div className=" w-full bg-transparent out outline-2 -outline-offset-2 outline-main outline  p-4 rounded-2xl flex justify-center items-center font-bold text-md text-main">
+            Log In
+          </div>
+        </Link>
       </div>
       <div className=" w-11/12 flex gap-4 justify-between items-center mb-8">
         <div className=" h-[2px] bg-secondary w-full" />
@@ -46,4 +51,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Landing;

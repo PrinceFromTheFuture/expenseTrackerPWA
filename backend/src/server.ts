@@ -21,8 +21,15 @@ configDotenv();
 const server = express();
 
 //server.use(cors({ origin: "http://localhost:5173" }));
-server.use(cors({ origin: process.env.FRONTENDURL }));
+//server.use(cors({ origin: process.env.FRONTENDURL }));
 
+server.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+    credentials: true, // If cookies or credentials are used
+  })
+);
 server.use(cookieParser());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op

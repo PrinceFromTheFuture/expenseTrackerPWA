@@ -12,8 +12,9 @@ import getAllDataFromAPI from "./lib/getAllDataFromAPI.ts";
 import ExpenssForm from "./pages/ExpenssForm/ExpenssForm.tsx";
 import PrimaryLayout from "./PrimaryLayout.tsx";
 import { getUserDataStatusSelector, getUserIdSelector, verifyUserTokenAsyncTunk } from "./redux/userSlice.ts";
-import LoadingPage from "./pages/LoadingPage.tsx";
-import LandingPage from "./pages/LandingPage.tsx";
+import LoadingPage from "./pages/Loading.tsx";
+import LandingPage from "./pages/Landing.tsx";
+import Auth from "./pages/Auth.tsx";
 
 const AppWraper = () => {
   const dispatch = useAppDispatch();
@@ -29,7 +30,7 @@ const AppWraper = () => {
   return (
     <AnimatePresence mode="wait">
       {userSliceState === "pending" ? (
-        <LoadingPage value="Test" />
+        <LoadingPage />
       ) : (
         <Routes key={location.pathname} location={location}>
           {userId ? (
@@ -42,9 +43,8 @@ const AppWraper = () => {
           ) : (
             <>
               <Route path="/" element={<LandingPage />} />
-
-              <Route path="/login" element={<div>fd </div>} />
-              <Route path="/signup" element={<div>fd </div>} />
+              <Route path="/signin" element={<Auth state="signin" />} />
+              <Route path="/signup" element={<Auth state="signup" />} />
 
               <Route path="*" element={<Navigate to={"/"} />} />
             </>

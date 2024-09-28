@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import app_icon from "/app_icon.svg";
 
-const LoadingPage = ({ value }: { value: string }) => {
+const Loading = () => {
   return (
     <motion.div
       transition={generalTransition}
@@ -35,4 +35,4 @@ const LoadingPage = ({ value }: { value: string }) => {
   );
 };
 
-export default LoadingPage;
+export default Loading;

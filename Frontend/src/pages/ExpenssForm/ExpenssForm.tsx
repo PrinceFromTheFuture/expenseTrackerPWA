@@ -13,7 +13,7 @@ import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 import Stage5 from "./Stage5";
-import { clearAllInForm, decrementStageInForm, formDataSelector, incrementStageInForm } from "@/redux/formSlice";
+import { clearAllInForm, decrementStageInForm, formDataSelector, incrementStageInForm } from "@/pages/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";

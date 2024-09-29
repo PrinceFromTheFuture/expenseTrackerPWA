@@ -8,7 +8,7 @@ import generalTransition from "@/lib/generalTransition";
 import { DrawerPortal } from "../drawer";
 import { useAppDispatch } from "@/lib/hooks/hooks";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
-import { deleteTransactionAsyncThunk } from "@/redux/transactionsSlice";
+import { deleteTransactionAsyncThunk } from "@/pages/redux/transactionsSlice";
 
 const DeleteTransaction = ({
   isDialogOpen,

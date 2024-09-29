@@ -1,4 +1,3 @@
-import { response } from "express";
 import { Bugdet, PaymentMethod, Transaction, TransactionForm } from "./types.js";
 
 const serverDefnition = {
@@ -111,3 +110,5 @@ const serverDefnition = {
     },
   },
 };
+
+export default serverDefnition

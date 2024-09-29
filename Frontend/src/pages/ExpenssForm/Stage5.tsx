@@ -2,10 +2,10 @@ import Icon from "@/components/ui/Icon";
 import Touchable from "@/components/ui/generalComponents/Touchable";
 import edit_main from "@/assets/edit_main.svg";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
+import { allPaymentMethodsSelector } from "@/pages/redux/paymentMethodsSlice";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
-import { formDataSelector, modifyPaymentMethodInForm } from "@/redux/formSlice";
+import { formDataSelector, modifyPaymentMethodInForm } from "@/pages/redux/formSlice";
 
 const Stage5 = () => {
   const allPaymentMethods = useAppSelector(allPaymentMethodsSelector);
@@ -42,8 +42,7 @@ const Stage5 = () => {
                     backgroundColor: "#9daab0",
                   }}
                   animate={{
-                    backgroundColor:
-                      selctedPaymentMethodId === paymentMethod.id ? "#0d6680" : "#9daab0",
+                    backgroundColor: selctedPaymentMethodId === paymentMethod.id ? "#0d6680" : "#9daab0",
                   }}
                   className=" flex justify-center  items-center  w-4 h-4 rounded-full "
                 >

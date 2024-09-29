@@ -6,7 +6,7 @@ import { Drawer, DrawerContent, DrawerTrigger, DrawerClose } from "@/components/
 import thought_bubble_main from "@/assets/thought_bubble_main.svg";
 import tag_main from "@/assets/tag_main.svg";
 
-import { modifyTitleInForm, modifyDescriptionInForm, formDataSelector } from "@/redux/formSlice";
+import { modifyTitleInForm, modifyDescriptionInForm, formDataSelector } from "@/pages/redux/formSlice";
 
 import { useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
@@ -91,16 +91,10 @@ function Stage4() {
                 />
               </div>
             </div>
-            <img
-              onClick={() => dispatch(modifyTitleInForm(null))}
-              className=" w-4 h-4"
-              src={exit_main}
-            />
+            <img onClick={() => dispatch(modifyTitleInForm(null))} className=" w-4 h-4" src={exit_main} />
           </div>
           <DrawerClose className=" w-full">
-            <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
-              Close
-            </Touchable>
+            <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">Close</Touchable>
           </DrawerClose>
         </DrawerContent>
       </Drawer>
@@ -149,16 +143,10 @@ function Stage4() {
                 />
               </div>
             </div>
-            <img
-              className=" w-4 h-4"
-              onClick={() => dispatch(modifyDescriptionInForm(null))}
-              src={exit_main}
-            />
+            <img className=" w-4 h-4" onClick={() => dispatch(modifyDescriptionInForm(null))} src={exit_main} />
           </div>
           <DrawerClose className=" w-full">
-            <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
-              Close
-            </Touchable>
+            <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">Close</Touchable>
           </DrawerClose>
         </DrawerContent>
       </Drawer>

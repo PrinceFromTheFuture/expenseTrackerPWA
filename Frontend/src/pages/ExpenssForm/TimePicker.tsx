@@ -4,7 +4,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import { modifyHoursInForm } from "@/redux/formSlice";
+import { modifyHoursInForm } from "@/pages/redux/formSlice";
 
 const TimePicker = () => {
   const dispatch = useAppDispatch();
@@ -50,10 +50,7 @@ const TimePicker = () => {
       >
         <CarouselContent className=" h-[200px]">
           {Array.from({ length: 24 }).map((_, index) => (
-            <CarouselItem
-              key={index}
-              className="  basis-1/3 h-[800px] justify-center flex items-center"
-            >
+            <CarouselItem key={index} className="  basis-1/3 h-[800px] justify-center flex items-center">
               <motion.div
                 className=" text-4xl font-extrabold"
                 animate={{ color: index === selectedHour ? "#171c1f" : "#9daab0" }}
@@ -79,10 +76,7 @@ const TimePicker = () => {
       >
         <CarouselContent className=" h-[200px]">
           {Array.from({ length: 60 }).map((_, index) => (
-            <CarouselItem
-              key={index}
-              className="  basis-1/3 h-[800px] justify-center flex items-center"
-            >
+            <CarouselItem key={index} className="  basis-1/3 h-[800px] justify-center flex items-center">
               <motion.div
                 className=" text-4xl font-extrabold"
                 animate={{ color: index === selectedMinute ? "#171c1f" : "#9daab0" }}

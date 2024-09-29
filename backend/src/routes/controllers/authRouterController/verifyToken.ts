@@ -1,8 +1,4 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
-import { db } from "../../../server.js";
-import { userTable } from "../../../schema.js";
-import signJWTToken from "../../../utils/signJWTToken.js";
 import jwt from "jsonwebtoken";
 
 const verifyToken = async (req: Request, res: Response) => {

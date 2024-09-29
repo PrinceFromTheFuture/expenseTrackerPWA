@@ -22,9 +22,9 @@ const Loading = () => {
               stroke="#0D6680 "
               cx="16px"
               cy="16px"
-              stroke-width="5px"
+              strokeWidth="5px"
               fill="none"
-              stroke-dasharray="28 900 "
+              strokeDasharray="28 900 "
               className=" circlet"
               strokeLinecap="round"
             />

@@ -1,15 +1,7 @@
 import { cn } from "@/lib/utils";
 import Touchable from "@/components/ui/generalComponents/Touchable";
 
-const Icon = ({
-  varient,
-  src,
-  backgroundColor,
-}: {
-  varient: "full" | "mid" | "small";
-  src: string;
-  backgroundColor?: string;
-}) => {
+const Icon = ({ varient, src, backgroundColor }: { varient: "full" | "mid" | "small"; src: string; backgroundColor?: string }) => {
   switch (varient) {
     case "full":
       return <img src={src} alt="" className=" w-10" />;

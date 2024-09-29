@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "./lib/hooks/hooks.ts";
 import getAllDataFromAPI from "./lib/getAllDataFromAPI.ts";
 import ExpenssForm from "./pages/ExpenssForm/ExpenssForm.tsx";
 import PrimaryLayout from "./PrimaryLayout.tsx";
-import { getUserDataStatusSelector, getUserIdSelector, verifyUserTokenAsyncTunk } from "./redux/userSlice.ts";
+import { getUserDataStatusSelector, getUserIdSelector, getUserIsLoggedIn, verifyUserTokenAsyncTunk } from "./redux/userSlice.ts";
 import LoadingPage from "./pages/Loading.tsx";
 import LandingPage from "./pages/Landing.tsx";
 import Auth from "./pages/Auth.tsx";
@@ -19,13 +19,11 @@ import Auth from "./pages/Auth.tsx";
 const AppWraper = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(verifyUserTokenAsyncTunk());
-    }, 1000);
+    dispatch(verifyUserTokenAsyncTunk());
   }, []);
   const location = useLocation();
   let userSliceState = useAppSelector(getUserDataStatusSelector);
-  let userId = useAppSelector(getUserIdSelector);
+  let isLoggedIn = useAppSelector(getUserIsLoggedIn);
 
   return (
     <AnimatePresence mode="wait">
@@ -33,7 +31,7 @@ const AppWraper = () => {
         <LoadingPage />
       ) : (
         <Routes key={location.pathname} location={location}>
-          {userId ? (
+          {isLoggedIn ? (
             <Route path="/" element={<PrimaryLayout />}>
               <Route index element={<Home />} />
               <Route path="new" element={<ExpenssForm />} />
@@ -56,11 +54,9 @@ const AppWraper = () => {
 };
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <AppWraper />
-      </BrowserRouter>
-    </Provider>
-  </StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <AppWraper />
+    </BrowserRouter>
+  </Provider>
 );

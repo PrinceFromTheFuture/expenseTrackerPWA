@@ -9,14 +9,12 @@ export const transactionsTable = pgTable("transactions", {
   date: timestamp("date", {
     withTimezone: true,
   }).notNull(),
+  paymentMethodId: uuid("paymentMethodId").references(() => paymentMethodsTable.id),
+  budgetId: uuid("budgetId").references(() => budgetsTable.id),
+  userId: uuid("userId")
+    .references(() => userTable.id)
+    .notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
-  budgetId: uuid("budgetId")
-    .references(() => budgetsTable.id)
-    .notNull(),
-  paymentMethodId: uuid("paymentMethodId")
-    .references(() => paymentMethodsTable.id)
-    .notNull(),
-  userId: uuid("userId").references(() => userTable.id),
 });
 
 export const budgetsTable = pgTable("budgets", {
@@ -25,6 +23,9 @@ export const budgetsTable = pgTable("budgets", {
   iconURL: varchar("iconURL", {
     length: 100,
   }).notNull(),
+  userId: uuid("userId")
+    .references(() => userTable.id)
+    .notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
 });
 
@@ -33,14 +34,16 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
   iconURL: varchar("iconURL", {
     length: 20,
   }).notNull(),
-
+  userId: uuid("userId")
+    .references(() => userTable.id)
+    .notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
 });
 
 export const userTable = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   name: varchar("name", { length: 25 }).notNull(),
-  email: varchar("email", { length: 50 }).notNull().unique(),
+  email: varchar("email", { length: 50 }).notNull(),
   balanceInAgorot: integer("balanceInAgorot").notNull(),
   hashedPassword: text("hashedPassword").notNull(),
 });

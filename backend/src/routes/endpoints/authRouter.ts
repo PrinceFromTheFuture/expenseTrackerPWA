@@ -9,4 +9,6 @@ authRouter.post("/signup", controller.signUp);
 authRouter.post("/signIn", controller.signIn);
 authRouter.get("/verifyToken", controller.verifyToken);
 
+authRouter.post("/signOut", controller.signOut);
+
 export default authRouter;

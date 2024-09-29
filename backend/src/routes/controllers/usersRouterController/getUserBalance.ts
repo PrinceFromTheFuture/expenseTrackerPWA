@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { db, devUserId } from "../../../server.js";
+import { db } from "../../../server.js";
 import { userTable } from "../../../schema.js";
 import { eq } from "drizzle-orm";
 

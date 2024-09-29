@@ -13,7 +13,7 @@ import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 import Stage5 from "./Stage5";
-import { clearAllInForm, formDataSelector } from "@/redux/formSlice";
+import { clearAllInForm, decrementStageInForm, formDataSelector, incrementStageInForm } from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
@@ -25,19 +25,16 @@ const ExpenssForm = () => {
 
   const [isReviewBeforeSubmitOpen, setIsReviewBeforeSubmitOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const [currentStage, setCurrentStage] = useState(0);
   const lastStage = 4;
 
   const handleNextStage = () => {
-    if (currentStage <= lastStage - 1) {
-      setCurrentStage((pre) => pre + 1);
+    if (formData.currentStage <= lastStage - 1) {
+      dispatch(incrementStageInForm());
     }
   };
 
   const previousStage = () => {
-    if (currentStage >= 0) {
-      setCurrentStage((pre) => pre - 1);
-    }
+    dispatch(decrementStageInForm());
   };
   const stages = [
     { stageComponnet: <Stage1 />, stageIndex: 0 },
@@ -59,13 +56,10 @@ const ExpenssForm = () => {
         {" "}
         <div className=" w-full gap-3 h-5 mb-4  flex ">
           <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div
-              className=" bg-main rounded-full w-full  h-full   "
-              transition={generalTransition}
-            ></motion.div>
+            <motion.div className=" bg-main rounded-full w-full  h-full   " transition={generalTransition}></motion.div>
           </div>
           {Array.from([1, 2, 3, 4], (item) => {
-            return <StageProgressBar key={item} currentStage={currentStage} thisBarStage={item} />;
+            return <StageProgressBar key={item} currentStage={formData.currentStage} thisBarStage={item} />;
           })}
         </div>
         <div className=" w-full  justify-between items-center flex ">
@@ -73,9 +67,7 @@ const ExpenssForm = () => {
             {" "}
             <Icon varient="mid" src={exit_main} />
           </Link>
-          <div className="font-bold text-dark text-lg">
-            {formData.editMode ? "Edit" : "New"} Transaction
-          </div>
+          <div className="font-bold text-dark text-lg">{formData.editMode ? "Edit" : "New"} Transaction</div>
 
           <div className=" invisible">
             <Icon varient="mid" src={edit_main} />
@@ -89,8 +81,8 @@ const ExpenssForm = () => {
               key={stage.stageIndex} // Add key for each item
               initial={{ opacity: 0 }}
               animate={{
-                transform: `translate(-${currentStage * 100}%)`,
-                opacity: stage.stageIndex === currentStage ? 1 : 0,
+                transform: `translate(-${formData.currentStage * 100}%)`,
+                opacity: stage.stageIndex === formData.currentStage ? 1 : 0,
               }}
               className="min-w-full flex flex-col  justify-between items-center    w-full h-full"
             >
@@ -100,7 +92,7 @@ const ExpenssForm = () => {
         </AnimatePresence>
       </div>
       <div className=" w-full flex justify-between gap-2">
-        {currentStage > 0 && (
+        {formData.currentStage > 0 && (
           <Touchable
             onClick={previousStage}
             className="  bg-container  p-4 px-8 rounded-2xl flex justify-center items-center font-bold text-md text-surface"
@@ -114,12 +106,7 @@ const ExpenssForm = () => {
         <AlertDialog
           open={isReviewBeforeSubmitOpen}
           onOpenChange={(isOpen) => {
-            if (
-              currentStage === 4 &&
-              formData.budgetId &&
-              formData.paymentMethodId &&
-              formData.amountInAgorot !== 0
-            ) {
+            if (formData.currentStage === 4 && formData.budgetId && formData.paymentMethodId && formData.amountInAgorot !== 0) {
               setIsReviewBeforeSubmitOpen(isOpen);
             }
           }}
@@ -130,9 +117,9 @@ const ExpenssForm = () => {
               onClick={handleNextStage}
               className=" w-full bg-main  gap-2  p-4 rounded-2xl flex justify-center items-center font-bold text-md  text-surface"
             >
-              <div>{currentStage !== 4 ? "Next" : "Submit"}</div>
+              <div>{formData.currentStage !== 4 ? "Next" : "Submit"}</div>
               <AnimatePresence>
-                {currentStage === 4 && (
+                {formData.currentStage === 4 && (
                   <motion.img
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}

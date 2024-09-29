@@ -41,19 +41,12 @@ if (!envoirmennt) {
   process.abort();
 }
 console.log(envoirmennt);
-const DBConnectionString =
-  envoirmennt === "PRODUCTION"
-    ? process.env.PRODUCTION_DB_CONNECTION_STRING
-    : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
+const DBConnectionString = envoirmennt === "PRODUCTION" ? process.env.PRODUCTION_DB_CONNECTION_STRING : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
 
 if (!DBConnectionString) {
   console.log("the data base connection string is not readable or not configured properly");
   process.abort();
 }
-export const devUserId =
-  envoirmennt === "PRODUCTION"
-    ? "cfad1132-6e09-45b0-ac52-f72735057c3f"
-    : "8be0bc5a-c5a2-4cb0-b4b4-e10f37a41846";
 
 const sql = neon(DBConnectionString);
 export const db = drizzle(sql);

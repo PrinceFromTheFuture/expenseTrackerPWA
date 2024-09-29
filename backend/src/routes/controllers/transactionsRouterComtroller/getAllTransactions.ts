@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
 import { db } from "../../../server.js";
 import { transactionsTable } from "../../../schema.js";
+import { eq } from "drizzle-orm";
 
-const getAllTransactions = async(req: Request, res: Response) => { {
-    const allTransactions = await db.select().from(transactionsTable);
+const getAllTransactions = async (req: Request, res: Response) => {
+  const userId = req.userId;
+
+  {
+    const allTransactions = await db.select().from(transactionsTable).where(eq(transactionsTable.userId, userId!));
     res.json(allTransactions);
-  }};
+  }
+};
 
 export default getAllTransactions;

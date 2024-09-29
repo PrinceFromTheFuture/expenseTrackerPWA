@@ -64,6 +64,20 @@
       "when": 1727545587685,
       "tag": "0008_material_bruce_banner",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1727552856141,
+      "tag": "0009_oval_karnak",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1727552914086,
+      "tag": "0010_ordinary_shen",
+      "breakpoints": true
     }
   ]
 }

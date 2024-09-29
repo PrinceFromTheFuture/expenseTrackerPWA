@@ -6,37 +6,41 @@ import bell_surface from "@/assets/bell_surface.svg";
 
 import SpendingsTimeFrame from "../components/ui/generalComponents/SpendingsTimeFrame";
 import Touchable from "../components/ui/generalComponents/Touchable";
-import { useAppSelector } from "../lib/hooks/hooks";
-import {
-  allTransactionsSelctor,
-  getTransactionsDataStatusSelector,
-} from "@/redux/transactionsSlice";
+import { useAppDispatch, useAppSelector } from "../lib/hooks/hooks";
+import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/redux/transactionsSlice";
 
 import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
 import ExpensesWidgetSkeleton from "../components/ui/generalComponents/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
-import { userBalanceSelector } from "../redux/userSlice";
+import { signOutAsyncTunk, userBalanceSelector } from "../redux/userSlice";
 import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
-import CustomGoogleLogin from "../components/CustomGoogleLogin";
+import log_out_main from "@/assets/log_out_main.svg";
+
 const Home = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
+  const dispatch = useAppDispatch();
 
   const transactionsDataStatus = useAppSelector(getTransactionsDataStatusSelector);
 
   return (
     <div className=" mainContainer w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
       <div className=" flex justify-between items-start mx-4">
-        <Icon varient="mid" src={edit_main} />
+        <div
+          className="rotate-180"
+          onClick={() => {
+            dispatch(signOutAsyncTunk());
+          }}
+        >
+          <Icon varient="mid" src={log_out_main} />
+        </div>
         <div className=" font-bold text-dark text-lg">Home</div>
         <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">
-          {formatAmountInAgorot(balance || 0, true)}
-        </div>
+        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance || 0, true)}</div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-12">
@@ -70,19 +74,12 @@ const Home = () => {
           })
         : allTransactions
             .slice()
-            .sort((transactionA, transactionB) =>
-              dayjs(transactionA.date).diff(dayjs(transactionB.date))
-            )
+            .sort((transactionA, transactionB) => dayjs(transactionA.date).diff(dayjs(transactionB.date)))
             .reverse()
             .map((transaction) => {
               return (
                 <AnimatePresence key={transaction.id}>
-                  <motion.div
-                    layout
-                    animate={{ opacity: 1, height: "auto" }}
-                    initial={{ opacity: 0, height: 0 }}
-                    exit={{ opacity: 0, height: 0 }}
-                  >
+                  <motion.div layout animate={{ opacity: 1, height: "auto" }} initial={{ opacity: 0, height: 0 }} exit={{ opacity: 0, height: 0 }}>
                     <ExpensesWidget transactionId={transaction.id} />
                   </motion.div>
                 </AnimatePresence>

@@ -44,7 +44,7 @@ const Landing = () => {
       </div>
       <Touchable className="  w-full bg-container  p-4 rounded-2xl flex justify-between items-center font-bold text-md text-main">
         <img src={google_icon} alt="" />
-        <div className=" text-dark">continue with google</div>
+        <div className=" text-dark">continue with Google</div>
         <img className=" invisible" src={google_icon} alt="" />
       </Touchable>
     </motion.div>

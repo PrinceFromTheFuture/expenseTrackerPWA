@@ -15,12 +15,8 @@ const getUserSpendingsByTimeFrame = async (req: Request, res: Response) => {
     .from(transactionsTable)
     .where(
       and(
-        between(
-          transactionsTable.date,
-          dayjs(requestedTimeFrame.from).toDate(),
-          dayjs(requestedTimeFrame.to).toDate()
-        ),
-        eq(userTable.id, userId!)
+        between(transactionsTable.date, dayjs(requestedTimeFrame.from).toDate(), dayjs(requestedTimeFrame.to).toDate()),
+        eq(transactionsTable.userId, userId!)
       )
     );
 

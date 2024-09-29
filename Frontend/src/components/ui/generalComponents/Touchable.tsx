@@ -2,7 +2,7 @@ import React from "react";
 import { AnimationControls, motion, TargetAndTransition, VariantLabels } from "framer-motion";
 import generalTransition from "../../../lib/generalTransition";
 
-type FrmaerAnimationProps = AnimationControls | TargetAndTransition | VariantLabels | boolean;
+type FrmaerAnimationProps = AnimationControls | TargetAndTransition | VariantLabels | boolean | undefined;
 const Touchable = ({
   children,
   className,

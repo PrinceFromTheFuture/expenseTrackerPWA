@@ -8,6 +8,7 @@ export interface TransactionForm {
   amountInAgorot: number;
   budgetId: string | null;
   date: string | null;
+  currentStage:number;
   paymentMethodId: null | string;
   title: string | null;
   description: string | null;

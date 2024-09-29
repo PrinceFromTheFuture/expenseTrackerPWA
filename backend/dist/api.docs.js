@@ -82,6 +82,12 @@ const serverDefnition = {
                     requestCookie: String() || null,
                     response: Object.prototype,
                 },
+                {
+                    path: "/signOut",
+                    method: "POST",
+                    response: Object.prototype,
+                    responseCookie: Object.prototype,
+                },
             ],
         },
     },

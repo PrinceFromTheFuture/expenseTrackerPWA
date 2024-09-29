@@ -95,12 +95,7 @@ const Auth = ({ state }: { state: "signin" | "signup" }) => {
           {state === "signin" ? "Sign in to your account" : "Create New Account"}
         </div>
         {state === "signup" && (
-          <Touchable
-            className={cn(
-              " bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center",
-              " "
-            )}
-          >
+          <Touchable className={cn(" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center", " ")}>
             <img className=" w-6 h-6" src={user_main} />
             <div className=" w-full">
               {" "}
@@ -131,10 +126,7 @@ const Auth = ({ state }: { state: "signin" | "signup" }) => {
             outlineOffset: isEmailValid === false ? "-2px" : "0px",
             outlineWidth: isEmailValid === false ? "2px" : "0px",
           }}
-          className={cn(
-            " bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center",
-            " outline-warning outline"
-          )}
+          className={cn(" bg-container p-4  mb-4   gap-3   outline-0  rounded-2xl flex justify-between items-center", " outline-warning outline")}
         >
           <img className=" w-6 h-6" src={at_main} />
           <div className=" w-full">
@@ -165,10 +157,7 @@ const Auth = ({ state }: { state: "signin" | "signup" }) => {
             outlineOffset: isPasswordValid === false ? "-2px" : "0px",
             outlineWidth: isPasswordValid === false ? "2px" : "0px",
           }}
-          className={cn(
-            " bg-container p-4    gap-3   outline-2  rounded-2xl flex justify-between items-center",
-            " outline-warning m outline"
-          )}
+          className={cn(" bg-container p-4   gap-3 outline-0     rounded-2xl flex justify-between items-center", " outline-warning m outline")}
         >
           <img className=" w-6 h-6" src={lock_main} />
           <div className=" w-full">
@@ -188,7 +177,7 @@ const Auth = ({ state }: { state: "signin" | "signup" }) => {
           </Touchable>
         </button>
       </form>
-      <div className="text-xs text-secondary text-left font-medium">
+      <div className="text-sm text-secondary text-left font-medium">
         {state === "signin" ? "Don't" : "Already"} have an account?{" "}
         <Link className=" font-bold text-main text underline" to={state === "signin" ? "/signup" : "/signin"}>
           {state === "signin" ? "sign up" : "sign in"}{" "}

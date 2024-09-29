@@ -95,6 +95,18 @@ const serverDefnition = {
           requestCookie: String() || null,
           response: Object.prototype as { success: boolean; message?: string; userId?: string },
         },
+        {
+          path: "/signOut",
+          method: "POST",
+          response: Object.prototype as { success: boolean; message?: string },
+          responseCookie: Object.prototype as {
+            name: "token";
+            value: undefined;
+            httpOnly: true;
+            secure: true;
+            maxAge: number;
+          },
+        },
       ],
     },
   },

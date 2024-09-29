@@ -25,9 +25,7 @@ const signIn = async (req, res) => {
         return;
     }
     const token = signJWTToken(userFound);
-    res
-        .cookie("token", token, { httpOnly: true, secure: true, maxAge: 100000 })
-        .json({ success: true, userId: userFound.id });
+    res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 100000000 }).json({ success: true, userId: userFound.id });
     return;
 };
 export default signIn;

@@ -1,4 +1,4 @@
-import { transactionsTable, userTable } from "../../../schema.js";
+import { transactionsTable } from "../../../schema.js";
 import { and, between, eq } from "drizzle-orm";
 import dayjs from "dayjs";
 import { db } from "../../../server.js";
@@ -8,7 +8,7 @@ const getUserSpendingsByTimeFrame = async (req, res) => {
     const transactionOccueredInTimeFrame = await db
         .select()
         .from(transactionsTable)
-        .where(and(between(transactionsTable.date, dayjs(requestedTimeFrame.from).toDate(), dayjs(requestedTimeFrame.to).toDate()), eq(userTable.id, userId)));
+        .where(and(between(transactionsTable.date, dayjs(requestedTimeFrame.from).toDate(), dayjs(requestedTimeFrame.to).toDate()), eq(transactionsTable.userId, userId)));
     const spendingsInTimeFrame = transactionOccueredInTimeFrame.reduce((accumulator, transaction) => {
         return accumulator + transaction.amountInAgorot;
     }, 0);

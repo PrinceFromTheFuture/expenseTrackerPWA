@@ -6,6 +6,7 @@ import { Transaction, TransactionForm } from "@/types";
 const initialState: TransactionForm = {
   amountInAgorot: 0,
   budgetId: null,
+  currentStage: 0,
   date: null,
   paymentMethodId: null,
   title: null,
@@ -50,10 +51,7 @@ const formSlice = createSlice({
 
       const curentDateTime = dayjs(state.date);
       const selctedDate = dayjs(action.payload);
-      const newDateTime = selctedDate
-        .set("hours", curentDateTime.get("hours"))
-        .set("minutes", curentDateTime.get("minutes"))
-        .toISOString();
+      const newDateTime = selctedDate.set("hours", curentDateTime.get("hours")).set("minutes", curentDateTime.get("minutes")).toISOString();
       state.date = newDateTime;
     },
     modifyHoursInForm(
@@ -73,6 +71,17 @@ const formSlice = createSlice({
     modifyTitleInForm(state, action: PayloadAction<string | null>) {
       state.title = action.payload;
     },
+    incrementStageInForm(state) {
+      const lastStage = 4;
+      if (state.currentStage <= lastStage - 1) {
+        state.currentStage += 1;
+      }
+    },
+    decrementStageInForm(state) {
+      if (state.currentStage >= 0) {
+        state.currentStage -= 1;
+      }
+    },
     modifyDescriptionInForm(state, action: PayloadAction<string | null>) {
       state.description = action.payload;
     },
@@ -85,6 +94,7 @@ const formSlice = createSlice({
         paymentMethodId: null,
         description: null,
         editMode: false,
+        currentStage: 0,
         id: null,
       };
       return clearedForm;
@@ -92,8 +102,8 @@ const formSlice = createSlice({
     modifyPaymentMethodInForm(state, action: PayloadAction<string>) {
       state.paymentMethodId = action.payload;
     },
-    enterEditModeInForm(_, action: PayloadAction<Transaction>) {
-      return { ...action.payload, editMode: true };
+    enterEditModeInForm(state, action: PayloadAction<Transaction>) {
+      return { ...action.payload, currentStage: state.currentStage, editMode: true };
     },
   },
 });
@@ -121,5 +131,7 @@ export const {
   modifyDescriptionInForm,
   clearAllInForm,
   modifyPaymentMethodInForm,
-  enterEditModeInForm
+  enterEditModeInForm,
+  decrementStageInForm,
+  incrementStageInForm,
 } = formSlice.actions;

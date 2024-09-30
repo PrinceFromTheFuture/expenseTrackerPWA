@@ -69,7 +69,5 @@ server.get("/api", async (req, res) => {
 });
 server.post("/api/gitWebHook", (req, res) => {
     exec("cd ../ && git pull");
-    exec("npm i");
-    exec("cd ../ && cd Frontend && npm i");
     res.send("got it");
 });

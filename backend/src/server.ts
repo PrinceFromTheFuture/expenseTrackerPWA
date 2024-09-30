@@ -17,9 +17,10 @@ import cookieParser from "cookie-parser";
 import { drizzle } from "drizzle-orm/neon-http";
 
 configDotenv();
-//ds
-const server = express();
 
+const server = express();
+const data = 4
+console.log(data)
 //server.use(cors({ origin: "http://localhost:5173" }));
 //server.use(cors({ origin: process.env.FRONTENDURL }));
 

@@ -8,13 +8,15 @@ import { exec } from "child_process";
 import cors from "cors";
 
 import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
 import { transactionsTable } from "./schema.js";
 import { between } from "drizzle-orm";
 import dayjs from "dayjs";
 import usersRouter from "./routes/endpoints/usersRouter.js";
 import authRouter from "./routes/endpoints/authRouter.js";
 import cookieParser from "cookie-parser";
+import pg from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Client } from "pg";
 
 configDotenv();
 
@@ -25,7 +27,7 @@ const server = express();
 
 server.use(
   cors({
-    origin: "https://amirwais.site",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
     credentials: true, // If cookies or credentials are used
   })
@@ -41,7 +43,10 @@ if (!envoirmennt) {
   process.abort();
 }
 console.log(envoirmennt);
-const DBConnectionString = envoirmennt === "PRODUCTION" ? process.env.PRODUCTION_DB_CONNECTION_STRING : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
+const DBConnectionString =
+  envoirmennt === "PRODUCTION"
+    ? process.env.PRODUCTION_DB_CONNECTION_STRING
+    : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
 
 if (!DBConnectionString) {
   console.log("the data base connection string is not readable or not configured properly");
@@ -49,7 +54,17 @@ if (!DBConnectionString) {
 }
 
 const sql = neon(DBConnectionString);
-export const db = drizzle(sql);
+
+const client = new pg.Client({
+  user: "amir",
+  host: "localhost", // localhost refers to the Docker service if running on the same machine
+  database: "expenssTrackerPWA",
+  password: "12345",
+  port: 5432,
+});
+
+client.connect();
+export const db = drizzle(client);
 
 server.use("/api/budgets", budgetsRouter);
 server.use("/api/paymentMethods", paymentsMethodRouter);

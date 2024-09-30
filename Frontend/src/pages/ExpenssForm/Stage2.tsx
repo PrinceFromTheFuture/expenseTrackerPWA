@@ -9,6 +9,8 @@ import { allBugdetsSelctor } from "@/redux/budgetsSlice";
 import { formDataSelector, selectBudgetInForm } from "@/redux/formSlice";
 import Icon from "@/components/ui/Icon";
 import Touchable from "@/components/ui/generalComponents/Touchable";
+import plus_surface from "@/assets/plus_surface.svg";
+import NewBudget from "@/components/ui/generalComponents/NewBudget";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -17,6 +19,7 @@ const Stage2 = () => {
   const dispatch = useAppDispatch();
   const allBudgets = useAppSelector(allBugdetsSelctor);
   const budgetsWidgetsContainerRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className=" w-full h-full flex-col flex justify-between items-center gap-4 my-8 ">
       <div className="text-secondary mb-1 font-semibold text-base">Select Budget Category </div>
@@ -61,16 +64,20 @@ const Stage2 = () => {
               </motion.div>
               <Icon
                 backgroundColor={budget.color}
-                src={`${budget.iconURL.substring(
-                  0,
-                  budget.iconURL.lastIndexOf("/") + 1
-                )}default.svg`}
+                src={`${budget.iconURL.substring(0, budget.iconURL.lastIndexOf("/") + 1)}default.svg`}
                 varient="small"
               />
               <div className=" text-dark font-bold">{budget.name}</div>
             </Touchable>
           );
         })}
+        <NewBudget
+          trigger={
+            <Touchable className=" h-36 full flex-col gap-2    min-h-24 rounded-2xl  bg-container relative flex justify-center items-center">
+              <Icon src={plus_surface} varient="small" />
+            </Touchable>
+          }
+        />
       </motion.div>
       <div
         className=" flex justify-center items-center gap-2"

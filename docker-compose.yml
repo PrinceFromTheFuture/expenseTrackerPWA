@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15-alpine  # Use the latest stable PostgreSQL version
+    environment:
+      POSTGRES_USER: amir  # Set your database user
+      POSTGRES_PASSWORD: 12345  # Set your database password
+      POSTGRES_DB: expenssTrackerPWA  # Set your database name
+    volumes:
+      - db-data:/var/lib/postgresql/data  # Persist data by mapping a volume to the database storage
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port to the host
+    networks:
+      - drizzle-network
+
+volumes:
+  db-data:  # Named volume to persist PostgreSQL data
+
+networks:
+  drizzle-network:
+    driver: bridge

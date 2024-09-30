@@ -14,9 +14,7 @@ import dayjs from "dayjs";
 import usersRouter from "./routes/endpoints/usersRouter.js";
 import authRouter from "./routes/endpoints/authRouter.js";
 import cookieParser from "cookie-parser";
-import pg from "pg";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Client } from "pg";
+import { drizzle } from "drizzle-orm/neon-http";
 
 configDotenv();
 
@@ -55,16 +53,7 @@ if (!DBConnectionString) {
 
 const sql = neon(DBConnectionString);
 
-const client = new pg.Client({
-  user: "amir",
-  host: "localhost", // localhost refers to the Docker service if running on the same machine
-  database: "expenssTrackerPWA",
-  password: "12345",
-  port: 5432,
-});
-
-client.connect();
-export const db = drizzle(client);
+export const db = drizzle(sql);
 
 server.use("/api/budgets", budgetsRouter);
 server.use("/api/paymentMethods", paymentsMethodRouter);

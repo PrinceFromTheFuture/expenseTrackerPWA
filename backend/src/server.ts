@@ -93,9 +93,7 @@ server.get("/api", async (req, res) => {
   console.log(dayjs().toISOString());
 });
 
-server.post("/gitWebHook", (req, res) => {
-  console.log("test!)!");
+server.post("/api/gitWebHook", (req, res) => {
   exec("cd ../ && git pull");
+  res.send("got it");
 });
-
-

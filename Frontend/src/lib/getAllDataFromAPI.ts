@@ -1,8 +1,8 @@
-import { getAllBudgetsAsyncThunk } from "@/redux/budgetsSlice";
-import { getAllPaymentMethodsAsyncThunk } from "@/redux/paymentMethodsSlice";
-import store from "@/redux/store";
-import { getAllTransactionsAsyncThunk } from "@/redux/transactionsSlice";
-import { getSpendingsInTimeFrameAsyncThunk, getUserBalanceAsyncThunk } from "@/redux/userSlice";
+import { getAllBudgetsAsyncThunk } from "@/pages/redux/budgetsSlice";
+import { getAllPaymentMethodsAsyncThunk } from "@/pages/redux/paymentMethodsSlice";
+import store from "@/pages/redux/store";
+import { getAllTransactionsAsyncThunk } from "@/pages/redux/transactionsSlice";
+import { getSpendingsInTimeFrameAsyncThunk, getUserBalanceAsyncThunk } from "@/pages/redux/userSlice";
 import dayjs from "dayjs";
 
 async function getAllDataFromAPI(dispatch: typeof store.dispatch) {

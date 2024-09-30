@@ -1,21 +1,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { formatAmountInAgorot } from "../../../lib/formatAmountInAgorot";
 import { useAppSelector } from "../../../lib/hooks/hooks";
-import { spendingsTimeFramePreferenceSelector } from "../../../redux/userPreferencesSlice";
-import { SpendingsTimeFrameSelector } from "../../../redux/userSlice";
-import { RootState } from "../../../redux/store";
+import { spendingsTimeFramePreferenceSelector } from "../../../pages/redux/userPreferencesSlice";
+import { SpendingsTimeFrameSelector } from "../../../pages/redux/userSlice";
+import { RootState } from "../../../pages/redux/store";
 import generalTransition from "../../../lib/generalTransition";
 
 const SpendingsTimeFrameValues = () => {
-  const oneDaysSpendings = useAppSelector((state: RootState) =>
-    SpendingsTimeFrameSelector(state, "1d")
-  );
-  const sevenDaysSpendings = useAppSelector((state: RootState) =>
-    SpendingsTimeFrameSelector(state, "7d")
-  );
-  const thirtyDaysSpendings = useAppSelector((state: RootState) =>
-    SpendingsTimeFrameSelector(state, "30d")
-  );
+  const oneDaysSpendings = useAppSelector((state: RootState) => SpendingsTimeFrameSelector(state, "1d"));
+  const sevenDaysSpendings = useAppSelector((state: RootState) => SpendingsTimeFrameSelector(state, "7d"));
+  const thirtyDaysSpendings = useAppSelector((state: RootState) => SpendingsTimeFrameSelector(state, "30d"));
   const spendingsTimeFramePreferance = useAppSelector(spendingsTimeFramePreferenceSelector);
   return (
     <div className=" relative">

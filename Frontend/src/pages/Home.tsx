@@ -7,12 +7,12 @@ import bell_surface from "@/assets/bell_surface.svg";
 import SpendingsTimeFrame from "../components/ui/generalComponents/SpendingsTimeFrame";
 import Touchable from "../components/ui/generalComponents/Touchable";
 import { useAppDispatch, useAppSelector } from "../lib/hooks/hooks";
-import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/redux/transactionsSlice";
+import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/pages/redux/transactionsSlice";
 
 import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
 import ExpensesWidgetSkeleton from "../components/ui/generalComponents/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
-import { signOutAsyncTunk, userBalanceSelector } from "../redux/userSlice";
+import { signOutAsyncTunk, userBalanceSelector } from "./redux/userSlice";
 import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";

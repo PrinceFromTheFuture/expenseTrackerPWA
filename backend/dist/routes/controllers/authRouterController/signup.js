@@ -15,7 +15,7 @@ const signUp = async (req, res) => {
     }
     const usersWithTheSameEmail = await db.select().from(userTable).where(eq(userTable.email, email));
     if (usersWithTheSameEmail[0] !== undefined) {
-        res.json({ success: false, message: "a user with the same id is already registered" });
+        res.json({ success: false, message: "a user with the same email is already registered" });
         return;
     }
     const hashedPassword = await bcrypt.hash(password, 10);

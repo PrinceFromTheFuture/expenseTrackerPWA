@@ -1,6 +1,4 @@
 import * as express from "express";
-import { budgetsTable, InsertBudgets } from "../../schema.js";
-import { db } from "../../server.js";
 import controller from "../controllers/authRouterController/index.js";
 
 const authRouter = express.Router();

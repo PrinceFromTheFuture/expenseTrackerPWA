@@ -11,7 +11,7 @@ import user_main from "@/assets/user_main.svg";
 import PinaColada_text from "@/assets/PinaColada_text.svg";
 import app_icon from "@/assets/app_icon.svg";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import { signInAsyncTunk, signUpAsyncTunk } from "@/redux/userSlice";
+import { signInAsyncTunk, signUpAsyncTunk } from "@/pages/redux/userSlice";
 
 const Auth = ({ state }: { state: "signin" | "signup" }) => {
   const [email, setEmail] = useState<null | string>(null);

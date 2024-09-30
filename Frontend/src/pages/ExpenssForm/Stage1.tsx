@@ -10,8 +10,8 @@ import {
   clearNumberFromFormAmount,
   decreaseOneFromFormAmount,
   formDataSelector,
-} from "@/redux/formSlice";
-import { userBalanceSelector } from "@/redux/userSlice";
+} from "@/pages/redux/formSlice";
+import { userBalanceSelector } from "@/pages/redux/userSlice";
 import Touchable from "@/components/ui/generalComponents/Touchable";
 import React from "react";
 
@@ -76,9 +76,7 @@ const Stage1 = () => {
         <div className=" border-b-2 border-secondary w-full flex justify-between items-center pb-1">
           <div className=" font-bold text-lg invisible">X</div>
           <div className=" flex gap-1 justify-center items-top">
-            <div className=" text-4xl text-dark font-extrabold">
-              {formatAmountInAgorot(formAmount, false)}
-            </div>
+            <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(formAmount, false)}</div>
             <div className="  text-main font-extrabold text-2xl">₪</div>
           </div>
           <div className=" font-bold text-lg" onClick={() => handleClearNumberFromFormAmount()}>
@@ -87,9 +85,7 @@ const Stage1 = () => {
         </div>
         <div className="mt-2 flex justify-start gap-2 items-end">
           <div className=" font-semibold text-secondary text-sm ">current balance:</div>
-          <div className=" font-bold text-dark text-sm ">
-            {formatAmountInAgorot(balance || 0, true)}
-          </div>
+          <div className=" font-bold text-dark text-sm ">{formatAmountInAgorot(balance || 0, true)}</div>
         </div>
       </div>
       <div className=" w-full flex    flex-col gap-4 justify-between items-center">

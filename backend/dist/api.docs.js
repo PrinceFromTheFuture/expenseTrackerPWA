@@ -92,4 +92,4 @@ const serverDefnition = {
         },
     },
 };
-export {};
+export default serverDefnition;

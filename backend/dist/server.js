@@ -14,7 +14,6 @@ import authRouter from "./routes/endpoints/authRouter.js";
 import cookieParser from "cookie-parser";
 import { drizzle } from "drizzle-orm/neon-http";
 configDotenv();
-console.log("jfd");
 const server = express();
 //server.use(cors({ origin: "http://localhost:5173" }));
 //server.use(cors({ origin: process.env.FRONTENDURL }));

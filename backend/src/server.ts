@@ -18,7 +18,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 
 configDotenv();
 
-console.log("j");
+console.log("jfd");
 
 const server = express();
 

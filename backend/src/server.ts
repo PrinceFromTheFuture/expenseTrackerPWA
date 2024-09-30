@@ -18,7 +18,8 @@ import { drizzle } from "drizzle-orm/neon-http";
 
 configDotenv();
 
-console.log("jdsjhdsj");
+console.log("j");
+
 const server = express();
 
 //server.use(cors({ origin: "http://localhost:5173" }));

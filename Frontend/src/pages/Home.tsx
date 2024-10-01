@@ -18,8 +18,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
 import log_out_main from "@/assets/log_out_main.svg";
 import NewBudget from "@/components/ui/generalComponents/NewBudget";
-import fd from ''
-
 const Home = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
@@ -81,12 +79,7 @@ const Home = () => {
             .map((transaction) => {
               return (
                 <AnimatePresence key={transaction.id}>
-                  <motion.div
-                    layout
-                    animate={{ opacity: 1, height: "auto" }}
-                    initial={{ opacity: 0, height: 0 }}
-                    exit={{ opacity: 0, height: 0 }}
-                  >
+                  <motion.div layout animate={{ opacity: 1, height: "auto" }} initial={{ opacity: 0, height: 0 }} exit={{ opacity: 0, height: 0 }}>
                     <ExpensesWidget transactionId={transaction.id} />
                   </motion.div>
                 </AnimatePresence>

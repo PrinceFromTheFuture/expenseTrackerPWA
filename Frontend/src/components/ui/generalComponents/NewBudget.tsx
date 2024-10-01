@@ -22,52 +22,58 @@ const IconSelector = ({
   selectedIcon: string | null;
 }) => {
   return (
-    <DrawerPortal>
-      <motion.div
-        transition={generalTransition}
-        initial={{ opacity: 0 }}
-        style={{ pointerEvents: "all" }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className=" inset-0  z-50 fixed  overflow-y-auto  bg-black/80 flex justify-center items-center"
-      >
-        <AnimatePresence>
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            style={{ pointerEvents: "all" }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            transition={generalTransition}
-            className=" w-3/4 gap-8 shadow-xl  justify-between  overflow-y-auto   items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
-          >
-            <div className=" w-full">
-              <div onClick={setIsDialogOpen}>
-                <Icon src={exit_main} varient="mid" />
-              </div>
+    <>
+      {" "}
+      <DrawerPortal>
+        <motion.div
+          transition={generalTransition}
+          initial={{ opacity: 0 }}
+          style={{ pointerEvents: "all" }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className=" inset-0  z-50 fixed  overflow-y-auto  bg-black/80 flex justify-center items-center"
+        >
+          <AnimatePresence>
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              style={{ pointerEvents: "all" }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={generalTransition}
+              className=" w-3/4 gap-8 shadow-xl  justify-between  overflow-y-auto   items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+            >
+              <div className=" w-full">
+                <div onClick={setIsDialogOpen}>
+                  <Icon src={exit_main} varient="mid" />
+                </div>
 
-              <div style={{ pointerEvents: "all" }} className=" max-h-[60vh]   overflow-y-auto w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
-                {" "}
-                {icons.map((icon) => {
-                  return (
-                    <div
-                      onClick={() => {
-                        setSelectedIcon(icon);
-                        setIsDialogOpen();
-                      }}
-                      key={icon}
-                      style={{ backgroundColor: icon === selectedIcon ? "#f0f4f7 " : "#f8fbfd" }}
-                      className=" p-6 flex justify-center  items-center transition-all  bg-surface rounded-2xl "
-                    >
-                      <img src={`${icon}0D6680.svg`} alt="" className=" w-12" />
-                    </div>
-                  );
-                })}
+                <div
+                  style={{ pointerEvents: "all" }}
+                  className=" max-h-[60vh]   overflow-y-auto w-full  grid grid-cols-4 gap-2 my-4   justify-start "
+                >
+                  {" "}
+                  {icons.map((icon) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          setSelectedIcon(icon);
+                          setIsDialogOpen();
+                        }}
+                        key={icon}
+                        style={{ backgroundColor: icon === selectedIcon ? "#f0f4f7 " : "#f8fbfd" }}
+                        className=" p-4 flex justify-center  items-center transition-all  bg-surface rounded-2xl "
+                      >
+                        <img src={`${icon}0D6680.svg`} alt="" className=" w-12" />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </motion.div>
-    </DrawerPortal>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+      </DrawerPortal>
+    </>
   );
 };
 
@@ -77,11 +83,8 @@ const ColorSelector = ({
   selectedColor,
 }: {
   setIsDialogOpen: () => void;
-  setSelectedColor: ({ name, hex }: { name: string; hex: string }) => void;
-  selectedColor: {
-    name: string;
-    hex: string;
-  };
+  setSelectedColor: (name: string) => void;
+  selectedColor: string;
 }) => {
   return (
     <DrawerPortal>
@@ -98,13 +101,13 @@ const ColorSelector = ({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={generalTransition}
-            className=" w-3/4 gap-8 shadow-xl justify-between  overflow-auto    items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+            className=" w-3/4 gap-8 shadow-xl pointer-events-auto justify-between  overflow-auto    items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
           >
             <div className=" w-full">
               <div onClick={setIsDialogOpen}>
                 <Icon src={exit_main} varient="mid" />
               </div>
-              <div className=" max-h-[60vh] overflow-auto  w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
+              <div className=" max-h-[60vh] overflow-auto  w-full  grid grid-cols-4 gap-4 my-4   justify-start ">
                 {" "}
                 {colors.map((color) => {
                   return (
@@ -113,11 +116,11 @@ const ColorSelector = ({
                         setSelectedColor(color);
                         setIsDialogOpen();
                       }}
-                      key={color.hex}
-                      style={{ backgroundColor: color.hex === selectedColor.hex ? "#f0f4f7 " : "#f8fbfd" }}
+                      key={color}
+                      style={{ backgroundColor: color === selectedColor ? "#f0f4f7 " : "#f8fbfd" }}
                       className=" p-2 flex justify-center items-center transition-all  bg-surface rounded-2xl "
                     >
-                      <div className=" w-full rounded-2xl h-20" style={{ backgroundColor: color.hex }}></div>
+                      <div className=" w-full rounded-2xl h-10" style={{ backgroundColor: `#${color}` }}></div>
                     </div>
                   );
                 })}
@@ -137,10 +140,7 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
   const [isSelectColorDialogOpen, setIsSelectColorDialogOpen] = useState(false);
 
   const [selectedIcon, setSelectedIcon] = useState<string>(icons[0]);
-  const [selectedColor, setSelectedColor] = useState<{
-    name: string;
-    hex: string;
-  }>(colors[0]);
+  const [selectedColor, setSelectedColor] = useState<string>(colors[0]);
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 25) {
       setSelectedName(e.target.value);
@@ -148,7 +148,7 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
   };
   const handleSaveNewBudget = () => {
     if (selectedName) {
-      dispatch(postNewBudgetAsyncThunk({ color: selectedColor.hex, iconURL: selectedIcon, name: selectedName }));
+      dispatch(postNewBudgetAsyncThunk({ color: selectedColor, iconURL: selectedIcon, name: selectedName }));
     }
   };
 
@@ -160,7 +160,7 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
   };
   return (
     <>
-      <Drawer shouldScaleBackground dismissible={false}>
+      <Drawer shouldScaleBackground dismissible={false} disablePreventScroll={false}>
         <AnimatePresence>
           {isSelectIconDialogOpen && (
             <IconSelector setSelectedIcon={setSelectedIcon} setIsDialogOpen={handleChangeIsSelectIconDialogOpen} selectedIcon={selectedIcon} />
@@ -171,7 +171,7 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
             <ColorSelector setIsDialogOpen={handleChangeIsSelectColorDialogOpen} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
           )}
         </AnimatePresence>
-        <DrawerTrigger>{trigger}</DrawerTrigger>
+        <DrawerTrigger className=" h-min">{trigger}</DrawerTrigger>
         <DrawerContent>
           <div className=" font-semibold text-xl text-dark mt-4 mb-6">Create New Budget</div>
           <div className="text-secondary ml-4 mb-2 font-semibold text-base  ">Choose a budget name</div>
@@ -197,14 +197,14 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
                 className=" 
 outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-container w-14 h-14 flex justify-center items-center  p-3 rounded-2xl"
               >
-                <img src={`${selectedIcon}0D6680.svg`} alt="" className=" w-6" />{" "}
+                <img src={`${selectedIcon}${selectedColor}.svg`} alt="" className=" w-6" />{" "}
               </div>
             </div>
             <div className="flex-1">
               <div className="text-secondary   mb-2 font-semibold text-base ">Color</div>
               <div
                 onClick={handleChangeIsSelectColorDialogOpen}
-                style={{ backgroundColor: selectedColor.hex }}
+                style={{ backgroundColor: `#${selectedColor}` }}
                 className="
    w-full h-14 flex justify-center shadow-sm items-center  p-3 rounded-2xl"
               ></div>

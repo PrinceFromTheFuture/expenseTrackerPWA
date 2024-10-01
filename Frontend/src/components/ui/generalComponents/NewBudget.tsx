@@ -26,23 +26,26 @@ const IconSelector = ({
       <motion.div
         transition={generalTransition}
         initial={{ opacity: 0 }}
+        style={{ pointerEvents: "all" }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className=" inset-0  pointer-events-auto   z-50 fixed bg-black/80 flex justify-center items-center"
+        className=" inset-0  z-50 fixed  overflow-y-auto  bg-black/80 flex justify-center items-center"
       >
         <AnimatePresence>
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
+            style={{ pointerEvents: "all" }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={generalTransition}
-            className=" w-3/4 gap-8 shadow-xl justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+            className=" w-3/4 gap-8 shadow-xl  justify-between  overflow-y-auto   items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
           >
             <div className=" w-full">
               <div onClick={setIsDialogOpen}>
                 <Icon src={exit_main} varient="mid" />
               </div>
-              <div className=" max-h-[60vh] overflow-auto  w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
+
+              <div style={{ pointerEvents: "all" }} className=" max-h-[60vh]   overflow-y-auto w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
                 {" "}
                 {icons.map((icon) => {
                   return (
@@ -87,7 +90,7 @@ const ColorSelector = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className=" inset-0    pointer-events-auto  z-50 fixed bg-black/80 flex justify-center items-center"
+        className=" inset-0   z-50 fixed bg-black/80 flex justify-center items-center"
       >
         <AnimatePresence>
           <motion.div
@@ -95,7 +98,7 @@ const ColorSelector = ({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={generalTransition}
-            className=" w-3/4 gap-8 shadow-xl justify-between   items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+            className=" w-3/4 gap-8 shadow-xl justify-between  overflow-auto    items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
           >
             <div className=" w-full">
               <div onClick={setIsDialogOpen}>
@@ -194,7 +197,7 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
                 className=" 
 outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-container w-14 h-14 flex justify-center items-center  p-3 rounded-2xl"
               >
-                <img src={`${selectedIcon}default.svg`} alt="" className=" w-6" />{" "}
+                <img src={`${selectedIcon}0D6680.svg`} alt="" className=" w-6" />{" "}
               </div>
             </div>
             <div className="flex-1">

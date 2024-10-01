@@ -120,7 +120,7 @@ const ColorSelector = ({
                       style={{ backgroundColor: color === selectedColor ? "#f0f4f7 " : "#f8fbfd" }}
                       className=" p-2 flex justify-center items-center transition-all  bg-surface rounded-2xl "
                     >
-                      <div className=" w-full rounded-2xl h-10" style={{ backgroundColor: `#${color}` }}></div>
+                      <div className=" w-full rounded-2xl aspect-square" style={{ backgroundColor: `#${color}` }}></div>
                     </div>
                   );
                 })}

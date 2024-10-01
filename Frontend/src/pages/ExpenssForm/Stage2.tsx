@@ -69,7 +69,7 @@ const Stage2 = () => {
                       className="  bg-container rounded-full"
                     ></motion.div>
                   </motion.div>
-                  <Icon backgroundColor={budget.color} src={`${budget.iconURL}0D6680.svg`} varient="small" />
+                  <Icon backgroundColor={`#${budget.color}`} src={`${budget.iconURL}F8FBFD.svg`} varient="small" />
                   <div className=" text-dark font-bold mx-2 text-center flex-wrap">{budget.name} </div>
                 </Touchable>
               );

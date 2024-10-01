@@ -37,6 +37,8 @@ const Stage2 = () => {
         {budgetStatus === "success" ? (
           <>
             {allBudgets.map((budget) => {
+              console.log(budget);
+
               return (
                 <Touchable
                   key={budget.id}

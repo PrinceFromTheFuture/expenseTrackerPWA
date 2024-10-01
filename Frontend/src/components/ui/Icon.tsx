@@ -19,7 +19,7 @@ const Icon = ({ varient, src, backgroundColor }: { varient: "full" | "mid" | "sm
           }}
           className={cn("p-2 rounded-full", !backgroundColor && "bg-main")}
         >
-          <img src={src} alt="" className=" w-4" />
+          <img src={src} alt="" className=" w-4 aspect-square" />
         </div>
       );
   }

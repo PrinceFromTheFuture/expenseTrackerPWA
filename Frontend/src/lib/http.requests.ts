@@ -21,6 +21,7 @@ export const HTTPGetAllTransactions = async () => {
 
 export const HTTPGetAllBudgets = async () => {
   const res = await axios.get<Bugdet[]>(`${apiURL}/budgets`);
+  console.log(res.data);
   return res.data;
 };
 

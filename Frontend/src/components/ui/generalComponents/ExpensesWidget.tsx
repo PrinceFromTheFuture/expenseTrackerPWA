@@ -40,7 +40,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
         <DrawerTrigger className=" w-full">
           <Touchable className=" box-content p-4 w-full bg-surface rounded-2xl flex justify-between items-center">
             <div className=" flex justify-start items-center gap-2 ">
-              <Icon varient="mid" src={transactionBudegt ? transactionBudegt.iconURL : ""} />
+              <Icon varient="mid" src={transactionBudegt ? `${transactionBudegt.iconURL}${transactionBudegt.color}.svg` : ""} />
               <div>
                 <div className=" text-left text-sm font-bold">{transaction.title}</div>
                 <div className=" text-xs text-secondary text-left font-semibold">
@@ -74,7 +74,7 @@ const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
               <div className=" flex justify-start items-center gap-2 ">
                 <div className=" w-8">
                   {" "}
-                  <Icon varient="full" src={transactionBudegt ? transactionBudegt.iconURL : ""} />
+                  <Icon varient="full" src={transactionBudegt ? `${transactionBudegt.iconURL}${transactionBudegt.color}.svg` : ""} />
                 </div>
 
                 <div>

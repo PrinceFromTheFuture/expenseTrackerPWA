@@ -42,7 +42,7 @@ const IconSelector = ({
               <div onClick={setIsDialogOpen}>
                 <Icon src={exit_main} varient="mid" />
               </div>
-              <div className=" max-h-[60vh] overflow-scroll   w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
+              <div className=" max-h-[60vh] overflow-auto  w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
                 {" "}
                 {icons.map((icon) => {
                   return (
@@ -53,9 +53,9 @@ const IconSelector = ({
                       }}
                       key={icon}
                       style={{ backgroundColor: icon === selectedIcon ? "#f0f4f7 " : "#f8fbfd" }}
-                      className=" p-6 flex justify-center items-center transition-all  bg-surface rounded-2xl "
+                      className=" p-6 flex justify-center  items-center transition-all  bg-surface rounded-2xl "
                     >
-                      <img src={`${icon}default.svg`} alt="" className=" w-12" />
+                      <img src={`${icon}0D6680.svg`} alt="" className=" w-12" />
                     </div>
                   );
                 })}
@@ -101,7 +101,7 @@ const ColorSelector = ({
               <div onClick={setIsDialogOpen}>
                 <Icon src={exit_main} varient="mid" />
               </div>
-              <div className=" max-h-[60vh] overflow-scroll   w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
+              <div className=" max-h-[60vh] overflow-auto  w-full  grid grid-cols-2 gap-4 my-4   justify-start ">
                 {" "}
                 {colors.map((color) => {
                   return (

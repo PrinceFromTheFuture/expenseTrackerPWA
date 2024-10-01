@@ -74,7 +74,7 @@ const Stage2 = () => {
                     src={`${budget.iconURL.substring(0, budget.iconURL.lastIndexOf("/") + 1)}default.svg`}
                     varient="small"
                   />
-                  <div className=" text-dark font-bold">{budget.name}</div>
+                  <div className=" text-dark font-bold mx-2 text-center flex-wrap">{budget.name} </div>
                 </Touchable>
               );
             })}

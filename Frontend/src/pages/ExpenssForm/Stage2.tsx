@@ -45,7 +45,10 @@ const Stage2 = () => {
                     outlineOffset: selctedBudgetId === budget.id ? "-2px" : "0px",
                     outlineWidth: selctedBudgetId === budget.id ? "2px" : "0px",
                   }}
-                  className=" h-36 full flex-col outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
+                  className={cn(
+                    " h-36 full flex-col  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center",
+                    selctedBudgetId === budget.id && " outline-main outline"
+                  )}
                 >
                   <motion.div
                     transition={generalTransition}

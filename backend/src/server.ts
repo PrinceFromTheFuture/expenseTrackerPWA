@@ -25,7 +25,7 @@ const server = express();
 
 server.use(
   cors({
-    origin: "https://amirwais.site",
+    origin: "http://amirwais.site",
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
     credentials: true, // If cookies or credentials are used
   })

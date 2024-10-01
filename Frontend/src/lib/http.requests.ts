@@ -66,31 +66,29 @@ export const HTTPPostNewUser = async (userData: { email: string; password: strin
 };
 
 export const HTTPVerifyToken = async () => {
-  const res = await axios.get<{ success: boolean; message?: string; userId?: string }>(
-    `${apiURL}/auth/verifyToken`
-  );
+  const res = await axios.get<{ success: boolean; message?: string; userId?: string }>(`${apiURL}/auth/verifyToken`);
   return res.data;
 };
 
 export const HTTPSignInUser = async (userData: { email: string; password: string }) => {
-  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(
-    `${apiURL}/auth/signIn`,
-    userData
-  );
+  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(`${apiURL}/auth/signIn`, userData);
   return res.data;
 };
 
 export const HTTPSignUpUser = async (userData: { email: string; password: string; name: string | null }) => {
-  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(
-    `${apiURL}/auth/signUp`,
-    userData
-  );
+  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(`${apiURL}/auth/signUp`, userData);
 
   return res.data;
 };
 
 export const HTTPSignOutUser = async () => {
   const res = await axios.post<{ success: boolean; message?: string }>(`${apiURL}/auth/signOut`);
+
+  return res.data;
+};
+
+export const HTTPPostNewBudget = async (body: { name: string; color: string; iconURL: string }) => {
+  const res = await axios.post<{ success: boolean; message?: string; budget?: Bugdet }>(`${apiURL}/budgets`, body);
 
   return res.data;
 };

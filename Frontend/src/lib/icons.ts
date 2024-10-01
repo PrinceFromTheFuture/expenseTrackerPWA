@@ -1,6 +1,6 @@
-import bus from "@/assets/bus/default.svg";
-import food from "@/assets/shirt/default.svg";
-import shirt from "@/assets/food/default.svg";
+const bus = "/src/assets/bus/";
+const food = "/src/assets/shirt/";
+const shirt = "/src/assets/food/";
 
 const icons = [bus, food, shirt];
 

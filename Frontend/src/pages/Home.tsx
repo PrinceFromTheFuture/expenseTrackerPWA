@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "../lib/hooks/hooks";
 import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/pages/redux/transactionsSlice";
 
 import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
-import ExpensesWidgetSkeleton from "../components/ui/generalComponents/ExpensesWidgetSkeleton";
+import ExpensesWidgetSkeleton from "../components/skeletons/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
 import { signOutAsyncTunk, userBalanceSelector } from "./redux/userSlice";
 import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
@@ -91,7 +91,6 @@ const Home = () => {
                 </AnimatePresence>
               );
             })}
-      <NewBudget />
     </div>
   );
 };

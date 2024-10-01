@@ -1,3 +1,4 @@
+import { response } from "express";
 import { Bugdet, PaymentMethod, Transaction, TransactionForm } from "./types.js";
 
 const serverDefnition = {
@@ -9,6 +10,12 @@ const serverDefnition = {
           path: "/",
           method: "GET",
           response: Array.prototype as Bugdet[],
+        },
+        {
+          path: "/",
+          method: "POST",
+          request: Object.prototype as { name: string; color: string; iconURL: string },
+          response: Object.prototype as { success: boolean; message?: string, budget:Bugdet },
         },
       ],
     },
@@ -111,4 +118,4 @@ const serverDefnition = {
   },
 };
 
-export default serverDefnition
+export default serverDefnition;

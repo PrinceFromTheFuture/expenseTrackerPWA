@@ -8,6 +8,12 @@ const serverDefnition = {
                     method: "GET",
                     response: Array.prototype,
                 },
+                {
+                    path: "/",
+                    method: "POST",
+                    request: Object.prototype,
+                    response: Object.prototype,
+                },
             ],
         },
         paymentMethods: {

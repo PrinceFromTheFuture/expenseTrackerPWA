@@ -7,7 +7,7 @@ const authMiddleware = (req, res, next) => {
     }
     const token = req.cookies.token;
     if (!token) {
-        res.status(401).json({ messages: "access denied acess token must be provided" });
+        res.json({ success: false, messages: "access denied acess token must be provided" });
         return;
     }
     const decodedToken = jwt.verify(token, jwtSecret);

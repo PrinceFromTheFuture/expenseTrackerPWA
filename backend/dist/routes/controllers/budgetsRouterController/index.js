@@ -1,2 +1,3 @@
 import getAllBudgets from "./getAllBudgets.js";
-export default { getAllBudgets };
+import postNewBudget from "./postNewBudget.js";
+export default { getAllBudgets, postNewBudget };

@@ -25,7 +25,7 @@ const server = express();
 
 server.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://amirwais.site",
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
     credentials: true, // If cookies or credentials are used
   })
@@ -41,10 +41,7 @@ if (!envoirmennt) {
   process.abort();
 }
 console.log(envoirmennt);
-const DBConnectionString =
-  envoirmennt === "PRODUCTION"
-    ? process.env.PRODUCTION_DB_CONNECTION_STRING
-    : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
+const DBConnectionString = envoirmennt === "PRODUCTION" ? process.env.PRODUCTION_DB_CONNECTION_STRING : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
 
 if (!DBConnectionString) {
   console.log("the data base connection string is not readable or not configured properly");

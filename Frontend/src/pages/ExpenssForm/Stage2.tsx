@@ -5,12 +5,13 @@ import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { allBugdetsSelctor } from "@/pages/redux/budgetsSlice";
+import { allBugdetsSelctor, getBudgetsStatus } from "@/pages/redux/budgetsSlice";
 import { formDataSelector, selectBudgetInForm } from "@/pages/redux/formSlice";
 import Icon from "@/components/ui/Icon";
 import Touchable from "@/components/ui/generalComponents/Touchable";
 import plus_surface from "@/assets/plus_surface.svg";
 import NewBudget from "@/components/ui/generalComponents/NewBudget";
+import { Skeleton } from "@/components/ui/skeleton";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -19,6 +20,7 @@ const Stage2 = () => {
   const dispatch = useAppDispatch();
   const allBudgets = useAppSelector(allBugdetsSelctor);
   const budgetsWidgetsContainerRef = useRef<HTMLDivElement>(null);
+  const budgetStatus = useAppSelector(getBudgetsStatus);
 
   return (
     <div className=" w-full h-full flex-col flex justify-between items-center gap-4 my-8 ">
@@ -32,52 +34,68 @@ const Stage2 = () => {
         }}
         className={cn(" h-full gap-4 grid grid-cols-2 justify-end   overflow-scroll w-full")}
       >
-        {allBudgets.map((budget) => {
-          return (
-            <Touchable
-              key={budget.id}
-              onClick={() => dispatch(selectBudgetInForm(budget.id))}
-              animate={{
-                outlineOffset: selctedBudgetId === budget.id ? "-2px" : "0px",
-                outlineWidth: selctedBudgetId === budget.id ? "2px" : "0px",
-              }}
-              className=" h-36 full flex-col outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
-            >
-              <motion.div
-                transition={generalTransition}
-                initial={{
-                  backgroundColor: "#9daab0",
-                }}
-                animate={{
-                  backgroundColor: selctedBudgetId === budget.id ? "#0d6680" : "#9daab0",
-                }}
-                className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "
-              >
-                <motion.div
-                  transition={generalTransition}
+        {budgetStatus === "success" ? (
+          <>
+            {allBudgets.map((budget) => {
+              return (
+                <Touchable
+                  key={budget.id}
+                  onClick={() => dispatch(selectBudgetInForm(budget.id))}
                   animate={{
-                    width: selctedBudgetId === budget.id ? "50%" : "80%",
-                    height: selctedBudgetId === budget.id ? "50%" : "80%",
+                    outlineOffset: selctedBudgetId === budget.id ? "-2px" : "0px",
+                    outlineWidth: selctedBudgetId === budget.id ? "2px" : "0px",
                   }}
-                  className="  bg-container rounded-full"
-                ></motion.div>
-              </motion.div>
-              <Icon
-                backgroundColor={budget.color}
-                src={`${budget.iconURL.substring(0, budget.iconURL.lastIndexOf("/") + 1)}default.svg`}
-                varient="small"
-              />
-              <div className=" text-dark font-bold">{budget.name}</div>
-            </Touchable>
-          );
-        })}
-        <NewBudget
-          trigger={
-            <Touchable className=" h-36 full flex-col gap-2    min-h-24 rounded-2xl  bg-container relative flex justify-center items-center">
-              <Icon src={plus_surface} varient="small" />
-            </Touchable>
-          }
-        />
+                  className=" h-36 full flex-col outline-main outline  min-h-24 rounded-2xl  bg-container relative flex justify-center items-center"
+                >
+                  <motion.div
+                    transition={generalTransition}
+                    initial={{
+                      backgroundColor: "#9daab0",
+                    }}
+                    animate={{
+                      backgroundColor: selctedBudgetId === budget.id ? "#0d6680" : "#9daab0",
+                    }}
+                    className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "
+                  >
+                    <motion.div
+                      transition={generalTransition}
+                      animate={{
+                        width: selctedBudgetId === budget.id ? "50%" : "80%",
+                        height: selctedBudgetId === budget.id ? "50%" : "80%",
+                      }}
+                      className="  bg-container rounded-full"
+                    ></motion.div>
+                  </motion.div>
+                  <Icon
+                    backgroundColor={budget.color}
+                    src={`${budget.iconURL.substring(0, budget.iconURL.lastIndexOf("/") + 1)}default.svg`}
+                    varient="small"
+                  />
+                  <div className=" text-dark font-bold">{budget.name}</div>
+                </Touchable>
+              );
+            })}
+            <NewBudget
+              trigger={
+                <Touchable className=" h-36 full flex-col gap-2    min-h-24 rounded-2xl  bg-container relative flex justify-center items-center">
+                  <Icon src={plus_surface} varient="small" />
+                </Touchable>
+              }
+            />
+          </>
+        ) : (
+          <>
+            {Array.from([1, 2, 3, 4], (index) => {
+              return (
+                <Skeleton key={index} className=" h-36 full flex-col   min-h-24 rounded-2xl   relative flex justify-center items-center">
+                  <Skeleton className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "></Skeleton>
+                  <Skeleton className="  w-8 h-8 rounded-full mt-2"></Skeleton>
+                  <Skeleton className="  w-12 h-4 mt-2"></Skeleton>
+                </Skeleton>
+              );
+            })}
+          </>
+        )}
       </motion.div>
       <div
         className=" flex justify-center items-center gap-2"

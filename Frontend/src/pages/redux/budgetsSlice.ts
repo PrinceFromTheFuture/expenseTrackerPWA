@@ -1,10 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { Bugdet } from "@/types";
-import { HTTPGetAllBudgets } from "@/lib/http.requests";
+import { HTTPGetAllBudgets, HTTPPostNewBudget } from "@/lib/http.requests";
 
 export const getAllBudgetsAsyncThunk = createAsyncThunk("budgets/getAll", async () => {
   return await HTTPGetAllBudgets();
+});
+export const postNewBudgetAsyncThunk = createAsyncThunk("budgets/postNew", async (args: { name: string; color: string; iconURL: string }) => {
+  const response = await HTTPPostNewBudget(args);
+  return response;
 });
 
 const initialState: {
@@ -20,8 +24,20 @@ const budgetsSlice = createSlice({
   name: "budgets",
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getAllBudgetsAsyncThunk.pending, (state, action) => {
+      state.status = "pending";
+    });
     builder.addCase(getAllBudgetsAsyncThunk.fulfilled, (state, action) => {
       state.data = action.payload;
+      state.status = "success";
+    });
+    builder.addCase(postNewBudgetAsyncThunk.pending, (state, action) => {
+      state.status = "pending";
+    });
+    builder.addCase(postNewBudgetAsyncThunk.fulfilled, (state, action) => {
+      if (action.payload.budget) {
+        state.data.push(action.payload.budget);
+      }
       state.status = "success";
     });
   },
@@ -49,3 +65,4 @@ export const getBudgetByIdSelector = (state: RootState, budgetId: string) => {
 
   return budgetFound;
 };
+export const getBudgetsStatus = (state: RootState) => state.budgetsSlice.status;

@@ -18,7 +18,7 @@ const server = express();
 //server.use(cors({ origin: "http://localhost:5173" }));
 //server.use(cors({ origin: process.env.FRONTENDURL }));
 server.use(cors({
-    origin: "http://amirwais.site",
+    origin: process.env.FRONTEND_URL,
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
     credentials: true, // If cookies or credentials are used
 }));

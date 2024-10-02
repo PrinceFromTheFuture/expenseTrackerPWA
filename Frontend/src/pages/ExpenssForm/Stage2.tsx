@@ -69,15 +69,19 @@ const Stage2 = () => {
                       className="  bg-container rounded-full"
                     ></motion.div>
                   </motion.div>
-                  <Icon backgroundColor={`#${budget.color}`} src={`${budget.iconURL}F8FBFD.svg`} varient="small" />
+                  <Icon
+                    backgroundColor={`#${budget.color}`}
+                    src={`${budget.iconURL}F8FBFD.svg`}
+                    varient="small"
+                  />
                   <div className=" text-dark font-bold mx-2 text-center flex-wrap">{budget.name} </div>
                 </Touchable>
               );
             })}
             <NewBudget
               trigger={
-                <Touchable className=" h-36 full flex-col gap-2    min-h-24 rounded-2xl  bg-container relative flex justify-center items-center">
-                  <Icon src={plus_surface} varient="small" />
+                <Touchable className=" h-36  full flex-col gap-2     rounded-2xl  bg-secondary relative flex justify-center items-center">
+                  <img src={plus_surface} className=" w-6" alt="" />
                 </Touchable>
               }
             />
@@ -86,7 +90,10 @@ const Stage2 = () => {
           <>
             {Array.from([1, 2, 3, 4], (index) => {
               return (
-                <Skeleton key={index} className=" h-36 full flex-col   min-h-24 rounded-2xl   relative flex justify-center items-center">
+                <Skeleton
+                  key={index}
+                  className=" h-36 full flex-col   min-h-24 rounded-2xl   relative flex justify-center items-center"
+                >
                   <Skeleton className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "></Skeleton>
                   <Skeleton className="  w-8 h-8 rounded-full mt-2"></Skeleton>
                   <Skeleton className="  w-12 h-4 mt-2"></Skeleton>

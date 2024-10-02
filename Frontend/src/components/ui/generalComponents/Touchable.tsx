@@ -8,18 +8,20 @@ const Touchable = ({
   className,
   onClick,
   animate,
+  tapBackgroundColor,
 }: {
   children: React.ReactNode;
   className?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   animate?: FrmaerAnimationProps;
+  tapBackgroundColor?: string;
 }) => {
   return (
     <motion.div
       onClick={onClick}
       animate={animate}
       className={className}
-      whileTap={{ backgroundColor: "#D6DBDE" }}
+      whileTap={{ backgroundColor: !!tapBackgroundColor ? tapBackgroundColor : "#D6DBDE" }}
       transition={{
         ...generalTransition,
       }}

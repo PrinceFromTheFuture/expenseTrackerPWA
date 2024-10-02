@@ -120,7 +120,10 @@ const ColorSelector = ({
                       style={{ backgroundColor: color === selectedColor ? "#f0f4f7 " : "#f8fbfd" }}
                       className=" p-2 flex justify-center items-center transition-all  bg-surface rounded-2xl "
                     >
-                      <div className=" w-full rounded-2xl aspect-square" style={{ backgroundColor: `#${color}` }}></div>
+                      <div
+                        className=" w-full rounded-2xl aspect-square"
+                        style={{ backgroundColor: `#${color}` }}
+                      ></div>
                     </div>
                   );
                 })}
@@ -163,19 +166,31 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
       <Drawer shouldScaleBackground dismissible={false} disablePreventScroll={false}>
         <AnimatePresence>
           {isSelectIconDialogOpen && (
-            <IconSelector setSelectedIcon={setSelectedIcon} setIsDialogOpen={handleChangeIsSelectIconDialogOpen} selectedIcon={selectedIcon} />
+            <IconSelector
+              setSelectedIcon={setSelectedIcon}
+              setIsDialogOpen={handleChangeIsSelectIconDialogOpen}
+              selectedIcon={selectedIcon}
+            />
           )}
         </AnimatePresence>
         <AnimatePresence>
           {isSelectColorDialogOpen && (
-            <ColorSelector setIsDialogOpen={handleChangeIsSelectColorDialogOpen} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
+            <ColorSelector
+              setIsDialogOpen={handleChangeIsSelectColorDialogOpen}
+              selectedColor={selectedColor}
+              setSelectedColor={setSelectedColor}
+            />
           )}
         </AnimatePresence>
         <DrawerTrigger className=" h-min">{trigger}</DrawerTrigger>
         <DrawerContent>
-          <div className=" font-semibold text-xl text-dark mt-4 mb-6">Create New Budget</div>
-          <div className="text-secondary ml-4 mb-2 font-semibold text-base  ">Choose a budget name</div>
-          <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
+          <div className=" font-semibold text-xl text-dark mt-4 mb-8">Create New Budget</div>
+          <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
+          <Touchable
+            className={
+              " bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"
+            }
+          >
             <img className=" w-6 h-6" src={tag_main} />
             <div className=" w-full">
               {" "}
@@ -200,7 +215,7 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
                 <img src={`${selectedIcon}${selectedColor}.svg`} alt="" className=" w-6" />{" "}
               </div>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 mb-8">
               <div className="text-secondary   mb-2 font-semibold text-base ">Color</div>
               <div
                 onClick={handleChangeIsSelectColorDialogOpen}
@@ -212,10 +227,15 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
           </div>
           <div className=" flex gap-2">
             <DrawerClose className="  ">
-              <Touchable className=" mt-5 w-full px-8 p-4 bg-container text-sm font-bold  rounded-2xl text-secondary">Cancel</Touchable>
+              <Touchable className=" mt-5 w-full px-8 p-4 bg-container text-sm font-bold  rounded-2xl text-secondary">
+                Cancel
+              </Touchable>
             </DrawerClose>
             <DrawerClose className=" w-full " disabled={selectedName ? false : true}>
-              <Touchable onClick={handleSaveNewBudget} className=" mt-5 w-full p-4 bg-main text-sm font-bold  rounded-2xl text-surface">
+              <Touchable
+                onClick={handleSaveNewBudget}
+                className=" mt-5 w-full p-4 bg-main text-sm font-bold  rounded-2xl text-surface"
+              >
                 Save
               </Touchable>
             </DrawerClose>

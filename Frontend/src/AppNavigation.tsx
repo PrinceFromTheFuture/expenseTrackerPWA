@@ -7,16 +7,9 @@ import { Link } from "react-router-dom";
 import home_main from "@/assets/navLinks/home_main.svg";
 import home_secondary_outline from "@/assets/navLinks/home_secondary_outline.svg";
 import recipt_surface from "@/assets/navLinks/recipt_surface.svg";
+import Finance from "./pages/Finance";
 
-const PageWraper = ({
-  currentPage,
-  children,
-  page,
-}: {
-  currentPage: number;
-  page: number;
-  children: React.ReactNode;
-}) => {
+const PageWraper = ({ currentPage, children, page }: { currentPage: number; page: number; children: React.ReactNode }) => {
   return (
     <motion.div
       animate={{
@@ -56,10 +49,7 @@ const NavItem = ({
       >
         <img src={isActive ? activeIconURL : IconURL} alt="" className=" w-4" />
       </Touchable>
-      <motion.div
-        animate={{ color: isActive ? "#0d6680" : "#9daab0" }}
-        className="text-xs   text-left font-semibold"
-      >
+      <motion.div animate={{ color: isActive ? "#0d6680" : "#9daab0" }} className="text-xs   text-left font-semibold">
         {label}
       </motion.div>
     </div>
@@ -69,7 +59,7 @@ const AppNavigation = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const pages = [
     { element: <Home />, index: 0 },
-    { element: <Home />, index: 1 },
+    { element: <Finance />, index: 1 },
     { element: <Home />, index: 2 },
     { element: <Home />, index: 3 },
   ];

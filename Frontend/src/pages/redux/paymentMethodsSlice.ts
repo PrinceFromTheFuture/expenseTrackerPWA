@@ -3,33 +3,34 @@ import { RootState } from "./store";
 import { PaymentMethod } from "@/types";
 import { HTTPGetAllPaymentMethods } from "@/lib/http.requests";
 
-export const getAllPaymentMethodsAsyncThunk = createAsyncThunk(
-  "paymentMethods/getAll",
-  async () => {
-    return await HTTPGetAllPaymentMethods();
-  }
-);
+export const getAllPaymentMethodsAsyncThunk = createAsyncThunk("paymentMethods/getAll", async () => {
+  return await HTTPGetAllPaymentMethods();
+});
 
 const initialState: PaymentMethod[] = [
   {
     iconURL: "/facebookTest.svg",
     id: "3dFD$3",
     name: "creaditCard 1",
+    accountId: "ds32#",
   },
   {
     iconURL: "/facebookTest.svg",
     id: "3ddFD$3",
     name: "creaditCard 2",
+    accountId: "dsdsfsd32#",
   },
   {
     iconURL: "/facebookTest.svg",
     id: "3FdddD$3",
     name: "creaditCard 3",
+    accountId: "dddds32#",
   },
   {
     iconURL: "/facebookTest.svg",
     id: "3FD$3ddd",
     name: "creaditCard 4",
+    accountId: "dds32#",
   },
 ];
 const paymentMethodsSlice = createSlice({
@@ -49,9 +50,7 @@ export default paymentMethodsSliceReducer;
 export const allPaymentMethodsSelector = (state: RootState) => state.paymentMethodsSlice;
 
 export const getPaymentMethodNameByIdSelector = (state: RootState, paymentMethodId: string) => {
-  const PaymentMethodFound = state.paymentMethodsSlice.find(
-    (paymentMethod) => paymentMethod.id === paymentMethodId
-  );
+  const PaymentMethodFound = state.paymentMethodsSlice.find((paymentMethod) => paymentMethod.id === paymentMethodId);
   if (!PaymentMethodFound) {
     return null;
   }

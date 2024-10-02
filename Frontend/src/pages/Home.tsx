@@ -17,7 +17,8 @@ import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
 import log_out_main from "@/assets/log_out_main.svg";
-import NewBudget from "@/components/ui/generalComponents/NewBudget";
+
+
 const Home = () => {
   const balance = useAppSelector(userBalanceSelector);
   const allTransactions = useAppSelector(allTransactionsSelctor);
@@ -26,7 +27,7 @@ const Home = () => {
   const transactionsDataStatus = useAppSelector(getTransactionsDataStatusSelector);
 
   return (
-    <div className=" mainContainer w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
+    <div className="  w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
       <div className=" flex justify-between items-start mx-4">
         <div
           className="rotate-180"

@@ -63,7 +63,7 @@ const IconSelector = ({
                         style={{ backgroundColor: icon === selectedIcon ? "#f0f4f7 " : "#f8fbfd" }}
                         className=" p-4 flex justify-center  items-center transition-all  bg-surface rounded-2xl "
                       >
-                        <img src={`${icon}0D6680.svg`} alt="" className=" w-12" />
+                        <img src={`${icon}0D6680.svg`} alt="" className=" w-10 h-10" />
                       </div>
                     );
                   })}

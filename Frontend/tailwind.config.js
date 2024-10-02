@@ -11,6 +11,7 @@ export default {
         main: "#0D6680",
         dark: "#171C1F",
         warning: "#824E4E",
+        success: "#78B577",
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"],

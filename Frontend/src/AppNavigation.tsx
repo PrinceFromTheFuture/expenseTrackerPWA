@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import { AnimatePresence, motion } from "framer-motion";
 import Touchable from "./components/ui/generalComponents/Touchable";
-import bell_ from "@/assets/shirt";
 import { Link } from "react-router-dom";
 import home_main from "@/assets/navLinks/home_main.svg";
 import home_secondary_outline from "@/assets/navLinks/home_secondary_outline.svg";
@@ -66,8 +65,7 @@ const NavItem = ({
     </div>
   );
 };
-const NavTest = () => {
-  const path = useLocation();
+const AppNavigation = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const pages = [
     { element: <Home />, index: 0 },
@@ -75,10 +73,6 @@ const NavTest = () => {
     { element: <Home />, index: 2 },
     { element: <Home />, index: 3 },
   ];
-
-  const handleChnagePage = (page: number) => {
-    setCurrentPage(page);
-  };
 
   return (
     <div className=" fixed inset-0">
@@ -133,4 +127,4 @@ const NavTest = () => {
   );
 };
 
-export default NavTest;
+export default AppNavigation;

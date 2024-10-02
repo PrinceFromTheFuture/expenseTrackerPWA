@@ -10,7 +10,6 @@ import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "./lib/hooks/hooks.ts";
 import ExpenssForm from "./pages/ExpenssForm/ExpenssForm.tsx";
 import PrimaryLayout from "./PrimaryLayout.tsx";
-import { motion } from "framer-motion";
 import {
   getUserDataStatusSelector,
   getUserIsLoggedIn,
@@ -19,8 +18,7 @@ import {
 import LoadingPage from "./pages/Loading.tsx";
 import LandingPage from "./pages/Landing.tsx";
 import Auth from "./pages/Auth.tsx";
-import generalTransition from "./lib/generalTransition.ts";
-import NavTest from "./NavTest.tsx";
+import AppNavigation from "./AppNavigation.tsx";
 
 const AppWraper = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +37,7 @@ const AppWraper = () => {
         <Routes key={location.pathname} location={location}>
           {isLoggedIn ? (
             <Route path="/" element={<PrimaryLayout />}>
-              <Route index path="/" element={<NavTest />} />
+              <Route index path="/" element={<AppNavigation />} />
               <Route path="new" element={<ExpenssForm />} />
               <Route path="editTransaction" element={<ExpenssForm />} />
               <Route path="*" element={<Navigate to="/" />} />

@@ -43,7 +43,7 @@ const Home = () => {
         <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance || 0, true)}</div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
-      <div className="  mx-4 mb-12">
+      <div className="  mx-4 mb-8">
         <div className=" text-xl font-semibold mb-2 text-dark ">useful insights</div>
         <div className="   flex gap-4 justify-between items-center">
           <div className=" bg-container  rounded-l-2xl rounded-r-md w-full flex justify-between  h-24 items-start p-4">
@@ -55,11 +55,6 @@ const Home = () => {
           </div>
           <SpendingsTimeFrame />
         </div>
-        <Link className=" select-none  " to={"new"}>
-          <Touchable className=" w-full bg-main  p-4 rounded-2xl flex justify-center items-center font-bold text-md mt-5  text-surface">
-            new expenss
-          </Touchable>
-        </Link>
       </div>
       <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">recent transactions</div>
       {transactionsDataStatus === "pending"
@@ -79,7 +74,12 @@ const Home = () => {
             .map((transaction) => {
               return (
                 <AnimatePresence key={transaction.id}>
-                  <motion.div layout animate={{ opacity: 1, height: "auto" }} initial={{ opacity: 0, height: 0 }} exit={{ opacity: 0, height: 0 }}>
+                  <motion.div
+                    layout
+                    animate={{ opacity: 1, height: "auto" }}
+                    initial={{ opacity: 0, height: 0 }}
+                    exit={{ opacity: 0, height: 0 }}
+                  >
                     <ExpensesWidget transactionId={transaction.id} />
                   </motion.div>
                 </AnimatePresence>

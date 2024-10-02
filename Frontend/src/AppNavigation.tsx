@@ -94,7 +94,12 @@ const AppNavigation = () => {
           IconURL={home_secondary_outline}
           activeIconURL={home_main}
         />
-        <Link to={"/new"}>
+        <Link
+          to={"/new"}
+          onClick={() => {
+            navigator.vibrate(100);
+          }}
+        >
           <Touchable className=" w-12 h-12  shadow-md   bg-main rotate-45 rounded-2xl flex justify-center items-center">
             <img src={recipt_surface} alt="" className=" -rotate-45 w-4" />
           </Touchable>

@@ -25,6 +25,8 @@ export interface Transaction {
 export interface PaymentMethod {
   name: string;
   iconURL: string;
+  accountId: string;
+
   id: string;
 }
 

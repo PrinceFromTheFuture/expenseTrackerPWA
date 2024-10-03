@@ -37,3 +37,10 @@ export interface User {
   balanceInAgorot: number;
   hashedPassword: string;
 }
+
+export interface Account{
+  iconURL: string,
+  id:string
+  name:string
+  balanceInAgorot: number;
+}

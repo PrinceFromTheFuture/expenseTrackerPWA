@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { formatAmountInAgorot } from "../../../lib/formatAmountInAgorot";
 import { useAppSelector } from "../../../lib/hooks/hooks";
-import { spendingsTimeFramePreferenceSelector } from "../../../pages/redux/userPreferencesSlice";
-import { SpendingsTimeFrameSelector } from "../../../pages/redux/userSlice";
-import { RootState } from "../../../pages/redux/store";
+import { spendingsTimeFramePreferenceSelector } from "../../../redux/userPreferencesSlice";
+import { SpendingsTimeFrameSelector } from "../../../redux/userSlice";
+import { RootState } from "../../../redux/store";
 import generalTransition from "../../../lib/generalTransition";
 
 const SpendingsTimeFrameValues = () => {

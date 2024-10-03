@@ -10,8 +10,8 @@ import {
   clearNumberFromFormAmount,
   decreaseOneFromFormAmount,
   formDataSelector,
-} from "@/pages/redux/formSlice";
-import { userBalanceSelector } from "@/pages/redux/userSlice";
+} from "@/redux/formSlice";
+import { userBalanceSelector } from "@/redux/userSlice";
 import Touchable from "@/components/ui/generalComponents/Touchable";
 import React from "react";
 
@@ -76,7 +76,9 @@ const Stage1 = () => {
         <div className=" border-b-2 border-secondary w-full flex justify-between items-center pb-1">
           <div className=" font-bold text-lg invisible">X</div>
           <div className=" flex gap-1 justify-center items-top">
-            <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(formAmount, false)}</div>
+            <div className=" text-4xl text-dark font-extrabold">
+              {formatAmountInAgorot(formAmount, false)}
+            </div>
             <div className="  text-main font-extrabold text-2xl">₪</div>
           </div>
           <div className=" font-bold text-lg" onClick={() => handleClearNumberFromFormAmount()}>

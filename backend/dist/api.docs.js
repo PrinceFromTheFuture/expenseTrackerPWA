@@ -66,6 +66,7 @@ const serverDefnition = {
                 },
             ],
         },
+        accounts: { endpoints: [{ path: "/", method: "GET", response: Object.prototype }] },
         auth: {
             endpoints: [
                 {

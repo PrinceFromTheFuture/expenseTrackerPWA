@@ -5,16 +5,12 @@ import "./index.css";
 
 import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "@/pages/redux/store.ts";
+import store from "@/redux/store.ts";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "./lib/hooks/hooks.ts";
 import ExpenssForm from "./pages/ExpenssForm/ExpenssForm.tsx";
 import PrimaryLayout from "./PrimaryLayout.tsx";
-import {
-  getUserDataStatusSelector,
-  getUserIsLoggedIn,
-  verifyUserTokenAsyncTunk,
-} from "./pages/redux/userSlice.ts";
+import { getUserDataStatusSelector, getUserIsLoggedIn, verifyUserTokenAsyncTunk } from "./redux/userSlice.ts";
 import LoadingPage from "./pages/Loading.tsx";
 import LandingPage from "./pages/Landing.tsx";
 import Auth from "./pages/Auth.tsx";

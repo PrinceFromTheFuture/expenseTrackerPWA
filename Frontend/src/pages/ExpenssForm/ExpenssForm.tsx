@@ -13,7 +13,12 @@ import Stage2 from "./Stage2";
 import Stage3 from "./Stage3";
 import Stage4 from "./Stage4";
 import Stage5 from "./Stage5";
-import { clearAllInForm, decrementStageInForm, formDataSelector, incrementStageInForm } from "@/pages/redux/formSlice";
+import {
+  clearAllInForm,
+  decrementStageInForm,
+  formDataSelector,
+  incrementStageInForm,
+} from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
@@ -56,7 +61,10 @@ const ExpenssForm = () => {
         {" "}
         <div className=" w-full gap-3 h-5 mb-4  flex ">
           <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div className=" bg-main rounded-full w-full  h-full   " transition={generalTransition}></motion.div>
+            <motion.div
+              className=" bg-main rounded-full w-full  h-full   "
+              transition={generalTransition}
+            ></motion.div>
           </div>
           {Array.from([1, 2, 3, 4], (item) => {
             return <StageProgressBar key={item} currentStage={formData.currentStage} thisBarStage={item} />;
@@ -106,7 +114,12 @@ const ExpenssForm = () => {
         <AlertDialog
           open={isReviewBeforeSubmitOpen}
           onOpenChange={(isOpen) => {
-            if (formData.currentStage === 4 && formData.budgetId && formData.paymentMethodId && formData.amountInAgorot !== 0) {
+            if (
+              formData.currentStage === 4 &&
+              formData.budgetId &&
+              formData.paymentMethodId &&
+              formData.amountInAgorot !== 0
+            ) {
               setIsReviewBeforeSubmitOpen(isOpen);
             }
           }}

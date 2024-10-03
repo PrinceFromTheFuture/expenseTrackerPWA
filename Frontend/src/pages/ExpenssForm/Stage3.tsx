@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import generalTransition from "@/lib/generalTransition";
 
 import dayjs from "dayjs";
-import { formDataSelector, modifyDateInForm } from "@/pages/redux/formSlice";
+import { formDataSelector, modifyDateInForm } from "@/redux/formSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
 import TimePicker from "./TimePicker";
 

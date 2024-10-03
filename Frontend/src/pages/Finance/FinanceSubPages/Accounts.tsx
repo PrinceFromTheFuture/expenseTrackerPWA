@@ -20,7 +20,7 @@ const Accounts = () => {
   ];
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   return (
-    <div className=" w-full mt-4 min-h-[80vh]">
+    <div className=" w-full mt-4 ">
       <div className=" mb-8">
         {" "}
         <div className=" w-full flex justify-end">
@@ -36,55 +36,58 @@ const Accounts = () => {
         </div>
       </div>
       <div className=" text-xl font-semibold mb-2 text-dark">Accoutns</div>
-      {fakeAccounts.map((account) => {
-        return (
-          <div
-            key={account.id}
-            onClick={() => setOpenAccount(openAccount === account.id ? null : account.id)}
-            className=" w-full p-4 py-6 bg-container mb-4 rounded-2xl"
-          >
-            <div className="  flex justify-between items-center ">
-              <div className=" flex justify-start gap-4 items-center">
-                <img src={account.iconURL} className=" w-6 " />
-                <div className="text-base text-secondary font-semibold">{account.name}</div>
-              </div>
-              <motion.img
-                transition={generalTransition}
-                animate={{ rotate: account.id === openAccount ? "180deg" : "0deg" }}
-                src={caret_secondary}
-                className=" w-4"
-              />
-            </div>
-            <AnimatePresence>
-              {openAccount === account.id && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
+      <div className=" mb-12">
+        {" "}
+        {fakeAccounts.map((account) => {
+          return (
+            <div
+              key={account.id}
+              onClick={() => setOpenAccount(openAccount === account.id ? null : account.id)}
+              className=" w-full p-4 py-6 bg-container mb-4 rounded-2xl"
+            >
+              <div className="  flex justify-between items-center ">
+                <div className=" flex justify-start gap-4 items-center">
+                  <img src={account.iconURL} className=" w-6 " />
+                  <div className="text-base text-secondary font-semibold">{account.name}</div>
+                </div>
+                <motion.img
                   transition={generalTransition}
-                  exit={{ height: 0, opacity: 0 }}
-                  className=" mt-2"
-                >
-                  <div className=" flex justify-between items-end">
-                    <div>
-                      {" "}
-                      <div className="text-dark font-extrabold text-2xl">{formatAmountInAgorot(account.balanceInAgorot, true)}</div>
-                      <div className="  bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1   text-success">
-                        1234.34 (124.24%)
+                  animate={{ rotate: account.id === openAccount ? "180deg" : "0deg" }}
+                  src={caret_secondary}
+                  className=" w-4"
+                />
+              </div>
+              <AnimatePresence>
+                {openAccount === account.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    transition={generalTransition}
+                    exit={{ height: 0, opacity: 0 }}
+                    className=" mt-4 mb-2"
+                  >
+                    <div className=" flex justify-between items-end">
+                      <div>
+                        {" "}
+                        <div className="text-dark font-extrabold text-2xl">{formatAmountInAgorot(account.balanceInAgorot, true)}</div>
+                        <div className="  bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1   text-success">
+                          1234.34 (124.24%)
+                        </div>
+                      </div>
+                      <div className=" flex">
+                        <div className="  mr-4 bg-transparent outline outline-4 outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
+                          4 Links
+                        </div>
+                        <img src={ellipsis_secondary} className=" h-6" alt="" />
                       </div>
                     </div>
-                    <div className=" flex">
-                      <div className="  mr-4 bg-transparent outline outline-3 outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
-                        4 Links
-                      </div>
-                      <img src={ellipsis_secondary} className=" h-6" alt="" />
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        );
-      })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

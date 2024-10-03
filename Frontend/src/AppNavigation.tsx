@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import home_main from "@/assets/navLinks/home_main.svg";
 import home_secondary_outline from "@/assets/navLinks/home_secondary_outline.svg";
 import recipt_surface from "@/assets/navLinks/recipt_surface.svg";
-import Finance from "./pages/Finance";
+import Finance from "./pages/Finance/Finance";
 
 const PageWraper = ({ currentPage, children, page }: { currentPage: number; page: number; children: React.ReactNode }) => {
   return (

@@ -36,7 +36,7 @@ const Accounts = () => {
         </div>
       </div>
       <div className=" text-xl font-semibold mb-2 text-dark">Accoutns</div>
-      <div className=" mb-12">
+      <div className=" mb-24">
         {" "}
         {fakeAccounts.map((account) => {
           return (
@@ -75,7 +75,7 @@ const Accounts = () => {
                         </div>
                       </div>
                       <div className=" flex">
-                        <div className="  mr-4 bg-transparent outline outline-4 outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
+                        <div className="  mr-4 bg-transparent outline outline-3 outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
                           4 Links
                         </div>
                         <img src={ellipsis_secondary} className=" h-6" alt="" />

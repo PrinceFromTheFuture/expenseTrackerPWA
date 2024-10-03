@@ -1,6 +1,7 @@
 import { HTTPGetAllAccounts } from "@/lib/http.requests";
 import { Account } from "@/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "./store";
 
 const initialState: { status: "success" | "pending"; data: Account[] } = { data: [], status: "pending" };
 
@@ -27,3 +28,5 @@ const accountsSlice = createSlice({
 const accountsSliceReducer = accountsSlice.reducer;
 
 export default accountsSliceReducer;
+
+export const getAllAccountsSelector = (state: RootState) => state.accountsSlice.data;

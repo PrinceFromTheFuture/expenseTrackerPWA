@@ -44,7 +44,7 @@ const NavItem = ({
   onClick: React.MouseEventHandler<HTMLDivElement>;
 }) => {
   return (
-    <div onClick={onClick}>
+    <div onClick={onClick} className=" flex justify-center flex-col items-center">
       <Touchable
         animate={{ backgroundColor: isActive ? "#E1ECF1" : "#f8fbfd" }}
         className=" w-10 h-10 mb-1  rounded-2xl flex justify-center items-center"

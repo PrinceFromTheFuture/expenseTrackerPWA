@@ -81,7 +81,7 @@ const AppNavigation = () => {
         />
         <NavItem
           onClick={() => setCurrentPage(1)}
-          label="Home"
+          label="Finance"
           isActive={currentPage === 1}
           IconURL={coins_secondary_outline}
           activeIconURL={coins_main}

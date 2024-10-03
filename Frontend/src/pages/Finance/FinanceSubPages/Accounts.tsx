@@ -21,14 +21,14 @@ const Accounts = () => {
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   return (
     <div className=" w-full mt-4 ">
-      <div className=" mb-8">
+      <div className=" mb-12">
         {" "}
         <div className=" w-full flex justify-end">
           <Touchable className=" w-10 h-10 bg-container rounded-2xl flex justify-center items-center">
             <img src={ellipsis_main} alt="" className="  h-6" />
           </Touchable>
         </div>
-        <div className=" flex justify-center flex-col items-center mt-2">
+        <div className=" flex justify-center flex-col items-center mt-6">
           {" "}
           <div className=" text-secondary font-semibold">current blanace</div>
           <div className=" text-4xl text-dark font-extrabold mb-2">{formatAmountInAgorot(3243434 || 0, true)}</div>

@@ -64,7 +64,7 @@ const Finance = () => {
           transition={generalTransition}
           className=" absolute w-1/3 bg-main   h-[4px]"
         ></motion.div>
-        <div className=" w-full bg-secondary h-[4px]"></div>
+        <div className=" w-full bg-container h-[4px]"></div>
       </div>
       <div className="  mx-4 flex overflow-hidden">
         {subPages.map((subPage) => {

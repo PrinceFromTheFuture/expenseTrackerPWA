@@ -31,6 +31,12 @@ export interface PaymentMethod {
   name: string;
   iconURL: string;
   accountId: string;
-
   id: string;
+}
+
+export interface Account {
+  iconURL: string;
+  id: string;
+  name: string;
+  balanceInAgorot: number;
 }

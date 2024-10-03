@@ -34,6 +34,7 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
     userId: uuid("userId")
         .references(() => userTable.id)
         .notNull(),
+    accountId: uuid("accountId").references(() => accountsTable.id),
     id: uuid("id").primaryKey().defaultRandom(),
 });
 export const userTable = pgTable("users", {
@@ -42,4 +43,13 @@ export const userTable = pgTable("users", {
     email: varchar("email", { length: 50 }).notNull(),
     balanceInAgorot: integer("balanceInAgorot").notNull(),
     hashedPassword: text("hashedPassword").notNull(),
+});
+export const accountsTable = pgTable("accounts", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    name: text("name").notNull(),
+    userId: uuid("userId")
+        .references(() => userTable.id)
+        .notNull(),
+    balanceInAgorot: integer("balanceInAgorot").notNull(),
+    iconURL: text("iconURL").notNull(),
 });

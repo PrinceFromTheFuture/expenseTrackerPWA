@@ -10,7 +10,7 @@ import exit_main from "@/assets/exit_main.svg";
 import icons from "@/lib/icons";
 import colors from "@/lib/colors";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import { postNewBudgetAsyncThunk } from "@/pages/redux/budgetsSlice";
+import { postNewBudgetAsyncThunk } from "@/redux/budgetsSlice";
 
 const IconSelector = ({
   setSelectedIcon,

@@ -1,6 +1,6 @@
 //@ts-ignore
 import axios from "axios";
-import { Bugdet, PaymentMethod, Transaction } from "@/types";
+import { Account, Bugdet, PaymentMethod, Transaction } from "@/types";
 const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
 
 if (!apiURL) {
@@ -35,6 +35,10 @@ export const HTTPPostNewTransaction = async (filledForm: Omit<Transaction, "id">
   return res.data;
 };
 
+export const HTTPGetAllAccounts = async () => {
+  const res = await axios.get<Account[]>(`${apiURL}/accounts`);
+  return res.data;
+};
 export const HTTPPPutNewTransaction = async (filledForm: Transaction) => {
   const { id, ...rest } = filledForm;
   const data = { ...rest };
@@ -67,17 +71,25 @@ export const HTTPPostNewUser = async (userData: { email: string; password: strin
 };
 
 export const HTTPVerifyToken = async () => {
-  const res = await axios.get<{ success: boolean; message?: string; userId?: string }>(`${apiURL}/auth/verifyToken`);
+  const res = await axios.get<{ success: boolean; message?: string; userId?: string }>(
+    `${apiURL}/auth/verifyToken`
+  );
   return res.data;
 };
 
 export const HTTPSignInUser = async (userData: { email: string; password: string }) => {
-  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(`${apiURL}/auth/signIn`, userData);
+  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(
+    `${apiURL}/auth/signIn`,
+    userData
+  );
   return res.data;
 };
 
 export const HTTPSignUpUser = async (userData: { email: string; password: string; name: string | null }) => {
-  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(`${apiURL}/auth/signUp`, userData);
+  const res = await axios.post<{ success: boolean; message?: string; userId?: string }>(
+    `${apiURL}/auth/signUp`,
+    userData
+  );
 
   return res.data;
 };
@@ -89,7 +101,10 @@ export const HTTPSignOutUser = async () => {
 };
 
 export const HTTPPostNewBudget = async (body: { name: string; color: string; iconURL: string }) => {
-  const res = await axios.post<{ success: boolean; message?: string; budget?: Bugdet }>(`${apiURL}/budgets`, body);
+  const res = await axios.post<{ success: boolean; message?: string; budget?: Bugdet }>(
+    `${apiURL}/budgets`,
+    body
+  );
 
   return res.data;
 };

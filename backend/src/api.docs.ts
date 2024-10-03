@@ -1,5 +1,4 @@
-import { response } from "express";
-import { Bugdet, PaymentMethod, Transaction, TransactionForm } from "./types.js";
+import { Account, Bugdet, PaymentMethod, Transaction, TransactionForm } from "./types.js";
 
 const serverDefnition = {
   name: "expensee tracker pwa API",
@@ -15,7 +14,7 @@ const serverDefnition = {
           path: "/",
           method: "POST",
           request: Object.prototype as { name: string; color: string; iconURL: string },
-          response: Object.prototype as { success: boolean; message?: string, budget:Bugdet },
+          response: Object.prototype as { success: boolean; message?: string; budget: Bugdet },
         },
       ],
     },
@@ -69,6 +68,7 @@ const serverDefnition = {
         },
       ],
     },
+    accounts: { endpoints: [{ path: "/", method: "GET", response: Object.prototype as Account[] }] },
     auth: {
       endpoints: [
         {

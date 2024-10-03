@@ -4,7 +4,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import { useAppDispatch } from "@/lib/hooks/hooks";
-import { modifyHoursInForm } from "@/pages/redux/formSlice";
+import { modifyHoursInForm } from "@/redux/formSlice";
 
 const TimePicker = () => {
   const dispatch = useAppDispatch();

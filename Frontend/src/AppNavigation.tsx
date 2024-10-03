@@ -5,7 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import Touchable from "./components/ui/generalComponents/Touchable";
 import { Link } from "react-router-dom";
 import home_main from "@/assets/navLinks/home_main.svg";
+import coins_main from "@/assets/navLinks/coins_main.svg";
 import home_secondary_outline from "@/assets/navLinks/home_secondary_outline.svg";
+import coins_secondary_outline from "@/assets/navLinks/coins_secondary_outline.svg";
 import recipt_surface from "@/assets/navLinks/recipt_surface.svg";
 import Finance from "./pages/Finance/Finance";
 
@@ -81,8 +83,8 @@ const AppNavigation = () => {
           onClick={() => setCurrentPage(1)}
           label="Home"
           isActive={currentPage === 1}
-          IconURL={home_secondary_outline}
-          activeIconURL={home_main}
+          IconURL={coins_secondary_outline}
+          activeIconURL={coins_main}
         />
         <Link
           to={"/new"}

@@ -75,7 +75,7 @@ const Accounts = () => {
                         </div>
                       </div>
                       <div className=" flex">
-                        <div className="  mr-4 bg-transparent outline outline-[3px] outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
+                        <div className="  mr-4 bg-transparent outline outline-[2px] outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
                           4 Links
                         </div>
                         <img src={ellipsis_secondary} className=" h-6" alt="" />

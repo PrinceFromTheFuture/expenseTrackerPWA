@@ -20,7 +20,7 @@ const Accounts = () => {
   ];
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   return (
-    <div className=" w-full mt-4 min-h-[100vh]">
+    <div className=" w-full mt-4 min-h-[800vh]">
       <div className=" mb-8">
         {" "}
         <div className=" w-full flex justify-end">
@@ -73,7 +73,7 @@ const Accounts = () => {
                       </div>
                     </div>
                     <div className=" flex">
-                      <div className="  mr-4 bg-transparent outline outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
+                      <div className="  mr-4 bg-transparent outline outline-3 outline-secondary text-secondary rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1  ">
                         4 Links
                       </div>
                       <img src={ellipsis_secondary} className=" h-6" alt="" />

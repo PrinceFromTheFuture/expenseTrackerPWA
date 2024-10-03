@@ -20,7 +20,7 @@ const Accounts = () => {
   ];
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   return (
-    <div className=" w-full mt-4 min-h-[800vh]">
+    <div className=" w-full mt-4 min-h-[80vh]">
       <div className=" mb-8">
         {" "}
         <div className=" w-full flex justify-end">

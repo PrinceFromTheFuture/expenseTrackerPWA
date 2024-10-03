@@ -20,7 +20,7 @@ const Accounts = () => {
   ];
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   return (
-    <div className=" w-full mt-4 min-h-full">
+    <div className=" w-full mt-4 min-h-[100vh]">
       <div className=" mb-8">
         {" "}
         <div className=" w-full flex justify-end">
@@ -30,7 +30,7 @@ const Accounts = () => {
         </div>
         <div className=" flex justify-center flex-col items-center mt-2">
           {" "}
-          <div className=" text-container font-semibold">current blanace</div>
+          <div className=" text-secondary font-semibold">current blanace</div>
           <div className=" text-4xl text-dark font-extrabold mb-2">{formatAmountInAgorot(3243434 || 0, true)}</div>
           <div className=" bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold text-success">1234.34 (124.24%)</div>
         </div>

@@ -129,21 +129,6 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
           <div className=" bg-surface w-full mx-4 rounded-2xl p-4">
             <div className=" font-semibold text-xl text-dark mt-4 mb-8">{mode === "new" ? "Create new" : "Edit"} account</div>
             <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
-            <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
-              <img className=" w-6 h-6" src={tag_main} />
-              <div className=" w-full">
-                {" "}
-                <div className="text-sm  text-main font-bold text-left"> Name</div>
-                <input
-                  type="name"
-                  value={selectedName ? selectedName : ""}
-                  onChange={handleNameChange}
-                  placeholder="Outside Food"
-                  className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
-                />
-              </div>
-            </Touchable>
-            <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
             <label htmlFor="test">
               <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
                 <img className=" w-6 h-6" src={ILS_symbol_main} />
@@ -166,6 +151,21 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
                 setBalanceInAgorot(Number(e.target.value));
               }}
             />
+            <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
+            <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
+              <img className=" w-6 h-6" src={tag_main} />
+              <div className=" w-full">
+                {" "}
+                <div className="text-sm  text-main font-bold text-left"> Name</div>
+                <input
+                  type="name"
+                  value={selectedName ? selectedName : ""}
+                  onChange={handleNameChange}
+                  placeholder="Outside Food"
+                  className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
+                />
+              </div>
+            </Touchable>
 
             <div className=" flex justify-between items-start gap-6">
               <div>

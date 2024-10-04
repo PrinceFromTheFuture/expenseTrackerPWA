@@ -21,7 +21,7 @@ import { postNewBudgetAsyncThunk } from "@/redux/budgetsSlice";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import { format } from "path";
-import ILS_symbol_main from '@/assets/ils_symbol_main.svg'
+import ILS_symbol_main from "@/assets/ils_symbol_main.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 
 const IconSelector = ({
@@ -100,6 +100,7 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
 
   const dispatch = useAppDispatch();
   const [selectedName, setSelectedName] = useState<null | string>(null);
+  const [balanceInAgorot, setBalanceInAgorot] = useState(4);
   const [isSelectIconDialogOpen, setIsSelectIconDialogOpen] = useState(false);
 
   const [selectedIcon, setSelectedIcon] = useState<string>(icons[0]);
@@ -143,20 +144,28 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
               </div>
             </Touchable>
             <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
-            <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
-              <img className=" w-6 h-6" src={ILS_symbol_main} />
-              <div className=" w-full">
-                {" "}
-                <div className="text-sm  text-main font-bold text-left"> Balance</div>
-                <input
-                  type="number"
-                  value={selectedName ? selectedName : ""}
-                  onChange={handleNameChange}
-                  placeholder={formatAmountInAgorot(32443298, true)}
-                  className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
-                />
-              </div>
-            </Touchable>
+            <label htmlFor="test">
+              <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
+                <img className=" w-6 h-6" src={ILS_symbol_main} />
+                <div className=" w-full">
+                  {" "}
+                  <div className="text-sm  text-main font-bold text-left"> Balance</div>
+                  <div className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent">
+                    {String(formatAmountInAgorot(balanceInAgorot, true))}
+                  </div>
+                </div>
+              </Touchable>
+            </label>
+            <input
+              type="number"
+              name="test"
+              id="test"
+              className="   absolute opacity-0 top-0 left-0 "
+              value={balanceInAgorot}
+              onChange={(e) => {
+                setBalanceInAgorot(Number(e.target.value));
+              }}
+            />
 
             <div className=" flex justify-between items-start gap-6">
               <div>

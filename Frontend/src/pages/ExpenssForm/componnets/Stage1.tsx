@@ -1,6 +1,6 @@
 import delete_surfce from "@/assets/delete_surface.svg";
-import Icon from "@/components/ui/Icon";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import Icon from "@/components/Icon";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import { cn } from "@/lib/utils";
 import {
@@ -12,7 +12,7 @@ import {
   formDataSelector,
 } from "@/redux/formSlice";
 import { userBalanceSelector } from "@/redux/userSlice";
-import Touchable from "@/components/ui/generalComponents/Touchable";
+import Touchable from "@/components/Touchable";
 import React from "react";
 
 const NumberInputBox = ({
@@ -76,9 +76,7 @@ const Stage1 = () => {
         <div className=" border-b-2 border-secondary w-full flex justify-between items-center pb-1">
           <div className=" font-bold text-lg invisible">X</div>
           <div className=" flex gap-1 justify-center items-top">
-            <div className=" text-4xl text-dark font-extrabold">
-              {formatAmountInAgorot(formAmount, false)}
-            </div>
+            <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(formAmount, false)}</div>
             <div className="  text-main font-extrabold text-2xl">₪</div>
           </div>
           <div className=" font-bold text-lg" onClick={() => handleClearNumberFromFormAmount()}>

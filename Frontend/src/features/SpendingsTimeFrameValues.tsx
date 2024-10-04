@@ -1,10 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { formatAmountInAgorot } from "../../../lib/formatAmountInAgorot";
-import { useAppSelector } from "../../../lib/hooks/hooks";
-import { spendingsTimeFramePreferenceSelector } from "../../../redux/userPreferencesSlice";
-import { SpendingsTimeFrameSelector } from "../../../redux/userSlice";
-import { RootState } from "../../../redux/store";
-import generalTransition from "../../../lib/generalTransition";
+import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
+import { useAppSelector } from "../hooks/hooks";
+import { spendingsTimeFramePreferenceSelector } from "../redux/userPreferencesSlice";
+import { SpendingsTimeFrameSelector } from "../redux/userSlice";
+import { RootState } from "../redux/store";
+import generalTransition from "../lib/generalTransition";
 
 const SpendingsTimeFrameValues = () => {
   const oneDaysSpendings = useAppSelector((state: RootState) => SpendingsTimeFrameSelector(state, "1d"));

@@ -1,4 +1,4 @@
-import Icon from "@/components/ui/Icon";
+import Icon from "@/components/Icon";
 import edit_main from "@/assets/edit_main.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";

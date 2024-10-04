@@ -1,13 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import {
-  HTTPGetSpendingsInTimeFrame,
-  HTTPGetUserBalance,
-  HTTPSignInUser,
-  HTTPSignOutUser,
-  HTTPSignUpUser,
-  HTTPVerifyToken,
-} from "@/lib/http.requests";
+import http from "@/lib/http/index";
 
 interface User {
   oneDaySpendings: number | null;
@@ -37,7 +30,7 @@ export const getSpendingsInTimeFrameAsyncThunk = createAsyncThunk(
   "/user/getSpendingsInTimeFrame",
   async (args: { from: string; to: string; defenition: "1d" | "7d" | "30d" }) => {
     const { from, to } = args;
-    const data = await HTTPGetSpendingsInTimeFrame({
+    const data = await http.HTTPGetSpendingsInTimeFrame({
       from,
       to,
     });
@@ -46,25 +39,25 @@ export const getSpendingsInTimeFrameAsyncThunk = createAsyncThunk(
 );
 
 export const getUserBalanceAsyncThunk = createAsyncThunk("/users/getBalance", async () => {
-  const data = await HTTPGetUserBalance();
+  const data = await http.HTTPGetUserBalance();
   return data;
 });
 
 export const verifyUserTokenAsyncTunk = createAsyncThunk("users/acessTokenVerification", async () => {
-  const data = await HTTPVerifyToken();
+  const data = await http.HTTPVerifyToken();
   return data;
 });
 
 export const signInAsyncTunk = createAsyncThunk("users/signIn", async (args: { email: string; password: string }) => {
-  const data = await HTTPSignInUser(args);
+  const data = await http.HTTPSignInUser(args);
   return data;
 });
 export const signUpAsyncTunk = createAsyncThunk("users/signUp", async (args: { email: string; password: string; name: string | null }) => {
-  const data = await HTTPSignUpUser({ ...args, name: "User" });
+  const data = await http.HTTPPostSignUpUser({ ...args, name: "User" });
   return data;
 });
 export const signOutAsyncTunk = createAsyncThunk("users/signOut", async () => {
-  const data = await HTTPSignOutUser();
+  const data = await http.HTTPPostSignOutUser();
   return data;
 });
 
@@ -147,7 +140,6 @@ export const SpendingsTimeFrameSelector = (state: RootState, timeFrame: "1d" | "
       return state.userSlice.user.thirtyDaySpendings;
   }
 };
-
 
 export const userBalanceSelector = (state: RootState) => state.userSlice.user.balance;
 

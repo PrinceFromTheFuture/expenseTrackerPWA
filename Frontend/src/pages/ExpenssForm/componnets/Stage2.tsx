@@ -4,14 +4,14 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import { cn } from "@/lib/utils";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { allBugdetsSelctor, getBudgetsStatus } from "@/redux/budgetsSlice";
 import { formDataSelector, selectBudgetInForm } from "@/redux/formSlice";
-import Icon from "@/components/ui/Icon";
-import Touchable from "@/components/ui/generalComponents/Touchable";
+import Icon from "@/components/Icon";
+import Touchable from "@/components/Touchable";
 import plus_surface from "@/assets/plus_surface.svg";
-import NewBudget from "@/components/ui/generalComponents/NewBudget";
-import { Skeleton } from "@/components/ui/skeleton";
+import NewBudget from "@/features/NewBudget";
+import { Skeleton } from "@/components/skeleton";
 const Stage2 = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -69,11 +69,7 @@ const Stage2 = () => {
                       className="  bg-container rounded-full"
                     ></motion.div>
                   </motion.div>
-                  <Icon
-                    backgroundColor={`#${budget.color}`}
-                    src={`${budget.iconURL}F8FBFD.svg`}
-                    varient="small"
-                  />
+                  <Icon backgroundColor={`#${budget.color}`} src={`${budget.iconURL}F8FBFD.svg`} varient="small" />
                   <div className=" text-dark font-bold mx-2 text-center flex-wrap">{budget.name} </div>
                 </Touchable>
               );
@@ -90,10 +86,7 @@ const Stage2 = () => {
           <>
             {Array.from([1, 2, 3, 4], (index) => {
               return (
-                <Skeleton
-                  key={index}
-                  className=" h-36 full flex-col   min-h-24 rounded-2xl   relative flex justify-center items-center"
-                >
+                <Skeleton key={index} className=" h-36 full flex-col   min-h-24 rounded-2xl   relative flex justify-center items-center">
                   <Skeleton className=" flex justify-center  items-center absolute top-4 left-4 w-4 h-4 rounded-full "></Skeleton>
                   <Skeleton className="  w-8 h-8 rounded-full mt-2"></Skeleton>
                   <Skeleton className="  w-12 h-4 mt-2"></Skeleton>

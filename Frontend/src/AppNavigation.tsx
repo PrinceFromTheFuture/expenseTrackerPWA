@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import { AnimatePresence, motion } from "framer-motion";
-import Touchable from "./components/ui/generalComponents/Touchable";
+import Touchable from "./components/Touchable";
 import { Link } from "react-router-dom";
 import home_main from "@/assets/navLinks/home_main.svg";
 import coins_main from "@/assets/navLinks/coins_main.svg";

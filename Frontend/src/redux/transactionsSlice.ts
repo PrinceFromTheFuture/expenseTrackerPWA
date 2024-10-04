@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { Transaction } from "@/types";
-import { HTTPDeleteTransaction, HTTPGetAllTransactions, HTTPPostNewTransaction, HTTPPPutNewTransaction } from "@/lib/http.requests";
+import http from "@/lib/http";
 
 export const getAllTransactionsAsyncThunk = createAsyncThunk("transactions/getAll", async () => {
-  return await HTTPGetAllTransactions();
+  return await http.HTTPGetAllTransactions();
 });
 
 export const postNewTransactionAsyncThunk = createAsyncThunk("form/postNewTransaction", async (_, thunkApi) => {
@@ -15,7 +15,7 @@ export const postNewTransactionAsyncThunk = createAsyncThunk("form/postNewTransa
   if (!title) {
     title = "Untitled Transaction";
   }
-  const savedTransaction = await HTTPPostNewTransaction({
+  const savedTransaction = await http.HTTPPostNewTransaction({
     budgetId,
     amountInAgorot,
     date,
@@ -34,7 +34,7 @@ export const updateNewTransactionAsyncThunk = createAsyncThunk("form/updateNewTr
   if (!title) {
     title = "Untitled Transaction";
   }
-  const data = await HTTPPPutNewTransaction({
+  const data = await http.HTTPPPutNewTransaction({
     budgetId,
     amountInAgorot,
     date,
@@ -47,7 +47,7 @@ export const updateNewTransactionAsyncThunk = createAsyncThunk("form/updateNewTr
 });
 
 export const deleteTransactionAsyncThunk = createAsyncThunk("transactions/deleteTransaction", async (transactionsId: string) => {
-  const data = await HTTPDeleteTransaction(transactionsId);
+  const data = await http.HTTPDeleteTransaction(transactionsId);
   return data;
 });
 

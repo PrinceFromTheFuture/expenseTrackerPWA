@@ -1,7 +1,7 @@
-import Touchable from "@/components/ui/generalComponents/Touchable";
-import Icon from "@/components/ui/Icon";
+import Touchable from "@/components/Touchable";
+import Icon from "@/components/Icon";
 import generalTransition from "@/lib/generalTransition";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import { getBudgetNameByIdSelector } from "@/redux/budgetsSlice";
@@ -31,9 +31,7 @@ const ReviewBeforeSubmit = () => {
     : "Untitled Transaction";
 
   const formDataBudgetName = useAppSelector((state) => getBudgetNameByIdSelector(state, formData.budgetId!));
-  const formDatePaymentMethodName = useAppSelector((state) =>
-    getPaymentMethodNameByIdSelector(state, formData.paymentMethodId!)
-  );
+  const formDatePaymentMethodName = useAppSelector((state) => getPaymentMethodNameByIdSelector(state, formData.paymentMethodId!));
   const handleSubmit = async () => {
     navigate("/");
     if (formData.editMode) {
@@ -75,9 +73,7 @@ const ReviewBeforeSubmit = () => {
         <div className=" mx-2">
           <div className="  flex mb-5 justify-between items-center w-full">
             <div className="text-sm text-secondary text-left font-semibold">date and time</div>
-            <div className="text-sm text-dark text-left font-bold">
-              {dayjs(formData.date).format("DD.MM.YYYY HH:mm")}
-            </div>
+            <div className="text-sm text-dark text-left font-bold">{dayjs(formData.date).format("DD.MM.YYYY HH:mm")}</div>
           </div>
           <div className=" flex mb-5 justify-between items-center w-full">
             <div className="text-sm text-secondary text-left font-semibold">expenses title</div>
@@ -91,37 +87,18 @@ const ReviewBeforeSubmit = () => {
             <div className="text-sm text-secondary text-left font-semibold">payment method</div>
             <div className="text-sm text-dark text-left font-bold">{formDatePaymentMethodName}</div>
           </div>
-          <svg
-            className=" mb-3 w-full px-1"
-            width="829"
-            height="10"
-            viewBox="0 0 829 6"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <line
-              x1="2.62268e-07"
-              y1="3"
-              x2="829"
-              y2="4.00007"
-              stroke="#BECDD5"
-              stroke-width="7"
-              stroke-dasharray="12 12"
-            />
+          <svg className=" mb-3 w-full px-1" width="829" height="10" viewBox="0 0 829 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="2.62268e-07" y1="3" x2="829" y2="4.00007" stroke="#BECDD5" stroke-width="7" stroke-dasharray="12 12" />
           </svg>
           <div className=" flex justify-between items-center w-full">
             <div className="text-sm text-secondary text-left font-semibold">total amount</div>
-            <div className="text-sm text-dark text-left font-bold">
-              {formatAmountInAgorot(formData.amountInAgorot, true)}
-            </div>
+            <div className="text-sm text-dark text-left font-bold">{formatAmountInAgorot(formData.amountInAgorot, true)}</div>
           </div>
         </div>
       </div>
       <div className=" w-full justify-between flex items-center gap-2">
         <AlertDialogCancel className=" w-full ">
-          <Touchable className=" w-full bg-container rounded-2xl font-semibold text-secondary p-4">
-            Cancel
-          </Touchable>
+          <Touchable className=" w-full bg-container rounded-2xl font-semibold text-secondary p-4">Cancel</Touchable>
         </AlertDialogCancel>
         <AlertDialogAction onClick={handleSubmit} className=" w-full ">
           <Touchable className=" flex justify-center items-center gap-2 w-full bg-main rounded-2xl font-semibold text-surface p-4">

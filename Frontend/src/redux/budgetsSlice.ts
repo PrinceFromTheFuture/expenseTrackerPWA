@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { Bugdet } from "@/types";
-import { HTTPGetAllBudgets, HTTPPostNewBudget } from "@/lib/http.requests";
+import http from "@/lib/http/index";
 
 export const getAllBudgetsAsyncThunk = createAsyncThunk("budgets/getAll", async () => {
-  return await HTTPGetAllBudgets();
+  return await http.HTTPGetAllBudgets();
 });
 export const postNewBudgetAsyncThunk = createAsyncThunk("budgets/postNew", async (args: { name: string; color: string; iconURL: string }) => {
-  const response = await HTTPPostNewBudget(args);
+  const response = await http.HTTPPostNewBudget(args);
   return response;
 });
 

@@ -26,7 +26,7 @@ const signIn = async (req: Request, res: Response) => {
 
   const userFound = usersFoundWithProvidedEmail[0];
 
-const isPasswordCorrect = await bcrypt.compare(password, userFound.hashedPassword);
+  const isPasswordCorrect = await bcrypt.compare(password, userFound.hashedPassword);
   if (isPasswordCorrect === false) {
     res.json({ success: false, message: "password inncorect" });
     return;
@@ -34,7 +34,7 @@ const isPasswordCorrect = await bcrypt.compare(password, userFound.hashedPasswor
 
   const token = signJWTToken(userFound);
 
-  res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 100000000 }).json({ success: true, userId: userFound.id });
+  res.cookie("token", token, { httpOnly: true, secure: false, maxAge: 100000000 }).json({ success: true, userId: userFound.id });
   return;
 };
 export default signIn;

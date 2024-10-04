@@ -37,15 +37,13 @@ server.use(express.urlencoded({ extended: true })); // Specify the extended op
 
 const port = process.env.PORT || 3000;
 const envoirmennt = process.env.environment as "DEVELOPMENT" | "PRODUCTION" | undefined;
+
 if (!envoirmennt) {
   console.log("the envoirment mode is not readable or not configured properly");
   process.abort();
 }
 console.log(envoirmennt);
-const DBConnectionString =
-  envoirmennt === "PRODUCTION"
-    ? process.env.PRODUCTION_DB_CONNECTION_STRING
-    : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
+const DBConnectionString = envoirmennt === "PRODUCTION" ? process.env.PRODUCTION_DB_CONNECTION_STRING : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
 
 if (!DBConnectionString) {
   console.log("the data base connection string is not readable or not configured properly");
@@ -65,6 +63,7 @@ server.use("/api/accounts", accountsRouter);
 
 function initilizeServer() {
   try {
+    //@ts-ignore
     server.listen(port, () => {
       console.log(`server is up and running on port: ${port}`);
     });

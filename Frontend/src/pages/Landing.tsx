@@ -2,7 +2,7 @@ import generalTransition from "@/lib/generalTransition";
 import React from "react";
 import { motion } from "framer-motion";
 import app_icon from "@/assets/app_icon.svg";
-import Touchable from "@/components/ui/generalComponents/Touchable";
+import Touchable from "@/components/Touchable";
 import google_icon from "@/assets/google__logo.svg";
 import { Link } from "react-router-dom";
 

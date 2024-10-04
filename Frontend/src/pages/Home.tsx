@@ -1,15 +1,15 @@
-import ExpensesWidget from "../components/ui/generalComponents/ExpensesWidget";
+import ExpensesWidget from "../features/ExpensesWidget";
 
-import Icon from "../components/ui/Icon";
+import Icon from "../components/Icon";
 import edit_main from "@/assets/edit_main.svg";
 import bell_surface from "@/assets/bell_surface.svg";
 
-import SpendingsTimeFrame from "../components/ui/generalComponents/SpendingsTimeFrame";
-import Touchable from "../components/ui/generalComponents/Touchable";
-import { useAppDispatch, useAppSelector } from "../lib/hooks/hooks";
+import SpendingsTimeFrame from "../features/SpendingsTimeFrame";
+import Touchable from "../components/Touchable";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/redux/transactionsSlice";
 
-import SpendingsTimeFrameValues from "@/components/ui/generalComponents/SpendingsTimeFrameValues";
+import SpendingsTimeFrameValues from "@/features/SpendingsTimeFrameValues";
 import ExpensesWidgetSkeleton from "../components/skeletons/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
 import { signOutAsyncTunk, userBalanceSelector } from "../redux/userSlice";
@@ -74,12 +74,7 @@ const Home = () => {
             .map((transaction) => {
               return (
                 <AnimatePresence key={transaction.id}>
-                  <motion.div
-                    layout
-                    animate={{ opacity: 1, height: "auto" }}
-                    initial={{ opacity: 0, height: 0 }}
-                    exit={{ opacity: 0, height: 0 }}
-                  >
+                  <motion.div layout animate={{ opacity: 1, height: "auto" }} initial={{ opacity: 0, height: 0 }} exit={{ opacity: 0, height: 0 }}>
                     <ExpensesWidget transactionId={transaction.id} />
                   </motion.div>
                 </AnimatePresence>

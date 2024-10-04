@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import Touchable from "@/components/ui/generalComponents/Touchable";
+import Touchable from "./Touchable";
 
 const Icon = ({ varient, src, backgroundColor }: { varient: "full" | "mid" | "small"; src: string; backgroundColor?: string }) => {
   switch (varient) {
@@ -8,7 +8,7 @@ const Icon = ({ varient, src, backgroundColor }: { varient: "full" | "mid" | "sm
     case "mid":
       return (
         <Touchable className=" w-10 h-10 bg-container rounded-2xl flex justify-center items-center">
-          <img src={src} alt="" className=" w-4" />
+          <img src={src} alt="" className=" w-4 h-6" />
         </Touchable>
       );
     case "small":

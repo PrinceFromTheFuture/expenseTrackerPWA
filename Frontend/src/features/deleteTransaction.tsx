@@ -1,14 +1,15 @@
 import React from "react";
-import Touchable from "./Touchable";
+import Touchable from "../components/Touchable";
 import { AnimatePresence } from "framer-motion";
 import exit_main from "@/assets/exit_main.svg";
-import Icon from "../Icon";
+import Icon from "../components/Icon";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
-import { DrawerPortal } from "../drawer";
-import { useAppDispatch } from "@/lib/hooks/hooks";
+import { DrawerPortal } from "../components/drawer";
+import { useAppDispatch } from "@/hooks/hooks";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import { deleteTransactionAsyncThunk } from "@/redux/transactionsSlice";
+import DeleteWarning from "./DeleteWarning";
 
 const DeleteTransaction = ({
   isDialogOpen,
@@ -43,42 +44,14 @@ const DeleteTransaction = ({
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 transition={generalTransition}
-                className=" w-full gap-8 shadow-xl justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+                className=" w-full shadow-xl justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
               >
                 <div className=" w-full">
                   <div>
                     <Icon src={exit_main} varient="mid" />
                   </div>
                 </div>
-                <div className=" w-full  flex flex-col justify-center items-center ">
-                  <div className=" text-xl mb-2  text-dark font-bold">Are you sure?!</div>
-
-                  <div className=" w-full  flex flex-col justify-center items-center ">
-                    <div className=" text-md text-center  mb-2 text-secondary font-semibold">
-                      This action cannot be undone. This will permanently delete{" "}
-                    </div>
-                  </div>
-                </div>
-                <div className=" w-full justify-between flex items-center gap-2">
-                  <div className=" w-full ">
-                    <Touchable
-                      onClick={() => onConfirmDelete()}
-                      className=" w-full text-center bg-warning rounded-2xl font-semibold text-surface p-4"
-                    >
-                      Delete
-                    </Touchable>
-                  </div>
-                  <div className=" w-full ">
-                    <Touchable
-                      onClick={() => {
-                        setIsDialogOpen(false);
-                      }}
-                      className=" flex justify-center items-center gap-2 w-full bg-container rounded-2xl font-semibold text-secondary p-4"
-                    >
-                      <div>Cancel</div>
-                    </Touchable>
-                  </div>
-                </div>
+                <DeleteWarning onConfirmDelete={() => onConfirmDelete()} onCancel={() => setIsDialogOpen(false)} />
               </motion.div>
             </AnimatePresence>
           </motion.div>

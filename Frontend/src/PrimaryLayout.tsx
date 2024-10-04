@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import getAllDataFromAPI from "./lib/getAllDataFromAPI";
-import { useAppDispatch } from "./lib/hooks/hooks";
+import { useAppDispatch } from "./hooks/hooks";
 import { Outlet } from "react-router-dom";
 
 const PrimaryLayout = () => {
@@ -16,6 +16,7 @@ const PrimaryLayout = () => {
   }, []);
 
   useEffect(() => {
+    setTimeout(() => {}, 2000);
     getAllDataFromAPI(dispatch);
   }, []);
 

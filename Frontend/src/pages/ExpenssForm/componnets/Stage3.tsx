@@ -1,5 +1,5 @@
-import { Calendar } from "@/components/ui/calendar";
-import Touchable from "@/components/ui/generalComponents/Touchable";
+import { Calendar } from "@/components/calendar";
+import Touchable from "@/components/Touchable";
 import { AnimatePresence, motion } from "framer-motion";
 import calender_main from "@/assets/calender_main.svg";
 import clock_main from "@/assets/clock_main.svg";
@@ -9,8 +9,8 @@ import generalTransition from "@/lib/generalTransition";
 
 import dayjs from "dayjs";
 import { formDataSelector, modifyDateInForm } from "@/redux/formSlice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import TimePicker from "./TimePicker";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import TimePicker from "../../../features/TimePicker";
 
 const Stage3 = () => {
   const [openMenu, setIsOpenMenu] = useState<"date" | "time">("date");

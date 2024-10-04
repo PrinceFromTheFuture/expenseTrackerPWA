@@ -1,11 +1,11 @@
-import Icon from "@/components/ui/Icon";
-import Touchable from "@/components/ui/generalComponents/Touchable";
+import Icon from "@/components/Icon";
 import edit_main from "@/assets/edit_main.svg";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import { formDataSelector, modifyPaymentMethodInForm } from "@/redux/formSlice";
+import Touchable from "@/components/Touchable";
 
 const Stage5 = () => {
   const allPaymentMethods = useAppSelector(allPaymentMethodsSelector);

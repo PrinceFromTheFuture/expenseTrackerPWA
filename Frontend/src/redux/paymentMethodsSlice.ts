@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { PaymentMethod } from "@/types";
-import { HTTPGetAllPaymentMethods } from "@/lib/http.requests";
+import http from "@/lib/http/index";
 
 export const getAllPaymentMethodsAsyncThunk = createAsyncThunk("paymentMethods/getAll", async () => {
-  return await HTTPGetAllPaymentMethods();
+  return await http.HTTPGetAllPaymentMethods();
 });
 
 const initialState: PaymentMethod[] = [

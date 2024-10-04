@@ -1,6 +1,5 @@
-import Icon from "@/components/ui/Icon";
+import Icon from "@/components/Icon";
 import generalTransition from "@/lib/generalTransition";
-import Touchable from "@/components/ui/generalComponents/Touchable";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import arrow_main from "@/assets/arrow-main.svg";
@@ -8,17 +7,18 @@ import edit_main from "@/assets/edit_main.svg";
 
 import { Link, useNavigate } from "react-router-dom";
 import exit_main from "@/assets/exit_main.svg";
-import Stage1 from "./Stage1";
-import Stage2 from "./Stage2";
-import Stage3 from "./Stage3";
-import Stage4 from "./Stage4";
-import Stage5 from "./Stage5";
+import Stage1 from "./componnets/Stage1";
+import Stage2 from "./componnets/Stage2";
+import Stage3 from "./componnets/Stage3";
+import Stage4 from "./componnets/Stage4";
+import Stage5 from "./componnets/Stage5";
 import { clearAllInForm, decrementStageInForm, formDataSelector, incrementStageInForm } from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks/hooks";
-import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/ui/alert-dialog";
-import ReviewBeforeSubmit from "./ReviewBeforeSubmit";
-import StageProgressBar from "./StageProgressBar";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/alert-dialog";
+import ReviewBeforeSubmit from "./componnets/ReviewBeforeSubmit";
+import StageProgressBar from "./componnets/StageProgressBar";
+import Touchable from "@/components/Touchable";
 
 const ExpenssForm = () => {
   const formData = useAppSelector(formDataSelector);

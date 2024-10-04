@@ -13,9 +13,9 @@ import React, { useState } from "react";
 import exit_main from "@/assets/exit_main.svg";
 import DeleteWarning from "./DeleteWarning";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import { getAccountByIdSelector } from "@/redux/accountsSlice";
+import { getAccountByIdSelector, postNewAccountAsyncThunk, updateAccountByIdAsynkThunk } from "@/redux/accountsSlice";
 import { AnimatePresence } from "framer-motion";
-import icons from "@/lib/icons";
+import { accountIcons } from "@/lib/icons";
 import colors from "@/lib/colors";
 import { postNewBudgetAsyncThunk } from "@/redux/budgetsSlice";
 import { motion } from "framer-motion";
@@ -23,6 +23,8 @@ import generalTransition from "@/lib/generalTransition";
 import { format } from "path";
 import ILS_symbol_main from "@/assets/ils_symbol_main.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
+import { DialogClose } from "@radix-ui/react-dialog";
+import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 
 const IconSelector = ({
   setSelectedIcon,
@@ -64,7 +66,7 @@ const IconSelector = ({
                   className=" max-h-[60vh]   overflow-y-auto w-full  grid grid-cols-4 gap-2 my-4   justify-start "
                 >
                   {" "}
-                  {icons.map((icon) => {
+                  {accountIcons.map((icon) => {
                     return (
                       <div
                         onClick={() => {
@@ -75,7 +77,7 @@ const IconSelector = ({
                         style={{ backgroundColor: icon === selectedIcon ? "#f0f4f7 " : "#f8fbfd" }}
                         className=" p-4 flex justify-center  items-center transition-all  bg-surface rounded-2xl "
                       >
-                        <img src={`${icon}0D6680.svg`} alt="" className=" w-10 h-10" />
+                        <img src={icon} alt="" className=" w-10 h-10" />
                       </div>
                     );
                   })}
@@ -93,26 +95,43 @@ type Props = {
   trigger: React.ReactNode;
   accountId?: string;
 };
-const NewAccountForm = ({ trigger, accountId }: Props) => {
+const AccountForm = ({ trigger, accountId }: Props) => {
   const account = useAppSelector((state) => getAccountByIdSelector(state, accountId));
   const mode = account === undefined ? "new" : "edit";
   // an undefined account will fallback to default mode of new account
 
   const dispatch = useAppDispatch();
-  const [selectedName, setSelectedName] = useState<null | string>(null);
-  const [balanceInAgorot, setBalanceInAgorot] = useState(4);
-  const [isSelectIconDialogOpen, setIsSelectIconDialogOpen] = useState(false);
 
-  const [selectedIcon, setSelectedIcon] = useState<string>(icons[0]);
+  const [selectedName, setSelectedName] = useState<null | string>(account ? account.name : null);
+  const [balanceInAgorot, setBalanceInAgorot] = useState(account ? account.balanceInAgorot : 0);
+  const [selectedIcon, setSelectedIcon] = useState<string>(account ? account.iconURL : accountIcons[0]);
+  const [isSelectIconDialogOpen, setIsSelectIconDialogOpen] = useState(false);
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 25) {
       setSelectedName(e.target.value);
     }
   };
-  const handleSaveNewBudget = () => {};
+  const handleBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) < 10000000000) {
+      setBalanceInAgorot(Number(e.target.value));
+    }
+  };
 
   const handleChangeIsSelectIconDialogOpen = () => {
     setIsSelectIconDialogOpen(!isSelectIconDialogOpen);
+  };
+
+  const onSave = async () => {
+    if (mode === "new") {
+      await dispatch(postNewAccountAsyncThunk({ balanceInAgorot, iconURL: selectedIcon, name: selectedName! }));
+      getAllDataFromAPI(dispatch);
+      setSelectedName(null);
+      setSelectedIcon(accountIcons[0]);
+      setBalanceInAgorot(0);
+    } else {
+      await dispatch(updateAccountByIdAsynkThunk({ balanceInAgorot, iconURL: selectedIcon, name: selectedName!, id: accountId! }));
+      getAllDataFromAPI(dispatch);
+    }
   };
 
   return (
@@ -124,12 +143,17 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
           )}
         </AnimatePresence>
 
-        <AlertDialogTrigger className=" ">{trigger}</AlertDialogTrigger>
+        <AlertDialogTrigger className=" w-full text-left ">{trigger}</AlertDialogTrigger>
         <AlertDialogContent>
           <div className=" bg-surface w-full mx-4 rounded-2xl p-4">
+            <AlertDialogCancel>
+              <div>
+                <Icon src={exit_main} varient="mid" />
+              </div>
+            </AlertDialogCancel>
             <div className=" font-semibold text-xl text-dark mt-4 mb-8">{mode === "new" ? "Create new" : "Edit"} account</div>
             <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
-            <label htmlFor="test">
+            <label htmlFor="balanceInAgorot">
               <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
                 <img className=" w-6 h-6" src={ILS_symbol_main} />
                 <div className=" w-full">
@@ -143,13 +167,11 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
             </label>
             <input
               type="number"
-              name="test"
-              id="test"
-              className="   absolute opacity-0 top-0 left-0 "
+              name="balanceInAgorot"
+              id="balanceInAgorot"
+              className="absolute opacity-0 top-0 left-0 "
               value={balanceInAgorot}
-              onChange={(e) => {
-                setBalanceInAgorot(Number(e.target.value));
-              }}
+              onChange={handleBalanceChange}
             />
             <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
             <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
@@ -161,7 +183,7 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
                   type="name"
                   value={selectedName ? selectedName : ""}
                   onChange={handleNameChange}
-                  placeholder="Outside Food"
+                  placeholder="Cash, Leumi, Savings..."
                   className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
                 />
               </div>
@@ -175,16 +197,14 @@ const NewAccountForm = ({ trigger, accountId }: Props) => {
                   className=" 
 outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-container w-14 h-14 flex justify-center items-center  p-3 rounded-2xl"
                 >
-                  <img src={`${selectedIcon}.svg`} alt="" className=" w-6" />{" "}
+                  <img src={selectedIcon} alt="" className=" w-6" />{" "}
                 </div>
               </div>
               <div className="flex-1 mb-8"></div>
             </div>
             <div className=" flex gap-2">
-              <AlertDialogAction className=" w-full " disabled={selectedName ? false : true}>
-                <Touchable onClick={handleSaveNewBudget} className=" mt-5 w-full p-4 bg-main text-sm font-bold  rounded-2xl text-surface">
-                  Save
-                </Touchable>
+              <AlertDialogAction onClick={onSave} className=" w-full " disabled={!selectedName || !selectedIcon}>
+                <Touchable className=" mt-5 w-full p-4 bg-main text-sm font-bold  rounded-2xl text-surface">Save</Touchable>
               </AlertDialogAction>
             </div>
           </div>
@@ -194,4 +214,4 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
   );
 };
 
-export default NewAccountForm;
+export default AccountForm;

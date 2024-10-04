@@ -68,7 +68,19 @@ const serverDefnition = {
         },
       ],
     },
-    accounts: { endpoints: [{ path: "/", method: "GET", response: Object.prototype as Account[] }] },
+    accounts: {
+      endpoints: [
+        { path: "/", method: "GET", response: Object.prototype as Account[] },
+        {
+          path: "/",
+          method: "POST",
+          request: Object.prototype as { name: string; balanceInAgorot: number; iconURL: string },
+          response: Object.prototype as { success: boolean; message?: string },
+        },
+        { path: "/:accountId", method: "PUT", response: Object.prototype as { success: boolean; message?: string } },
+        { path: "/:accountId", method: "DELETE", response: Object.prototype as { success: boolean; message?: string } },
+      ],
+    },
     auth: {
       endpoints: [
         {

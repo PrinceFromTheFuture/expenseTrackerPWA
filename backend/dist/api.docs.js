@@ -66,7 +66,19 @@ const serverDefnition = {
                 },
             ],
         },
-        accounts: { endpoints: [{ path: "/", method: "GET", response: Object.prototype }] },
+        accounts: {
+            endpoints: [
+                { path: "/", method: "GET", response: Object.prototype },
+                {
+                    path: "/",
+                    method: "POST",
+                    request: Object.prototype,
+                    response: Object.prototype,
+                },
+                { path: "/:accountId", method: "PUT", response: Object.prototype },
+                { path: "/:accountId", method: "DELETE", response: Object.prototype },
+            ],
+        },
         auth: {
             endpoints: [
                 {

@@ -17,7 +17,14 @@ const shield = "/icons/shield/";
 const shirt = "/icons/shirt/";
 const stroller = "/icons/stroller/";
 
-const icons = [
+const cash = "accountIcons/cash.svg";
+const discont = "accountIcons/discont.svg";
+const hapoalim = "accountIcons/hapoalim.svg";
+const leumi = "accountIcons/leumi.svg";
+const mizrachiTifchot = "accountIcons/mizrachiTifchot.svg";
+const paypal = "accountIcons/paypal.svg";
+
+export const budgetIcons = [
   calender,
   cart,
   shirt,
@@ -38,4 +45,4 @@ const icons = [
   stroller,
 ];
 
-export default icons;
+export const accountIcons = [cash, leumi, paypal, mizrachiTifchot, hapoalim, discont];

@@ -16,6 +16,7 @@ import authRouter from "./routes/endpoints/authRouter.js";
 import cookieParser from "cookie-parser";
 import { drizzle } from "drizzle-orm/neon-http";
 import accountsRouter from "./routes/endpoints/accountsRouter.js";
+import serverDefnition from "./api.docs.js";
 
 configDotenv();
 
@@ -64,7 +65,7 @@ server.use("/api/accounts", accountsRouter);
 function initilizeServer() {
   try {
     //@ts-ignore
-    server.listen(port, () => {
+    server.listen(port, "0.0.0.0", () => {
       console.log(`server is up and running on port: ${port}`);
     });
   } catch (e) {

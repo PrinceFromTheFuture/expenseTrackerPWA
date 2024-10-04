@@ -49,7 +49,7 @@ server.use("/api/accounts", accountsRouter);
 function initilizeServer() {
     try {
         //@ts-ignore
-        server.listen(port, () => {
+        server.listen(port, "0.0.0.0", () => {
             console.log(`server is up and running on port: ${port}`);
         });
     }

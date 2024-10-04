@@ -19,7 +19,7 @@ import { AlertDialog, AlertDialogCancel, AlertDialogContent } from "@/components
 import exit_main from "@/assets/exit_main.svg";
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import { PopoverClose } from "@radix-ui/react-popover";
-import NewAccountForm from "@/features/NewAccountForm";
+import AccountForm from "@/features/AccountForm";
 
 const Accounts = () => {
   const allAcounts = useAppSelector(getAllAccountsSelector);
@@ -52,7 +52,9 @@ const Accounts = () => {
               return (
                 <div
                   key={account.id}
-                  onClick={() => setOpenAccount(openAccount === account.id ? null : account.id)}
+                  onClick={() => {
+                    setOpenAccount(openAccount === account.id ? null : account.id);
+                  }}
                   className=" shadow-sm w-full p-4 py-6 bg-container mb-4 rounded-2xl"
                 >
                   <div className="  flex justify-between items-center ">
@@ -99,7 +101,7 @@ const Accounts = () => {
                                   side="bottom"
                                   className=" flex flex-col justify-start items-start font-semibold overflow-hidden text-secondary"
                                 >
-                                  <NewAccountForm accountId={account.id} trigger={<Touchable className=" p-6 pl-4 py-2 ">Edit</Touchable>} />
+                                  <AccountForm accountId={account.id} trigger={<Touchable className=" p-6 pl-4 py-2 ">Edit</Touchable>} />
                                   <AlertDialog>
                                     <AlertDialogTrigger>
                                       <Touchable className=" p-6 pl-4 py-2">Delete</Touchable>
@@ -135,9 +137,13 @@ const Accounts = () => {
                 </Skeleton>
               );
             })}
-        <Touchable className=" w-full flex justify-center items-center h-14 bg-secondary mb-4 px-4 rounded-2xl">
-          <img src={plus_surface} alt="" className=" w-6" />
-        </Touchable>
+        <AccountForm
+          trigger={
+            <Touchable className=" w-full flex justify-center items-center h-14 bg-secondary mb-4 px-4 rounded-2xl">
+              <img src={plus_surface} alt="" className=" w-6" />
+            </Touchable>
+          }
+        />
       </div>
     </div>
   );

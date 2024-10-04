@@ -7,7 +7,7 @@ import Icon from "../components/Icon";
 import { AnimatePresence, motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import exit_main from "@/assets/exit_main.svg";
-import icons from "@/lib/icons";
+import { budgetIcons } from "@/lib/icons";
 import colors from "@/lib/colors";
 import { useAppDispatch } from "@/hooks/hooks";
 import { postNewBudgetAsyncThunk } from "@/redux/budgetsSlice";
@@ -52,7 +52,7 @@ const IconSelector = ({
                   className=" max-h-[60vh]   overflow-y-auto w-full  grid grid-cols-4 gap-2 my-4   justify-start "
                 >
                   {" "}
-                  {icons.map((icon) => {
+                  {budgetIcons.map((icon) => {
                     return (
                       <div
                         onClick={() => {
@@ -139,7 +139,7 @@ const NewBudget = ({ trigger }: { trigger: ReactNode }) => {
   const [isSelectIconDialogOpen, setIsSelectIconDialogOpen] = useState(false);
   const [isSelectColorDialogOpen, setIsSelectColorDialogOpen] = useState(false);
 
-  const [selectedIcon, setSelectedIcon] = useState<string>(icons[0]);
+  const [selectedIcon, setSelectedIcon] = useState<string>(budgetIcons[0]);
   const [selectedColor, setSelectedColor] = useState<string>(colors[0]);
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 25) {

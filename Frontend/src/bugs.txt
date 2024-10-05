@@ -1,0 +1,2 @@
+1. it is possible to send a request to the basend creating and updating account to a big int wthat will crash the backend
+2. review before submit area shoes facebook logo

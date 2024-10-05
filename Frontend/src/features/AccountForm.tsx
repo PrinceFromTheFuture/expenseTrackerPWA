@@ -112,7 +112,7 @@ const AccountForm = ({ trigger, accountId }: Props) => {
     }
   };
   const handleBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (Number(e.target.value) < 10000000000) {
+    if (Number(e.target.value) < 100000000) {
       setBalanceInAgorot(Number(e.target.value));
     }
   };

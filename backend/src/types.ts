@@ -38,9 +38,18 @@ export interface User {
   hashedPassword: string;
 }
 
-export interface Account{
-  iconURL: string,
-  id:string
-  name:string
+export interface Account {
+  iconURL: string;
+  id: string;
+  name: string;
   balanceInAgorot: number;
+}
+
+export interface PaymentMethod {
+  accountId: string;
+  userId: string;
+  name: string;
+  type: "credit" | "debit" | "other";
+  creditLimit: number;
+  resetDate: number
 }

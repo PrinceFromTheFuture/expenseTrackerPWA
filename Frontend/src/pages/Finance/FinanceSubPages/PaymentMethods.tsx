@@ -7,19 +7,22 @@ const PaymentMethods = () => {
     <div className=" w-full mt-4">
       {" "}
       <div className=" text-xl font-semibold mb-2 text-dark">PaymentMethods</div>
-      <Carousel opts={{ align: "start", loop: false, skipSnaps: true }}>
-        <CarouselContent className=" overflow-visible">
-          <CarouselItem className="  p-4  ">
-            <Card />
-          </CarouselItem>
-          <CarouselItem className=" p-4  ">
-            <Card />
-          </CarouselItem>
-          <CarouselItem className=" p-4  ">
-            <Card />
-          </CarouselItem>
-        </CarouselContent>
-      </Carousel>
+      <div className=" w-full ">
+        {" "}
+        <Carousel opts={{ loop: false, skipSnaps: true }}>
+          <CarouselContent className=" w-full overflow-visible ">
+            <CarouselItem className=" w-full overflow-visible  p-4  ">
+              <Card />
+            </CarouselItem>
+            <CarouselItem className=" p-4 overflow-visible   w-full">
+              <Card />
+            </CarouselItem>
+            <CarouselItem className=" p-4  overflow-visible w-full ">
+              <Card />
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
+      </div>
     </div>
   );
 };

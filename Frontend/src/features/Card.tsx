@@ -8,7 +8,7 @@ import nfc from "@/assets/nfc.svg";
 const Card = () => {
   return (
     <div
-      style={{ boxShadow: "0px 0px 5px #4B63E6" }}
+      style={{ boxShadow: "0px 0px 10px #4B63E6" }}
       className=" w-full    bg-[#4B63E6] aspect-[9/5] rounded-2xl relative "
     >
       <div className=" absolute w-full h-full flex justify-center  -z-10 -bottom-4">

@@ -6,7 +6,11 @@ import Touchable from "./components/Touchable";
 import { Link } from "react-router-dom";
 import home_main from "@/assets/navLinks/home_main.svg";
 import coins_main from "@/assets/navLinks/coins_main.svg";
+import gear_main from "@/assets/navLinks/gear_main.svg";
+import statistics_main from "@/assets/navLinks/statistics_main.svg";
 import home_secondary_outline from "@/assets/navLinks/home_secondary_outline.svg";
+import gear_secondary_outline from "@/assets/navLinks/gear_secondary_outline.svg";
+import statistics_secondary_outline from "@/assets/navLinks/statistics_secondary_outline.svg";
 import coins_secondary_outline from "@/assets/navLinks/coins_secondary_outline.svg";
 import recipt_surface from "@/assets/navLinks/recipt_surface.svg";
 import Finance from "./pages/Finance/Finance";
@@ -98,17 +102,17 @@ const AppNavigation = () => {
         </Link>
         <NavItem
           onClick={() => setCurrentPage(2)}
-          label="Home"
+          label="Statistics"
           isActive={currentPage === 2}
-          IconURL={home_secondary_outline}
-          activeIconURL={home_main}
+          IconURL={statistics_secondary_outline}
+          activeIconURL={statistics_main}
         />
         <NavItem
           onClick={() => setCurrentPage(3)}
-          label="Home"
+          label="Settings"
           isActive={currentPage === 3}
-          IconURL={home_secondary_outline}
-          activeIconURL={home_main}
+          IconURL={gear_secondary_outline}
+          activeIconURL={gear_main}
         />
       </div>
       <div className=" flex w-full h-full">

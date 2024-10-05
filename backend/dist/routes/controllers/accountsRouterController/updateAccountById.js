@@ -5,7 +5,7 @@ const updateAccountById = async (req, res) => {
     const userId = req.userId;
     const accountId = req.params.accountId;
     const { name, balanceInAgorot, iconURL } = req.body;
-    if (!name || !balanceInAgorot || !iconURL || !accountId) {
+    if (!name || balanceInAgorot === undefined || !iconURL || !accountId) {
         res.status(400).json({ message: "Not all fields were provided", success: false });
         return;
     }

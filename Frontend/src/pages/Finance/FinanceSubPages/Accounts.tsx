@@ -4,11 +4,7 @@ import ellipsis_main from "@/assets/ellipsis_main.svg";
 import ellipsis_secondary from "@/assets/ellipsis_secondary.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import {
-  deleteAccountByIdAsynkThunk,
-  getAccountsStatusSelector,
-  getAllAccountsSelector,
-} from "@/redux/accountsSlice";
+import { deleteAccountByIdAsynkThunk, getAccountsStatusSelector, getAllAccountsSelector } from "@/redux/accountsSlice";
 import { AnimatePresence, motion } from "framer-motion";
 import caret_secondary from "@/assets/caret_secondary.svg";
 import generalTransition from "@/lib/generalTransition";
@@ -25,13 +21,18 @@ import { PopoverClose } from "@radix-ui/react-popover";
 import AccountForm from "@/features/AccountForm";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import AccountsViewPreferencesDialog from "@/features/AccountsViewPreferencesDialog";
+import { accountsViewPreferencesSelector } from "@/redux/userPreferencesSlice";
 
 const Accounts = () => {
   const allAcounts = useAppSelector(getAllAccountsSelector);
   const accountsStatus = useAppSelector(getAccountsStatusSelector);
+  const accountsBalanceViewPreferance = useAppSelector(accountsViewPreferencesSelector).caluclatedBalanceAccounts;
   const [isDeletedialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   const dispatch = useAppDispatch();
+
+  const accountsViewPreferance = allAcounts.filter((account) => accountsBalanceViewPreferance.find((accountId) => account.id === accountId));
+  const preferredBalanceView = accountsViewPreferance.reduce((accumulator, cuurentAccount) => accumulator + cuurentAccount.balanceInAgorot, 0);
 
   const onDeleteAccount = async (accountId: string) => {
     await dispatch(deleteAccountByIdAsynkThunk(accountId));
@@ -48,12 +49,8 @@ const Accounts = () => {
         <div className=" flex justify-center flex-col items-center mt-6">
           {" "}
           <div className=" text-secondary font-semibold">current blanace</div>
-          <div className=" text-4xl text-dark font-extrabold mb-2">
-            {formatAmountInAgorot(3243434 || 0, true)}
-          </div>
-          <div className=" bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold text-success">
-            1234.34 (124.24%)
-          </div>
+          <div className=" text-4xl text-dark font-extrabold mb-2">{formatAmountInAgorot(preferredBalanceView || 0, true)}</div>
+          <div className=" bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold text-success">1234.34 (124.24%)</div>
         </div>
       </div>
       <div className=" text-xl font-semibold mb-2 text-dark">Accoutns</div>
@@ -93,9 +90,7 @@ const Accounts = () => {
                         <div className=" flex justify-between items-end">
                           <div>
                             {" "}
-                            <div className="text-dark font-extrabold text-2xl">
-                              {formatAmountInAgorot(account.balanceInAgorot, true)}
-                            </div>
+                            <div className="text-dark font-extrabold text-2xl">{formatAmountInAgorot(account.balanceInAgorot, true)}</div>
                             <div className="  bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1   text-success">
                               1234.34 (124.24%)
                             </div>
@@ -115,10 +110,7 @@ const Accounts = () => {
                                   side="bottom"
                                   className=" flex flex-col justify-start items-start font-semibold overflow-hidden text-secondary"
                                 >
-                                  <AccountForm
-                                    accountId={account.id}
-                                    trigger={<Touchable className=" p-6 pl-4 py-2 ">Edit</Touchable>}
-                                  />
+                                  <AccountForm accountId={account.id} trigger={<Touchable className=" p-6 pl-4 py-2 ">Edit</Touchable>} />
                                   <AlertDialog open={isDeletedialogOpen} onOpenChange={setIsDeleteDialogOpen}>
                                     <AlertDialogTrigger>
                                       <Touchable className=" p-6 pl-4 py-2">Delete</Touchable>
@@ -148,10 +140,7 @@ const Accounts = () => {
             })
           : Array.from([1, 2, 3], (_, index) => {
               return (
-                <Skeleton
-                  key={index}
-                  className=" w-full flex justify-between items-center h-20 bg-container mb-4 px-4 rounded-2xl"
-                >
+                <Skeleton key={index} className=" w-full flex justify-between items-center h-20 bg-container mb-4 px-4 rounded-2xl">
                   <div className=" flex gap-2 items-center">
                     <Skeleton className=" w-10 h-10" />
                     <Skeleton className=" w-32 h-6" />

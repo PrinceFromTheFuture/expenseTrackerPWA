@@ -9,13 +9,13 @@ const PaymentMethods = () => {
       <div className=" text-xl font-semibold mb-2 text-dark">PaymentMethods</div>
       <Carousel opts={{ align: "start", loop: false, skipSnaps: true }}>
         <CarouselContent className=" overflow-visible">
-          <CarouselItem className="  p-8  ">
+          <CarouselItem className="  p-4  ">
             <Card />
           </CarouselItem>
-          <CarouselItem className=" p-8  ">
+          <CarouselItem className=" p-4  ">
             <Card />
           </CarouselItem>
-          <CarouselItem className=" p-8  ">
+          <CarouselItem className=" p-4  ">
             <Card />
           </CarouselItem>
         </CarouselContent>

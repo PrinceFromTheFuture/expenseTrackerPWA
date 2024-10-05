@@ -11,13 +11,13 @@ const PaymentMethods = () => {
         {" "}
         <Carousel opts={{ loop: false, skipSnaps: true }}>
           <CarouselContent className=" w-full overflow-visible ">
-            <CarouselItem className=" w-full overflow-visible  p-4  ">
+            <CarouselItem className="p-2 w-full overflow-visible    ">
               <Card />
             </CarouselItem>
-            <CarouselItem className=" p-4 overflow-visible   w-full">
+            <CarouselItem className=" p-2 overflow-visible   w-full">
               <Card />
             </CarouselItem>
-            <CarouselItem className=" p-4  overflow-visible w-full ">
+            <CarouselItem className=" p-2  overflow-visible w-full ">
               <Card />
             </CarouselItem>
           </CarouselContent>

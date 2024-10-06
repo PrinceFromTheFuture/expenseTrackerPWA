@@ -11,6 +11,8 @@ import { motion } from "framer-motion";
 import { useAppSelector } from "@/hooks/hooks";
 import { getAllAccountsSelector } from "@/redux/accountsSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { AlertDialog } from "@radix-ui/react-alert-dialog";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/drawer";
 
 const PaymentMethods = () => {
   const faketest: PaymentMethod[] = [
@@ -44,7 +46,16 @@ const PaymentMethods = () => {
       type: "other",
       userId: "333",
     },
-    { accountId: "f3", creditLimit: null, iconURL: leumi, id: "343ds4d#", name: "test1", resetDate: null, type: "other", userId: "333" },
+    {
+      accountId: "f3",
+      creditLimit: null,
+      iconURL: leumi,
+      id: "343ds4d#",
+      name: "test1",
+      resetDate: null,
+      type: "other",
+      userId: "333",
+    },
     {
       accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
       creditLimit: null,
@@ -55,7 +66,16 @@ const PaymentMethods = () => {
       type: "debitCard",
       userId: "333",
     },
-    { accountId: "f3", creditLimit: null, iconURL: leumi, id: "343ds4d#", name: "test1", resetDate: null, type: "debitCard", userId: "333" },
+    {
+      accountId: "f3",
+      creditLimit: null,
+      iconURL: leumi,
+      id: "343ds4d#",
+      name: "test1",
+      resetDate: null,
+      type: "debitCard",
+      userId: "333",
+    },
     {
       accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
       creditLimit: null,
@@ -66,7 +86,16 @@ const PaymentMethods = () => {
       type: "debitCard",
       userId: "333",
     },
-    { accountId: "f3", creditLimit: null, iconURL: leumi, id: "343ds4d#", name: "test1", resetDate: null, type: "other", userId: "333" },
+    {
+      accountId: "f3",
+      creditLimit: null,
+      iconURL: leumi,
+      id: "343ds4d#",
+      name: "test1",
+      resetDate: null,
+      type: "other",
+      userId: "333",
+    },
     {
       accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
       creditLimit: null,
@@ -77,7 +106,26 @@ const PaymentMethods = () => {
       type: "other",
       userId: "333",
     },
-    { accountId: "f3", creditLimit: null, iconURL: leumi, id: "343ds4d#", name: "test1", resetDate: null, type: "other", userId: "333" },
+    {
+      accountId: "f3",
+      creditLimit: null,
+      iconURL: leumi,
+      id: "343ds4d#",
+      name: "test1",
+      resetDate: null,
+      type: "other",
+      userId: "333",
+    },
+    {
+      accountId: "f3",
+      creditLimit: null,
+      iconURL: leumi,
+      id: "343ds4dddd#",
+      name: "test1",
+      resetDate: null,
+      type: "creditCard",
+      userId: "333",
+    },
   ];
 
   const allAccounts = useAppSelector(getAllAccountsSelector);
@@ -93,7 +141,6 @@ const PaymentMethods = () => {
       setActiveSlide(caruselApi.selectedScrollSnap() + 1);
     });
   }, [caruselApi]);
-  const navigate = useNavigate();
 
   return (
     <div className=" w-full mt-4">
@@ -103,24 +150,47 @@ const PaymentMethods = () => {
       </div>
       <div className=" w-full mb-4 ">
         {" "}
-        <Carousel setApi={setCaruselApi} onChange={(e) => console.log(e)} opts={{ loop: false, skipSnaps: true }}>
+        <Carousel
+          setApi={setCaruselApi}
+          onChange={(e) => console.log(e)}
+          opts={{ loop: false, skipSnaps: true }}
+        >
           <CarouselContent className=" w-full overflow-visible ">
             {faketest
               .filter((paymentMethod) => paymentMethod.type !== "other")
               .map((paymentMethod) => {
                 return (
-                  <CarouselItem onClick={() => navigate(`/card/${paymentMethod.id}`)} className="p-2 py-4 w-full overflow-visible    ">
-                    <Card />
-                  </CarouselItem>
+                  <Drawer key={paymentMethod.id}>
+                    <CarouselItem className="p-2 py-4 w-full overflow-visible    ">
+                      <DrawerTrigger className=" w-full h-full">
+                        <Card />
+                      </DrawerTrigger>
+                    </CarouselItem>
+                    <DrawerContent>
+                      <div className=" w-full mt-4">
+                        <Card />
+                      </div>
+                    </DrawerContent>
+                  </Drawer>
                 );
               })}
           </CarouselContent>
         </Carousel>
         <div className=" w-full justify-center items-center flex mt-4 gap-2">
           {" "}
-          {Array.from([1, 2, 3], (val) => {
-            return <div className={cn("  rounded-full w-2 h-2 gap-2", val === activeSlide ? "bg-dark" : "bg-secondary")} />;
-          })}
+          {faketest
+            .filter((paymentMethod) => paymentMethod.type !== "other")
+            .map((paymentMethod, index) => {
+              return (
+                <div
+                  key={paymentMethod.id}
+                  className={cn(
+                    "  rounded-full w-2 h-2 gap-2",
+                    index + 1 === activeSlide ? "bg-dark" : "bg-secondary"
+                  )}
+                />
+              );
+            })}
         </div>
       </div>
 
@@ -130,7 +200,7 @@ const PaymentMethods = () => {
           .filter((paymentMethod) => paymentMethod.type === "other")
           .map((paymentMethod) => {
             return (
-              <div className=" w-full bg-container rounded-md p-4">
+              <div key={paymentMethod.id} className=" w-full bg-container rounded-md p-4">
                 <div className=" flex justify-between items-center">
                   <div className=" flex gap-2">
                     <img src={paymentMethod.iconURL} className=" w-5" alt="" />
@@ -141,7 +211,8 @@ const PaymentMethods = () => {
                 <div className=" mt-2 flex gap-2">
                   <img src={link_secondary} className=" w-5" alt="" />
                   <div className=" text-secondary text-sm font-semibold">
-                    {allAccounts.find((account) => account.id === paymentMethod.accountId)?.name || "error account with the id deosnt exsists"}
+                    {allAccounts.find((account) => account.id === paymentMethod.accountId)?.name ||
+                      "error account with the id deosnt exsists"}
                   </div>
                 </div>
               </div>

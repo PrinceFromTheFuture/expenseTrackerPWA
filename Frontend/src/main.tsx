@@ -37,7 +37,6 @@ const AppWraper = () => {
               <Route index path="/" element={<AppNavigation />} />
               <Route path="new" element={<ExpenssForm />} />
               <Route path="editTransaction" element={<ExpenssForm />} />
-              <Route path="/card/:cardId" element={<CardDetails />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Route>
           ) : (

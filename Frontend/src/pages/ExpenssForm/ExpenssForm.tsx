@@ -2,7 +2,7 @@ import Icon from "@/components/Icon";
 import generalTransition from "@/lib/generalTransition";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import arrow_main from "@/assets/arrow-main.svg";
+import arrow_main from "@/assets/arrow_main.svg";
 import edit_main from "@/assets/edit_main.svg";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -12,7 +12,12 @@ import Stage2 from "./componnets/Stage2";
 import Stage3 from "./componnets/Stage3";
 import Stage4 from "./componnets/Stage4";
 import Stage5 from "./componnets/Stage5";
-import { clearAllInForm, decrementStageInForm, formDataSelector, incrementStageInForm } from "@/redux/formSlice";
+import {
+  clearAllInForm,
+  decrementStageInForm,
+  formDataSelector,
+  incrementStageInForm,
+} from "@/redux/formSlice";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { AlertDialog, AlertDialogTrigger, AlertDialogContent } from "@/components/alert-dialog";
@@ -57,7 +62,10 @@ const ExpenssForm = () => {
         {" "}
         <div className=" w-full gap-3 h-5 mb-4  flex ">
           <div className=" h-2 w-full rounded-full bg-container ">
-            <motion.div className=" bg-main rounded-full w-full  h-full   " transition={generalTransition}></motion.div>
+            <motion.div
+              className=" bg-main rounded-full w-full  h-full   "
+              transition={generalTransition}
+            ></motion.div>
           </div>
           {Array.from([1, 2, 3, 4], (item) => {
             return <StageProgressBar key={item} currentStage={formData.currentStage} thisBarStage={item} />;
@@ -112,7 +120,12 @@ const ExpenssForm = () => {
         <AlertDialog
           open={isReviewBeforeSubmitOpen}
           onOpenChange={(isOpen) => {
-            if (formData.currentStage === 4 && formData.budgetId && formData.paymentMethodId && formData.amountInAgorot !== 0) {
+            if (
+              formData.currentStage === 4 &&
+              formData.budgetId &&
+              formData.paymentMethodId &&
+              formData.amountInAgorot !== 0
+            ) {
               setIsReviewBeforeSubmitOpen(isOpen);
             }
           }}

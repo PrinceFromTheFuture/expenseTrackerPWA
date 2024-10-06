@@ -1,4 +1,4 @@
-import { pgTable, integer, uuid, varchar, timestamp, text } from "drizzle-orm/pg-core";
+import { pgTable, integer, uuid, varchar, timestamp, text, pgEnum } from "drizzle-orm/pg-core";
 
 export const transactionsTable = pgTable("transactions", {
   amountInAgorot: integer("amountInAgorot").notNull(),
@@ -29,11 +29,15 @@ export const budgetsTable = pgTable("budgets", {
   id: uuid("id").primaryKey().defaultRandom(),
 });
 
+export const paymentMethodType = pgEnum("type", ["other", "creditCard", "debitCard"]);
 export const paymentMethodsTable = pgTable("paymentMethods", {
   name: varchar("name", { length: 50 }).notNull(),
   iconURL: varchar("iconURL", {
     length: 20,
   }).notNull(),
+  resetDate: integer("resetDate"),
+  type: paymentMethodType("type"),
+  creditLimit: integer("creditLimit"),
   userId: uuid("userId")
     .references(() => userTable.id)
     .notNull(),

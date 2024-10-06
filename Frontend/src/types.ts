@@ -28,9 +28,13 @@ export interface Transaction {
 }
 
 export interface PaymentMethod {
+  accountId: string;
+  userId: string;
   name: string;
   iconURL: string;
-  accountId: string;
+  type: "other" | "creditCard" | "debitCard";
+  creditLimit: number | null;
+  resetDate: number | null;
   id: string;
 }
 

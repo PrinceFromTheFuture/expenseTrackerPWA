@@ -82,11 +82,6 @@ const Home = () => {
                 </AnimatePresence>
               );
             })}
-
-      <div className="  mx-8">
-        {" "}
-        <Card />
-      </div>
     </div>
   );
 };

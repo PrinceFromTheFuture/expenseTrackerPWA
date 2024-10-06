@@ -15,6 +15,7 @@ import LandingPage from "./pages/Landing.tsx";
 import Auth from "./pages/Auth.tsx";
 import AppNavigation from "./AppNavigation.tsx";
 import ExpenssForm from "./pages/ExpenssForm/ExpenssForm.tsx";
+import CardDetails from "./pages/CardDetails.tsx";
 
 const AppWraper = () => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ const AppWraper = () => {
               <Route index path="/" element={<AppNavigation />} />
               <Route path="new" element={<ExpenssForm />} />
               <Route path="editTransaction" element={<ExpenssForm />} />
+              <Route path="/card/:cardId" element={<CardDetails />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Route>
           ) : (

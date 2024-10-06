@@ -22,13 +22,6 @@ export interface Transaction {
   description: string;
   id: string;
 }
-export interface PaymentMethod {
-  name: string;
-  iconURL: string;
-  accountId: string;
-
-  id: string;
-}
 
 export interface User {
   name: string;
@@ -49,7 +42,9 @@ export interface PaymentMethod {
   accountId: string;
   userId: string;
   name: string;
-  type: "credit" | "debit" | "other";
-  creditLimit: number;
-  resetDate: number
+  iconURL: string;
+  type: "other" | "creditCard" | "debitCard";
+  creditLimit: number | null;
+  resetDate: number | null;
+  id: string;
 }

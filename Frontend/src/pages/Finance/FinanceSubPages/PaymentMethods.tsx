@@ -175,9 +175,9 @@ const PaymentMethods = () => {
                         <div className="mt-4">
                           <Card />
                           <div className=" text-xl font-semibold mb-2 text-dark mt-10 ">Deatils</div>
-                          <div className="p-4 border-container border-2  rounded-2xl">
+                          <div className="p-4 border-container border-2  rounded-2xl flex flex-col justify-between gap-2">
                             {" "}
-                            <div className=" flex justify-between items-center mb-2">
+                            <div className=" flex justify-between items-center ">
                               <div className="text-sm text-secondary text-left font-semibold">linked account</div>
                               <div className="flex justify-start items-center gap-2">
                                 <img src={link_dark} className=" w-5" alt="" />
@@ -188,13 +188,13 @@ const PaymentMethods = () => {
                                 </div>
                               </div>
                             </div>
-                            <div className=" flex justify-between items-center mb-2">
+                            <div className=" flex justify-between items-center ">
                               <div className="text-sm text-secondary text-left font-semibold">name</div>
                               <div className="text-sm text-dark text-left font-bold"> {paymentMethod.name}</div>
                             </div>
                             {paymentMethod.type === "creditCard" && (
                               <>
-                                <div className=" flex justify-between items-center mb-2">
+                                <div className=" flex justify-between items-center ">
                                   <div className="text-sm text-secondary text-left font-semibold">reset date</div>
                                   <div className="text-sm text-dark text-left font-bold"> {paymentMethod.resetDate}</div>
                                 </div>
@@ -208,25 +208,32 @@ const PaymentMethods = () => {
                               </>
                             )}
                           </div>
-                          <div className=" text-xl font-semibold mb-2 text-dark mt-4 ">Usage</div>
-                          <div className=" flex w-full justify-between items-end font-semibold text-base ">
-                            <div className=" text-main">{formatAmountInAgorot(400000, true)}</div>
-                            <div className=" text-dark">{formatAmountInAgorot(paymentMethod.creditLimit!, true)}</div>
-                          </div>
-                          <div className=" my-2 relative w-full h-6 rounded-md bg-container overflow-hidden">
-                            <motion.div
-                              transition={{ delay: 0.25, ...generalTransition }}
-                              initial={{ width: "0%" }}
-                              animate={{ width: `${(400000 / paymentMethod.creditLimit!) * 100}%` }}
-                              className=" absolute h-full rounded-md bg-main left-0"
-                            ></motion.div>
-                          </div>
-                          <div className="font-semibold text-secondary text-sm">{((400000 / paymentMethod.creditLimit!) * 100).toFixed(1)}% used</div>
+                          {paymentMethod.type === "creditCard" && (
+                            <>
+                              {" "}
+                              <div className=" text-xl font-semibold mb-2 text-dark mt-4 ">Usage</div>
+                              <div className=" flex w-full justify-between items-end font-semibold text-base ">
+                                <div className=" text-main">{formatAmountInAgorot(400000, true)}</div>
+                                <div className=" text-dark">{formatAmountInAgorot(paymentMethod.creditLimit!, true)}</div>
+                              </div>
+                              <div className=" my-2 relative w-full h-6 rounded-md bg-container overflow-hidden">
+                                <motion.div
+                                  transition={{ delay: 0.2, ...generalTransition }}
+                                  initial={{ width: "0%" }}
+                                  animate={{ width: `${(400000 / paymentMethod.creditLimit!) * 100}%` }}
+                                  className=" absolute h-full rounded-md bg-main left-0"
+                                ></motion.div>
+                              </div>
+                              <div className="font-semibold text-secondary text-sm">
+                                {((400000 / paymentMethod.creditLimit!) * 100).toFixed(1)}% used
+                              </div>
+                            </>
+                          )}
                         </div>
-                        <DrawerClose className=" w-full">
-                          <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">Close</Touchable>
-                        </DrawerClose>
                       </div>
+                      <DrawerClose className=" w-full">
+                        <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">Close</Touchable>
+                      </DrawerClose>
                     </DrawerContent>
                   </Drawer>
                 );

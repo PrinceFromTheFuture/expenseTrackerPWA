@@ -212,13 +212,13 @@ const PaymentMethods = () => {
                             <>
                               {" "}
                               <div className=" text-xl font-semibold mb-2 text-dark mt-4 ">Usage</div>
-                              <div className=" flex w-full justify-between items-end font-semibold text-base ">
+                              <div className=" flex w-full justify-between items-end font-bold text-base ">
                                 <div className=" text-main">{formatAmountInAgorot(400000, true)}</div>
                                 <div className=" text-dark">{formatAmountInAgorot(paymentMethod.creditLimit!, true)}</div>
                               </div>
                               <div className=" my-2 relative w-full h-6 rounded-md bg-container overflow-hidden">
                                 <motion.div
-                                  transition={{ delay: 0.2, ...generalTransition }}
+                                  transition={{ delay: 0.2, ...generalTransition, duration: 0.5 }}
                                   initial={{ width: "0%" }}
                                   animate={{ width: `${(400000 / paymentMethod.creditLimit!) * 100}%` }}
                                   className=" absolute h-full rounded-md bg-main left-0"

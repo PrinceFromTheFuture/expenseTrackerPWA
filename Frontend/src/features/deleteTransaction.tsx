@@ -17,8 +17,8 @@ const DeleteTransaction = ({
   transactionId,
 }: {
   isDialogOpen: boolean;
-  transactionId: string;
   setIsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  transactionId: string;
 }) => {
   const dispatch = useAppDispatch();
   const onConfirmDelete = async () => {

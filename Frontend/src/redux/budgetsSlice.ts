@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { Bugdet } from "@/types";
+import { Bugdet } from "@/types/types";
 import http from "@/lib/http/index";
 
 export const getAllBudgetsAsyncThunk = createAsyncThunk("budgets/getAll", async () => {

@@ -1,5 +1,4 @@
 import { pgTable, integer, uuid, varchar, timestamp, text, pgEnum } from "drizzle-orm/pg-core";
-
 export const transactionsTable = pgTable("transactions", {
   amountInAgorot: integer("amountInAgorot").notNull(),
   title: varchar("title", { length: 50 }).notNull(),

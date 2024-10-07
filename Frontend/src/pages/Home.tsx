@@ -17,7 +17,7 @@ import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
 import log_out_main from "@/assets/log_out_main.svg";
-import Card from "@/features/Card";
+import Card from "@/components/Card";
 
 const Home = () => {
   const balance = useAppSelector(userBalanceSelector);

@@ -1,4 +1,4 @@
-import { User } from "../types.js";
+import { User } from "@/types/types.js";
 import jwt from "jsonwebtoken";
 
 const signJWTToken = (user: User) => {

@@ -1,5 +1,5 @@
 import http from "@/lib/http/index.ts";
-import { Account } from "@/types";
+import { Account } from "@/types/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 

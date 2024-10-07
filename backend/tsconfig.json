@@ -7,7 +7,10 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "paths": {
+      "@/types/*": ["../types/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

@@ -259,21 +259,21 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
                         {" "}
                         <div className="text-sm  text-main font-bold text-left"> credit limit</div>
                         <div className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent">
+                          <div className=" relative">
+                            <input
+                              type="number"
+                              name="creditLimit"
+                              id="creditLimit"
+                              className="absolute opacity-0  top-0 left-0 "
+                              value={creditLimit}
+                              onChange={handleCardLimitChange}
+                            />
+                          </div>
                           {String(formatAmountInAgorot(creditLimit, true))}
                         </div>
                       </div>
                     </Touchable>
                   </label>
-                  <div className=" relative">
-                    <input
-                      type="number"
-                      name="creditLimit"
-                      id="creditLimit"
-                      className="absolute opacity-0 top-0 left-0 "
-                      value={creditLimit}
-                      onChange={handleCardLimitChange}
-                    />
-                  </div>
                 </section>
                 <section className=" w-full">
                   <div className="text-secondary mb-2  font-semibold  text-base  ">link your acount</div>

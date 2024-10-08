@@ -12,7 +12,68 @@ import exit_main from "@/assets/exit_main.svg";
 import Icon from "@/components/Icon";
 import tag_main from "@/assets/tag_main.svg";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useAppSelector } from "@/hooks/hooks";
+import { getAllAccountsSelector } from "@/redux/accountsSlice";
+import link_dark from "@/assets/link_dark.svg";
+import { Slider } from "@/components/ui/slider";
+import { DrawerPortal } from "@/components/drawer";
+import colors from "@/lib/colors";
 
+const ColorSelector = ({
+  setSelectedColor,
+  setIsDialogOpen,
+  selectedColor,
+}: {
+  setIsDialogOpen: () => void;
+  setSelectedColor: (name: string) => void;
+  selectedColor: string;
+}) => {
+  return (
+    <AlertDialogPortal>
+      <motion.div
+        transition={generalTransition}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className=" inset-0   z-50 fixed bg-black/80 flex justify-center items-center"
+      >
+        <AnimatePresence>
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={generalTransition}
+            className=" w-3/4 gap-8 shadow-xl pointer-events-auto justify-between  overflow-auto    items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+          >
+            <div className=" w-full">
+              <div onClick={setIsDialogOpen}>
+                <Icon src={exit_main} varient="mid" />
+              </div>
+              <div className=" max-h-[60vh] overflow-auto  w-full  grid grid-cols-4 gap-4 my-4   justify-start ">
+                {" "}
+                {colors.map((color) => {
+                  return (
+                    <div
+                      onClick={() => {
+                        setSelectedColor(color);
+                        setIsDialogOpen();
+                      }}
+                      key={color}
+                      style={{ backgroundColor: color === selectedColor ? "#f0f4f7 " : "#f8fbfd" }}
+                      className=" p-2 flex justify-center items-center transition-all  bg-surface rounded-2xl "
+                    >
+                      <div className=" w-full rounded-2xl aspect-square" style={{ backgroundColor: `#${color}` }}></div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    </AlertDialogPortal>
+  );
+};
 const IconSelector = ({
   setSelectedIcon,
   setIsDialogOpen,
@@ -78,27 +139,34 @@ const IconSelector = ({
   );
 };
 const PaymentMethodForm = () => {
+  const [isSelectIconDialogOpen, setIsSelectIconDialogOpen] = useState(false);
+  const [isSelectColorDialogOpen, setIsSelectColorDialogOpen] = useState(false);
+
+  const [methodTypeIndex, setMethodTypeIndex] = useState(0);
+
+  const [selectedColor, setSelectedColor] = useState<string>(colors[0]);
   const [creditLimit, setCardLimit] = useState(0);
   const [selectedName, setSelectedName] = useState("");
+  const [selectedIcon, setSelectedIcon] = useState<string>(accountIcons[0]);
+  const allAccounts = useAppSelector(getAllAccountsSelector);
+  const [selectedCardResetDay, setSelectedCardResetDay] = useState(1);
+
   const mode = "new";
-  const [methodTypeIndex, setMethodTypeIndex] = useState(0);
   const handleCardLimitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (Number(e.target.value) < 100000000) {
       setCardLimit(Number(e.target.value));
     }
   };
-  const [isSelectIconDialogOpen, setIsSelectIconDialogOpen] = useState(false);
-
-  const [selectedIcon, setSelectedIcon] = useState<string>(accountIcons[0]);
-
   const handleChangeIsSelectIconDialogOpen = () => {
     setIsSelectIconDialogOpen(!isSelectIconDialogOpen);
   };
-
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 25) {
       setSelectedName(e.target.value);
     }
+  };
+  const handleChangeIsSelectColorDialogOpen = () => {
+    setIsSelectColorDialogOpen(!isSelectColorDialogOpen);
   };
 
   return (
@@ -108,9 +176,13 @@ const PaymentMethodForm = () => {
           <IconSelector setSelectedIcon={setSelectedIcon} setIsDialogOpen={handleChangeIsSelectIconDialogOpen} selectedIcon={selectedIcon} />
         )}
       </AnimatePresence>{" "}
-      <div className=" font-semibold text-xl text-dark mt-4 mb-8">{mode === "new" ? "Create new" : "Edit"} payment method</div>
-      <div className="text-secondary ml-4   mb-2 font-semibold  text-base  ">payment method type</div>
-      <div className=" bg-container p-2 w-full rounded-2xl h-14">
+      <AnimatePresence>
+        {isSelectColorDialogOpen && (
+          <ColorSelector setIsDialogOpen={handleChangeIsSelectColorDialogOpen} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
+        )}
+      </AnimatePresence>
+      <div className="  font-semibold text-xl text-dark mt-4 ">{mode === "new" ? "Create new" : "Edit"} payment method</div>
+      <div className=" mb-8 mt-2 bg-container p-2 w-full rounded-2xl h-14">
         <div className="relative w-full h-full  flex justify-around items-center text-sm font-semibold text-dark  ">
           <div
             onClick={() => setMethodTypeIndex(0)}
@@ -137,60 +209,100 @@ const PaymentMethodForm = () => {
           ></motion.div>
         </div>
       </div>
-      <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">set your credit card credit limit</div>
-      <label htmlFor="creditLimit">
-        <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
-          <img className=" w-6 h-6" src={ILS_symbol_main} />
-          <div className=" w-full">
-            {" "}
-            <div className="text-sm  text-main font-bold text-left"> credit limit</div>
-            <div className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent">
-              {String(formatAmountInAgorot(creditLimit, true))}
+      <div className=" flex flex-col justify-start items-start gap-8 max-h-[60vh] overflow-auto">
+        <section className=" w-full">
+          <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
+          <Touchable className={" bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
+            <img className=" w-6 h-6" src={tag_main} />
+            <div className=" w-full">
+              {" "}
+              <div className="text-sm  text-main font-bold text-left"> Name</div>
+              <input
+                type="name"
+                value={selectedName ? selectedName : ""}
+                onChange={handleNameChange}
+                placeholder="Cash, Leumi, Savings..."
+                className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
+              />
             </div>
-          </div>
-        </Touchable>
-      </label>
-      <input
-        type="number"
-        name="creditLimit"
-        id="creditLimit"
-        className="absolute opacity-0 top-0 left-0 "
-        value={creditLimit}
-        onChange={handleCardLimitChange}
-      />
-      <div className="text-secondary  mb-2 font-semibold text-base ">Icon</div>
-      <div
-        onClick={handleChangeIsSelectIconDialogOpen}
-        className=" 
+          </Touchable>
+        </section>
+        <section className=" w-full">
+          <div className="text-secondary  font-semibold text-base ">Icon</div>
+          <div
+            onClick={handleChangeIsSelectIconDialogOpen}
+            className=" 
 outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-container w-14 h-14 flex justify-center items-center  p-3 rounded-2xl"
-      >
-        <img src={selectedIcon} alt="" className=" w-6" />{" "}
+          >
+            <img src={selectedIcon} alt="" className=" w-6" />{" "}
+          </div>
+        </section>
+        {methodTypeIndex !== 0 && (
+          <>
+            <section className=" w-full">
+              <div className="text-secondary   mb-2 font-semibold text-base ">Color</div>
+              <div
+                onClick={handleChangeIsSelectColorDialogOpen}
+                style={{ backgroundColor: `#${selectedColor}` }}
+                className="
+   w-full h-14 flex justify-center shadow-sm items-center  p-3 rounded-2xl"
+              ></div>
+            </section>
+            {methodTypeIndex === 2 && (
+              <>
+                <section className=" w-full">
+                  <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">set your credit card credit limit</div>
+                  <label htmlFor="creditLimit">
+                    <Touchable className={" bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
+                      <img className=" w-6 h-6" src={ILS_symbol_main} />
+                      <div className=" w-full">
+                        {" "}
+                        <div className="text-sm  text-main font-bold text-left"> credit limit</div>
+                        <div className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent">
+                          {String(formatAmountInAgorot(creditLimit, true))}
+                        </div>
+                      </div>
+                    </Touchable>
+                  </label>
+                  <input
+                    type="number"
+                    name="creditLimit"
+                    id="creditLimit"
+                    className="absolute opacity-0 top-0 left-0 "
+                    value={creditLimit}
+                    onChange={handleCardLimitChange}
+                  />
+                </section>
+                <section className=" w-full">
+                  <div className="text-secondary mb-2  font-semibold  text-base  ">link your acount</div>
+                  <Select defaultValue={allAccounts[0].id} onValueChange={(e) => console.log(e)}>
+                    <SelectTrigger>
+                      <img src={link_dark} className=" w-5  mx-1 text-" alt="" />
+                      <SelectValue className=" placeholder:text-secondary" placeholder="choose account" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {allAccounts.map((account) => {
+                        return <SelectItem value={account.id}>{account.name}</SelectItem>;
+                      })}
+                    </SelectContent>
+                  </Select>
+                </section>
+                <section className=" w-full">
+                  <div className="text-secondary mb-4 font-semibold  text-base  ">credit reset date {selectedCardResetDay}</div>
+                  <Slider
+                    onValueChange={(value) => {
+                      const [newDay] = value;
+                      setSelectedCardResetDay(newDay);
+                    }}
+                    step={1}
+                    max={28}
+                  ></Slider>
+                </section>
+              </>
+            )}
+          </>
+        )}
       </div>
-      <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
-      <Touchable className={" bg-container p-4  mb-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
-        <img className=" w-6 h-6" src={tag_main} />
-        <div className=" w-full">
-          {" "}
-          <div className="text-sm  text-main font-bold text-left"> Name</div>
-          <input
-            type="name"
-            value={selectedName ? selectedName : ""}
-            onChange={handleNameChange}
-            placeholder="Cash, Leumi, Savings..."
-            className="placeholder:text-secondary text-sm select-none w-full focus:outline-none text-dark font-semibold bg-transparent "
-          />
-        </div>
-      </Touchable>
-      <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">link your acount</div>
-      <Select>
-        <SelectTrigger>
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="erfdsr">fd</SelectItem>
-          <SelectItem value="erdr">g</SelectItem>
-        </SelectContent>
-      </Select>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { RootState } from "./store";
 import { PaymentMethod } from "@/types/types";
 import http from "@/lib/http/index";
 import leumi from "@/assets/accountsIcons/leumi.svg";
-import { CreditCardPayemntMethodData, DebitCardPayemntMethodData, OtherPayemntMethodData } from "@/lib/http/HTTPPostPaymentMethod";
+import { CreditCardPayemntMethodData, DebitCardPayemntMethodData, OtherPayemntMethodData } from "@/types/PaymentMethod";
 
 export const getAllPaymentMethodsAsyncThunk = createAsyncThunk("paymentMethods/getAll", async () => {
   return await http.HTTPGetAllPaymentMethods();
@@ -27,7 +27,7 @@ const initialState: PaymentMethod[] = [
     accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
     creditLimit: null,
     iconURL: leumi,
-    id: "344d#",
+    id: "344dffsdf#",
     name: "test1",
     color: "#06062b",
     resetDate: null,
@@ -38,7 +38,7 @@ const initialState: PaymentMethod[] = [
     accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
     creditLimit: null,
     iconURL: leumi,
-    id: "3344d#",
+    id: "3344dffdsf#",
     color: "#06062b",
     name: "test2",
     resetDate: null,
@@ -50,7 +50,7 @@ const initialState: PaymentMethod[] = [
     creditLimit: null,
     iconURL: leumi,
     color: "#06062b",
-    id: "33f44d#",
+    id: "33f44fsdfd#",
     name: "test1",
     resetDate: null,
     type: "other",
@@ -61,7 +61,7 @@ const initialState: PaymentMethod[] = [
     creditLimit: null,
     iconURL: leumi,
     color: "#06062b",
-    id: "343ds4d#",
+    id: "343ds4fsdd#",
     name: "test1",
     resetDate: null,
     type: "other",
@@ -83,7 +83,7 @@ const initialState: PaymentMethod[] = [
     creditLimit: null,
     iconURL: leumi,
     color: "#06062b",
-    id: "343ds4d#",
+    id: "343dfsds4d#",
     name: "test1",
     resetDate: null,
     type: "debitCard",
@@ -93,7 +93,7 @@ const initialState: PaymentMethod[] = [
     accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
     creditLimit: null,
     iconURL: leumi,
-    id: "33f44fsd#",
+    id: "33f44fsdfsd#",
     name: "test1",
     resetDate: null,
     type: "debitCard",
@@ -104,7 +104,7 @@ const initialState: PaymentMethod[] = [
     accountId: "f3",
     creditLimit: null,
     iconURL: leumi,
-    id: "343ds4d#",
+    id: "343dfdss4d#",
     name: "test1",
     resetDate: null,
     type: "other",
@@ -115,7 +115,7 @@ const initialState: PaymentMethod[] = [
     accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
     creditLimit: null,
     iconURL: leumi,
-    id: "33f4d4d#",
+    id: "33f4fsdd4d#",
     name: "test1",
     resetDate: null,
     color: "#06062b",
@@ -126,7 +126,7 @@ const initialState: PaymentMethod[] = [
     accountId: "f3",
     creditLimit: null,
     iconURL: leumi,
-    id: "343ds4d#",
+    id: "343dsfds4d#",
     color: "#06062b",
     name: "test1",
     resetDate: null,

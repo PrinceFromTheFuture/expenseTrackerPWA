@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import { transactionsTable, userTable } from "../../../schema.js";
 import dayjs from "dayjs";
 import { db,  } from "../../../server.js";
-import { TransactionForm } from "../../../types.js";
+import { TransactionFormAPI } from "@/types/types.js";
 import { eq } from "drizzle-orm";
 
 const postNewTransaction = async (req: Request, res: Response) => {
-  const transactionForm: TransactionForm = req.body;
+  const transactionForm: TransactionFormAPI = req.body;
   const userId = req.userId;
 
   const result = await db

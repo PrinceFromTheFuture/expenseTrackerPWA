@@ -22,7 +22,7 @@ const Stage5 = () => {
         <div className="text-dark   font-semibold text-lg">Payment Method</div>
         <Icon src={edit_main} varient="mid" />
       </div>
-      <div className=" w-full flex flex-col justify-between items-start gap-2">
+      <div className=" w-full max-h-[60vh] overflow-hidden flex flex-col justify-between items-start gap-2">
         {allPaymentMethods.map((paymentMethod) => {
           return (
             <Touchable

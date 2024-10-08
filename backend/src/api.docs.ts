@@ -1,4 +1,4 @@
-import { Account, Bugdet, PaymentMethod, Transaction, TransactionForm } from "./types.js";
+import { Account, Bugdet, PaymentMethod, Transaction, TransactionForm } from "@/types/types.js";
 
 const serverDefnition = {
   name: "expensee tracker pwa API",

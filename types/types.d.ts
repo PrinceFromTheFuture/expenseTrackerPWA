@@ -17,6 +17,15 @@ export interface TransactionForm {
   editMode: boolean;
   id: string | null;
 }
+export interface TransactionFormAPI {
+  amountInAgorot: number;
+  budgetId: string;
+  date: string;
+  paymentMethodId: string;
+  title: string;
+  description: string | null;
+}
+
 
 export interface Transaction {
   amountInAgorot: number;

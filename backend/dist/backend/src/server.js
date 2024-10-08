@@ -73,3 +73,16 @@ server.post("/api/gitWebHook", (req, res) => {
     exec("cd ../ && cd Frontend && npm i");
     res.send("got it");
 });
+const data = { type: "creditCard", accountId: "fd", iconURL: "fe", name: "undefined" };
+if (typeof data !== OtherPayemntMethodData) {
+}
+function isDataExist(objet) {
+    for (const key in objet) {
+        if (objet[key] === undefined) {
+            return false;
+        }
+    }
+    return true;
+}
+const test = isDataExist(data);
+console.log(test);

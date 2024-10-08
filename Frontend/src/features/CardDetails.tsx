@@ -84,6 +84,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
         <CardActionsDialogProvider
           children={
             <PaymentMethodForm
+              paymentMethodId={paymentMethod.id}
               onSaveAction={() => {
                 setIsEditDialogOpen(false);
               }}

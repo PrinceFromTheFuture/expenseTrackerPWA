@@ -13,7 +13,6 @@ import { getAllAccountsSelector } from "@/redux/accountsSlice";
 import { useAppSelector } from "@/hooks/hooks";
 import Touchable from "@/components/Touchable";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
-import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogTrigger } from "@/components/alert-dialog";
 import DeleteWarning from "./DeleteWarning";
 import exit_main from "@/assets/exit_main.svg";
 import PaymentMethodForm from "./PaymentMethodForm";
@@ -36,7 +35,6 @@ const CardActionsDialogProvider = ({
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 1 }}
-            on
             className=" inset-0  z-50 fixed bg-black/80 flex justify-center items-center"
           >
             <AnimatePresence>

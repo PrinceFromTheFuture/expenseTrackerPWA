@@ -323,7 +323,7 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
             className=" left-0 absolute w-1/3  h-full bg-main rounded-2xl  z-0"
           ></motion.div>
         </div>
-      </div>
+      </div>  
       <div className=" flex flex-col justify-start items-start gap-6">
         <section className=" w-full">
           <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>

@@ -3,7 +3,7 @@ import { CarouselItem } from "@/components/carousel";
 import { Drawer, DrawerClose, DrawerContent, DrawerPortal, DrawerTrigger } from "@/components/drawer";
 import Icon from "@/components/Icon";
 import { PaymentMethod } from "@/types/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ellipsis_secondary from "@/assets/ellipsis_secondary.svg";
 import link_dark from "@/assets/link_dark.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
@@ -36,6 +36,7 @@ const CardActionsDialogProvider = ({
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 1 }}
+            on
             className=" inset-0  z-50 fixed bg-black/80 flex justify-center items-center"
           >
             <AnimatePresence>
@@ -48,6 +49,7 @@ const CardActionsDialogProvider = ({
               >
                 <div className=" w-full">
                   <div
+                    className=" w-min"
                     onClick={() => {
                       setIsDialogOpen(false);
                     }}
@@ -74,7 +76,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
   const onConfirmDelete = () => {};
 
   return (
-    <Drawer modal={!isDeletedialogOpen && !isEditDialogOpen} dismissible={false} key={paymentMethod.id}>
+    <Drawer modal={false} key={paymentMethod.id}>
       <CarouselItem className="p-2 py-4 w-full overflow-visible    ">
         <CardActionsDialogProvider
           children={<DeleteWarning onConfirmDelete={() => onConfirmDelete()} onCancel={() => setIsDeleteDialogOpen(false)} />}

@@ -33,10 +33,10 @@ const CardActionsDialogProvider = ({
         <AnimatePresence>
           <motion.div
             transition={generalTransition}
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className=" inset-0  z-50 fixed bg-black/40 flex justify-center items-center"
+            exit={{ opacity: 1 }}
+            className=" inset-0  z-50 fixed bg-black/80 flex justify-center items-center"
           >
             <AnimatePresence>
               <motion.div
@@ -74,7 +74,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
   const onConfirmDelete = () => {};
 
   return (
-    <Drawer dismissible={false} key={paymentMethod.id}>
+    <Drawer modal={!isDeletedialogOpen && !isEditDialogOpen} dismissible={false} key={paymentMethod.id}>
       <CarouselItem className="p-2 py-4 w-full overflow-visible    ">
         <CardActionsDialogProvider
           children={<DeleteWarning onConfirmDelete={() => onConfirmDelete()} onCancel={() => setIsDeleteDialogOpen(false)} />}

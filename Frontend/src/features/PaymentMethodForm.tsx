@@ -54,7 +54,7 @@ const ColorSelector = ({
             <div onClick={setIsDialogOpen}>
               <Icon src={exit_main} varient="mid" />
             </div>
-            <div className=" max-h-[60vh] overflow-auto  w-full  grid grid-cols-4 gap-4 my-4   justify-start ">
+            <div className="   w-full  grid grid-cols-4 gap-4 my-4   justify-start ">
               {" "}
               {colors.map((color) => {
                 return (
@@ -324,7 +324,7 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
           ></motion.div>
         </div>
       </div>
-      <div className=" flex flex-col justify-start items-start gap-6 max-h-[60vh] overflow-auto">
+      <div className=" flex flex-col justify-start items-start gap-6">
         <section className=" w-full">
           <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
           <Touchable className={" bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>

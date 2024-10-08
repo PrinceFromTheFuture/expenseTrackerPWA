@@ -16,6 +16,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogTrigger } from "@/components/alert-dialog";
 import DeleteWarning from "./DeleteWarning";
 import exit_main from "@/assets/exit_main.svg";
+import PaymentMethodForm from "./PaymentMethodForm";
 
 const CardActionsDialogProvider = ({
   children,
@@ -35,9 +36,6 @@ const CardActionsDialogProvider = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => {
-              setIsDialogOpen(false);
-            }}
             className=" inset-0  z-50 fixed bg-black/40 flex justify-center items-center"
           >
             <AnimatePresence>
@@ -49,11 +47,15 @@ const CardActionsDialogProvider = ({
                 className=" w-full shadow-xl justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
               >
                 <div className=" w-full">
-                  <div>
+                  <div
+                    onClick={() => {
+                      setIsDialogOpen(false);
+                    }}
+                  >
                     <Icon src={exit_main} varient="mid" />
                   </div>
                 </div>
-                {children}
+                <div className=" w-full">{children}</div>
               </motion.div>
             </AnimatePresence>
           </motion.div>
@@ -72,14 +74,24 @@ const CardDetails = ({ paymentMethod }: Props) => {
   const onConfirmDelete = () => {};
 
   return (
-    <Drawer key={paymentMethod.id}>
+    <Drawer dismissible={false} key={paymentMethod.id}>
       <CarouselItem className="p-2 py-4 w-full overflow-visible    ">
         <CardActionsDialogProvider
           children={<DeleteWarning onConfirmDelete={() => onConfirmDelete()} onCancel={() => setIsDeleteDialogOpen(false)} />}
           isDialogOpen={isDeletedialogOpen}
           setIsDialogOpen={setIsDeleteDialogOpen}
         />
-        <CardActionsDialogProvider children={<>fd</>} isDialogOpen={isEditDialogOpen} setIsDialogOpen={setIsEditDialogOpen} />
+        <CardActionsDialogProvider
+          children={
+            <PaymentMethodForm
+              onSaveAction={() => {
+                setIsEditDialogOpen(false);
+              }}
+            />
+          }
+          isDialogOpen={isEditDialogOpen}
+          setIsDialogOpen={setIsEditDialogOpen}
+        />
         <DrawerTrigger className=" w-full h-full">
           <Card />
         </DrawerTrigger>

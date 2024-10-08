@@ -89,7 +89,7 @@ const Home = () => {
           <AlertDialogTrigger>fd</AlertDialogTrigger>
           <AlertDialogContent>
             <div className=" bg-surface w-full p-4 rounded-2xl mx-4">
-              <PaymentMethodForm />
+              <PaymentMethodForm onSave={() => {}} paymentMethodId="0926efe3-6f10-4206-81f0-65199daf923b" />
             </div>
           </AlertDialogContent>
         </AlertDialog>

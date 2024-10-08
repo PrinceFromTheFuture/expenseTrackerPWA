@@ -37,6 +37,7 @@ export interface PaymentMethod {
     creditLimit: number | null;
     resetDate: number | null;
     id: string;
+    color:string
   }
   
 

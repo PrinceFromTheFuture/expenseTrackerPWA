@@ -7,7 +7,6 @@ const initialState: { status: "success" | "pending"; data: Account[] } = { data:
 
 export const getAllAccountsAsyncThunk = createAsyncThunk("/accounts/getAll", async () => {
   const allAcounts = await http.HTTPGetAllAccounts();
-  console.log(allAcounts[0].id);
   return allAcounts;
 });
 

@@ -17,6 +17,8 @@ import HTTPSignInUser from "./HTTPSignInUser";
 import HTTPDeleteAccount from "./HTTPDeleteAccount";
 import HTTPPutAccountById from "./HTTPPutAccountById";
 import HTTPPostAccount from "./HTTPPostAccount";
+import HTTPPostPaymentMethod from "./HTTPPostPaymentMethod";
+import HTTPPutPaymentMethod from "./HTTPPutPaymentMethod";
 
 export const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
 
@@ -34,8 +36,10 @@ export default {
   HTTPGetAllAccounts,
   HTTPGetSpendingsInTimeFrame,
   HTTPGetUserBalance,
+  HTTPPostPaymentMethod,
   HTTPPostNewBudget,
   HTTPPostNewUser,
+  HTTPPutPaymentMethod,
   HTTPDeleteAccount,
   HTTPPutAccountById,
   HTTPPostAccount,

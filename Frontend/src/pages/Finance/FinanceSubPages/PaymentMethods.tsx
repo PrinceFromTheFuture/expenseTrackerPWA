@@ -19,120 +19,11 @@ import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import generalTransition from "@/lib/generalTransition";
 import Touchable from "@/components/Touchable";
 import CardDetails from "@/features/CardDetails";
+import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
 
 const PaymentMethods = () => {
-  const faketest: PaymentMethod[] = [
-    {
-      accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "344d#",
-      name: "test1",
-      resetDate: null,
-      type: "other",
-      userId: "333",
-    },
-    {
-      accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "3344d#",
-      name: "test2",
-      resetDate: null,
-      type: "other",
-      userId: "333",
-    },
-    {
-      accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "33f44d#",
-      name: "test1",
-      resetDate: null,
-      type: "other",
-      userId: "333",
-    },
-    {
-      accountId: "f3",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "343ds4d#",
-      name: "test1",
-      resetDate: null,
-      type: "other",
-      userId: "333",
-    },
-    {
-      accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "33f44fsd#",
-      name: "test1",
-      resetDate: null,
-      type: "debitCard",
-      userId: "333",
-    },
-    {
-      accountId: "f3",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "343ds4d#",
-      name: "test1",
-      resetDate: null,
-      type: "debitCard",
-      userId: "333",
-    },
-    {
-      accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "33f44fsd#",
-      name: "test1",
-      resetDate: null,
-      type: "debitCard",
-      userId: "333",
-    },
-    {
-      accountId: "f3",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "343ds4d#",
-      name: "test1",
-      resetDate: null,
-      type: "other",
-      userId: "333",
-    },
-    {
-      accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "33f4d4d#",
-      name: "test1",
-      resetDate: null,
-      type: "other",
-      userId: "333",
-    },
-    {
-      accountId: "f3",
-      creditLimit: null,
-      iconURL: leumi,
-      id: "343ds4d#",
-      name: "test1",
-      resetDate: null,
-      type: "other",
-      userId: "333",
-    },
-    {
-      accountId: "0926efe3-6f10-4206-81f0-65199daf923b",
-      creditLimit: 600000,
-      iconURL: leumi,
-      id: "343ds4dddd#",
-      name: "test1",
-      resetDate: 21,
-      type: "creditCard",
-      userId: "333",
-    },
-  ];
+  const paymentMethods = useAppSelector(allPaymentMethodsSelector);
+  console.log(paymentMethods);
 
   const allAccounts = useAppSelector(getAllAccountsSelector);
 
@@ -156,20 +47,18 @@ const PaymentMethods = () => {
       </div>
       <div className=" w-full mb-4 ">
         {" "}
-        <Carousel setApi={setCaruselApi} onChange={(e) => console.log(e)} opts={{ loop: false, skipSnaps: true }}>
+        <Carousel setApi={setCaruselApi} opts={{ loop: false, skipSnaps: true }}>
           <CarouselContent className=" w-full overflow-visible ">
-            {faketest
+            {paymentMethods
               .filter((paymentMethod) => paymentMethod.type !== "other")
               .map((paymentMethod) => {
-                return (
-                 <CardDetails paymentMethod={paymentMethod}/>
-                );
+                return <CardDetails paymentMethod={paymentMethod} />;
               })}
           </CarouselContent>
         </Carousel>
         <div className=" w-full justify-center items-center flex mt-4 gap-2">
           {" "}
-          {faketest
+          {paymentMethods
             .filter((paymentMethod) => paymentMethod.type !== "other")
             .map((paymentMethod, index) => {
               return (
@@ -181,7 +70,7 @@ const PaymentMethods = () => {
 
       <div className=" text-xl font-semibold mb-2 text-dark ">Other</div>
       <div className=" flex flex-col gap-4">
-        {faketest
+        {paymentMethods
           .filter((paymentMethod) => paymentMethod.type === "other")
           .map((paymentMethod) => {
             return (

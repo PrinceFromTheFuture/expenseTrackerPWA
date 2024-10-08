@@ -39,12 +39,3 @@ body {
 .circlet {
   animation: 1s loadingAnimation infinite ease-in-out;
 }
-.inputCreditLimit {
-  &::-webkit-clear-button,
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    display: none;
-    -webkit-appearance: none;
-    margin: 0;
-  }
-}

@@ -192,15 +192,15 @@ const PaymentMethodForm = () => {
           </div>
           <div
             onClick={() => setMethodTypeIndex(1)}
-            className={cn(" z-10 h-full w-full  flex justify-center items-center", methodTypeIndex === 1 ? "text-white" : "text-secondary")}
+            className={cn(" z-10 h-full w-full flex justify-center items-center", methodTypeIndex === 1 ? "text-white" : "text-secondary")}
           >
-            credit
+            debit
           </div>
           <div
             onClick={() => setMethodTypeIndex(2)}
-            className={cn(" z-10 h-full w-full flex justify-center items-center", methodTypeIndex === 2 ? "text-white" : "text-secondary")}
+            className={cn(" z-10 h-full w-full  flex justify-center items-center", methodTypeIndex === 2 ? "text-white" : "text-secondary")}
           >
-            debit
+            credit
           </div>
           <motion.div
             animate={{ transform: `translate(${methodTypeIndex * 100}%)` }}
@@ -264,14 +264,16 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
                       </div>
                     </Touchable>
                   </label>
-                  <input
-                    type="number"
-                    name="creditLimit"
-                    id="creditLimit"
-                    className="absolute opacity-0 top-0 left-0 "
-                    value={creditLimit}
-                    onChange={handleCardLimitChange}
-                  />
+                  <div className=" relative">
+                    <input
+                      type="number"
+                      name="creditLimit"
+                      id="creditLimit"
+                      className="absolute opacity-0 top-0 left-0 "
+                      value={creditLimit}
+                      onChange={handleCardLimitChange}
+                    />
+                  </div>
                 </section>
                 <section className=" w-full">
                   <div className="text-secondary mb-2  font-semibold  text-base  ">link your acount</div>

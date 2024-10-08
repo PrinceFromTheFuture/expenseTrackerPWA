@@ -44,7 +44,7 @@ const CardActionsDialogProvider = ({
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
                 transition={generalTransition}
-                className=" w-full shadow-xl max-h-[70vh] overflow-auto justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
+                className=" w-full shadow-xl max-h-[80vh] overflow-auto justify-between pointer-events-auto  items-start p-4 flex-col flex mx-4 rounded-2xl bg-surface"
               >
                 <div className=" w-full">
                   <div

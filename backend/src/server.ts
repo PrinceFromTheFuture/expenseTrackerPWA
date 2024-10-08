@@ -91,26 +91,3 @@ server.post("/api/gitWebHook", (req, res) => {
 
   res.send("got it");
 });
-
-import { OtherPayemntMethodData, CreditCardPayemntMethodData, DebitCardPayemntMethodData } from "@/types/PaymentMethod.js";
-type Nullable<T> = {
-  [P in keyof T]: T[P] | undefined;
-};
-type Body = Nullable<OtherPayemntMethodData> | Nullable<CreditCardPayemntMethodData> | Nullable<DebitCardPayemntMethodData>;
-
-const data: any = { type: "creditCard", accountId: "fd", iconURL: "fe", name: "undefined" };
-if(typeof data !== OtherPayemntMethodData){
-
-}
-
-function isDataExist<T>(objet: T): boolean {
-  for (const key in objet) {
-    if (objet[key] === undefined) {
-      return false;
-    }
-  }
-  return true;
-}
-const test = isDataExist(data);
-
-console.log(test);

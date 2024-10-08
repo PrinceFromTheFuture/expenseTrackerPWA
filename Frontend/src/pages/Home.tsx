@@ -18,6 +18,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
 import log_out_main from "@/assets/log_out_main.svg";
 import Card from "@/components/Card";
+import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from "@/components/alert-dialog";
+import PaymentMethodForm from "@/features/PaymentMethodForm";
 
 const Home = () => {
   const balance = useAppSelector(userBalanceSelector);
@@ -82,6 +84,16 @@ const Home = () => {
                 </AnimatePresence>
               );
             })}
+      <div>
+        <AlertDialog>
+          <AlertDialogTrigger>fd</AlertDialogTrigger>
+          <AlertDialogContent>
+            <div className=" bg-surface w-full p-4 rounded-2xl mx-4">
+              <PaymentMethodForm />
+            </div>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   );
 };

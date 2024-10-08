@@ -264,7 +264,7 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
                               type="number"
                               name="creditLimit"
                               id="creditLimit"
-                              className="absolute opacity-0  top-0 left-0 "
+                              className="inputCreditLimit absolute opacity-0  top-0 left-0 "
                               value={creditLimit}
                               onChange={handleCardLimitChange}
                             />

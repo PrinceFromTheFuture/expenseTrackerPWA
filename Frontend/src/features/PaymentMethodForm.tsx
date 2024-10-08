@@ -112,7 +112,7 @@ const IconSelector = ({
                 <Icon src={exit_main} varient="mid" />
               </div>
 
-              <div style={{ pointerEvents: "all" }} className=" max-h-[60vh]   overflow-y-auto w-full  grid grid-cols-4 gap-2 my-4   justify-start ">
+              <div style={{ pointerEvents: "all" }} className=" max-h-[55vh]   overflow-y-auto w-full  grid grid-cols-4 gap-2 my-4   justify-start ">
                 {" "}
                 {accountIcons.map((icon) => {
                   return (

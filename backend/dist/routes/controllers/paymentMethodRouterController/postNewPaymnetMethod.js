@@ -22,6 +22,7 @@ const postNewPaymnetMethod = async (req, res) => {
             accountId: filledForm.accountId,
             type: filledForm.type,
             iconURL: filledForm.iconURL,
+            color: filledForm.color,
             userId: userId,
             creditLimit: filledForm.creditLimit,
         });

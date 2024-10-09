@@ -19,6 +19,7 @@ import HTTPPutAccountById from "./HTTPPutAccountById";
 import HTTPPostAccount from "./HTTPPostAccount";
 import HTTPPostPaymentMethod from "./HTTPPostPaymentMethod";
 import HTTPPutPaymentMethod from "./HTTPPutPaymentMethod";
+import HTTPDeletePaymentMethod from "./HTTPDeletePaymentMethod";
 
 export const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
 
@@ -30,6 +31,7 @@ axios.defaults.withCredentials = true;
 
 export default {
   HTTPGetAllTransactions,
+  HTTPDeletePaymentMethod,
   HTTPGetAllBudgets,
   HTTPGetAllPaymentMethods,
   HTTPDeleteTransaction,

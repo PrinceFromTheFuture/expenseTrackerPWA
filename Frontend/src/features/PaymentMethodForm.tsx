@@ -205,6 +205,7 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
 
   const onSave = async () => {
     onSaveAction();
+    console.log("fd");
     if (selectedName === "" || selectedName === null || !selectedIcon || !selectedLinkedAccountId) {
       return;
     }
@@ -221,7 +222,7 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
       creditLimit: selectedCreditLimit,
       iconURL: selectedIcon,
       resetDate: selectedCardResetDay,
-      type: methodTypeIndex === 0 ? "creditCard" : methodTypeIndex === 1 ? "debitCard" : "other",
+      type: methodTypeIndex === 0 ? "other" : methodTypeIndex === 1 ? "debitCard" : "creditCard",
     };
     if (mode === "new") {
       await dispatch(postNewPaymentMethodAsyncThunk({ ...filledForm }));

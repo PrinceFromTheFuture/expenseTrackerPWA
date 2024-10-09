@@ -32,6 +32,7 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
     iconURL: text("iconURL").notNull(),
     resetDate: integer("resetDate"),
     type: paymentMethodType("type"),
+    color: text("color"),
     creditLimit: integer("creditLimit"),
     userId: uuid("userId")
         .references(() => userTable.id)

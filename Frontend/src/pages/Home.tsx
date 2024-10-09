@@ -78,22 +78,17 @@ const Home = () => {
             .map((transaction) => {
               return (
                 <AnimatePresence key={transaction.id}>
-                  <motion.div layout animate={{ opacity: 1, height: "auto" }} initial={{ opacity: 0, height: 0 }} exit={{ opacity: 0, height: 0 }}>
+                  <motion.div
+                    layout
+                    animate={{ opacity: 1, height: "auto" }}
+                    initial={{ opacity: 0, height: 0 }}
+                    exit={{ opacity: 0, height: 0 }}
+                  >
                     <ExpensesWidget transactionId={transaction.id} />
                   </motion.div>
                 </AnimatePresence>
               );
             })}
-      <div>
-        <AlertDialog>
-          <AlertDialogTrigger>fd</AlertDialogTrigger>
-          <AlertDialogContent>
-            <div className=" bg-surface w-full p-4 rounded-2xl mx-4">
-              <PaymentMethodForm onSave={() => {}} paymentMethodId="0926efe3-6f10-4206-81f0-65199daf923b" />
-            </div>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
     </div>
   );
 };

@@ -1,0 +1,1 @@
+ALTER TABLE "paymentMethods" ADD COLUMN "color" text;

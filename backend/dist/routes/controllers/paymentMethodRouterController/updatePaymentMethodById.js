@@ -25,7 +25,7 @@ const updatePaymentMethodById = async (req, res) => {
         accountId: filledForm.accountId,
         type: filledForm.type,
         iconURL: filledForm.iconURL,
-        userId: userId,
+        color: filledForm.color,
         creditLimit: filledForm.creditLimit,
     })
         .where(and(eq(paymentMethodsTable.id, paymentMethodId), eq(paymentMethodsTable.userId, userId)));

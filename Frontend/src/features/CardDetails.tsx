@@ -10,12 +10,14 @@ import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import generalTransition from "@/lib/generalTransition";
 import { AnimatePresence, motion } from "framer-motion";
 import { getAllAccountsSelector } from "@/redux/accountsSlice";
-import { useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import Touchable from "@/components/Touchable";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
 import DeleteWarning from "./DeleteWarning";
 import exit_main from "@/assets/exit_main.svg";
 import PaymentMethodForm from "./PaymentMethodForm";
+import { deletePaymentMethodByIdAsyncThunk } from "@/redux/paymentMethodsSlice";
+import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 
 const CardActionsDialogProvider = ({
   children,
@@ -68,16 +70,28 @@ interface Props {
   paymentMethod: PaymentMethod;
 }
 const CardDetails = ({ paymentMethod }: Props) => {
+  const dispatch = useAppDispatch();
   const allAccounts = useAppSelector(getAllAccountsSelector);
   const [isDeletedialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const onConfirmDelete = () => {};
+  const onConfirmDelete = async () => {
+    await dispatch(deletePaymentMethodByIdAsyncThunk(paymentMethod.id));
+    getAllDataFromAPI(dispatch);
+  };
 
   return (
     <Drawer modal={false} key={paymentMethod.id}>
       <CarouselItem className="p-2 py-4 w-full overflow-visible    ">
         <CardActionsDialogProvider
-          children={<DeleteWarning onConfirmDelete={() => onConfirmDelete()} onCancel={() => setIsDeleteDialogOpen(false)} />}
+          children={
+            <DeleteWarning
+              onConfirmDelete={() => {
+                onConfirmDelete();
+                setIsDeleteDialogOpen(false);
+              }}
+              onCancel={() => setIsDeleteDialogOpen(false)}
+            />
+          }
           isDialogOpen={isDeletedialogOpen}
           setIsDialogOpen={setIsDeleteDialogOpen}
         />
@@ -94,7 +108,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
           setIsDialogOpen={setIsEditDialogOpen}
         />
         <DrawerTrigger className=" w-full h-full">
-          <Card />
+          <Card color={paymentMethod.color!} />
         </DrawerTrigger>
       </CarouselItem>
       <DrawerContent>
@@ -123,7 +137,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
             </Popover>
           </div>
           <div className="mt-4">
-            <Card />
+            <Card color={paymentMethod.color!} />
             <div className=" text-xl font-semibold mb-2 text-dark mt-10 ">Deatils</div>
             <div className="p-4 border-container border-2  rounded-2xl flex flex-col justify-between gap-2">
               {" "}
@@ -133,7 +147,8 @@ const CardDetails = ({ paymentMethod }: Props) => {
                   <img src={link_dark} className=" w-5" alt="" />
                   <div className="text-sm text-dark text-left font-bold">
                     {" "}
-                    {allAccounts.find((account) => account.id === paymentMethod.accountId)?.name || "error account with the id deosnt exsists"}
+                    {allAccounts.find((account) => account.id === paymentMethod.accountId)?.name ||
+                      "error account with the id deosnt exsists"}
                   </div>
                 </div>
               </div>
@@ -149,7 +164,10 @@ const CardDetails = ({ paymentMethod }: Props) => {
                   </div>
                   <div className=" flex justify-between items-center ">
                     <div className="text-sm text-secondary text-left font-semibold">credit limit</div>
-                    <div className="text-sm text-dark text-left font-bold"> {formatAmountInAgorot(paymentMethod.creditLimit!, true)}</div>
+                    <div className="text-sm text-dark text-left font-bold">
+                      {" "}
+                      {formatAmountInAgorot(paymentMethod.creditLimit!, true)}
+                    </div>
                   </div>
                 </>
               )}
@@ -170,13 +188,17 @@ const CardDetails = ({ paymentMethod }: Props) => {
                     className=" absolute h-full rounded-md bg-main left-0"
                   ></motion.div>
                 </div>
-                <div className="font-semibold text-secondary text-sm">{((400000 / paymentMethod.creditLimit!) * 100).toFixed(1)}% used</div>
+                <div className="font-semibold text-secondary text-sm">
+                  {((400000 / paymentMethod.creditLimit!) * 100).toFixed(1)}% used
+                </div>
               </>
             )}
           </div>
         </div>
         <DrawerClose className=" w-full">
-          <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">Close</Touchable>
+          <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
+            Close
+          </Touchable>
         </DrawerClose>
       </DrawerContent>
     </Drawer>

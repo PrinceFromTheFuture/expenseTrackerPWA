@@ -5,4 +5,5 @@ const paymentsMethodRouter = express.Router();
 paymentsMethodRouter.get("/", authMiddleware, controller.getAllPaymentMethods);
 paymentsMethodRouter.post("/", authMiddleware, controller.postNewPaymnetMethod);
 paymentsMethodRouter.put("/:paymentMethodId", authMiddleware, controller.updatePaymentMethodById);
+paymentsMethodRouter.delete("/:paymentMethodId", authMiddleware, controller.deletePaymentMethodById);
 export default paymentsMethodRouter;

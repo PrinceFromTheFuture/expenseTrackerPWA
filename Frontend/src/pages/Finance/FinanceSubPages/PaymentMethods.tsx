@@ -9,7 +9,7 @@ import leumi from "@/assets/accountsIcons/leumi.svg";
 import link_secondary from "@/assets/link_secondary.svg";
 import link_dark from "@/assets/link_dark.svg";
 import { motion } from "framer-motion";
-import { useAppSelector } from "@/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { getAllAccountsSelector } from "@/redux/accountsSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { AlertDialog } from "@radix-ui/react-alert-dialog";
@@ -19,20 +19,26 @@ import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import generalTransition from "@/lib/generalTransition";
 import Touchable from "@/components/Touchable";
 import CardDetails from "@/features/CardDetails";
-import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
+import { allPaymentMethodsSelector, deletePaymentMethodByIdAsyncThunk } from "@/redux/paymentMethodsSlice";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
 import { AlertDialogContent, AlertDialogTrigger } from "@/components/alert-dialog";
 import PaymentMethodForm from "@/features/PaymentMethodForm";
 import plus_surface from "@/assets/plus_surface.svg";
+import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
+import DeleteWarning from "@/features/DeleteWarning";
+import exit_main from "@/assets/exit_main.svg";
 
 const PaymentMethods = () => {
   const paymentMethods = useAppSelector(allPaymentMethodsSelector);
-
+  const dispatch = useAppDispatch();
   const allAccounts = useAppSelector(getAllAccountsSelector);
 
   const [caruselApi, setCaruselApi] = useState<CarouselApi>();
   const [activeSlide, setActiveSlide] = useState(1);
   const [isNewPaymentMethodDialogOpen, setIsNewPaymentMethodDialogOpen] = useState(false);
+  const [IsDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+
   React.useEffect(() => {
     if (!caruselApi) {
       return;
@@ -41,6 +47,10 @@ const PaymentMethods = () => {
       setActiveSlide(caruselApi.selectedScrollSnap() + 1);
     });
   }, [caruselApi]);
+  const onConfirmDelete = async (id: string) => {
+    await dispatch(deletePaymentMethodByIdAsyncThunk(id));
+    getAllDataFromAPI(dispatch);
+  };
 
   return (
     <div className=" w-full mt-4 ">
@@ -77,7 +87,7 @@ const PaymentMethods = () => {
         </div>
       </div>
 
-      <div className=" text-xl font-semibold mb-2 text-dark ">Other</div>
+      <div className=" text-secondary mb-2 font-semibold text-base ">Other</div>
       <div className=" flex flex-col gap-4">
         {paymentMethods
           .filter((paymentMethod) => paymentMethod.type === "other")
@@ -99,18 +109,45 @@ const PaymentMethods = () => {
                       side="bottom"
                       className=" flex flex-col justify-start items-start font-semibold overflow-hidden text-secondary"
                     >
-                      <AlertDialog>
-                        <AlertDialogTrigger>
-                          <Touchable className=" p-6 pl-4 w-full py-2 ">Edit</Touchable>
+                      <AlertDialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+                        <AlertDialogTrigger className=" w-full">
+                          <Touchable className="  p-6 pl-4 py-2  ">Edit</Touchable>
                         </AlertDialogTrigger>
                         <AlertDialogContent>
-                          <PaymentMethodForm paymentMethodId={paymentMethod.id} onSaveAction={() => {}} />
+                          <div className=" w-full bg-surface rounded-2xl mx-4  p-4">
+                            <div
+                              className="pb-6"
+                              onClick={() => {
+                                setIsEditDialogOpen(false);
+                              }}
+                            >
+                              <Icon src={exit_main} varient="mid" />
+                            </div>
+                            <PaymentMethodForm
+                              paymentMethodId={paymentMethod.id}
+                              onSaveAction={() => {
+                                setIsEditDialogOpen(false);
+                              }}
+                            />
+                          </div>
                         </AlertDialogContent>
                       </AlertDialog>
-
-                      <Touchable onClick={() => {}} className=" p-6 pl-4 py-2">
-                        Delete
-                      </Touchable>
+                      <AlertDialog open={IsDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+                        <AlertDialogTrigger>
+                          <Touchable className=" p-6 pl-4 py-2">Delete</Touchable>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <div className=" w-full bg-surface rounded-2xl mx-4 pt-16 p-4">
+                            <DeleteWarning
+                              onCancel={() => setIsDeleteDialogOpen(false)}
+                              onConfirmDelete={() => {
+                                onConfirmDelete(paymentMethod.id);
+                                setIsDeleteDialogOpen(false);
+                              }}
+                            />
+                          </div>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </PopoverContent>
                   </Popover>
                 </div>

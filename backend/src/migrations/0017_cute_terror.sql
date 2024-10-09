@@ -1,0 +1,1 @@
+ALTER TABLE "paymentMethods" ALTER COLUMN "iconURL" SET DATA TYPE text;

@@ -1,4 +1,4 @@
-import { Bugdet } from "@/types";
+import { Bugdet } from "@/types/types";
 import axios from "axios";
 import { apiURL } from ".";
 

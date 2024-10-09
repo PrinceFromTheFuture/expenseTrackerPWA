@@ -5,7 +5,6 @@ export interface Bugdet {
   id: string;
 }
 
-  
 export interface TransactionForm {
   amountInAgorot: number;
   budgetId: string | null;
@@ -26,7 +25,6 @@ export interface TransactionFormAPI {
   description: string | null;
 }
 
-
 export interface Transaction {
   amountInAgorot: number;
   budgetId: string;
@@ -38,17 +36,16 @@ export interface Transaction {
 }
 
 export interface PaymentMethod {
-    accountId: string;
-    userId: string;
-    name: string;
-    iconURL: string;
-    type: "other" | "creditCard" | "debitCard";
-    creditLimit: number | null;
-    resetDate: number | null;
-    id: string;
-    color:string
-  }
-  
+  accountId: string;
+  userId: string;
+  name: string;
+  iconURL: string;
+  id: string;
+  type: "other" | "creditCard" | "debitCard";
+  creditLimit: number | null;
+  resetDate: number | null;
+  color: string | null;
+}
 
 export interface User {
   name: string;
@@ -64,5 +61,3 @@ export interface Account {
   name: string;
   balanceInAgorot: number;
 }
-
-

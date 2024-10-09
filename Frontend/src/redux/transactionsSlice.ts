@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { Transaction } from "@/types";
+import { Transaction } from "@/types/types";
 import http from "@/lib/http";
 
 export const getAllTransactionsAsyncThunk = createAsyncThunk("transactions/getAll", async () => {

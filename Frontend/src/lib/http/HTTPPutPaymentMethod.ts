@@ -1,10 +1,10 @@
 import axios from "axios";
 import { apiURL } from ".";
-import { CreditCardPayemntMethodData, DebitCardPayemntMethodData, OtherPayemntMethodData } from "./HTTPPostPaymentMethod";
+import { PaymentMethod } from "@/types/types";
 
-const HTTPPutPaymentMethod = async (filledForm: OtherPayemntMethodData | DebitCardPayemntMethodData | CreditCardPayemntMethodData, id: string) => {
-  console.log({ ...filledForm, id });
-  const res = await axios.put<{ success: boolean; message?: string }>(`${apiURL}/paymentMethods/${id}`, filledForm);
+const HTTPPutPaymentMethod = async (filledForm: Omit<PaymentMethod, "userId">) => {
+  const { id, ...rest } = filledForm;
+  const res = await axios.put<{ success: boolean; message?: string }>(`${apiURL}/paymentMethods/${id}`, rest);
   return res.data;
 };
 

@@ -120,6 +120,13 @@
       "when": 1728245157699,
       "tag": "0016_typical_stone_men",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1728474494842,
+      "tag": "0017_cute_terror",
+      "breakpoints": true
     }
   ]
 }

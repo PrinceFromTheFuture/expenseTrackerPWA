@@ -3,22 +3,21 @@ import { RootState } from "./store";
 import { PaymentMethod } from "@/types/types";
 import http from "@/lib/http/index";
 import leumi from "@/assets/accountsIcons/leumi.svg";
-import { CreditCardPayemntMethodData, DebitCardPayemntMethodData, OtherPayemntMethodData } from "@/types/PaymentMethod";
 
 export const getAllPaymentMethodsAsyncThunk = createAsyncThunk("paymentMethods/getAll", async () => {
   return await http.HTTPGetAllPaymentMethods();
 });
 export const postNewPaymentMethodAsyncThunk = createAsyncThunk(
   "paymentMethods/potNew",
-  async (args: OtherPayemntMethodData | DebitCardPayemntMethodData | CreditCardPayemntMethodData) => {
+  async (args: Omit<PaymentMethod, "id" | "userId">) => {
     return await http.HTTPPostPaymentMethod(args);
   }
 );
 
 export const updatePaymentMethodAsyncThunk = createAsyncThunk(
   "paymentMethods/updateOne",
-  async (args: { data: OtherPayemntMethodData | DebitCardPayemntMethodData | CreditCardPayemntMethodData; id: string }) => {
-    return await http.HTTPPutPaymentMethod(args.data, args.id);
+  async (args: Omit<PaymentMethod, "userId">) => {
+    return await http.HTTPPutPaymentMethod(args);
   }
 );
 
@@ -151,7 +150,7 @@ const paymentMethodsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllPaymentMethodsAsyncThunk.fulfilled, (_, action) => {
-      // return action.payload;
+      return action.payload;
     });
   },
 });
@@ -162,7 +161,9 @@ export default paymentMethodsSliceReducer;
 export const allPaymentMethodsSelector = (state: RootState) => state.paymentMethodsSlice;
 
 export const getPaymentMethodNameByIdSelector = (state: RootState, paymentMethodId: string) => {
-  const PaymentMethodFound = state.paymentMethodsSlice.find((paymentMethod) => paymentMethod.id === paymentMethodId);
+  const PaymentMethodFound = state.paymentMethodsSlice.find(
+    (paymentMethod) => paymentMethod.id === paymentMethodId
+  );
   if (!PaymentMethodFound) {
     return null;
   }

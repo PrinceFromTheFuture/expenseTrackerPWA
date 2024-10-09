@@ -31,9 +31,7 @@ export const budgetsTable = pgTable("budgets", {
 export const paymentMethodType = pgEnum("type", ["other", "creditCard", "debitCard"]);
 export const paymentMethodsTable = pgTable("paymentMethods", {
   name: varchar("name", { length: 50 }).notNull(),
-  iconURL: varchar("iconURL", {
-    length: 20,
-  }).notNull(),
+  iconURL: text("iconURL").notNull(),
   resetDate: integer("resetDate"),
   type: paymentMethodType("type"),
   creditLimit: integer("creditLimit"),

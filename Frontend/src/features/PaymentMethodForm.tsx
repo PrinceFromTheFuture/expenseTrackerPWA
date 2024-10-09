@@ -24,7 +24,7 @@ import {
   postNewPaymentMethodAsyncThunk,
   updatePaymentMethodAsyncThunk,
 } from "@/redux/paymentMethodsSlice";
-import { PaymentMethod } from "@/types/types";
+import { PaymentMethodForm as PaymentMethodFormType } from "@/types/types";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 
 const ColorSelector = ({
@@ -42,7 +42,7 @@ const ColorSelector = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className=" inset-0   z-50 fixed bg-black/80 flex justify-center items-center"
+      className=" inset-0   z-50 fixed bg-black/80 h-full flex justify-center items-center"
     >
       <AnimatePresence>
         <motion.div
@@ -69,10 +69,7 @@ const ColorSelector = ({
                     style={{ backgroundColor: color === selectedColor ? "#f0f4f7 " : "#f8fbfd" }}
                     className=" p-2 flex justify-center items-center transition-all  bg-surface rounded-2xl "
                   >
-                    <div
-                      className=" w-full rounded-2xl aspect-square"
-                      style={{ backgroundColor: `#${color}` }}
-                    ></div>
+                    <div className=" w-full rounded-2xl aspect-square" style={{ backgroundColor: `#${color}` }}></div>
                   </div>
                 );
               })}
@@ -101,7 +98,7 @@ const IconSelector = ({
         style={{ pointerEvents: "all" }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className=" inset-0  z-50 fixed  overflow-y-auto  bg-black/80 flex justify-center items-center"
+        className=" inset-0  z-50 fixed  overflow-y-auto  h-full  bg-black/80 flex justify-center items-center"
       >
         <AnimatePresence>
           <motion.div
@@ -117,10 +114,7 @@ const IconSelector = ({
                 <Icon src={exit_main} varient="mid" />
               </div>
 
-              <div
-                style={{ pointerEvents: "all" }}
-                className=" max-h-[50vh]   overflow-y-auto w-full  grid grid-cols-4 gap-2 my-4   justify-start "
-              >
+              <div style={{ pointerEvents: "all" }} className=" max-h-[50vh]   overflow-y-auto w-full  grid grid-cols-4 gap-2 my-4   justify-start ">
                 {" "}
                 {accountIcons.map((icon) => {
                   return (
@@ -169,18 +163,14 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
     }
   };
   const allAccounts = useAppSelector(getAllAccountsSelector);
-  const [methodTypeIndex, setMethodTypeIndex] = useState(
-    paymentMethod ? getPaymentMethodIndexByType(paymentMethod.type) : 0
-  );
+  const [methodTypeIndex, setMethodTypeIndex] = useState(paymentMethod ? getPaymentMethodIndexByType(paymentMethod.type) : 0);
 
   const [selectedColor, setSelectedColor] = useState<string>(
     paymentMethod ? colors.find((color) => color === paymentMethod.color) || colors[0] : colors[0]
   );
 
   const [selectedCreditLimit, setSelectedCreditLimit] = useState(paymentMethod?.creditLimit || 0);
-  const [selectedLinkedAccountId, setSelectedLinkedAccountId] = useState(
-    paymentMethod?.accountId || allAccounts[0].id
-  );
+  const [selectedLinkedAccountId, setSelectedLinkedAccountId] = useState(paymentMethod?.accountId || allAccounts[0].id);
   const [selectedName, setSelectedName] = useState(paymentMethod?.name || null);
   const [selectedIcon, setSelectedIcon] = useState<string>(paymentMethod?.iconURL || accountIcons[0]);
   const [selectedCardResetDay, setSelectedCardResetDay] = useState(paymentMethod?.resetDate || 1);
@@ -204,8 +194,6 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
   const dispatch = useAppDispatch();
 
   const onSave = async () => {
-    onSaveAction();
-    console.log("fd");
     if (selectedName === "" || selectedName === null || !selectedIcon || !selectedLinkedAccountId) {
       return;
     }
@@ -215,7 +203,8 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
     if (methodTypeIndex === 2 && (!selectedCreditLimit || !selectedCardResetDay)) {
       return;
     }
-    const filledForm: Omit<PaymentMethod, "id" | "userId"> = {
+    onSaveAction();
+    const filledForm: Omit<PaymentMethodFormType, "id"> = {
       accountId: selectedLinkedAccountId,
       name: selectedName,
       color: selectedColor,
@@ -236,51 +225,32 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
     <div>
       <AnimatePresence>
         {isSelectIconDialogOpen && (
-          <IconSelector
-            setSelectedIcon={setSelectedIcon}
-            setIsDialogOpen={handleChangeIsSelectIconDialogOpen}
-            selectedIcon={selectedIcon}
-          />
+          <IconSelector setSelectedIcon={setSelectedIcon} setIsDialogOpen={handleChangeIsSelectIconDialogOpen} selectedIcon={selectedIcon} />
         )}
       </AnimatePresence>{" "}
       <AnimatePresence>
         {isSelectColorDialogOpen && (
-          <ColorSelector
-            setIsDialogOpen={handleChangeIsSelectColorDialogOpen}
-            selectedColor={selectedColor}
-            setSelectedColor={setSelectedColor}
-          />
+          <ColorSelector setIsDialogOpen={handleChangeIsSelectColorDialogOpen} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
         )}
       </AnimatePresence>
-      <div className="  font-semibold text-xl text-dark mt-4 ">
-        {mode === "new" ? "Create new" : "Edit"} payment method
-      </div>
+      <div className="  font-semibold text-xl text-dark mt-4 ">{mode === "new" ? "Create new" : "Edit"} payment method</div>
       <div className=" mb-8 mt-2 bg-container p-2 w-full rounded-2xl h-14">
         <div className="relative w-full h-full  flex justify-around items-center text-sm font-semibold text-dark  ">
           <div
             onClick={() => setMethodTypeIndex(0)}
-            className={cn(
-              " z-10 h-full w-full flex justify-center items-center ",
-              methodTypeIndex === 0 ? "text-white" : "text-secondary"
-            )}
+            className={cn(" z-10 h-full w-full flex justify-center items-center ", methodTypeIndex === 0 ? "text-white" : "text-secondary")}
           >
             other
           </div>
           <div
             onClick={() => setMethodTypeIndex(1)}
-            className={cn(
-              " z-10 h-full w-full flex justify-center items-center",
-              methodTypeIndex === 1 ? "text-white" : "text-secondary"
-            )}
+            className={cn(" z-10 h-full w-full flex justify-center items-center", methodTypeIndex === 1 ? "text-white" : "text-secondary")}
           >
             debit
           </div>
           <div
             onClick={() => setMethodTypeIndex(2)}
-            className={cn(
-              " z-10 h-full w-full  flex justify-center items-center",
-              methodTypeIndex === 2 ? "text-white" : "text-secondary"
-            )}
+            className={cn(" z-10 h-full w-full  flex justify-center items-center", methodTypeIndex === 2 ? "text-white" : "text-secondary")}
           >
             credit
           </div>
@@ -294,9 +264,7 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
       <div className=" flex flex-col justify-start items-start gap-6">
         <section className=" w-full">
           <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">Choose a budget name</div>
-          <Touchable
-            className={" bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}
-          >
+          <Touchable className={" bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
             <img className=" w-6 h-6" src={tag_main} />
             <div className=" w-full">
               {" "}
@@ -323,10 +291,7 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
         </section>
         <section className=" w-full">
           <div className="text-secondary mb-2  font-semibold  text-base  ">link your acount</div>
-          <Select
-            defaultValue={selectedLinkedAccountId}
-            onValueChange={(selectedValue) => setSelectedLinkedAccountId(selectedValue)}
-          >
+          <Select defaultValue={selectedLinkedAccountId} onValueChange={(selectedValue) => setSelectedLinkedAccountId(selectedValue)}>
             <SelectTrigger>
               <img src={link_dark} className=" w-5  mx-1 text-" alt="" />
               <SelectValue className=" placeholder:text-secondary" placeholder="choose account" />
@@ -352,15 +317,9 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
             {methodTypeIndex === 2 && (
               <>
                 <section className=" w-full">
-                  <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">
-                    set your credit card credit limit
-                  </div>
+                  <div className="text-secondary ml-4 mb-2 font-semibold  text-base  ">set your credit card credit limit</div>
                   <label htmlFor="creditLimit">
-                    <Touchable
-                      className={
-                        " bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"
-                      }
-                    >
+                    <Touchable className={" bg-container p-4   gap-3   outline-2  rounded-2xl flex justify-between items-center"}>
                       <img className=" w-6 h-6" src={ILS_symbol_main} />
                       <div className=" w-full">
                         {" "}
@@ -383,9 +342,7 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
                   </label>
                 </section>
                 <section className=" w-full">
-                  <div className="text-secondary mb-4 font-semibold  text-base  ">
-                    credit reset date {selectedCardResetDay}
-                  </div>
+                  <div className="text-secondary mb-4 font-semibold  text-base  ">credit reset date {selectedCardResetDay}</div>
                   <Slider
                     onValueChange={(value) => {
                       const [newDay] = value;
@@ -400,10 +357,7 @@ outline-dashed  outline-secondary outline-[3px] -outline-offset-[3px]  bg-contai
             )}
           </>
         )}
-        <Touchable
-          onClick={onSave}
-          className=" mt-5 w-full p-4 bg-main text-sm font-bold justify-center flex  rounded-2xl text-surface"
-        >
+        <Touchable onClick={onSave} className=" mt-5 w-full p-4 bg-main text-sm font-bold justify-center flex  rounded-2xl text-surface">
           Save
         </Touchable>
       </div>

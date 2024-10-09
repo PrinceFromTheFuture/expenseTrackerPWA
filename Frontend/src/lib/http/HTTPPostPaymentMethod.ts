@@ -1,13 +1,10 @@
 import axios from "axios";
 import { apiURL } from ".";
-import { PaymentMethod } from "@/types/types";
+import { PaymentMethod, PaymentMethodForm } from "@/types/types";
 
-const HTTPPostPaymentMethod = async (filledForm: Omit<PaymentMethod, "id" | "userId">) => {
+const HTTPPostPaymentMethod = async (filledForm: Omit<PaymentMethodForm, "id">) => {
   console.log({ ...filledForm });
-  const res = await axios.post<{ success: boolean; message?: string }>(
-    `${apiURL}/paymentMethods`,
-    filledForm
-  );
+  const res = await axios.post<{ success: boolean; message?: string }>(`${apiURL}/paymentMethods`, filledForm);
   return res.data;
 };
 

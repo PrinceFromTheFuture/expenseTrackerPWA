@@ -56,6 +56,14 @@ export const getBudgetNameByIdSelector = (state: RootState, budgetId: string) =>
 
   return budgetFound.name;
 };
+export const getBudgetIconUrlByIdSelector = (state: RootState, budgetId: string) => {
+  const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);
+  if (!budgetFound) {
+    return null;
+  }
+
+  return budgetFound.iconURL;
+};
 
 export const getBudgetByIdSelector = (state: RootState, budgetId: string) => {
   const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);
@@ -65,4 +73,14 @@ export const getBudgetByIdSelector = (state: RootState, budgetId: string) => {
 
   return budgetFound;
 };
+
+export const getBudgetColorByIdSelector = (state: RootState, budgetId: string) => {
+  const budgetFound = state.budgetsSlice.data.find((budget) => budget.id === budgetId);
+  if (!budgetFound) {
+    return null;
+  }
+
+  return budgetFound.color;
+};
+
 export const getBudgetsStatus = (state: RootState) => state.budgetsSlice.status;

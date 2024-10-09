@@ -20,9 +20,11 @@ import log_out_main from "@/assets/log_out_main.svg";
 import Card from "@/components/Card";
 import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from "@/components/alert-dialog";
 import PaymentMethodForm from "@/features/PaymentMethodForm";
-
+import empty_illustration from "@/assets/empty_illustration.svg";
+import { getAllAccountsSelector } from "@/redux/accountsSlice";
 const Home = () => {
-  const balance = useAppSelector(userBalanceSelector);
+  const allAccounts = useAppSelector(getAllAccountsSelector);
+  const userBalance = allAccounts.reduce((accumolator, account) => (accumolator += account.balanceInAgorot), 0);
   const allTransactions = useAppSelector(allTransactionsSelctor);
   const dispatch = useAppDispatch();
 
@@ -43,7 +45,7 @@ const Home = () => {
         <Icon varient="mid" src={edit_main} />
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(balance || 0, true)}</div>
+        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(userBalance || 0, true)}</div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-8">
@@ -61,34 +63,41 @@ const Home = () => {
         </div>
       </div>
       <div className=" mx-4 text-xl font-semibold mb-2 text-dark ">recent transactions</div>
-      {transactionsDataStatus === "pending"
-        ? Array.from([1, 2, 3, 4, 5], (item) => {
+      {transactionsDataStatus === "pending" ? (
+        Array.from([1, 2, 3, 4, 5], (item) => {
+          return (
+            <AnimatePresence key={item}>
+              <motion.div>
+                <ExpensesWidgetSkeleton key={item} />
+              </motion.div>
+            </AnimatePresence>
+          );
+        })
+      ) : allTransactions.length !== 0 ? (
+        allTransactions
+          .slice()
+          .filter((transaction) => !transaction.isDeleted)
+          .sort((transactionA, transactionB) => dayjs(transactionA.date).diff(dayjs(transactionB.date)))
+          .reverse()
+          .map((transaction) => {
             return (
-              <AnimatePresence key={item}>
-                <motion.div>
-                  <ExpensesWidgetSkeleton key={item} />
+              <AnimatePresence key={transaction.id}>
+                <motion.div layout animate={{ opacity: 1, height: "auto" }} initial={{ opacity: 0, height: 0 }} exit={{ opacity: 0, height: 0 }}>
+                  <ExpensesWidget transactionId={transaction.id} />
                 </motion.div>
               </AnimatePresence>
             );
           })
-        : allTransactions
-            .slice()
-            .sort((transactionA, transactionB) => dayjs(transactionA.date).diff(dayjs(transactionB.date)))
-            .reverse()
-            .map((transaction) => {
-              return (
-                <AnimatePresence key={transaction.id}>
-                  <motion.div
-                    layout
-                    animate={{ opacity: 1, height: "auto" }}
-                    initial={{ opacity: 0, height: 0 }}
-                    exit={{ opacity: 0, height: 0 }}
-                  >
-                    <ExpensesWidget transactionId={transaction.id} />
-                  </motion.div>
-                </AnimatePresence>
-              );
-            })}
+      ) : (
+        <div className=" w-full  flex flex-col gap-4 justify-center px-4 items-center py-8">
+          {" "}
+          <img src={empty_illustration} className=" w-24" alt="" />
+          <div className=" text-xl text-dark text-left font-bold">No transactions yet</div>
+          <Link to={"/new"} className=" w-full">
+            <Touchable className="  w-full  p-4 bg-main text-sm font-bold text-center  rounded-2xl text-surface">New</Touchable>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

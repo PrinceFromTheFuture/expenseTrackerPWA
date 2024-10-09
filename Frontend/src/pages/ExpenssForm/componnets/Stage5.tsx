@@ -58,7 +58,7 @@ const Stage5 = () => {
               </div>
               <div className=" w-full flex justify-between items-center">
                 <div className=" text-md text-secondary font-bold">{paymentMethod.name}</div>
-                <Icon src={paymentMethod.iconURL} varient="full" />
+                <img src={paymentMethod.iconURL} className=" w-6" />
               </div>
             </Touchable>
           );

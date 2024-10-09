@@ -37,7 +37,7 @@ const CardActionsDialogProvider = ({
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 1 }}
-            className=" inset-0  z-50 fixed bg-black/80 flex justify-center items-center"
+            className=" inset-0  z-50 h-full fixed bg-black/80 flex justify-center items-center"
           >
             <AnimatePresence>
               <motion.div
@@ -108,7 +108,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
           setIsDialogOpen={setIsEditDialogOpen}
         />
         <DrawerTrigger className=" w-full h-full">
-          <Card color={paymentMethod.color!} />
+          <Card name={paymentMethod.name} color={paymentMethod.color!} />
         </DrawerTrigger>
       </CarouselItem>
       <DrawerContent>
@@ -137,7 +137,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
             </Popover>
           </div>
           <div className="mt-4">
-            <Card color={paymentMethod.color!} />
+            <Card name={paymentMethod.name} color={paymentMethod.color!} />
             <div className=" text-xl font-semibold mb-2 text-dark mt-10 ">Deatils</div>
             <div className="p-4 border-container border-2  rounded-2xl flex flex-col justify-between gap-2">
               {" "}
@@ -147,8 +147,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
                   <img src={link_dark} className=" w-5" alt="" />
                   <div className="text-sm text-dark text-left font-bold">
                     {" "}
-                    {allAccounts.find((account) => account.id === paymentMethod.accountId)?.name ||
-                      "error account with the id deosnt exsists"}
+                    {allAccounts.find((account) => account.id === paymentMethod.accountId)?.name || "error account with the id deosnt exsists"}
                   </div>
                 </div>
               </div>
@@ -164,10 +163,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
                   </div>
                   <div className=" flex justify-between items-center ">
                     <div className="text-sm text-secondary text-left font-semibold">credit limit</div>
-                    <div className="text-sm text-dark text-left font-bold">
-                      {" "}
-                      {formatAmountInAgorot(paymentMethod.creditLimit!, true)}
-                    </div>
+                    <div className="text-sm text-dark text-left font-bold"> {formatAmountInAgorot(paymentMethod.creditLimit!, true)}</div>
                   </div>
                 </>
               )}
@@ -188,17 +184,13 @@ const CardDetails = ({ paymentMethod }: Props) => {
                     className=" absolute h-full rounded-md bg-main left-0"
                   ></motion.div>
                 </div>
-                <div className="font-semibold text-secondary text-sm">
-                  {((400000 / paymentMethod.creditLimit!) * 100).toFixed(1)}% used
-                </div>
+                <div className="font-semibold text-secondary text-sm">{((400000 / paymentMethod.creditLimit!) * 100).toFixed(1)}% used</div>
               </>
             )}
           </div>
         </div>
         <DrawerClose className=" w-full">
-          <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">
-            Close
-          </Touchable>
+          <Touchable className=" mt-5 w-full p-4 bg-secondary text-sm font-bold  rounded-2xl text-surface">Close</Touchable>
         </DrawerClose>
       </DrawerContent>
     </Drawer>

@@ -1,4 +1,4 @@
-import { pgTable, integer, uuid, varchar, timestamp, text, pgEnum } from "drizzle-orm/pg-core";
+import { pgTable, integer, uuid, varchar, timestamp, text, pgEnum, boolean } from "drizzle-orm/pg-core";
 export const transactionsTable = pgTable("transactions", {
   amountInAgorot: integer("amountInAgorot").notNull(),
   title: varchar("title", { length: 50 }).notNull(),
@@ -13,6 +13,7 @@ export const transactionsTable = pgTable("transactions", {
   userId: uuid("userId")
     .references(() => userTable.id)
     .notNull(),
+  isDeleted: boolean("isDeleted").default(false),
   id: uuid("id").primaryKey().defaultRandom(),
 });
 
@@ -26,6 +27,8 @@ export const budgetsTable = pgTable("budgets", {
     .references(() => userTable.id)
     .notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
+  isDeleted: boolean("isDeleted").default(false),
+
 });
 
 export const paymentMethodType = pgEnum("type", ["other", "creditCard", "debitCard"]);
@@ -41,6 +44,8 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
     .notNull(),
   accountId: uuid("accountId").references(() => accountsTable.id),
   id: uuid("id").primaryKey().defaultRandom(),
+  isDeleted: boolean("isDeleted").default(false),
+
 });
 
 export const userTable = pgTable("users", {
@@ -59,6 +64,7 @@ export const accountsTable = pgTable("accounts", {
     .notNull(),
   balanceInAgorot: integer("balanceInAgorot").notNull(),
   iconURL: text("iconURL").notNull(),
+  isDeleted: boolean("isDeleted").default(false),
 });
 
 export type InsertPaymentMethods = typeof paymentMethodsTable.$inferInsert;

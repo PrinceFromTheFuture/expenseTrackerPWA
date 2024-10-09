@@ -22,6 +22,8 @@ import AccountForm from "@/features/AccountForm";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import AccountsViewPreferencesDialog from "@/features/AccountsViewPreferencesDialog";
 import { accountsViewPreferencesSelector } from "@/redux/userPreferencesSlice";
+import { allBugdetsSelctor, getBudgetsStatus } from "@/redux/budgetsSlice";
+import { allPaymentMethodsSelector, getAllPaymentMethodsAsyncThunk } from "@/redux/paymentMethodsSlice";
 
 const Accounts = () => {
   const allAcounts = useAppSelector(getAllAccountsSelector);
@@ -33,6 +35,7 @@ const Accounts = () => {
 
   const accountsViewPreferance = allAcounts.filter((account) => accountsBalanceViewPreferance.find((accountId) => account.id === accountId));
   const preferredBalanceView = accountsViewPreferance.reduce((accumulator, cuurentAccount) => accumulator + cuurentAccount.balanceInAgorot, 0);
+  const activePaymentMethods = useAppSelector(allPaymentMethodsSelector).filter((paymentMethod) => !paymentMethod.isDeleted);
 
   const onDeleteAccount = async (accountId: string) => {
     await dispatch(deleteAccountByIdAsynkThunk(accountId));
@@ -97,7 +100,8 @@ const Accounts = () => {
                           </div>
                           <div className=" flex items-end">
                             <div className="  mr-4 bg-transparent outline outline-[2px] outline-secondary text-secondary flex justify-center items-center rounded-lg p-2  px-4 text-xs h-min   text-left font-bold mt-1  ">
-                              4 <img src={link_secondary} className=" w-5 ml-2" alt="" />
+                              {activePaymentMethods.filter((paymentMethod) => paymentMethod.accountId === account.id).length}{" "}
+                              <img src={link_secondary} className=" w-5 ml-2" alt="" />
                             </div>
                             <div onClick={(e) => e.stopPropagation()}>
                               <Popover>

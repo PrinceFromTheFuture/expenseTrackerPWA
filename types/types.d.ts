@@ -1,5 +1,7 @@
 export interface Bugdet {
   name: string;
+  isDeleted: boolean;
+
   color: string;
   iconURL: string;
   id: string;
@@ -32,6 +34,7 @@ export interface Transaction {
   paymentMethodId: string;
   title: string;
   description: string | null;
+  isDeleted: boolean;
   id: string;
 }
 
@@ -40,12 +43,15 @@ export interface PaymentMethod {
   userId: string;
   name: string;
   iconURL: string;
+  isDeleted: boolean;
+
   id: string;
   type: "other" | "creditCard" | "debitCard";
   creditLimit: number | null;
   resetDate: number | null;
   color: string | null;
 }
+export type PaymentMethodForm = Omit<PaymentMethod, "userId" | "isDeleted">;
 
 export interface User {
   name: string;
@@ -59,5 +65,7 @@ export interface Account {
   iconURL: string;
   id: string;
   name: string;
+  isDeleted: boolean;
+
   balanceInAgorot: number;
 }

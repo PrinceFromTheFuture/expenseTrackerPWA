@@ -1,6 +1,6 @@
 import { transactionsTable, userTable } from "../../../schema.js";
 import dayjs from "dayjs";
-import { db, } from "../../../server.js";
+import { db } from "../../../server.js";
 import { eq } from "drizzle-orm";
 const postNewTransaction = async (req, res) => {
     const transactionForm = req.body;

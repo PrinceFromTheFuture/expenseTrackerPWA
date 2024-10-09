@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { transactionsTable, userTable } from "../../../schema.js";
 import dayjs from "dayjs";
-import { db,  } from "../../../server.js";
+import { db } from "../../../server.js";
 import { TransactionFormAPI } from "@/types/types.js";
 import { eq } from "drizzle-orm";
 

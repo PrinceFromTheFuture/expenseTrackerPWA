@@ -16,7 +16,6 @@ import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { Link } from "react-router-dom";
 import { enterEditModeInForm } from "@/redux/formSlice.ts";
-import { getAccountsStatusSelector } from "@/redux/accountsSlice.ts";
 
 const ExpensesWidget = ({ transactionId }: { transactionId: string }) => {
   const transaction = useAppSelector((state: RootState) => singleTransactionSelector(state, transactionId));

@@ -1,5 +1,5 @@
 import Icon from "@/components/Icon";
-import React, { useState } from "react";
+import  { useState } from "react";
 import ellipsis_main from "@/assets/ellipsis_main.svg";
 import ellipsis_secondary from "@/assets/ellipsis_secondary.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
@@ -17,13 +17,11 @@ import DeleteWarning from "@/features/DeleteWarning";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent } from "@/components/alert-dialog";
 import exit_main from "@/assets/exit_main.svg";
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
-import { PopoverClose } from "@radix-ui/react-popover";
 import AccountForm from "@/features/AccountForm";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import AccountsViewPreferencesDialog from "@/features/AccountsViewPreferencesDialog";
 import { accountsViewPreferencesSelector } from "@/redux/userPreferencesSlice";
-import { allBugdetsSelctor, getBudgetsStatus } from "@/redux/budgetsSlice";
-import { allPaymentMethodsSelector, getAllPaymentMethodsAsyncThunk } from "@/redux/paymentMethodsSlice";
+import { allPaymentMethodsSelector,  } from "@/redux/paymentMethodsSlice";
 import warning_red from "@/assets/warning_red.svg";
 
 import { toast } from "sonner";

@@ -13,11 +13,9 @@ import dayjs from "dayjs";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-import facebookTest from "@/assets/facebookTest.svg";
 
 import exit_main from "@/assets/exit_main.svg";
 import paper_plane_surface from "@/assets/paper_plane_surface.svg";
-import { RootState } from "@/redux/store";
 
 const ReviewBeforeSubmit = () => {
   const formData = useAppSelector(formDataSelector);

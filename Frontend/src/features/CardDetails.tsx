@@ -3,7 +3,7 @@ import { CarouselItem } from "@/components/carousel";
 import { Drawer, DrawerClose, DrawerContent, DrawerPortal, DrawerTrigger } from "@/components/drawer";
 import Icon from "@/components/Icon";
 import { PaymentMethod } from "@/types/types";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ellipsis_secondary from "@/assets/ellipsis_secondary.svg";
 import link_dark from "@/assets/link_dark.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
@@ -16,11 +16,9 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
 import DeleteWarning from "./DeleteWarning";
 import exit_main from "@/assets/exit_main.svg";
 import PaymentMethodForm from "./PaymentMethodForm";
-import { allPaymentMethodsSelector, deletePaymentMethodByIdAsyncThunk } from "@/redux/paymentMethodsSlice";
+import {  deletePaymentMethodByIdAsyncThunk } from "@/redux/paymentMethodsSlice";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
-import warning_red from "@/assets/warning_red.svg";
 
-import { toast } from "sonner";
 
 const CardActionsDialogProvider = ({
   children,

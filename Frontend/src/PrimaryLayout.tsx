@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import {  useEffect } from "react";
 import getAllDataFromAPI from "./lib/getAllDataFromAPI";
 import { useAppDispatch } from "./hooks/hooks";
 import { Outlet } from "react-router-dom";

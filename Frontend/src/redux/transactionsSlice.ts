@@ -72,7 +72,7 @@ const transactionsSlice = createSlice({
     builder.addCase(getAllTransactionsAsyncThunk.pending, (state) => {
       state.status = "pending";
     });
-    builder.addCase(postNewTransactionAsyncThunk.fulfilled, (state, action) => {
+    builder.addCase(postNewTransactionAsyncThunk.fulfilled, (state, ) => {
       state.status = "success";
     });
     builder.addCase(postNewTransactionAsyncThunk.pending, (state) => {

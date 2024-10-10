@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { PaymentMethod, PaymentMethodForm } from "@/types/types";
 import http from "@/lib/http/index";
-import leumi from "@/assets/accountsIcons/leumi.svg";
 
 export const getAllPaymentMethodsAsyncThunk = createAsyncThunk("paymentMethods/getAll", async () => {
   return await http.HTTPGetAllPaymentMethods();

@@ -24,14 +24,14 @@ const budgetsSlice = createSlice({
   name: "budgets",
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllBudgetsAsyncThunk.pending, (state, action) => {
+    builder.addCase(getAllBudgetsAsyncThunk.pending, (state, ) => {
       state.status = "pending";
     });
     builder.addCase(getAllBudgetsAsyncThunk.fulfilled, (state, action) => {
       state.data = action.payload;
       state.status = "success";
     });
-    builder.addCase(postNewBudgetAsyncThunk.pending, (state, action) => {
+    builder.addCase(postNewBudgetAsyncThunk.pending, (state, ) => {
       state.status = "pending";
     });
     builder.addCase(postNewBudgetAsyncThunk.fulfilled, (state, action) => {

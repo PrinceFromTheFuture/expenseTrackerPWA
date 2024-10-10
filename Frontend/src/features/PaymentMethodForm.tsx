@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import ILS_symbol_main from "@/assets/ils_symbol_main.svg";
-import { AlertDialogAction, AlertDialogPortal } from "@/components/alert-dialog";
 import { accountIcons } from "@/lib/icons";
 
 import exit_main from "@/assets/exit_main.svg";
@@ -16,12 +15,10 @@ import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import { getAllAccountsSelector } from "@/redux/accountsSlice";
 import link_dark from "@/assets/link_dark.svg";
 import { Slider } from "@/components/ui/slider";
-import { DrawerPortal } from "@/components/drawer";
 import colors from "@/lib/colors";
 import {
   allPaymentMethodsSelector,
   getPaymentMethodById,
-  getPaymentMethodNameByIdSelector,
   postNewPaymentMethodAsyncThunk,
   updatePaymentMethodAsyncThunk,
 } from "@/redux/paymentMethodsSlice";

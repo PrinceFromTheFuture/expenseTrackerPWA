@@ -1,9 +1,8 @@
 import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
-import Home from "./pages/Home.tsx";
 import "./index.css";
 
-import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter, Navigate,  Route, Routes, useLocation,  } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "@/redux/store.ts";
 import { AnimatePresence } from "framer-motion";

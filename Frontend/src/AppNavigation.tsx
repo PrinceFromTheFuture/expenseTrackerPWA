@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, {  useState } from "react";
 import Home from "./pages/Home";
 import { AnimatePresence, motion } from "framer-motion";
 import Touchable from "./components/Touchable";

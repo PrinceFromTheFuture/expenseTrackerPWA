@@ -12,14 +12,11 @@ import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/red
 import SpendingsTimeFrameValues from "@/features/SpendingsTimeFrameValues";
 import ExpensesWidgetSkeleton from "../components/skeletons/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
-import { signOutAsyncTunk, userBalanceSelector } from "../redux/userSlice";
+import { signOutAsyncTunk,  } from "../redux/userSlice";
 import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
 import log_out_main from "@/assets/log_out_main.svg";
-import Card from "@/components/Card";
-import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from "@/components/alert-dialog";
-import PaymentMethodForm from "@/features/PaymentMethodForm";
 import empty_illustration from "@/assets/empty_illustration.svg";
 import { getAllAccountsSelector } from "@/redux/accountsSlice";
 const Home = () => {

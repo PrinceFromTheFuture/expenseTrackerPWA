@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { transactionsTable,  } from "../../../schema.js";
+import { transactionsTable } from "../../../schema.js";
 import { and, between, eq } from "drizzle-orm";
 import dayjs from "dayjs";
 import { db } from "../../../server.js";
@@ -16,7 +16,8 @@ const getUserSpendingsByTimeFrame = async (req: Request, res: Response) => {
     .where(
       and(
         between(transactionsTable.date, dayjs(requestedTimeFrame.from).toDate(), dayjs(requestedTimeFrame.to).toDate()),
-        eq(transactionsTable.userId, userId!)
+        eq(transactionsTable.userId, userId!),
+        eq(transactionsTable.isDeleted, false)
       )
     );
 

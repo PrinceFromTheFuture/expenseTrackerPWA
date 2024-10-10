@@ -16,8 +16,11 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
 import DeleteWarning from "./DeleteWarning";
 import exit_main from "@/assets/exit_main.svg";
 import PaymentMethodForm from "./PaymentMethodForm";
-import { deletePaymentMethodByIdAsyncThunk } from "@/redux/paymentMethodsSlice";
+import { allPaymentMethodsSelector, deletePaymentMethodByIdAsyncThunk } from "@/redux/paymentMethodsSlice";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
+import warning_red from "@/assets/warning_red.svg";
+
+import { toast } from "sonner";
 
 const CardActionsDialogProvider = ({
   children,
@@ -75,6 +78,7 @@ const CardDetails = ({ paymentMethod }: Props) => {
   const [isDeletedialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const onConfirmDelete = async () => {
+  
     await dispatch(deletePaymentMethodByIdAsyncThunk(paymentMethod.id));
     getAllDataFromAPI(dispatch);
   };

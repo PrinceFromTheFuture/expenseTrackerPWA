@@ -14,6 +14,7 @@ import statistics_secondary_outline from "@/assets/navLinks/statistics_secondary
 import coins_secondary_outline from "@/assets/navLinks/coins_secondary_outline.svg";
 import recipt_surface from "@/assets/navLinks/recipt_surface.svg";
 import Finance from "./pages/Finance/Finance";
+import { Toaster } from "./components/ui/sonner";
 
 const PageWraper = ({ currentPage, children, page }: { currentPage: number; page: number; children: React.ReactNode }) => {
   return (
@@ -66,12 +67,13 @@ const AppNavigation = () => {
   const pages = [
     { element: <Home />, index: 0 },
     { element: <Finance />, index: 1 },
-    { element: <Home />, index: 2 },
-    { element: <Home />, index: 3 },
+    { element: <div className=" flex justify-center items-center h-[60vh]">Coming soon...</div>, index: 2 },
+    { element: <div className=" flex justify-center items-center h-[60vh]">Coming soon...</div>, index: 3 },
   ];
 
   return (
     <div className=" fixed inset-0">
+      <Toaster />
       <div
         className=" absolute z-10 rounded-tl-2xl py-4 flex justify-evenly items-center bg-surface shadow-2xl w-full bottom-0"
         style={{ boxShadow: "0px 10px 20px  10px rgba(0,0,0,0.1)" }}

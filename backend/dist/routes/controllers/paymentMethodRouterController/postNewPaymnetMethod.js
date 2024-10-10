@@ -25,7 +25,9 @@ const postNewPaymnetMethod = async (req, res) => {
             color: filledForm.color,
             userId: userId,
             creditLimit: filledForm.creditLimit,
-        });
+            resetDate: filledForm.resetDate
+        }).returning();
+        console.log(filledForm);
     }
     catch (e) {
         console.log(e);

@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { transactionsTable, userTable } from "../../../schema.js";
+import { accountsTable, paymentMethodsTable, transactionsTable, userTable } from "../../../schema.js";
 import dayjs from "dayjs";
 import { db } from "../../../server.js";
 import { TransactionFormAPI } from "@/types/types.js";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 const postNewTransaction = async (req: Request, res: Response) => {
   const transactionForm: TransactionFormAPI = req.body;
@@ -19,9 +19,26 @@ const postNewTransaction = async (req: Request, res: Response) => {
     .returning();
   const savedTransaction = result[0];
 
-  const currentBalanceInAgorot = (await db.select().from(userTable).where(eq(userTable.id, userId!)))[0].balanceInAgorot;
-  const newBalanceInAgorot = currentBalanceInAgorot - savedTransaction.amountInAgorot;
-  await db.update(userTable).set({ balanceInAgorot: newBalanceInAgorot }).where(eq(userTable.id, userId!));
+  const paymentMethodAssociatedWithTransaction = (
+    await db
+      .select()
+      .from(paymentMethodsTable)
+      .where(and(eq(paymentMethodsTable.id, transactionForm.paymentMethodId), eq(paymentMethodsTable.userId, userId!)))
+  )[0];
+
+  const accountAssociatedWithTransaction = (
+    await db
+      .select()
+      .from(accountsTable)
+      .where(and(eq(accountsTable.id, paymentMethodAssociatedWithTransaction.accountId!), eq(accountsTable.userId, userId!)))
+  )[0];
+
+  await db
+    .update(accountsTable)
+    .set({ balanceInAgorot: accountAssociatedWithTransaction.balanceInAgorot - savedTransaction.amountInAgorot })
+    .where(and(eq(accountsTable.id, paymentMethodAssociatedWithTransaction.accountId!), eq(accountsTable.userId, userId!)))
+    .returning();
+
   res.json(savedTransaction);
 };
 

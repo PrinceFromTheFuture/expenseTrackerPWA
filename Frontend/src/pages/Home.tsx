@@ -24,7 +24,9 @@ import empty_illustration from "@/assets/empty_illustration.svg";
 import { getAllAccountsSelector } from "@/redux/accountsSlice";
 const Home = () => {
   const allAccounts = useAppSelector(getAllAccountsSelector);
-  const userBalance = allAccounts.reduce((accumolator, account) => (accumolator += account.balanceInAgorot), 0);
+  const userBalance = allAccounts
+    .filter((account) => !account.isDeleted)
+    .reduce((accumolator, account) => (accumolator += account.balanceInAgorot), 0);
   const allTransactions = useAppSelector(allTransactionsSelctor);
   const dispatch = useAppDispatch();
 
@@ -42,7 +44,10 @@ const Home = () => {
           <Icon varient="mid" src={log_out_main} />
         </div>
         <div className=" font-bold text-dark text-lg">Home</div>
-        <Icon varient="mid" src={edit_main} />
+        <div className=" invisible ">
+          {" "}
+          <Icon varient="mid" src={edit_main} />
+        </div>
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
         <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(userBalance || 0, true)}</div>

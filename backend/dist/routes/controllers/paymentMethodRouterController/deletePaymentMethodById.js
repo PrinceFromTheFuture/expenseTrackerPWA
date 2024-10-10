@@ -5,9 +5,7 @@ const deletePaymentMethodById = async (req, res) => {
     const paymentMethodId = req.params.paymentMethodId;
     const userId = req.userId;
     await db
-        .delete(paymentMethodsTable)
-        .where(and(eq(paymentMethodsTable.id, paymentMethodId), eq(paymentMethodsTable.userId, userId)))
-        .execute();
+        .update(paymentMethodsTable).set({ isDeleted: true }).where((and(eq(paymentMethodsTable.id, paymentMethodId), eq(paymentMethodsTable.userId, userId))));
     res.json({ sucess: true });
 };
 export default deletePaymentMethodById;

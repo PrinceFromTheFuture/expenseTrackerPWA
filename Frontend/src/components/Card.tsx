@@ -7,7 +7,7 @@ import nfc from "@/assets/nfc.svg";
 import hexToRgba from "@/lib/hexToRgba";
 import { Skeleton } from "./skeleton";
 
-const Card = ({ color, name, isPending }: { color?: string; name?: string; isPending: boolean }) => {
+const Card = ({ color, name, isPending = false }: { color?: string; name?: string; isPending?: boolean }) => {
   if (isPending) {
     return (
       <Skeleton className="w-full aspect-[9/5] rounded-2xl relative p-6 flex flex-col justify-between">

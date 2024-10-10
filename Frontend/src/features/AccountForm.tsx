@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import exit_main from "@/assets/exit_main.svg";
 import DeleteWarning from "./DeleteWarning";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import { getAccountByIdSelector, postNewAccountAsyncThunk, updateAccountByIdAsynkThunk } from "@/redux/accountsSlice";
+import { getAccountByIdSelector, getAllAccountsSelector, postNewAccountAsyncThunk, updateAccountByIdAsynkThunk } from "@/redux/accountsSlice";
 import { AnimatePresence } from "framer-motion";
 import { accountIcons } from "@/lib/icons";
 import colors from "@/lib/colors";
@@ -24,7 +24,10 @@ import { format } from "path";
 import ILS_symbol_main from "@/assets/ils_symbol_main.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import { DialogClose } from "@radix-ui/react-dialog";
+import warning_red from "@/assets/warning_red.svg";
+
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
+import { toast } from "sonner";
 
 const IconSelector = ({
   setSelectedIcon,
@@ -101,6 +104,7 @@ const AccountForm = ({ trigger, accountId }: Props) => {
   // an undefined account will fallback to default mode of new account
 
   const dispatch = useAppDispatch();
+  const allActiveAccounts = useAppSelector(getAllAccountsSelector).filter((account) => !account.isDeleted);
 
   const [selectedName, setSelectedName] = useState<null | string>(account ? account.name : null);
   const [balanceInAgorot, setBalanceInAgorot] = useState(account ? account.balanceInAgorot : 0);
@@ -123,6 +127,10 @@ const AccountForm = ({ trigger, accountId }: Props) => {
 
   const onSave = async () => {
     if (mode === "new") {
+      if (allActiveAccounts.length > 7) {
+        toast("you cannot have more than 8 accounts", { icon: <img src={warning_red} alt="" /> });
+        return;
+      }
       await dispatch(postNewAccountAsyncThunk({ balanceInAgorot, iconURL: selectedIcon, name: selectedName! }));
       getAllDataFromAPI(dispatch);
       setSelectedName(null);

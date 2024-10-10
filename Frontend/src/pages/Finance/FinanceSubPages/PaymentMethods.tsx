@@ -81,8 +81,27 @@ const PaymentMethods = () => {
         </div>
       </div>
 
+      <AlertDialog open={isNewPaymentMethodDialogOpen} onOpenChange={setIsNewPaymentMethodDialogOpen}>
+        <AlertDialogTrigger className=" w-full">
+          <Touchable className=" w-full flex justify-center items-center h-14 bg-secondary mb-4 px-4 rounded-2xl">
+            <img src={plus_surface} alt="" className=" w-6" />
+          </Touchable>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <div className=" w-full p-4 mx-4 rounded-2xl bg-surface max-h-[65vh] overflow-auto">
+            <div onClick={() => setIsNewPaymentMethodDialogOpen(false)}>
+              <Icon src={exit_main} varient="mid" />
+            </div>
+            <PaymentMethodForm
+              onSaveAction={() => {
+                setIsNewPaymentMethodDialogOpen(false);
+              }}
+            />
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
       <div className=" text-secondary mb-2 font-semibold text-base ">Other</div>
-      <div className=" flex flex-col gap-4">
+      <div className=" flex flex-col gap-4 mb-24">
         {paymentMethodsStatus === "success" ? (
           paymentMethods
             .filter((paymentMethod) => paymentMethod.type === "other")
@@ -170,25 +189,6 @@ const PaymentMethods = () => {
             })}
           </>
         )}
-        <AlertDialog open={isNewPaymentMethodDialogOpen} onOpenChange={setIsNewPaymentMethodDialogOpen}>
-          <AlertDialogTrigger>
-            <Touchable className=" w-full flex justify-center items-center h-14 bg-secondary mb-4 px-4 rounded-2xl">
-              <img src={plus_surface} alt="" className=" w-6" />
-            </Touchable>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <div className=" w-full p-4 mx-4 rounded-2xl bg-surface max-h-[65vh] overflow-auto">
-              <div onClick={() => setIsNewPaymentMethodDialogOpen(false)}>
-                <Icon src={exit_main} varient="mid" />
-              </div>
-              <PaymentMethodForm
-                onSaveAction={() => {
-                  setIsNewPaymentMethodDialogOpen(false);
-                }}
-              />
-            </div>
-          </AlertDialogContent>
-        </AlertDialog>
       </div>
     </div>
   );

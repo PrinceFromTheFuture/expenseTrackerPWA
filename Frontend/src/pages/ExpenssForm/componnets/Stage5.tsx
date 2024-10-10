@@ -6,23 +6,28 @@ import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
 import { formDataSelector, modifyPaymentMethodInForm } from "@/redux/formSlice";
 import Touchable from "@/components/Touchable";
+import { AlertDialog, AlertDialogContent, AlertDialogTrigger } from "@/components/alert-dialog";
+import PaymentMethodForm from "@/features/PaymentMethodForm";
+import plus_surface from "@/assets/plus_surface.svg";
+import exit_main from "@/assets/exit_main.svg";
+import { useState } from "react";
 
 const Stage5 = () => {
-  const allPaymentMethods = useAppSelector(allPaymentMethodsSelector);
-
+  const allPaymentMethods = useAppSelector(allPaymentMethodsSelector).filter((paymentMethod) => !paymentMethod.isDeleted);
+  const [isNewPaymentMethodDialogOpen, setIsNewPaymentMethodDialogOpen] = useState(false);
   const selctedPaymentMethodId = useAppSelector(formDataSelector).paymentMethodId;
   const dispatch = useAppDispatch();
 
   return (
-    <div className=" w-full h-full my-4 flex flex-col justify-start items-center">
+    <div className=" w-full h-full my-4 flex flex-col justify-start items-center ">
       {" "}
       <div className="text-secondary mb-4  font-semibold text-base">Payment Method</div>
       <div className=" w-full mb-4 flex justify-between items-end">
         {" "}
-        <div className="text-dark   font-semibold text-lg">Payment Method</div>
+        <div className="text-dark   font-semibold text-lg">Payment Methods</div>
         <Icon src={edit_main} varient="mid" />
       </div>
-      <div className=" w-full max-h-[60vh] overflow-hidden flex flex-col justify-between items-start gap-2">
+      <div className=" w-full max-h-[60vh] overflow-auto flex flex-col justify-between items-start gap-2">
         {allPaymentMethods.map((paymentMethod) => {
           return (
             <Touchable
@@ -63,6 +68,25 @@ const Stage5 = () => {
             </Touchable>
           );
         })}
+        <AlertDialog open={isNewPaymentMethodDialogOpen} onOpenChange={setIsNewPaymentMethodDialogOpen}>
+          <AlertDialogTrigger className=" w-full">
+            <Touchable className=" w-full flex justify-center items-center h-14 bg-secondary mb-4 px-4 rounded-2xl">
+              <img src={plus_surface} alt="" className=" w-6" />
+            </Touchable>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <div className=" w-full p-4 mx-4 rounded-2xl bg-surface max-h-[65vh] overflow-auto">
+              <div onClick={() => setIsNewPaymentMethodDialogOpen(false)}>
+                <Icon src={exit_main} varient="mid" />
+              </div>
+              <PaymentMethodForm
+                onSaveAction={() => {
+                  setIsNewPaymentMethodDialogOpen(false);
+                }}
+              />
+            </div>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );

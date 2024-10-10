@@ -5,6 +5,7 @@ import app_icon from "@/assets/app_icon.svg";
 import Touchable from "@/components/Touchable";
 import google_icon from "@/assets/google__logo.svg";
 import { Link } from "react-router-dom";
+import { Toaster } from "@/components/ui/sonner";
 
 const Landing = () => {
   return (
@@ -16,6 +17,7 @@ const Landing = () => {
       style={{ top: 0, bottom: 0 }}
       className=" p-4 bg-surface  fixed flex flex-col justify-center items-center"
     >
+              <Toaster />
       <div className=" flex flex-col justify-center items-center mb-8">
         <div className="p-2  mb-8 flex justify-center items-center bg-dark rounded-3xl h-32 w-32">
           <img src={app_icon} className="  w-4/6 mt-4 " alt="" />

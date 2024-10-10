@@ -19,13 +19,16 @@ import { Slider } from "@/components/ui/slider";
 import { DrawerPortal } from "@/components/drawer";
 import colors from "@/lib/colors";
 import {
+  allPaymentMethodsSelector,
   getPaymentMethodById,
   getPaymentMethodNameByIdSelector,
   postNewPaymentMethodAsyncThunk,
   updatePaymentMethodAsyncThunk,
 } from "@/redux/paymentMethodsSlice";
+import warning_red from "@/assets/warning_red.svg";
 import { PaymentMethodForm as PaymentMethodFormType } from "@/types/types";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
+import { toast } from "sonner";
 
 const ColorSelector = ({
   setSelectedColor,
@@ -147,7 +150,7 @@ type Props = {
 const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
   const [isSelectIconDialogOpen, setIsSelectIconDialogOpen] = useState(false);
   const [isSelectColorDialogOpen, setIsSelectColorDialogOpen] = useState(false);
-
+  const allPaymentMethods = useAppSelector(allPaymentMethodsSelector);
   const paymentMethod = useAppSelector((state) => getPaymentMethodById(state, paymentMethodId));
   const mode = paymentMethod === undefined ? "new" : "edit";
   // an undefined paymentMethodId will fallback to default mode of new account
@@ -204,6 +207,11 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
       return;
     }
     onSaveAction();
+    if (allPaymentMethods.filter((paymentMethod) => !paymentMethod.isDeleted).length > 7) {
+      toast("you cannot have more than 8 payment methods", { icon: <img src={warning_red} alt="" /> });
+      return;
+    }
+
     const filledForm: Omit<PaymentMethodFormType, "id"> = {
       accountId: selectedLinkedAccountId,
       name: selectedName,
@@ -213,6 +221,7 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
       resetDate: selectedCardResetDay,
       type: methodTypeIndex === 0 ? "other" : methodTypeIndex === 1 ? "debitCard" : "creditCard",
     };
+
     if (mode === "new") {
       await dispatch(postNewPaymentMethodAsyncThunk({ ...filledForm }));
     } else {

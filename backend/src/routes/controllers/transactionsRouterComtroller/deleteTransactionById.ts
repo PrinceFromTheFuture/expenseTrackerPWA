@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { db } from "../../../server.js";
-import { transactionsTable, userTable } from "../../../schema.js";
+import { accountsTable, paymentMethodsTable, transactionsTable } from "../../../schema.js";
 import { and, eq } from "drizzle-orm";
 
 const deleteTransactionById = async (req: Request, res: Response) => {
@@ -15,17 +15,32 @@ const deleteTransactionById = async (req: Request, res: Response) => {
       .where(and(eq(transactionsTable.id, transactionId), eq(transactionsTable.userId, userId!)))
   )[0];
 
-  const currentBalanceInAgorot = (await db.select().from(userTable).where(eq(userTable.id, userId!)))[0].balanceInAgorot;
+  const paymentMethodAssociatedWithTransaction = (
+    await db
+      .select()
+      .from(paymentMethodsTable)
+      .where(and(eq(paymentMethodsTable.id, aboutToBeDeletedTransaction.paymentMethodId!), eq(paymentMethodsTable.userId, userId!)))
+  )[0];
 
-  const newBalanceInAgorot = currentBalanceInAgorot + aboutToBeDeletedTransaction.amountInAgorot;
-  await db.update(userTable).set({ balanceInAgorot: newBalanceInAgorot }).where(eq(userTable.id, userId!));
+  const accountAssociatedWithTransaction = (
+    await db
+      .select()
+      .from(accountsTable)
+      .where(and(eq(accountsTable.id, paymentMethodAssociatedWithTransaction.accountId!), eq(accountsTable.userId, userId!)))
+  )[0];
 
-  const success = await db
-    .delete(transactionsTable)
-    .where(and(eq(transactionsTable.id, transactionId), eq(transactionsTable.userId, userId!)))
-    .execute();
+  await db
+    .update(accountsTable)
+    .set({ balanceInAgorot: accountAssociatedWithTransaction.balanceInAgorot + aboutToBeDeletedTransaction.amountInAgorot })
+    .where(and(eq(accountsTable.id, paymentMethodAssociatedWithTransaction.accountId!), eq(accountsTable.userId, userId!)))
+    .returning();
 
-  res.json({ success });
+  await db
+    .update(transactionsTable)
+    .set({ isDeleted: true })
+    .where(and(eq(transactionsTable.id, transactionId), eq(transactionsTable.userId, userId!)));
+
+  res.json({ success: true });
 };
 
 export default deleteTransactionById;

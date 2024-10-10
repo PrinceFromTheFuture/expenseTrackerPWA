@@ -5,7 +5,7 @@ import { useState } from "react";
 import arrow_main from "@/assets/arrow_main.svg";
 import edit_main from "@/assets/edit_main.svg";
 
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import exit_main from "@/assets/exit_main.svg";
 import Stage1 from "./componnets/Stage1";
 import Stage2 from "./componnets/Stage2";

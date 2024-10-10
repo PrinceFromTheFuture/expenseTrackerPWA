@@ -1,4 +1,3 @@
-import { Transaction } from "@/types/types";
 import { apiURL } from ".";
 import axios from "axios";
 

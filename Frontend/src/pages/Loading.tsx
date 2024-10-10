@@ -1,7 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";
-import app_icon from "/app_icon.svg";
 
 const Loading = () => {
   return (

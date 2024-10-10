@@ -1,8 +1,7 @@
-import React, { EventHandler, ReactNode, useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { DrawerContent, Drawer, DrawerTrigger, DrawerClose, DrawerPortal } from "../components/drawer";
 import Touchable from "../components/Touchable";
 import tag_main from "@/assets/tag_main.svg";
-import bell_main from "@/assets/user_main.svg";
 import Icon from "../components/Icon";
 import { AnimatePresence, motion } from "framer-motion";
 import generalTransition from "@/lib/generalTransition";

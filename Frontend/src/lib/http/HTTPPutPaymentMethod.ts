@@ -1,6 +1,6 @@
 import axios from "axios";
 import { apiURL } from ".";
-import { PaymentMethod, PaymentMethodForm } from "@/types/types";
+import { PaymentMethodForm } from "@/types/types";
 
 const HTTPPutPaymentMethod = async (filledForm: PaymentMethodForm) => {
   const { id, ...rest } = filledForm;

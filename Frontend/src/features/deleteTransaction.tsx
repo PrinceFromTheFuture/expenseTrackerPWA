@@ -1,5 +1,4 @@
 import React from "react";
-import Touchable from "../components/Touchable";
 import { AnimatePresence } from "framer-motion";
 import exit_main from "@/assets/exit_main.svg";
 import Icon from "../components/Icon";

@@ -3,7 +3,7 @@ import { getAllBudgetsAsyncThunk } from "@/redux/budgetsSlice";
 import { getAllPaymentMethodsAsyncThunk } from "@/redux/paymentMethodsSlice";
 import store from "@/redux/store";
 import { getAllTransactionsAsyncThunk } from "@/redux/transactionsSlice";
-import { getSpendingsInTimeFrameAsyncThunk, getUserBalanceAsyncThunk } from "@/redux/userSlice";
+import { getSpendingsInTimeFrameAsyncThunk,  } from "@/redux/userSlice";
 import dayjs from "dayjs";
 
 async function getAllDataFromAPI(dispatch: typeof store.dispatch) {
@@ -33,7 +33,6 @@ async function getAllDataFromAPI(dispatch: typeof store.dispatch) {
           defenition: "30d",
         })
       ).unwrap(),
-      dispatch(getUserBalanceAsyncThunk()).unwrap(),
       dispatch(getAllAccountsAsyncThunk()).unwrap(),
     ]);
   } catch (error) {

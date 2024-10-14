@@ -38,10 +38,6 @@ export const getSpendingsInTimeFrameAsyncThunk = createAsyncThunk(
   }
 );
 
-export const getUserBalanceAsyncThunk = createAsyncThunk("/users/getBalance", async () => {
-  const data = await http.HTTPGetUserBalance();
-  return data;
-});
 
 export const verifyUserTokenAsyncTunk = createAsyncThunk("users/acessTokenVerification", async () => {
   const data = await http.HTTPVerifyToken();
@@ -80,9 +76,7 @@ const userSlice = createSlice({
           break;
       }
     });
-    builder.addCase(getUserBalanceAsyncThunk.fulfilled, (state, action) => {
-      state.user.balance = action.payload.balanceInAgorot;
-    });
+   
     builder.addCase(verifyUserTokenAsyncTunk.fulfilled, (state, action) => {
       state.status = "success";
       if (action.payload.success === false || !action.payload.userId) {

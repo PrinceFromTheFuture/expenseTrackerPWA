@@ -37,7 +37,6 @@ export default {
   HTTPDeleteTransaction,
   HTTPGetAllAccounts,
   HTTPGetSpendingsInTimeFrame,
-  HTTPGetUserBalance,
   HTTPPostPaymentMethod,
   HTTPPostNewBudget,
   HTTPPostNewUser,

@@ -162,7 +162,7 @@ const PaymentMethodForm = ({ onSaveAction, paymentMethodId }: Props) => {
         return 2;
     }
   };
-  const allAccounts = useAppSelector(getAllAccountsSelector);
+  const allAccounts = useAppSelector(getAllAccountsSelector).filter((account) => !account.isDeleted);
   const [methodTypeIndex, setMethodTypeIndex] = useState(paymentMethod ? getPaymentMethodIndexByType(paymentMethod.type) : 0);
 
   const [selectedColor, setSelectedColor] = useState<string>(

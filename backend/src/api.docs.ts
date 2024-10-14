@@ -25,6 +25,23 @@ const serverDefnition = {
           method: "GET",
           response: Array.prototype as PaymentMethod[],
         },
+        {
+          path: "/",
+          method: "POST",
+          request: Object.prototype as Omit<PaymentMethod, "id">,
+          response: Object.prototype as { success: boolean; message?: string },
+        },
+        {
+          path: "/:paymentMethodId",
+          method: "PUT",
+          request: Object.prototype as Omit<PaymentMethod, "id">,
+          response: Object.prototype as { success: boolean; message?: string },
+        },
+        {
+          path: "/:paymentMethodId",
+          method: "DELETE",
+          response: Object.prototype as { success: boolean; message?: string },
+        },
       ],
     },
     transactions: {
@@ -54,19 +71,7 @@ const serverDefnition = {
       ],
     },
     users: {
-      endpoints: [
-        {
-          path: "/timeFrameSpendings",
-          method: "POST",
-          request: Object.prototype as { from: string; to: string },
-          response: Object.prototype as { amountInAgorot: number },
-        },
-        {
-          path: "/balance",
-          method: "GET",
-          response: Object.prototype as { balanceInAgorot: number },
-        },
-      ],
+      endpoints: [],
     },
     accounts: {
       endpoints: [
@@ -79,6 +84,12 @@ const serverDefnition = {
         },
         { path: "/:accountId", method: "PUT", response: Object.prototype as { success: boolean; message?: string } },
         { path: "/:accountId", method: "DELETE", response: Object.prototype as { success: boolean; message?: string } },
+        {
+          path: "/timeFrameSpendings",
+          method: "POST",
+          request: Object.prototype as { from: string; to: string },
+          response: Object.prototype as { amountInAgorot: number },
+        },
       ],
     },
     auth: {

@@ -23,6 +23,23 @@ const serverDefnition = {
                     method: "GET",
                     response: Array.prototype,
                 },
+                {
+                    path: "/",
+                    method: "POST",
+                    request: Object.prototype,
+                    response: Object.prototype,
+                },
+                {
+                    path: "/:paymentMethodId",
+                    method: "PUT",
+                    request: Object.prototype,
+                    response: Object.prototype,
+                },
+                {
+                    path: "/:paymentMethodId",
+                    method: "DELETE",
+                    response: Object.prototype,
+                },
             ],
         },
         transactions: {
@@ -52,19 +69,7 @@ const serverDefnition = {
             ],
         },
         users: {
-            endpoints: [
-                {
-                    path: "/timeFrameSpendings",
-                    method: "POST",
-                    request: Object.prototype,
-                    response: Object.prototype,
-                },
-                {
-                    path: "/balance",
-                    method: "GET",
-                    response: Object.prototype,
-                },
-            ],
+            endpoints: [],
         },
         accounts: {
             endpoints: [
@@ -77,6 +82,12 @@ const serverDefnition = {
                 },
                 { path: "/:accountId", method: "PUT", response: Object.prototype },
                 { path: "/:accountId", method: "DELETE", response: Object.prototype },
+                {
+                    path: "/timeFrameSpendings",
+                    method: "POST",
+                    request: Object.prototype,
+                    response: Object.prototype,
+                },
             ],
         },
         auth: {

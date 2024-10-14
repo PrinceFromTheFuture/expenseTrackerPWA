@@ -28,16 +28,19 @@ const postNewPaymnetMethod = async (req: Request, res: Response) => {
 
   const filledForm = possibleUndefinedFilledForm as PaymentMethod;
   try {
-    await db.insert(paymentMethodsTable).values({
-      name: filledForm.name,
-      accountId: filledForm.accountId,
-      type: filledForm.type,
-      iconURL: filledForm.iconURL,
-      color: filledForm.color,
-      userId: userId!,
-      creditLimit: filledForm.creditLimit,
-      resetDate: filledForm.resetDate
-    }).returning();
+    await db
+      .insert(paymentMethodsTable)
+      .values({
+        name: filledForm.name,
+        accountId: filledForm.accountId,
+        type: filledForm.type,
+        iconURL: filledForm.iconURL,
+        color: filledForm.color,
+        userId: userId!,
+        creditLimit: filledForm.creditLimit,
+        resetDate: filledForm.resetDate,
+      })
+      .returning();
     console.log(filledForm);
   } catch (e) {
     console.log(e);

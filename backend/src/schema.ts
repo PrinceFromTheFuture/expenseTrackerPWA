@@ -13,7 +13,7 @@ export const transactionsTable = pgTable("transactions", {
   userId: uuid("userId")
     .references(() => userTable.id)
     .notNull(),
-  isDeleted: boolean("isDeleted").default(false),
+  isDeleted: boolean("isDeleted").default(false).notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
 });
 
@@ -27,8 +27,7 @@ export const budgetsTable = pgTable("budgets", {
     .references(() => userTable.id)
     .notNull(),
   id: uuid("id").primaryKey().defaultRandom(),
-  isDeleted: boolean("isDeleted").default(false),
-
+  isDeleted: boolean("isDeleted").default(false).notNull(),
 });
 
 export const paymentMethodType = pgEnum("type", ["other", "creditCard", "debitCard"]);
@@ -45,7 +44,6 @@ export const paymentMethodsTable = pgTable("paymentMethods", {
   accountId: uuid("accountId").references(() => accountsTable.id),
   id: uuid("id").primaryKey().defaultRandom(),
   isDeleted: boolean("isDeleted").default(false),
-
 });
 
 export const userTable = pgTable("users", {

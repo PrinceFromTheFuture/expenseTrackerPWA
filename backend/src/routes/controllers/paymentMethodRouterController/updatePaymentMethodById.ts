@@ -30,7 +30,7 @@ const updatePaymentMethodById = async (req: Request, res: Response) => {
 
   const filledForm = possibleUndefinedFilledForm as PaymentMethod;
 
-  const newPaymentMethod = await db
+await db
     .update(paymentMethodsTable)
     .set({
       name: filledForm.name,

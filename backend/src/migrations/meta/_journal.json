@@ -141,6 +141,27 @@
       "when": 1728491466652,
       "tag": "0019_fearless_felicia_hardy",
       "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1728865445569,
+      "tag": "0020_zippy_wrecking_crew",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1728865474934,
+      "tag": "0021_silly_enchantress",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1728865801008,
+      "tag": "0022_secret_ikaris",
+      "breakpoints": true
     }
   ]
 }

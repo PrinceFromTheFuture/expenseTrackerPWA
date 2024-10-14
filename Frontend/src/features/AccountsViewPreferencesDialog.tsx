@@ -15,7 +15,7 @@ type Props = {
 
 const AccountsViewPreferencesDialog = ({ trigger }: Props) => {
   const preferences = useAppSelector(accountsViewPreferencesSelector);
-  const accounts = useAppSelector(getAllAccountsSelector);
+  const accounts = useAppSelector(getAllAccountsSelector).filter((account) => !account.isDeleted);
   const dispatch = useAppDispatch();
 
   const [selectedAccounts, setSelectedAccounts] = useState(preferences.caluclatedBalanceAccounts);

@@ -17,7 +17,9 @@ const postNewPaymnetMethod = async (req, res) => {
     }
     const filledForm = possibleUndefinedFilledForm;
     try {
-        await db.insert(paymentMethodsTable).values({
+        await db
+            .insert(paymentMethodsTable)
+            .values({
             name: filledForm.name,
             accountId: filledForm.accountId,
             type: filledForm.type,
@@ -25,8 +27,9 @@ const postNewPaymnetMethod = async (req, res) => {
             color: filledForm.color,
             userId: userId,
             creditLimit: filledForm.creditLimit,
-            resetDate: filledForm.resetDate
-        }).returning();
+            resetDate: filledForm.resetDate,
+        })
+            .returning();
         console.log(filledForm);
     }
     catch (e) {

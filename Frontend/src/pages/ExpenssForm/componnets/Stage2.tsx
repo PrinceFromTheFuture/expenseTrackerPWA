@@ -18,7 +18,7 @@ const Stage2 = () => {
   const selctedBudgetId = useAppSelector(formDataSelector).budgetId;
 
   const dispatch = useAppDispatch();
-  const allBudgets = useAppSelector(allBugdetsSelctor);
+  const allBudgets = useAppSelector(allBugdetsSelctor).filter((account) => !account.isDeleted);
   const budgetsWidgetsContainerRef = useRef<HTMLDivElement>(null);
   const budgetStatus = useAppSelector(getBudgetsStatus);
 

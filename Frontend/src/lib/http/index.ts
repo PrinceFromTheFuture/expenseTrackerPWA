@@ -21,7 +21,7 @@ import HTTPPutPaymentMethod from "./HTTPPutPaymentMethod";
 import HTTPDeletePaymentMethod from "./HTTPDeletePaymentMethod";
 import HTTPGetAccountsBalanceSumSelector from "./HTTPGetAccountsBalanceSumSelector";
 import HTTPUpdateAccountsBalanceSumSelector from "./HTTPUpdateAccountsBalanceSumSelector";
-import HTTPGetAccountsDaysBackChange from "./HTTPgetAccountsDaysBackChange";
+import HTTPGetAccountsDaysBackChange from "./HTTPGetAccountsDaysBackChange";
 
 export const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
 

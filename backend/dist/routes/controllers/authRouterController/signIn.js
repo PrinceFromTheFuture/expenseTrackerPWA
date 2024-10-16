@@ -5,6 +5,7 @@ import signJWTToken from "../../../utils/signJWTToken.js";
 import { eq } from "drizzle-orm";
 const signIn = async (req, res) => {
     const { email, password } = req.body;
+    console.log(email, password);
     if (!email) {
         res.json({ success: false, message: "user email is required for authintication" });
         return;
@@ -25,9 +26,7 @@ const signIn = async (req, res) => {
         return;
     }
     const token = signJWTToken(userFound);
-    res
-        .cookie("token", token, { httpOnly: true, secure: false, maxAge: 100000000 })
-        .json({ success: true, userId: userFound.id, });
+    res.cookie("token", token, { httpOnly: true, secure: false, maxAge: 100000000 }).json({ success: true, userId: userFound.id });
     return;
 };
 export default signIn;

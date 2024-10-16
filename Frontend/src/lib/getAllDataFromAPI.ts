@@ -1,9 +1,9 @@
-import { getAllAccountsAsyncThunk } from "@/redux/accountsSlice";
+import { getAllAccountsAsyncThunk, getSpendingsInTimeFrameAsyncThunk } from "@/redux/accountsSlice";
 import { getAllBudgetsAsyncThunk } from "@/redux/budgetsSlice";
 import { getAllPaymentMethodsAsyncThunk } from "@/redux/paymentMethodsSlice";
 import store from "@/redux/store";
 import { getAllTransactionsAsyncThunk } from "@/redux/transactionsSlice";
-import { getSpendingsInTimeFrameAsyncThunk,  } from "@/redux/userSlice";
+import { getAccountsBalanceSumSelectorAsyncThunk } from "@/redux/userPreferencesSlice";
 import dayjs from "dayjs";
 
 async function getAllDataFromAPI(dispatch: typeof store.dispatch) {
@@ -12,6 +12,7 @@ async function getAllDataFromAPI(dispatch: typeof store.dispatch) {
       dispatch(getAllBudgetsAsyncThunk()).unwrap(),
       dispatch(getAllPaymentMethodsAsyncThunk()).unwrap(),
       dispatch(getAllTransactionsAsyncThunk()).unwrap(),
+      dispatch(getAccountsBalanceSumSelectorAsyncThunk()).unwrap(),
       dispatch(
         getSpendingsInTimeFrameAsyncThunk({
           from: dayjs().subtract(1, "days").toISOString(),

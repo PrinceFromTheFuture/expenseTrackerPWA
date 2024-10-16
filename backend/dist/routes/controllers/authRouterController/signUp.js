@@ -19,7 +19,10 @@ const signUp = async (req, res) => {
         return;
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const savedUser = (await db.insert(userTable).values({ email, balanceInAgorot: 0, hashedPassword, name: "randomUser" }).returning())[0];
+    const savedUser = (await db
+        .insert(userTable)
+        .values({ email, balanceInAgorot: 0, accountsBalanceSumSelector: JSON.stringify([]), hashedPassword, name: "randomUser" })
+        .returning())[0];
     const token = signJWTToken(savedUser);
     //initial first account
     await db

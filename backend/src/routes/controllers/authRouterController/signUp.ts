@@ -4,6 +4,7 @@ import { db } from "../../../server.js";
 import { accountsTable, userTable } from "../../../schema.js";
 import signJWTToken from "../../../utils/signJWTToken.js";
 import { eq } from "drizzle-orm";
+import { User } from "@/types/types.js";
 
 const signUp = async (req: Request, res: Response) => {
   const { email, password }: { email: string | null; password: string | null } = req.body;
@@ -25,7 +26,12 @@ const signUp = async (req: Request, res: Response) => {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const savedUser = (await db.insert(userTable).values({ email, balanceInAgorot: 0, hashedPassword, name: "randomUser" }).returning())[0];
+  const savedUser = (
+    await db
+      .insert(userTable)
+      .values({ email, balanceInAgorot: 0, accountsBalanceSumSelector: JSON.stringify([]), hashedPassword, name: "randomUser" })
+      .returning()
+  )[0] as User;
 
   const token = signJWTToken(savedUser);
 

@@ -4,4 +4,4 @@ import getUserSpendingsByTimeFrame from "./getUserSpendingsByTimeFrame.js";
 import postNewAccount from "./postNewAccount.js";
 import updateAccountById from "./updateAccountById.js";
 
-export default { getAllAccounts, updateAccountById , deleteAccountById, postNewAccount, getUserSpendingsByTimeFrame};
+export default { getAllAccounts, updateAccountById , deleteAccountById, postNewAccount, getUserSpendingsByTimeFrame, };

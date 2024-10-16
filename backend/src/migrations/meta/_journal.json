@@ -162,6 +162,20 @@
       "when": 1728865801008,
       "tag": "0022_secret_ikaris",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1728949112903,
+      "tag": "0023_cuddly_warpath",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1729082064542,
+      "tag": "0024_high_bastion",
+      "breakpoints": true
     }
   ]
 }

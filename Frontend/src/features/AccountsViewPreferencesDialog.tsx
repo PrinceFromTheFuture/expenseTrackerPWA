@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import exit_main from "@/assets/exit_main.svg";
 import Icon from "@/components/Icon";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import { accountsViewPreferencesSelector, changeUserAccountPrefrences } from "@/redux/userPreferencesSlice";
+import {
+  accountsViewPreferencesSelector,
+  changeUserAccountPrefrences,
+  updateAccountsBalanceSumSelectorAsyncThunk,
+} from "@/redux/userPreferencesSlice";
 import { getAllAccountsSelector } from "@/redux/accountsSlice";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
@@ -18,7 +22,7 @@ const AccountsViewPreferencesDialog = ({ trigger }: Props) => {
   const accounts = useAppSelector(getAllAccountsSelector).filter((account) => !account.isDeleted);
   const dispatch = useAppDispatch();
 
-  const [selectedAccounts, setSelectedAccounts] = useState(preferences.caluclatedBalanceAccounts);
+  const [selectedAccounts, setSelectedAccounts] = useState(preferences.accountsBalanceSumSelector);
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(preferences.accountBalanceChanageInDays);
 
   const handleSelectedAccountsChange = (accountId: string, isChecked: boolean) => {
@@ -36,6 +40,7 @@ const AccountsViewPreferencesDialog = ({ trigger }: Props) => {
     setSelectedTimeFrame(newValue);
   };
   const handleSave = () => {
+    dispatch(updateAccountsBalanceSumSelectorAsyncThunk(selectedAccounts));
     dispatch(changeUserAccountPrefrences({ accountBalanceViewTimeFrame: selectedTimeFrame, selectedAccounts: selectedAccounts }));
   };
   return (

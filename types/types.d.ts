@@ -58,8 +58,9 @@ export interface User {
   id: string;
   email: string;
   hashedPassword: string;
+  accountsBalanceSumSelector: string[]; // string as id of accounts
+  accountsDaysBackChange:number
 }
-
 export interface Account {
   iconURL: string;
   id: string;

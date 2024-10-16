@@ -4,6 +4,7 @@ import { db } from "../../../server.js";
 import { userTable } from "../../../schema.js";
 import signJWTToken from "../../../utils/signJWTToken.js";
 import { eq } from "drizzle-orm";
+import { User } from "@/types/types.js";
 
 const signIn = async (req: Request, res: Response) => {
   const { email, password }: { email: string | null; password: string | null } = req.body;
@@ -24,7 +25,7 @@ const signIn = async (req: Request, res: Response) => {
     return;
   }
 
-  const userFound = usersFoundWithProvidedEmail[0];
+  const userFound = usersFoundWithProvidedEmail[0] as User;
 
   const isPasswordCorrect = await bcrypt.compare(password, userFound.hashedPassword);
   if (isPasswordCorrect === false) {
@@ -34,7 +35,9 @@ const signIn = async (req: Request, res: Response) => {
 
   const token = signJWTToken(userFound);
 
-  res.cookie("token", token, { httpOnly: true, secure: false, maxAge: 100000000 }).json({ success: true, userId: userFound.id });
+  res
+    .cookie("token", token, { httpOnly: true, secure: false, maxAge: 100000000 })
+    .json({ success: true, userId: userFound.id,  });
   return;
 };
 export default signIn;

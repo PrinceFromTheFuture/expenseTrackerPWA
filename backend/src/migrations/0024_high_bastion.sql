@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "getAccountsDaysBackChange" integer DEFAULT 7;

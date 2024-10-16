@@ -1,5 +1,5 @@
 import Icon from "@/components/Icon";
-import  { useState } from "react";
+import { useState } from "react";
 import ellipsis_main from "@/assets/ellipsis_main.svg";
 import ellipsis_secondary from "@/assets/ellipsis_secondary.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
@@ -21,7 +21,7 @@ import AccountForm from "@/features/AccountForm";
 import getAllDataFromAPI from "@/lib/getAllDataFromAPI";
 import AccountsViewPreferencesDialog from "@/features/AccountsViewPreferencesDialog";
 import { accountsViewPreferencesSelector } from "@/redux/userPreferencesSlice";
-import { allPaymentMethodsSelector,  } from "@/redux/paymentMethodsSlice";
+import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
 import warning_red from "@/assets/warning_red.svg";
 
 import { toast } from "sonner";
@@ -29,7 +29,7 @@ import { toast } from "sonner";
 const Accounts = () => {
   const allAcounts = useAppSelector(getAllAccountsSelector);
   const accountsStatus = useAppSelector(getAccountsStatusSelector);
-  const accountsBalanceViewPreferance = useAppSelector(accountsViewPreferencesSelector).caluclatedBalanceAccounts;
+  const accountsBalanceViewPreferance = useAppSelector(accountsViewPreferencesSelector).accountsBalanceSumSelector;
   const [isDeletedialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   const dispatch = useAppDispatch();

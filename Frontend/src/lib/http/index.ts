@@ -22,6 +22,7 @@ import HTTPDeletePaymentMethod from "./HTTPDeletePaymentMethod";
 import HTTPGetAccountsBalanceSumSelector from "./HTTPGetAccountsBalanceSumSelector";
 import HTTPUpdateAccountsBalanceSumSelector from "./HTTPUpdateAccountsBalanceSumSelector";
 import HTTPGetAccountsDaysBackChange from "./HTTPGetAccountsDaysBackChange";
+import HTTPGetSpendingsInUserPreferedTimeFrame from "./HTTPGetSpendingsInUserPreferedTimeFrame";
 
 export const apiURL = import.meta.env.VITE_API_BASE_URI as string | undefined;
 
@@ -44,6 +45,7 @@ export default {
   HTTPPostPaymentMethod,
   HTTPGetAccountsDaysBackChange,
   HTTPPostNewBudget,
+  HTTPGetSpendingsInUserPreferedTimeFrame,
   HTTPPostNewUser,
   HTTPPutPaymentMethod,
   HTTPDeleteAccount,

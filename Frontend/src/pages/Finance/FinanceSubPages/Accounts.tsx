@@ -4,7 +4,12 @@ import ellipsis_main from "@/assets/ellipsis_main.svg";
 import ellipsis_secondary from "@/assets/ellipsis_secondary.svg";
 import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
-import { deleteAccountByIdAsynkThunk, getAccountsStatusSelector, getAllAccountsSelector } from "@/redux/accountsSlice";
+import {
+  deleteAccountByIdAsynkThunk,
+  getAccountsSpendingsOverUserPreferedTimeFrameSelector,
+  getAccountsStatusSelector,
+  getAllAccountsSelector,
+} from "@/redux/accountsSlice";
 import { AnimatePresence, motion } from "framer-motion";
 import caret_secondary from "@/assets/caret_secondary.svg";
 import generalTransition from "@/lib/generalTransition";
@@ -25,6 +30,7 @@ import { allPaymentMethodsSelector } from "@/redux/paymentMethodsSlice";
 import warning_red from "@/assets/warning_red.svg";
 
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 const Accounts = () => {
   const allAcounts = useAppSelector(getAllAccountsSelector);
@@ -34,6 +40,7 @@ const Accounts = () => {
   const [openAccount, setOpenAccount] = useState<string | null>(null);
   const dispatch = useAppDispatch();
 
+  const accountsSpendingsOverUserPreferedTimeFrame = useAppSelector(getAccountsSpendingsOverUserPreferedTimeFrameSelector);
   const accountsViewPreferance = allAcounts.filter((account) => accountsBalanceViewPreferance.find((accountId) => account.id === accountId));
   const preferredBalanceView = accountsViewPreferance.reduce((accumulator, cuurentAccount) => accumulator + cuurentAccount.balanceInAgorot, 0);
   const activePaymentMethods = useAppSelector(allPaymentMethodsSelector).filter((paymentMethod) => !paymentMethod.isDeleted);
@@ -46,6 +53,11 @@ const Accounts = () => {
     await dispatch(deleteAccountByIdAsynkThunk(accountId));
     getAllDataFromAPI(dispatch);
   };
+  const amountSpentInUserPreferedTimeLine = accountsSpendingsOverUserPreferedTimeFrame
+    .filter((account) => accountsBalanceViewPreferance.find((accountId) => account.accountId === accountId))
+    .reduce((acc, obj) => acc + obj.amountInAgorotUsedInTimeFrame, 0);
+  const isIncrees = amountSpentInUserPreferedTimeLine <= 0;
+
   return (
     <div className=" w-full mt-4 ">
       <div className=" mb-12">
@@ -58,7 +70,16 @@ const Accounts = () => {
           {" "}
           <div className=" text-secondary font-semibold">current blanace</div>
           <div className=" text-4xl text-dark font-extrabold mb-2">{formatAmountInAgorot(preferredBalanceView || 0, true)}</div>
-          <div className=" bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold text-success">1234.34 (124.24%)</div>
+          <div
+            className={cn(
+              "   rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1   ",
+              isIncrees ? "bg-success/10 text-success" : "bg-warning/10 text-warning"
+            )}
+          >
+            {formatAmountInAgorot(amountSpentInUserPreferedTimeLine, true)} ({!isIncrees && "-"}
+            {Math.abs((amountSpentInUserPreferedTimeLine / (preferredBalanceView + amountSpentInUserPreferedTimeLine)) * 100).toFixed(2)}
+            {"%"})
+          </div>
         </div>
       </div>
       <div className=" text-xl font-semibold mb-2 text-dark">Accoutns</div>
@@ -68,6 +89,11 @@ const Accounts = () => {
           ? allAcounts
               .filter((account) => !account.isDeleted)
               .map((account) => {
+                const amountSpentInUserPreferedTimeLine = accountsSpendingsOverUserPreferedTimeFrame.find(
+                  (preferedAccount) => preferedAccount.accountId === account.id
+                )!.amountInAgorotUsedInTimeFrame;
+                //postive value meaning spendings and balance lost negetive means incresse in balance
+                const isIncrees = amountSpentInUserPreferedTimeLine <= 0;
                 return (
                   <div
                     key={account.id}
@@ -101,8 +127,17 @@ const Accounts = () => {
                             <div>
                               {" "}
                               <div className="text-dark font-extrabold text-2xl">{formatAmountInAgorot(account.balanceInAgorot, true)}</div>
-                              <div className="  bg-success/10 rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1   text-success">
-                                1234.34 (124.24%)
+                              <div
+                                className={cn(
+                                  "   rounded-lg p-1 px-4 text-xs   text-left font-semibold mt-1   ",
+                                  isIncrees ? "bg-success/10 text-success" : "bg-warning/10 text-warning"
+                                )}
+                              >
+                                {formatAmountInAgorot(amountSpentInUserPreferedTimeLine, true)} ({!isIncrees && "-"}
+                                {Math.abs(
+                                  (amountSpentInUserPreferedTimeLine / (account.balanceInAgorot + amountSpentInUserPreferedTimeLine)) * 100
+                                ).toFixed(2)}
+                                {"%"})
                               </div>
                             </div>
                             <div className=" flex items-end">

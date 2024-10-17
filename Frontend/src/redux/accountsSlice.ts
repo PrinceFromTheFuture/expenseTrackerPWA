@@ -6,11 +6,11 @@ import { RootState } from "./store";
 const initialState: {
   status: "success" | "pending";
   data: Account[];
-  balacneChangeByTimeFramePreference: { accountId: string; amountInAgorot: number }[];
+  accountsSpendingsOverUserPreferedTimeFrame: { accountId: string; amountInAgorotUsedInTimeFrame: number }[];
   oneDaySpendings: number;
   sevenDaySpendings: number;
   thirtyDaySpendings: number;
-} = { data: [], status: "pending", oneDaySpendings: 0, sevenDaySpendings: 0, thirtyDaySpendings: 0, balacneChangeByTimeFramePreference: [] };
+} = { data: [], status: "pending", oneDaySpendings: 0, sevenDaySpendings: 0, thirtyDaySpendings: 0, accountsSpendingsOverUserPreferedTimeFrame: [] };
 
 export const getAllAccountsAsyncThunk = createAsyncThunk("/accounts/getAll", async () => {
   const allAcounts = await http.HTTPGetAllAccounts();
@@ -28,6 +28,10 @@ export const getSpendingsInTimeFrameAsyncThunk = createAsyncThunk(
     return { ...data, defenition: args.defenition };
   }
 );
+export const getSpendingsInUserPreferedTimeFrameAsyncThunk = createAsyncThunk("/account/getSpendingsInUserPreferedTimeFrame", async () => {
+  const data = await http.HTTPGetSpendingsInUserPreferedTimeFrame();
+  return data;
+});
 
 export const postNewAccountAsyncThunk = createAsyncThunk(
   "accounts/postNew",
@@ -56,6 +60,9 @@ const accountsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllAccountsAsyncThunk.pending, (state) => {
       state.status = "pending";
+    });
+    builder.addCase(getSpendingsInUserPreferedTimeFrameAsyncThunk.fulfilled, (state, action) => {
+      state.accountsSpendingsOverUserPreferedTimeFrame = action.payload.data;
     });
     builder.addCase(getAllAccountsAsyncThunk.fulfilled, (state, action) => {
       state.status = "success";
@@ -103,6 +110,7 @@ export const getAccountByIdSelector = (state: RootState, id: string | undefined)
   }
   return state.accountsSlice.data.find((account) => account.id === id) as Account;
 };
+export const getAccountsSpendingsOverUserPreferedTimeFrameSelector = (state:RootState) =>state.accountsSlice.accountsSpendingsOverUserPreferedTimeFrame
 
 export const SpendingsTimeFrameSelector = (state: RootState, timeFrame: "1d" | "7d" | "30d") => {
   switch (timeFrame) {

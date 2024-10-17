@@ -9,5 +9,6 @@ accountsRouter.post("/", authMiddleware, controller.postNewAccount);
 accountsRouter.put("/:accountId", authMiddleware, controller.updateAccountById);
 accountsRouter.delete("/:accountId", authMiddleware, controller.deleteAccountById);
 accountsRouter.post("/timeFrameSpendings", authMiddleware, controller.getUserSpendingsByTimeFrame);
+accountsRouter.get('/userPreferedTimeFrameSpendings',authMiddleware, controller.getUserSpendingsByUserPreferedTimeFrame)
 
 export default accountsRouter;

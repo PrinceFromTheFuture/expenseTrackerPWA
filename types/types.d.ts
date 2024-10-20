@@ -59,7 +59,7 @@ export interface User {
   email: string;
   hashedPassword: string;
   accountsBalanceSumSelector: string[]; // string as id of accounts
-  accountsDaysBackChange:number
+  accountsDaysBackChange: number;
 }
 export interface Account {
   iconURL: string;
@@ -68,4 +68,18 @@ export interface Account {
   isDeleted: boolean;
 
   balanceInAgorot: number;
+}
+export enum MonthsNames {
+  January = 1,
+  February,
+  March,
+  April,
+  May,
+  June,
+  July,
+  August,
+  September,
+  October,
+  November,
+  December,
 }

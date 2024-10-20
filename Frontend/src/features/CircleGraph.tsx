@@ -127,7 +127,7 @@ function CircleGraph({ size, segmentBorderWidth, segmentWidth, data, roundness }
             setHoveredSegmentId(null);
           }}
           key={segment.id}
-          style={{ transformOrigin: "100px 100px" }} // Scale from the center
+          style={{ transformOrigin: "100px 100px", outline: "none", border: "none", boxShadow: "none" }} // Scale from the center
           d={`M ${point1I.x} ${point1I.y} Q ${controlPoint1.x} ${controlPoint1.y} ${point1II.x} ${point1II.y} A ${innerRaduis} ${innerRaduis} 0 0 0 ${point2I.x} ${point2I.y} Q ${controlPoint2.x} ${controlPoint2.y} ${point2II.x} ${point2II.y}  L ${point3I.x} ${point3I.y} Q${controlPoint3.x} ${controlPoint3.y} ${point3II.x} ${point3II.y}  A ${outerRadius} ${outerRadius} 0 0 1 ${point4I.x} ${point4I.y} Q ${controlPoint4.x} ${controlPoint4.y} ${point4II.x} ${point4II.y} Z  `}
           fill={segment.color}
           stroke="#F8FBFD"

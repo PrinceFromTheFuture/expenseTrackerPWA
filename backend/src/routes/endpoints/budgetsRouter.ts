@@ -6,5 +6,6 @@ const budgetsRouter = express.Router();
 
 budgetsRouter.get("/", authMiddleware, controller.getAllBudgets);
 budgetsRouter.post("/", authMiddleware, controller.postNewBudget);
+budgetsRouter.get("/getSpendingsByMonths",authMiddleware, controller.getBudgetsSpendingsByMonths);
 
 export default budgetsRouter;

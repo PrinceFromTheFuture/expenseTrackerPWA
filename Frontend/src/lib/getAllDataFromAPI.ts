@@ -1,5 +1,5 @@
 import { getAllAccountsAsyncThunk, getSpendingsInTimeFrameAsyncThunk, getSpendingsInUserPreferedTimeFrameAsyncThunk } from "@/redux/accountsSlice";
-import { getAllBudgetsAsyncThunk } from "@/redux/budgetsSlice";
+import { getAllBudgetsAsyncThunk, getBudgetsSpendingsByMonthsThunk } from "@/redux/budgetsSlice";
 import { getAllPaymentMethodsAsyncThunk } from "@/redux/paymentMethodsSlice";
 import store from "@/redux/store";
 import { getAllTransactionsAsyncThunk } from "@/redux/transactionsSlice";
@@ -36,6 +36,7 @@ async function getAllDataFromAPI(dispatch: typeof store.dispatch) {
         })
       ).unwrap(),
       dispatch(getAllAccountsAsyncThunk()).unwrap(),
+      dispatch(getBudgetsSpendingsByMonthsThunk()).unwrap(),
     ]);
   } catch (error) {
     console.error("Failed to fetch all data from API:", error);

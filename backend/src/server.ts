@@ -44,10 +44,7 @@ if (!envoirmennt) {
   process.abort();
 }
 console.log(envoirmennt);
-const DBConnectionString =
-  envoirmennt === "PRODUCTION"
-    ? process.env.PRODUCTION_DB_CONNECTION_STRING
-    : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
+const DBConnectionString = envoirmennt === "PRODUCTION" ? process.env.PRODUCTION_DB_CONNECTION_STRING : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
 
 if (!DBConnectionString) {
   console.log("the data base connection string is not readable or not configured properly");
@@ -64,6 +61,7 @@ server.use("/api/transactions", transactionsRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/accounts", accountsRouter);
+
 
 function initilizeServer() {
   try {

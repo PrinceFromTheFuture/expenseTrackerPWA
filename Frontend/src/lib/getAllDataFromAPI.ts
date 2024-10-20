@@ -9,11 +9,11 @@ import dayjs from "dayjs";
 async function getAllDataFromAPI(dispatch: typeof store.dispatch) {
   try {
     await Promise.all([
+      dispatch(getSpendingsInUserPreferedTimeFrameAsyncThunk()).unwrap(),
       dispatch(getAllBudgetsAsyncThunk()).unwrap(),
       dispatch(getAllPaymentMethodsAsyncThunk()).unwrap(),
       dispatch(getAllTransactionsAsyncThunk()).unwrap(),
       dispatch(getAccountsBalanceSumSelectorAsyncThunk()).unwrap(),
-      dispatch(getSpendingsInUserPreferedTimeFrameAsyncThunk()).unwrap(),
       dispatch(
         getSpendingsInTimeFrameAsyncThunk({
           from: dayjs().subtract(1, "days").toISOString(),

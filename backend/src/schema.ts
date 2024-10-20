@@ -70,3 +70,6 @@ export const accountsTable = pgTable("accounts", {
 export type InsertPaymentMethods = typeof paymentMethodsTable.$inferInsert;
 export type InsertBudgets = typeof budgetsTable.$inferInsert;
 export type InsertTransaction = typeof transactionsTable.$inferInsert;
+
+
+

@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Home from "./pages/Home";
 import { AnimatePresence, motion } from "framer-motion";
 import Touchable from "./components/Touchable";
@@ -14,6 +14,7 @@ import coins_secondary_outline from "@/assets/navLinks/coins_secondary_outline.s
 import recipt_surface from "@/assets/navLinks/recipt_surface.svg";
 import Finance from "./pages/Finance/Finance";
 import { Toaster } from "./components/ui/sonner";
+import Statistics from "./pages/Statistics";
 
 const PageWraper = ({ currentPage, children, page }: { currentPage: number; page: number; children: React.ReactNode }) => {
   return (
@@ -66,7 +67,7 @@ const AppNavigation = () => {
   const pages = [
     { element: <Home />, index: 0 },
     { element: <Finance />, index: 1 },
-    { element: <div className=" flex justify-center items-center h-[60vh]">Coming soon...</div>, index: 2 },
+    { element: <Statistics />, index: 2 },
     { element: <div className=" flex justify-center items-center h-[60vh]">Coming soon...</div>, index: 3 },
   ];
 

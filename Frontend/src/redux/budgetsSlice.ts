@@ -52,7 +52,9 @@ const budgetsSlice = createSlice({
     });
     builder.addCase(getBudgetsSpendingsByMonthsThunk.fulfilled, (state, action) => {
       state.spendingsByMonths.status = "success";
+     
       state.spendingsByMonths.data = action.payload.data;
+
     });
   },
 });

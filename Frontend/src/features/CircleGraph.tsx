@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
+import generalTransition from "@/lib/generalTransition";
 
 type Props = {
   roundness: number;
@@ -102,8 +104,6 @@ function CircleGraph({ size, segmentBorderWidth, segmentWidth, data, roundness }
       };
       return (
         <motion.path
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 1.2 }}
           onHoverStart={() => {
             setHoveredSegmentId(segment.id);
             const degree = (segment.end - segment.start) / 2 + segment.start;
@@ -140,14 +140,26 @@ function CircleGraph({ size, segmentBorderWidth, segmentWidth, data, roundness }
   return (
     <div className=" select-none  relative" ref={boxRef}>
       <motion.div
-        className=" absolute p-4 rounded-lg select-none bg-slate-200 shadow-md  pointer-events-none -translate-x-1/2 -translate-y-1/2"
+        className=" absolute p-2 rounded-lg select-none bg-container shadow-md  pointer-events-none -translate-x-1/2 -translate-y-1/2"
         animate={{
           top: hoveredSegmentCenterPoint.y * parentSizeMultipler,
           left: hoveredSegmentCenterPoint.x * parentSizeMultipler,
           opacity: !!hoveredSegmentId ? 1 : 0,
         }}
+        transition={generalTransition}
       >
-        {data.find((object) => object.id === hoveredSegmentId)?.amount}
+        <div className=" text-dark font-semibold flex justify-between gap-1">
+          <div className=" ">{formatAmountInAgorot(data.find((object) => object.id === hoveredSegmentId)?.amount || 0, true)}</div>
+          <div>
+            {" "}
+            (
+            {(((data.find((object) => object.id === hoveredSegmentId)?.amount || 0) / data.reduce((acc, obj) => acc + obj.amount, 0)) * 100).toFixed(
+              2
+            )}
+            %)
+          </div>
+        </div>
+        {}
       </motion.div>
       <motion.svg
         viewBox={`0 0 ${width} ${hight}`}

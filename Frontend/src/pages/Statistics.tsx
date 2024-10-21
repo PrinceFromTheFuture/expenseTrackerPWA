@@ -1,6 +1,7 @@
 import CircleGraph from "@/features/CircleGraph";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks";
 import generalTransition from "@/lib/generalTransition";
+import { formatAmountInAgorot } from "@/lib/formatAmountInAgorot";
 import {
   allBugdetsSelctor,
   getBudgetsSpendingsByMonthsSelector,
@@ -23,26 +24,26 @@ const Statistics = () => {
   const [budgetsSpendingsByMonth, setBudgetsSpendingsByMonth] = useState(budgetsSpendingsByMonths[0]);
   const allBudets = useAppSelector(allBugdetsSelctor);
 
-  const [fromatedData, setFormatedData] = useState(
-    budgetsSpendingsByMonth.data.map((budgetSpendings) => {
+  const formatData = (
+    data: {
+      budgetId: string;
+      amountInAgorot: number;
+    }[]
+  ) => {
+    const newData = data.map((budgetSpendings) => {
       return {
-        amount: budgetSpendings.amountInAgorot / 100,
+        amount: budgetSpendings.amountInAgorot,
         color: `#${allBudets.find((budegt) => budegt.id === budgetSpendings.budgetId)!.color}`,
         id: budgetSpendings.budgetId,
       };
-    })
-  );
+    });
+
+    return newData;
+  };
+  const [fromatedData, setFormatedData] = useState(formatData(budgetsSpendingsByMonth.data));
   useEffect(() => {
-    if (budgetsSpendingsByMonth.data.filter((budget) => budget.amountInAgorot !== 0).length > 1) {
-      setFormatedData(
-        budgetsSpendingsByMonth.data.map((budgetSpendings) => {
-          return {
-            amount: budgetSpendings.amountInAgorot / 100,
-            color: `#${allBudets.find((budegt) => budegt.id === budgetSpendings.budgetId)!.color}`,
-            id: budgetSpendings.budgetId,
-          };
-        })
-      );
+    if (budgetsSpendingsByMonth.data.filter((budget) => budget.amountInAgorot !== 0).length > 0) {
+      setFormatedData(formatData(budgetsSpendingsByMonth.data));
     } else {
       setFormatedData([{ amount: 100, color: "#F0F4F7", id: "1" }]);
     }
@@ -51,7 +52,7 @@ const Statistics = () => {
   const monthsNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return (
     <div className=" w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface py-4">
-      <div className=" flex justify-between items-center">
+      <div className=" flex justify-between  mx-4  mb-4 items-center">
         <div className="font-bold text-dark text-lg">Statistics</div>
 
         <AlertDialog>
@@ -98,9 +99,35 @@ const Statistics = () => {
         </AlertDialog>
       </div>
       <div className=" mx-4  border-container border-2 rounded-2xl flex p-4 justify-center items-center flex-col">
-        {budgetsSpendingsByMonthsStatus === "success" && (
-          <CircleGraph data={fromatedData} roundness={8} segmentBorderWidth={5} segmentWidth={30} size={200} />
-        )}
+        <div className=" relative">
+          <div className=" absolute text-center  bottom-0  left-1/2 -translate-x-1/2">
+            <div className="text-secondary mb-1 font-semibold text-base">Budgets view</div>
+            <div className="text-dark font-extrabold text-2xl">
+              {formatAmountInAgorot(
+                budgetsSpendingsByMonth.data.reduce((acc, obj) => acc + obj.amountInAgorot, 0),
+                true
+              )}
+            </div>
+          </div>
+          {budgetsSpendingsByMonthsStatus === "success" && (
+            <CircleGraph data={fromatedData} roundness={8} segmentBorderWidth={5} segmentWidth={30} size={200} />
+          )}
+        </div>
+        <div className=" flex w-full justify-center items-center mt-4">
+          <div className="  flex flex-wrap justify-center gap-2  z-10 max-w-[60%]">
+            {" "}
+            {budgetsSpendingsByMonth.data.map((budgetObj) => {
+              const budget = allBudets.find((budget) => budget.id === budgetObj.budgetId)!;
+              return (
+                <div key={budget.id} className=" mr-2 flex justify-between items-center gap-2">
+                  {" "}
+                  <div className=" w-2 h-2 rounded-full  " style={{ backgroundColor: `#${budget.color}` }} />
+                  <div className="text-sm    text-secondary font-semibold">{budget.name}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

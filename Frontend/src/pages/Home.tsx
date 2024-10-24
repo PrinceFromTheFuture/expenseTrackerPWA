@@ -32,6 +32,7 @@ const Home = () => {
   return (
     <div className="  w-full fixed mb-24  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
       <div className=" flex justify-between items-start mx-4">
+        yossi
         <div
           className="rotate-180"
           onClick={() => {

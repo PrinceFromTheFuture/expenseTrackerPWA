@@ -12,7 +12,7 @@ import { allTransactionsSelctor, getTransactionsDataStatusSelector } from "@/red
 import SpendingsTimeFrameValues from "@/features/SpendingsTimeFrameValues";
 import ExpensesWidgetSkeleton from "../components/skeletons/ExpensesWidgetSkeleton";
 import { Link } from "react-router-dom";
-import { signOutAsyncTunk,  } from "../redux/userSlice";
+import { signOutAsyncTunk } from "../redux/userSlice";
 import { formatAmountInAgorot } from "../lib/formatAmountInAgorot";
 import { AnimatePresence, motion } from "framer-motion";
 import dayjs from "dayjs";
@@ -32,6 +32,7 @@ const Home = () => {
   return (
     <div className="  w-full fixed mb-24  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface select-none font-montserrat py-4 ">
       <div className=" flex justify-between items-start mx-4">
+        yosiiiiiii
         <div
           className="rotate-180"
           onClick={() => {
@@ -47,7 +48,9 @@ const Home = () => {
         </div>
       </div>
       <div className=" w-full py-20 flex flex-col justify-center items-center">
-        <div className=" text-4xl text-dark font-extrabold">{formatAmountInAgorot(userBalance || 0, true)}</div>
+        <div className=" text-4xl text-dark font-extrabold">
+          {formatAmountInAgorot(userBalance || 0, true)}
+        </div>
         <div className=" text-secondary font-semibold">current blanace</div>
       </div>
       <div className="  mx-4 mb-8">
@@ -84,7 +87,12 @@ const Home = () => {
           .map((transaction) => {
             return (
               <AnimatePresence key={transaction.id}>
-                <motion.div layout animate={{ opacity: 1, height: "auto" }} initial={{ opacity: 0, height: 0 }} exit={{ opacity: 0, height: 0 }}>
+                <motion.div
+                  layout
+                  animate={{ opacity: 1, height: "auto" }}
+                  initial={{ opacity: 0, height: 0 }}
+                  exit={{ opacity: 0, height: 0 }}
+                >
                   <ExpensesWidget transactionId={transaction.id} />
                 </motion.div>
               </AnimatePresence>
@@ -96,7 +104,9 @@ const Home = () => {
           <img src={empty_illustration} className=" w-24" alt="" />
           <div className=" text-xl text-dark text-left font-bold">No transactions yet</div>
           <Link to={"/new"} className=" w-full">
-            <Touchable className="  w-full  p-4 bg-main text-sm font-bold text-center  rounded-2xl text-surface">New</Touchable>
+            <Touchable className="  w-full  p-4 bg-main text-sm font-bold text-center  rounded-2xl text-surface">
+              New
+            </Touchable>
           </Link>
         </div>
       )}

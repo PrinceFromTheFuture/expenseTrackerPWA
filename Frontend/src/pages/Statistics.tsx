@@ -17,7 +17,13 @@ const Statistics = () => {
 
   return (
     <div className=" w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface py-4">
-      <div className="font-bold text-dark text-lg">Statistics</div>
+      <div className=" mx-4 justify-between flex items-end mb-4">
+        <div className="font-bold text-dark text-lg">Statistics</div>
+        <label htmlFor="month123" className=" p-4 rounded-2xl bg-container">
+          fd
+        </label>
+        <input type="month" name="month123" id="month123" className=" absolute " />
+      </div>
       <div className=" mx-4  border-container border-2 rounded-2xl flex p-4 justify-center items-center flex-col">
         <div className=" relative">
           <div className=" absolute text-center  bottom-0  left-1/2 -translate-x-1/2">

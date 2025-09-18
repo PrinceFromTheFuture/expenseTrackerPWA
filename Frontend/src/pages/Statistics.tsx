@@ -22,7 +22,7 @@ const Statistics = () => {
 
   return (
     <div className=" w-full fixed  top-0 bottom-0 left-0 right-0 overflow-y-auto overflow-x-hidden bg-surface py-4">
-      <div className=" mx-4 justify-between flex items-end mb-4 items-center">
+      <div className=" mx-4 justify-between flex  mb-4 items-center">
         <div className="font-bold text-dark text-lg">Statistics</div>
         <label
           htmlFor="monthSelector"

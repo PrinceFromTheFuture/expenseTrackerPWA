@@ -16,7 +16,6 @@ import authRouter from "./routes/endpoints/authRouter.js";
 import cookieParser from "cookie-parser";
 import { drizzle } from "drizzle-orm/neon-http";
 import accountsRouter from "./routes/endpoints/accountsRouter.js";
-import serverDefnition from "./api.docs.js";
 
 configDotenv();
 
@@ -27,7 +26,7 @@ const server = express();
 
 server.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [process.env.FRONTEND_URL as string, "http://localhost:5173"], // Replace with your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
     credentials: true, // If cookies or credentials are used
   })
@@ -36,7 +35,7 @@ server.use(cookieParser());
 server.use(express.json());
 server.use(express.urlencoded({ extended: true })); // Specify the extended op
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const envoirmennt = process.env.environment as "DEVELOPMENT" | "PRODUCTION" | undefined;
 
 if (!envoirmennt) {
@@ -44,7 +43,10 @@ if (!envoirmennt) {
   process.abort();
 }
 console.log(envoirmennt);
-const DBConnectionString = envoirmennt === "PRODUCTION" ? process.env.PRODUCTION_DB_CONNECTION_STRING : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
+const DBConnectionString =
+  envoirmennt === "PRODUCTION"
+    ? process.env.PRODUCTION_DB_CONNECTION_STRING
+    : process.env.DEVELOPMENT_DB_CONNECTION_STRING;
 
 if (!DBConnectionString) {
   console.log("the data base connection string is not readable or not configured properly");
@@ -62,11 +64,10 @@ server.use("/api/users", usersRouter);
 server.use("/api/auth", authRouter);
 server.use("/api/accounts", accountsRouter);
 
-
 function initilizeServer() {
   try {
     //@ts-ignore
-    server.listen(port, "0.0.0.0", () => {
+    server.listen(port, () => {
       console.log(`server is up and running on port: ${port}`);
     });
   } catch (e) {

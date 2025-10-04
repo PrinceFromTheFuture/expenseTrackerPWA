@@ -1,0 +1,10 @@
+name: my first workflow
+on:
+  workflow_dispatch:
+jobs:
+  job1:
+    name: testJob!
+    runs-on: ubuntu-latest
+    steps:
+      - name: firstStep
+        run: echo hiii
